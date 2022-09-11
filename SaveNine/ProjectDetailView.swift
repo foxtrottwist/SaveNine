@@ -31,21 +31,19 @@ struct ProjectDetailView: View {
                     .lineLimit(...7)
             }
             
-            ForEach(project.projectItemLists) { list in
+            ForEach(project.projectItemLists) { itemList in
                 Section {
-                    ForEach(list.itemListItems) { item in
-                        // ItemListItemRowView a TextField that also navigates to ItemDetailView
-                        Text("\(item.itemName)")
+                    ForEach(itemList.itemListItems) { item in
+                        ItemListRowView(item: item)
                     }
                 } header: {
-                    // ItemListHeaderView a TextField
-                    Text("\(list.itemListName)")
-                        .font(.title2)
+                    ItemListHeaderView(itemList: itemList)
                 }
             }
         }
         .onChange(of: name, perform: { _ in update() })
         .onChange(of: detail, perform: { _ in update() })
+        .onDisappear(perform: dataController.save)
     }
     
     func update() -> Void {
