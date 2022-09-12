@@ -10,6 +10,7 @@ import SwiftUI
 struct ProjectsView: View {
     // Currently only needed for temporary "Add Data" button
     @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.creationDate, ascending: false)]) var projects: FetchedResults<Project>
     
@@ -23,9 +24,21 @@ struct ProjectsView: View {
             .navigationTitle("Projects")
             .toolbar {
                 // Temporary button to add data during development
-                Button("Add Data") {
-                    dataController.deleteAll()
-                    try? dataController.createSampleData()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add Data") {
+                        dataController.deleteAll()
+                        try? dataController.createSampleData()
+                    }
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
+                        let newProject = Project(context: managedObjectContext)
+                        selectedProject = newProject
+                    } label: {
+                        Image(systemName: "plus.circle")
+                        Text("**Add Project**")
+                    }
                 }
             }
         } detail: {

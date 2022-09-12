@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ItemListRowView: View {
     @State var name: String
-    @State var showItemDetailView = false
+    @State var showingItemDetailView = false
     
     let item: Item
     
@@ -24,14 +24,14 @@ struct ItemListRowView: View {
             TextField("New item", text: $name)
             Spacer()
             Button {
-                showItemDetailView.toggle()
+                showingItemDetailView.toggle()
             } label: {
                 Image(systemName: "info.circle")
                     .foregroundColor(.blue)
             }
         }
         .onChange(of: name, perform: { _ in update() })
-        .sheet(isPresented: $showItemDetailView) {
+        .sheet(isPresented: $showingItemDetailView) {
             ItemDetailView(name: $name, item: item)
         }
     }

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ProjectDetailView: View {
     @EnvironmentObject var dataController: DataController
-    @Environment(\.dismiss) var dismiss
     
     @State private var name: String
     @State private var detail: String
+    @State private var showingDeleteConfirm = false
     
     let project: Project
     
@@ -40,10 +40,24 @@ struct ProjectDetailView: View {
                     ItemListHeaderView(itemList: itemList)
                 }
             }
+            
+            Section {
+                Button {
+                    showingDeleteConfirm.toggle()
+                } label: {
+                    Label("Delete Project", systemImage: "trash")
+                        .foregroundColor(.red)
+                }
+            }
         }
         .onChange(of: name, perform: { _ in update() })
         .onChange(of: detail, perform: { _ in update() })
         .onDisappear(perform: dataController.save)
+        .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete Project", role: .destructive) {
+                delete()
+            }
+        }
     }
     
     func update() -> Void {
@@ -54,7 +68,6 @@ struct ProjectDetailView: View {
     
     func delete() {
         dataController.delete(project)
-        dismiss()
     }
 }
 
