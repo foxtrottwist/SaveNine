@@ -5,13 +5,17 @@
 //  Created by Lawrence Horne on 9/10/22.
 //
 
+import PhotosUI
 import SwiftUI
 
 struct ProjectDetailView: View {
     @EnvironmentObject var dataController: DataController
+    @Environment(\.dismiss) private var dismiss
     
     @State private var name: String
     @State private var detail: String
+    @State private var selectedImage: [PhotosPickerItem] = []
+    @State private var image: Data?
     @State private var showingDeleteConfirm = false
     
     let project: Project
@@ -24,12 +28,18 @@ struct ProjectDetailView: View {
     }
     
     var body: some View {
-        Form {
+        ScrollView {
             Section {
                 TextField("Project name", text: $name)
+                    .font(.title3)
+            }
+            .padding(.horizontal)
+            
+            Section {
                 TextField("Notes", text: $detail, axis: .vertical)
                     .lineLimit(...7)
             }
+            .padding(.horizontal)
             
             ForEach(project.projectItemLists) { itemList in
                 Section {
@@ -39,7 +49,11 @@ struct ProjectDetailView: View {
                 } header: {
                     ItemListHeaderView(itemList: itemList)
                 }
+                .padding(.horizontal)
             }
+            
+            Divider()
+                .padding()
             
             Section {
                 Button {
@@ -49,6 +63,7 @@ struct ProjectDetailView: View {
                         .foregroundColor(.red)
                 }
             }
+            .padding(.vertical)
         }
         .onChange(of: name, perform: { _ in update() })
         .onChange(of: detail, perform: { _ in update() })
@@ -68,6 +83,7 @@ struct ProjectDetailView: View {
     
     func delete() {
         dataController.delete(project)
+        dismiss()
     }
 }
 

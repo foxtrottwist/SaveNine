@@ -22,7 +22,10 @@ struct ItemListHeaderView: View {
         TextField("List Name", text: $name)
             .font(.title3)
             .foregroundColor(.blue)
+            .padding(.top)
             .onChange(of: name, perform: { _ in update() })
+        
+        Divider()
     }
     
     func update() {

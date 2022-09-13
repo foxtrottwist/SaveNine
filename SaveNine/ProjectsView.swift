@@ -15,11 +15,12 @@ struct ProjectsView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.creationDate, ascending: false)]) var projects: FetchedResults<Project>
     
     @State private var selectedProject: Project?
+    @State private var path: [Project] = []
     
     var body: some View {
         NavigationSplitView {
-            List(projects, selection: $selectedProject) {
-                Text($0.projectName).tag($0)
+            List(projects, selection: $selectedProject) { project in
+                NavigationLink(project.projectName, value: project)
             }
             .navigationTitle("Projects")
             .toolbar {
@@ -47,7 +48,9 @@ struct ProjectsView: View {
                     .italic()
                     .foregroundColor(.secondary)
             } else {
-                ProjectDetailView(project: selectedProject! )
+                NavigationStack(path: $path) {
+                    ProjectDetailView(project: selectedProject! )
+                }
             }
         }
     }

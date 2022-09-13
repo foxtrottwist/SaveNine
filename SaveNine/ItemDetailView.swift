@@ -15,7 +15,6 @@ struct ItemDetailView: View {
     
     @State private var detail: String
     @State private var priority: Int
-    @State private var completed: Bool
     
     let item: Item
     
@@ -26,7 +25,6 @@ struct ItemDetailView: View {
         _name = name
         _detail = State(wrappedValue: item.itemDetail)
         _priority = State(wrappedValue: Int(item.priority))
-        _completed = State(wrappedValue: item.completed)
     }
     
     var body: some View {
@@ -46,10 +44,6 @@ struct ItemDetailView: View {
                 } header: {
                     Text("Priority")
                 }
-                
-                Section {
-                    Toggle("Mark Completed", isOn: $completed)
-                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Details")
@@ -61,7 +55,7 @@ struct ItemDetailView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("**Save**") {
+                    Button("**Done**") {
                         save()
                         dismiss()
                     }
@@ -76,7 +70,6 @@ struct ItemDetailView: View {
         item.name = name
         item.detail = detail
         item.priority = Int16(priority)
-        item.completed = completed
         
         dataController.save()
     }

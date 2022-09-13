@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemListRowView: View {
     @State var name: String
+    @State var completed: Bool
     @State var showingItemDetailView = false
     
     let item: Item
@@ -17,20 +18,30 @@ struct ItemListRowView: View {
         self.item = item
         
         _name = State(wrappedValue: item.itemName)
+        _completed = State(wrappedValue: item.completed)
     }
     
     var body: some View {
         HStack {
-            TextField("New item", text: $name)
+            Image(systemName: completed ? "square" : "checkmark.square.fill")
+                .onTapGesture {
+                    completed.toggle()
+                }
+            
+            TextField("New Task", text: $name)
+            
             Spacer()
+            
             Button {
                 showingItemDetailView.toggle()
             } label: {
                 Image(systemName: "info.circle")
-                    .foregroundColor(.blue)
             }
+            .buttonStyle(.plain)
         }
+        .padding()
         .onChange(of: name, perform: { _ in update() })
+        .onChange(of: completed, perform: { _ in update() })
         .sheet(isPresented: $showingItemDetailView) {
             ItemDetailView(name: $name, item: item)
         }
@@ -40,6 +51,7 @@ struct ItemListRowView: View {
         item.itemList?.objectWillChange.send()
         
         item.name = name
+        item.completed = completed
     }
 }
 
