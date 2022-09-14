@@ -89,11 +89,10 @@ struct ProjectDetailView: View {
     func update() -> Void {
         project.name = name
         project.detail = detail
-        project.image = image != nil && !name.isEmpty ? "\(name).png" : nil
+        project.image = "\(project.id!).png"
     }
     
     func updateImage() {
-        if !project.projectImage.isEmpty {
             if let uiImage = image  {
                 Task {
                     save(uiImage: uiImage, named: project.projectImage)
@@ -101,7 +100,6 @@ struct ProjectDetailView: View {
             } else {
                 deleteImage(named: project.projectImage)
             }
-        }
     }
     
     func delete() {
