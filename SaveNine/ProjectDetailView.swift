@@ -14,8 +14,7 @@ struct ProjectDetailView: View {
     
     @State private var name: String
     @State private var detail: String
-    @State private var selectedImage: [PhotosPickerItem] = []
-    @State private var image: Data?
+    @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
     
     let project: Project
@@ -25,10 +24,18 @@ struct ProjectDetailView: View {
         
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
+        
+        if !project.projectImage.isEmpty {
+            if let uiImage = getImage(named: project.projectImage) {
+                _image = State(wrappedValue: uiImage)
+            }
+        }
     }
     
     var body: some View {
         ScrollView {
+           PhotoPickerView(uiImage: $image)
+            
             Section {
                 TextField("Project name", text: $name)
                     .font(.title3)
@@ -39,7 +46,7 @@ struct ProjectDetailView: View {
                 TextField("Notes", text: $detail, axis: .vertical)
                     .lineLimit(...7)
             }
-            .padding(.horizontal)
+            .padding()
             
             ForEach(project.projectItemLists) { itemList in
                 Section {
@@ -67,6 +74,10 @@ struct ProjectDetailView: View {
         }
         .onChange(of: name, perform: { _ in update() })
         .onChange(of: detail, perform: { _ in update() })
+        .onChange(of: image, perform: { _ in
+            update()
+            updateImage()
+        })
         .onDisappear(perform: dataController.save)
         .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
             Button("Delete Project", role: .destructive) {
@@ -78,10 +89,23 @@ struct ProjectDetailView: View {
     func update() -> Void {
         project.name = name
         project.detail = detail
-        
+        project.image = image != nil && !name.isEmpty ? "\(name).png" : nil
+    }
+    
+    func updateImage() {
+        if !project.projectImage.isEmpty {
+            if let uiImage = image  {
+                Task {
+                    save(uiImage: uiImage, named: project.projectImage)
+                }
+            } else {
+                deleteImage(named: project.projectImage)
+            }
+        }
     }
     
     func delete() {
+        deleteImage(named: project.projectImage)
         dataController.delete(project)
         dismiss()
     }

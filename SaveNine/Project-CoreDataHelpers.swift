@@ -12,6 +12,10 @@ extension Project {
         name ?? ""
     }
     
+    var projectImage: String {
+        image ?? ""
+    }
+    
     var projectDetail: String {
         detail ?? ""
     }

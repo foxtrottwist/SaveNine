@@ -19,6 +19,7 @@
         <attribute name="closed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="itemLists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ItemList" inverseName="project" inverseEntity="ItemList"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="project" inverseEntity="Session"/>
