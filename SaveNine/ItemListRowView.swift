@@ -23,7 +23,7 @@ struct ItemListRowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: completed ? "square" : "checkmark.square.fill")
+            Image(systemName: completed ? "checkmark.square.fill" : "square" )
                 .onTapGesture {
                     completed.toggle()
                 }
@@ -48,8 +48,6 @@ struct ItemListRowView: View {
     }
     
     func update() {
-        item.itemList?.objectWillChange.send()
-        
         item.name = name
         item.completed = completed
     }

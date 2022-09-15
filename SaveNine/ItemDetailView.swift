@@ -65,8 +65,6 @@ struct ItemDetailView: View {
     }
     
     func save() {
-        item.itemList?.objectWillChange.send()
-        
         item.name = name
         item.detail = detail
         item.priority = Int16(priority)
