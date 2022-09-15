@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProjectsView: View {
+    @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.creationDate, ascending: false)]) var projects: FetchedResults<Project>
@@ -24,22 +25,7 @@ struct ProjectsView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        let newProject = Project(context: managedObjectContext)
-                        newProject.id = UUID()
-                        newProject.closed = false
-                        newProject.creationDate = Date()
-                        
-                        let supplies = ItemList(context: managedObjectContext)
-                        supplies.name = "Supplies"
-                        supplies.creationDate = Date()
-                        supplies.project = newProject
-                        
-                        let todos = ItemList(context: managedObjectContext)
-                        todos.name = "Todos"
-                        todos.creationDate = Date()
-                        todos.project = newProject
-                        
-                        selectedProject = newProject
+                        addProject()
                     } label: {
                         Image(systemName: "plus.circle")
                         Text("**Add Project**")
@@ -47,16 +33,29 @@ struct ProjectsView: View {
                 }
             }
         } detail: {
-            if selectedProject == nil {
-                Text("Please select a project from the menu to begin.")
-                    .italic()
-                    .foregroundColor(.secondary)
-            } else {
-                NavigationStack(path: $path) {
-                    ProjectDetailView(project: selectedProject! )
-                }
+            NavigationStack(path: $path) {
+                ProjectDetailView(project: selectedProject )
             }
         }
+    }
+    
+    func addProject() {
+        let newProject = Project(context: managedObjectContext)
+        newProject.id = UUID()
+        newProject.closed = false
+        newProject.creationDate = Date()
+        
+        let supplies = ItemList(context: managedObjectContext)
+        supplies.name = "Supplies"
+        supplies.creationDate = Date()
+        supplies.project = newProject
+        
+        let todos = ItemList(context: managedObjectContext)
+        todos.name = "Todos"
+        todos.creationDate = Date()
+        todos.project = newProject
+        
+        dataController.save()
     }
 }
 
