@@ -101,12 +101,12 @@ struct ProjectDetailView: View {
                 save(uiImage: uiImage, named: name)
             }
         } else {
-            deleteImage(named: name)
+            deleteFile(named: name)
         }
     }
     
     func delete(project: Project) {
-        deleteImage(named: project.projectImage)
+        deleteFile(named: project.projectImage)
         dataController.delete(project)
         dismiss()
     }

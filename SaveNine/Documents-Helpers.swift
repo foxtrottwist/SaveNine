@@ -38,11 +38,12 @@ func getImage(named name: String) -> UIImage? {
        }
 }
 
-func deleteImage(named name: String) {
+func deleteFile(named name: String) {
+    guard !name.isEmpty else { return }
     let url = getDocumentsDirectory().appendingPathComponent(name)
        
     guard FileManager.default.fileExists(atPath: url.path) else {
-           print("Image does not exist at path: \(url)")
+           print("File does not exist at path: \(url)")
            
            return
        }
