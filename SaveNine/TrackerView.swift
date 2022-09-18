@@ -110,11 +110,14 @@ struct TrackerView: View {
     func endSession() {
         if let session = session {
             session.endDate = Date()
-            
-            start = nil
-            tracking = false
-            
-            dataController.save()
+            if let startDate = start, let endDate = session.endDate {
+                session.duration = endDate.timeIntervalSince(startDate)
+                
+                start = nil
+                tracking = false
+                
+                dataController.save()
+            }
         }
     }
     
