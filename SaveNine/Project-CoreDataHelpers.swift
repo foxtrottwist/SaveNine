@@ -40,6 +40,10 @@ extension Project {
         }
     }
     
+    var projectTotalDuration: Double {
+        projectSessions.compactMap { $0.duration }.reduce(0.0) { $0 + $1 }
+    }
+    
     static var example: Project {
         let controller = DataController(inMemory: true)
         let viewContext = controller.container.viewContext

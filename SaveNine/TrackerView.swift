@@ -13,6 +13,7 @@ struct TrackerView: View {
     
     @State var start: Date?
     @State var tracking = false
+    @State var showingClearConfirm = false
     
     let project: Project
     let session: Session?
@@ -37,38 +38,54 @@ struct TrackerView: View {
             TimerView(start: start)
             
             HStack {
-                Button("Cancel") {
+                Button("Clear") {
                     withAnimation {
-                        cancelSession()
+                        showingClearConfirm.toggle()
                     }
                 }
                 .disabled(!tracking)
                 
-                Spacer(minLength: 100)
+                Spacer()
                 
                 if tracking {
-                    Button("End Session") {
+                    Button("End Timer") {
                         withAnimation {
-                            endSession()
+                            endTimer()
                         }
                     }
                 } else {
-                    Button("Start Session") {
+                    Button("Start Timer") {
                         withAnimation {
-                            startSession()
+                            startTimer()
                         }
                     }
                 }
             }
             .padding()
-            
-            NavigationLink("Sessions", destination: SessionsView(sessions: project.projectSessions))
-            
+
             Divider()
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("\(project.projectSessions.count) Sessions")
+                        .padding(.bottom)
+                    Text("\(format(duration: project.projectTotalDuration)) Tracked")
+                        .font(.callout)
+                }
+                Spacer()
+            }
+            .padding(.vertical)
+            
+            NavigationLink("View Sessions", destination: SessionsView(sessions: project.projectSessions))
+        }
+        .confirmationDialog("Are you sure you want to clear the timer?", isPresented: $showingClearConfirm, titleVisibility: .visible) {
+            Button("Clear Timer", role: .destructive) {
+                clearTimer()
+            }
         }
     }
     
-    func startSession() {
+    func startTimer() {
         start = Date()
         
         let session = Session(context: managedObjectContext)
@@ -79,7 +96,7 @@ struct TrackerView: View {
         dataController.save()
     }
     
-    func endSession() {
+    func endTimer() {
         if let session = session {
             session.endDate = Date()
             if let startDate = start, let endDate = session.endDate {
@@ -93,7 +110,7 @@ struct TrackerView: View {
         }
     }
     
-    func cancelSession() {
+    func clearTimer() {
         if let session = session {
             dataController.delete(session)
             start = nil
@@ -101,6 +118,16 @@ struct TrackerView: View {
             
             dataController.save()
         }
+    }
+    
+    func format(duration: Double) -> String {
+        let time = Int(duration.rounded())
+        let hours = time / 60 / 60
+        let minutes = (time - (hours * 60 * 60)) / 60
+        
+        let formattedMinutes = "and \(minutes)mins"
+        
+        return "\(hours)hrs \(formattedMinutes)"
     }
 }
 
