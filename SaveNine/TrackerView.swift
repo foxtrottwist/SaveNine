@@ -119,16 +119,6 @@ struct TrackerView: View {
             dataController.save()
         }
     }
-    
-    func format(duration: Double) -> String {
-        let time = Int(duration.rounded())
-        let hours = time / 60 / 60
-        let minutes = (time - (hours * 60 * 60)) / 60
-        
-        let formattedMinutes = "and \(minutes)mins"
-        
-        return "\(hours)hrs \(formattedMinutes)"
-    }
 }
 
 struct TrackerView_Previews: PreviewProvider {

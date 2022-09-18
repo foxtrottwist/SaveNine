@@ -22,7 +22,7 @@ struct SessionsView: View {
                 ForEach(sessions) { session in
                     if let duration = session.duration, let startDate = session.startDate, session.endDate != nil {
                         VStack(alignment: .leading) {
-                            Text(startDate.formatted())
+                            Text(startDate.formatted(date: .abbreviated, time: .shortened))
                                 .font(.callout)
                                 .foregroundColor(.secondary)
                             Text(format(duration: duration))
@@ -32,14 +32,6 @@ struct SessionsView: View {
                 .onDelete(perform: deleteSession)
             }
         }
-    }
-    
-    func format(duration: Double) -> String {
-        let time = Int(duration.rounded())
-        let hours = time / 60 / 60
-        let minutes = (time - (hours * 60 * 60)) / 60
-        
-        return "\(hours):\(minutes)"
     }
     
     func deleteSession(at offsets: IndexSet) {
