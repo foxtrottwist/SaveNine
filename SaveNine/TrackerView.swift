@@ -16,8 +16,6 @@ struct TrackerView: View {
     
     let project: Project
     let session: Session?
-    let digit = "0"
-    let width = CGFloat(60)
     
     
     
@@ -38,29 +36,33 @@ struct TrackerView: View {
         VStack {
             if let start = start {
                 TimelineView(.periodic(from: start, by: 1)) { _ in
+                    let hours = digitsFrom(string: elapsedTime(since: start, in: .hours))
+                    let minutes = digitsFrom(string: elapsedTime(since: start, in: .minutes))
+                    let seconds = digitsFrom(string: elapsedTime(since: start, in: .seconds))
+                    
                     HStack {
-                        DigitView(digit: String(elapsedTime(since: start, in: .hours).split(separator: "").first!))
-                        DigitView(digit: String(elapsedTime(since: start, in: .hours).split(separator: "").last!))
+                        DigitView(digit: hours.0)
+                        DigitView(digit: hours.1)
                         Text(":")
-                        DigitView(digit: String(elapsedTime(since: start, in: .minutes).split(separator: "").first!))
-                        DigitView(digit: String(elapsedTime(since: start, in: .minutes).split(separator: "").last!))
+                        DigitView(digit: minutes.0)
+                        DigitView(digit: minutes.1)
                         Text(":")
-                        DigitView(digit: String(elapsedTime(since: start, in: .seconds).split(separator: "").first!))
-                        DigitView(digit: String(elapsedTime(since: start, in: .seconds).split(separator: "").last!))
+                        DigitView(digit: seconds.0)
+                        DigitView(digit: seconds.1)
                     }
                     .font(.largeTitle)
                     .padding()
                 }
             } else {
                 HStack {
-                    DigitView(digit: digit)
-                    DigitView(digit: digit)
+                    DigitView(digit: "0")
+                    DigitView(digit: "0")
                     Text(":")
-                    DigitView(digit: digit)
-                    DigitView(digit: digit)
+                    DigitView(digit: "0")
+                    DigitView(digit: "0")
                     Text(":")
-                    DigitView(digit: digit)
-                    DigitView(digit: digit)
+                    DigitView(digit: "0")
+                    DigitView(digit: "0")
                 }
                 .font(.largeTitle)
                 .padding()
@@ -137,9 +139,9 @@ struct TrackerView: View {
         
         switch format {
         case .hours:
-            return hours <= 9 ? "\(0)\(hours)" : "\(hours)"
+            return hours <= 9 ? "0\(hours)" : "\(hours)"
         case .minutes:
-            return minutes <= 9 ? "\(0)\(minutes)" : "\(minutes)"
+            return minutes <= 9 ? "0\(minutes)" : "\(minutes)"
         case .seconds:
             return seconds(elapsedTime)
         }
@@ -148,12 +150,18 @@ struct TrackerView: View {
     func seconds(_ seconds: Int) -> String {
         if seconds > 60 {
             let remainder = seconds % 60
-            return remainder <= 9 ? "\(0)\(remainder)" : "\(remainder)"
+            return remainder <= 9 ? "0\(remainder)" : "\(remainder)"
         } else if seconds > 9 {
             return "\(seconds)"
         }
         
-        return "\(0)\(seconds)"
+        return "0\(seconds)"
+    }
+    
+    func digitsFrom(string: String) -> (String, String) {
+        let split = string.split(separator: "")
+
+        return (String(split.first ?? "0"), String(split.last ?? "0"))
     }
 }
 
