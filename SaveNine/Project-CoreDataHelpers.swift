@@ -29,7 +29,15 @@ extension Project {
     }
     
     var projectSessions: [Session] {
-       sessions?.allObjects as? [Session] ?? []
+        let sessions = sessions?.allObjects as? [Session] ?? []
+        
+        return sessions.sorted { a, b in
+            if let a = a.startDate, let b = b.startDate {
+                return  a < b
+            } else {
+                return true
+            }
+        }
     }
     
     static var example: Project {

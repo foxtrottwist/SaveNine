@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
 		652D025228D7476000F818E7 /* DigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025128D7476000F818E7 /* DigitView.swift */; };
+		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
+		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
 		652E7A9B28CE4C420054D6AB /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652E7A9A28CE4C420054D6AB /* ItemDetailView.swift */; };
 		6589D3CC28CE1B2E00182F2B /* ItemListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */; };
 		6589D3CE28CE1D8A00182F2B /* ItemListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		652D025128D7476000F818E7 /* DigitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitView.swift; sourceTree = "<group>"; };
+		652D025528D79DA300F818E7 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
+		652D025728D79F9000F818E7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		652E7A9A28CE4C420054D6AB /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListHeaderView.swift; sourceTree = "<group>"; };
 		6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListRowView.swift; sourceTree = "<group>"; };
@@ -83,9 +87,11 @@
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
 				65D2315D28CD5B3B00A91A47 /* ProjectsView.swift */,
 				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
-				652AE94F28D6550E0001294F /* TrackerView.swift */,
-				652D025128D7476000F818E7 /* DigitView.swift */,
 				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
+				652AE94F28D6550E0001294F /* TrackerView.swift */,
+				652D025728D79F9000F818E7 /* TimerView.swift */,
+				652D025128D7476000F818E7 /* DigitView.swift */,
+				652D025528D79DA300F818E7 /* SessionsView.swift */,
 				6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */,
 				6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */,
 				652E7A9A28CE4C420054D6AB /* ItemDetailView.swift */,
@@ -179,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				652D025828D79F9000F818E7 /* TimerView.swift in Sources */,
 				652E7A9B28CE4C420054D6AB /* ItemDetailView.swift in Sources */,
 				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
@@ -187,6 +194,7 @@
 				6589D3CE28CE1D8A00182F2B /* ItemListRowView.swift in Sources */,
 				65D2314728CD552E00A91A47 /* ContentView.swift in Sources */,
 				65D2315628CD590900A91A47 /* Project-CoreDataHelpers.swift in Sources */,
+				652D025628D79DA300F818E7 /* SessionsView.swift in Sources */,
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				65DD023F28D1318800567676 /* Documents-Helpers.swift in Sources */,
 				652D025228D7476000F818E7 /* DigitView.swift in Sources */,
