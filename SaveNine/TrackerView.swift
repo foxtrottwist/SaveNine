@@ -16,6 +16,8 @@ struct TrackerView: View {
     
     let project: Project
     let session: Session?
+    let digit = "0"
+    let width = CGFloat(60)
     
     
     
@@ -37,22 +39,28 @@ struct TrackerView: View {
             if let start = start {
                 TimelineView(.periodic(from: start, by: 1)) { _ in
                     HStack {
-                        Text(time(since: start, in: .hours))
+                        DigitView(digit: String(elapsedTime(since: start, in: .hours).split(separator: "").first!))
+                        DigitView(digit: String(elapsedTime(since: start, in: .hours).split(separator: "").last!))
                         Text(":")
-                        Text(time(since:start, in: .minutes))
+                        DigitView(digit: String(elapsedTime(since: start, in: .minutes).split(separator: "").first!))
+                        DigitView(digit: String(elapsedTime(since: start, in: .minutes).split(separator: "").last!))
                         Text(":")
-                        Text(time(since:start, in: .seconds))
+                        DigitView(digit: String(elapsedTime(since: start, in: .seconds).split(separator: "").first!))
+                        DigitView(digit: String(elapsedTime(since: start, in: .seconds).split(separator: "").last!))
                     }
                     .font(.largeTitle)
                     .padding()
                 }
             } else {
                 HStack {
-                    Text("00")
+                    DigitView(digit: digit)
+                    DigitView(digit: digit)
                     Text(":")
-                    Text("00")
+                    DigitView(digit: digit)
+                    DigitView(digit: digit)
                     Text(":")
-                    Text("00")
+                    DigitView(digit: digit)
+                    DigitView(digit: digit)
                 }
                 .font(.largeTitle)
                 .padding()
@@ -122,7 +130,7 @@ struct TrackerView: View {
         case hours, minutes, seconds
     }
     
-    func time(since start: Date, in format: FormmattedTime ) -> String {
+    func elapsedTime(since start: Date, in format: FormmattedTime ) -> String {
         let elapsedTime = Int(-start.timeIntervalSinceNow.rounded())
         let hours = elapsedTime / 60 / 60
         let minutes = (elapsedTime - (hours * 60 * 60)) / 60
@@ -133,14 +141,14 @@ struct TrackerView: View {
         case .minutes:
             return minutes <= 9 ? "\(0)\(minutes)" : "\(minutes)"
         case .seconds:
-            return prettyPrint(seconds: elapsedTime)
+            return seconds(elapsedTime)
         }
     }
     
-    func prettyPrint(seconds: Int) -> String {
+    func seconds(_ seconds: Int) -> String {
         if seconds > 60 {
             let remainder = seconds % 60
-            return remainder < 9 ? "\(0)\(remainder)" : "\(remainder)"
+            return remainder <= 9 ? "\(0)\(remainder)" : "\(remainder)"
         } else if seconds > 9 {
             return "\(seconds)"
         }
