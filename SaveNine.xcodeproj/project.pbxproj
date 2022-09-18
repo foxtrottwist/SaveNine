@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
 		652E7A9B28CE4C420054D6AB /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652E7A9A28CE4C420054D6AB /* ItemDetailView.swift */; };
 		6589D3CC28CE1B2E00182F2B /* ItemListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */; };
 		6589D3CE28CE1D8A00182F2B /* ItemListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		652E7A9A28CE4C420054D6AB /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListHeaderView.swift; sourceTree = "<group>"; };
 		6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListRowView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
 				65D2315D28CD5B3B00A91A47 /* ProjectsView.swift */,
 				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
+				652AE94F28D6550E0001294F /* TrackerView.swift */,
 				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
 				6589D3CB28CE1B2E00182F2B /* ItemListHeaderView.swift */,
 				6589D3CD28CE1D8A00182F2B /* ItemListRowView.swift */,
@@ -181,6 +184,7 @@
 				6589D3CE28CE1D8A00182F2B /* ItemListRowView.swift in Sources */,
 				65D2314728CD552E00A91A47 /* ContentView.swift in Sources */,
 				65D2315628CD590900A91A47 /* Project-CoreDataHelpers.swift in Sources */,
+				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				65DD023F28D1318800567676 /* Documents-Helpers.swift in Sources */,
 				65D2315828CD598A00A91A47 /* ItemList-CoreDataHelpers.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
@@ -315,8 +319,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SaveNine/Preview Content\"";
+				DEVELOPMENT_TEAM = 7YY7893TQJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Save Nine";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,8 +349,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SaveNine/Preview Content\"";
+				DEVELOPMENT_TEAM = 7YY7893TQJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Save Nine";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

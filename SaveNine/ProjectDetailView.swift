@@ -44,6 +44,12 @@ struct ProjectDetailView: View {
                         .font(.title3)
                 }
                 .padding(.horizontal)
+                .padding(.bottom)
+                
+                Section {
+                    TrackerView(project: project)
+                }
+                .padding()
                 
                 Section {
                     TextField("Notes", text: $detail, axis: .vertical)
@@ -90,6 +96,11 @@ struct ProjectDetailView: View {
                 .foregroundColor(.secondary)
         }
     }
+    
+    private func secondsValue(for date: Date) -> Double {
+           let seconds = Calendar.current.component(.second, from: date)
+           return Double(seconds) / 60
+       }
     
     func update(uiImage: UIImage?, in project: Project) {
         if let uiImage = uiImage  {

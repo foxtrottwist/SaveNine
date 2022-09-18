@@ -28,6 +28,10 @@ extension Project {
        itemLists?.allObjects as? [ItemList] ?? []
     }
     
+    var projectSessions: [Session] {
+       sessions?.allObjects as? [Session] ?? []
+    }
+    
     static var example: Project {
         let controller = DataController(inMemory: true)
         let viewContext = controller.container.viewContext
