@@ -25,7 +25,7 @@ struct SessionsView: View {
                             Text(startDate.formatted(date: .abbreviated, time: .shortened))
                                 .font(.callout)
                                 .foregroundColor(.secondary)
-                            Text(format(duration: duration))
+                            Text("\(format(duration: duration, in: .hours)) \(format(duration: duration, in: .minutes)) \(format(duration: duration, in: .seconds))")
                         }
                     }
                 }

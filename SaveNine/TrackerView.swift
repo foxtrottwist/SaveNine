@@ -48,9 +48,9 @@ struct TrackerView: View {
                 Spacer()
                 
                 if tracking {
-                    Button("End Timer") {
+                    Button("Stop Timer") {
                         withAnimation {
-                            endTimer()
+                            stopTimer()
                         }
                     }
                 } else {
@@ -69,8 +69,7 @@ struct TrackerView: View {
                 VStack(alignment: .leading) {
                     Text("\(project.projectSessions.count) Sessions")
                         .padding(.bottom)
-                    Text("\(format(duration: project.projectTotalDuration)) Tracked")
-                        .font(.callout)
+                    Text("\(format(duration: project.projectTotalDuration, in: .hours)) \(format(duration: project.projectTotalDuration, in: .minutes)) Tracked")
                 }
                 Spacer()
             }
@@ -96,7 +95,7 @@ struct TrackerView: View {
         dataController.save()
     }
     
-    func endTimer() {
+    func stopTimer() {
         if let session = session {
             session.endDate = Date()
             if let startDate = start, let endDate = session.endDate {
