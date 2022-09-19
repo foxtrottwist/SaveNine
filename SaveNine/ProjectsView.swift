@@ -45,16 +45,6 @@ struct ProjectsView: View {
         newProject.closed = false
         newProject.creationDate = Date()
         
-        let supplies = ItemList(context: managedObjectContext)
-        supplies.name = "Supplies"
-        supplies.creationDate = Date()
-        supplies.project = newProject
-        
-        let todos = ItemList(context: managedObjectContext)
-        todos.name = "Todos"
-        todos.creationDate = Date()
-        todos.project = newProject
-        
         dataController.save()
     }
 }

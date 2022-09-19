@@ -43,26 +43,8 @@ class DataController: ObservableObject {
         for p in 1...5 {
             let project = Project(context: viewContext)
             project.name = "Project \(p)"
-            project.itemLists = []
             project.creationDate = Date()
             project.closed = Bool.random()
-            
-            for l in 1...2 {
-                let itemList = ItemList(context: viewContext)
-                itemList.name = "List \(l)"
-                itemList.items = []
-                itemList.creationDate = Date()
-                itemList.project = project
-                
-                for i in 1...7 {
-                    let item = Item(context: viewContext)
-                    item.name = "Item \(i)"
-                    item.creationDate = Date()
-                    item.completed = Bool.random()
-                    item.itemList = itemList
-                    item.priority = Int16.random(in: 1...3)
-                }
-            }
         }
         
         try viewContext.save()
@@ -79,7 +61,7 @@ class DataController: ObservableObject {
     }
     
     func deleteAll() {
-        let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
+        let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
         let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
         _ = try? container.viewContext.execute(batchDeleteRequest1)
         

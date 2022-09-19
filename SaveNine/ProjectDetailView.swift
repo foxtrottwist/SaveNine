@@ -57,17 +57,6 @@ struct ProjectDetailView: View {
                 }
                 .padding()
                 
-                ForEach(project.projectItemLists) { itemList in
-                    Section {
-                        ForEach(itemList.itemListItems) { item in
-                            ItemListRowView(item: item)
-                        }
-                    } header: {
-                        ItemListHeaderView(itemList: itemList)
-                    }
-                    .padding(.horizontal)
-                }
-                
                 Divider()
                     .padding()
                 

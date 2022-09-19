@@ -24,10 +24,6 @@ extension Project {
         creationDate ?? Date()
     }
     
-    var projectItemLists: [ItemList] {
-       itemLists?.allObjects as? [ItemList] ?? []
-    }
-    
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
         
