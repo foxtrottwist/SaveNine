@@ -13,14 +13,14 @@ enum TimeValue {
 
 func elapsedTime(since start: Date, in format: TimeValue ) -> String {
     let elapsedTime = Int(-start.timeIntervalSinceNow.rounded())
-    let hours = elapsedTime / 60 / 60
-    let minutes = (elapsedTime - (hours * 60 * 60)) / 60
     
     switch format {
     case .hours:
-        return hours <= 9 ? "0\(hours)" : "\(hours)"
+        let hrs = hours(from: elapsedTime)
+        return hrs <= 9 ? "0\(hrs)" : "\(hrs)"
     case .minutes:
-        return minutes <= 9 ? "0\(minutes)" : "\(minutes)"
+        let mins = minutes(from: elapsedTime)
+        return mins <= 9 ? "0\(mins)" : "\(mins)"
     case .seconds:
         return seconds(elapsedTime)
     }
@@ -39,17 +39,29 @@ func seconds(_ seconds: Int) -> String {
 
 func format(duration: Double, in format: TimeValue) -> String {
     let time = Int(duration.rounded(.up))
-    let hours = time / 60 / 60
-    let minutes = (time - (hours * 60 * 60)) / 60
-    
-    
+
     switch format {
     case .hours:
-        return hours > 0 ? "\(hours) \(hours == 1 ? "hr" : "hrs")" : ""
+        let hrs = hours(from: time)
+        return hrs > 0 ? "\(hrs) \(hrs == 1 ? "hr" : "hrs") " : ""
     case .minutes:
-        return minutes > 0 ? "\(minutes) \(minutes == 1 ? "min" : "mins")" : ""
+        let mins = minutes(from: time)
+        return mins > 0 ? "\(mins) \(mins == 1 ? "min" : "mins") " : ""
     case .seconds:
-        let seconds = time % 60
-        return seconds > 0 ? "\(seconds) \(seconds == 1 ? "second" : "seconds")" : ""
+        let secs = seconds(from: time)
+        return secs > 0 ? "\(secs) \(secs == 1 ? "second" : "seconds")" : ""
     }
+}
+
+func hours(from elapseTime: Int) -> Int {
+   return elapseTime / 60 / 60
+}
+
+func minutes(from elapseTime: Int) -> Int {
+    let hours = elapseTime / 60 / 60
+    return (elapseTime - (hours * 60 * 60)) / 60
+}
+
+func seconds(from elapseTime: Int) -> Int {
+    return elapseTime % 60
 }

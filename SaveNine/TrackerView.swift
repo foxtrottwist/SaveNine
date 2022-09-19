@@ -66,10 +66,28 @@ struct TrackerView: View {
             Divider()
             
             HStack {
+                let timeTracked = format(duration: project.projectTotalDuration, in: .hours) + format(duration: project.projectTotalDuration, in: .minutes)
+                
                 VStack(alignment: .leading) {
-                    Text("\(project.projectSessions.count) Sessions")
+                    Text("*Sessions*:")
+                        .font(.callout)
+                        .fontWeight(.light)
+                    
+                    Text("\(tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
+                        .padding(.leading)
                         .padding(.bottom)
-                    Text("\(format(duration: project.projectTotalDuration, in: .hours)) \(format(duration: project.projectTotalDuration, in: .minutes)) Tracked")
+                    
+                    Text("*Time Tracked*:")
+                        .font(.callout)
+                        .fontWeight(.light)
+                    
+                    if timeTracked.isEmpty {
+                        Text("None")
+                            .padding(.leading)
+                    } else {
+                        Text(timeTracked)
+                            .padding(.leading)
+                    }
                 }
                 Spacer()
             }
@@ -77,7 +95,7 @@ struct TrackerView: View {
             
             NavigationLink("View Sessions", destination: SessionsView(sessions: project.projectSessions))
         }
-        .confirmationDialog("Are you sure you want to clear the timer?", isPresented: $showingClearConfirm, titleVisibility: .visible) {
+        .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
             Button("Clear Timer", role: .destructive) {
                 clearTimer()
             }
