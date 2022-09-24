@@ -14,7 +14,7 @@ struct SessionsView: View {
     
     var body: some View {
         List {
-            if sessions.isEmpty {
+            if sessions.isEmpty || sessions.first?.duration != nil {
                 Text("No time tracking sessions have been completed for this project.")
                     .italic()
                     .foregroundColor(.secondary)
