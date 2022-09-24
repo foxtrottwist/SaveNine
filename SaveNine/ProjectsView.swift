@@ -15,11 +15,25 @@ struct ProjectsView: View {
     
     @State private var selectedProject: Project?
     @State private var path: [Project] = []
+    @State private var disabled = false
     
     var body: some View {
         NavigationSplitView {
             List(projects, selection: $selectedProject) { project in
-                NavigationLink(project.projectName.isEmpty ? "New Project" : project.projectName, value: project)
+                if project.projectName.isEmpty {
+                    ProjectNameView(project: project)
+                        .onAppear {
+                            disabled = true
+                        }
+                        .onDisappear {
+                            disabled = false
+                        }
+                } else {
+                    VStack {
+                        NavigationLink(project.projectName.isEmpty ? "New Project" : project.projectName, value: project)
+                    }
+                    .disabled(disabled)
+                }
             }
             .navigationTitle("Projects")
             .toolbar {
@@ -30,6 +44,7 @@ struct ProjectsView: View {
                         Image(systemName: "plus.circle")
                         Text("**Add Project**")
                     }
+                    .disabled(disabled)
                 }
             }
         } detail: {
@@ -40,12 +55,10 @@ struct ProjectsView: View {
     }
     
     func addProject() {
-        let newProject = Project(context: managedObjectContext)
-        newProject.id = UUID()
-        newProject.closed = false
-        newProject.creationDate = Date()
-        
-        dataController.save()
+            let newProject = Project(context: managedObjectContext)
+            newProject.id = UUID()
+            newProject.closed = false
+            newProject.creationDate = Date()
     }
 }
 

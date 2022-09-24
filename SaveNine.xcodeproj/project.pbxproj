@@ -23,6 +23,7 @@
 		65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */; };
 		65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023A28D121AD00567676 /* PhotoPickerView.swift */; };
 		65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* DocumentHelpers.swift */; };
+		65EF242A28DF870A003749F3 /* ProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF242928DF870A003749F3 /* ProjectNameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		65DD023A28D121AD00567676 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		65DD023E28D1318800567676 /* DocumentHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentHelpers.swift; sourceTree = "<group>"; };
+		65EF242928DF870A003749F3 /* ProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				65D2314428CD552E00A91A47 /* SaveNineApp.swift */,
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
 				65D2315D28CD5B3B00A91A47 /* ProjectsView.swift */,
+				65EF242928DF870A003749F3 /* ProjectNameView.swift */,
 				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
 				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
 				652AE94F28D6550E0001294F /* TrackerView.swift */,
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				652D025828D79F9000F818E7 /* TimerView.swift in Sources */,
+				65EF242A28DF870A003749F3 /* ProjectNameView.swift in Sources */,
 				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */,
