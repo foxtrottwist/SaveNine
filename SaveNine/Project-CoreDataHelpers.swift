@@ -9,7 +9,7 @@ import Foundation
 
 extension Project {
     var projectName: String {
-        name ?? "New Project"
+        name ?? ""
     }
     
     var projectImage: String {

@@ -19,7 +19,7 @@ struct ProjectsView: View {
     var body: some View {
         NavigationSplitView {
             List(projects, selection: $selectedProject) { project in
-                NavigationLink(project.projectName, value: project)
+                NavigationLink(project.projectName.isEmpty ? "New Project" : project.projectName, value: project)
             }
             .navigationTitle("Projects")
             .toolbar {
