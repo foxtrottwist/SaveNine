@@ -30,7 +30,7 @@ struct ProjectsView: View {
                         }
                 } else {
                     VStack {
-                        NavigationLink(project.projectName.isEmpty ? "New Project" : project.projectName, value: project)
+                        NavigationLink(project.projectName, value: project)
                     }
                     .disabled(disabled)
                 }
