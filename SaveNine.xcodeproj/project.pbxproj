@@ -24,6 +24,8 @@
 		65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023A28D121AD00567676 /* PhotoPickerView.swift */; };
 		65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* DocumentHelpers.swift */; };
 		65EF242A28DF870A003749F3 /* ProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF242928DF870A003749F3 /* ProjectNameView.swift */; };
+		65F648AF28E0FB370086512D /* Checklist-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648AE28E0FB370086512D /* Checklist-CoreDataHelpers.swift */; };
+		65F648B128E0FBF90086512D /* Item-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648B028E0FBF90086512D /* Item-CoreDataHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		65DD023A28D121AD00567676 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		65DD023E28D1318800567676 /* DocumentHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentHelpers.swift; sourceTree = "<group>"; };
 		65EF242928DF870A003749F3 /* ProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameView.swift; sourceTree = "<group>"; };
+		65F648AE28E0FB370086512D /* Checklist-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checklist-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		65F648B028E0FBF90086512D /* Item-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				65DD023E28D1318800567676 /* DocumentHelpers.swift */,
 				652D025928D7D3FB00F818E7 /* TimeHelpers.swift */,
 				65D2315528CD590900A91A47 /* Project-CoreDataHelpers.swift */,
+				65F648AE28E0FB370086512D /* Checklist-CoreDataHelpers.swift */,
+				65F648B028E0FBF90086512D /* Item-CoreDataHelpers.swift */,
 				65D2314828CD552F00A91A47 /* Assets.xcassets */,
 				65D2314A28CD552F00A91A47 /* Preview Content */,
 			);
@@ -187,8 +193,10 @@
 				65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */,
 				65D2315E28CD5B3B00A91A47 /* ProjectsView.swift in Sources */,
 				65D2314728CD552E00A91A47 /* ContentView.swift in Sources */,
+				65F648AF28E0FB370086512D /* Checklist-CoreDataHelpers.swift in Sources */,
 				65D2315628CD590900A91A47 /* Project-CoreDataHelpers.swift in Sources */,
 				652D025628D79DA300F818E7 /* SessionsView.swift in Sources */,
+				65F648B128E0FBF90086512D /* Item-CoreDataHelpers.swift in Sources */,
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
 				652D025228D7476000F818E7 /* DigitView.swift in Sources */,

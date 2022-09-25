@@ -9,6 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct ProjectDetailView: View {
+    @ObservedObject var project: Project
+    
     @EnvironmentObject var dataController: DataController
     @Environment(\.dismiss) private var dismiss
     
@@ -17,72 +19,62 @@ struct ProjectDetailView: View {
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
     
-    let project: Project?
-    
-    init(project: Project?) {
+    init(project: Project) {
         self.project = project
         
-        if let project = project {
-            _name = State(wrappedValue: project.projectName)
-            _detail = State(wrappedValue: project.projectDetail)
-            
-            if !project.projectImage.isEmpty {
-                if let uiImage = getImage(named: project.projectImage) {
-                    _image = State(wrappedValue: uiImage)
-                }
+        _name = State(wrappedValue: project.projectName)
+        _detail = State(wrappedValue: project.projectDetail)
+        
+        if !project.projectImage.isEmpty {
+            if let uiImage = getImage(named: project.projectImage) {
+                _image = State(wrappedValue: uiImage)
             }
         }
     }
     
     var body: some View {
-        if let project = project {
-            ScrollView {
-                PhotoPickerView(uiImage: $image)
+        ScrollView {
+            PhotoPickerView(uiImage: $image)
                 
-                Section {
-                    TextField("Project name", text: $name)
-                        .font(.title3)
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                Section {
-                    TrackerView(project: project)
-                }
-                .padding()
-                
-                Section {
-                    TextField("Notes", text: $detail, axis: .vertical)
-                        .lineLimit(...7)
-                }
-                .padding()
-                
-                Divider()
-                    .padding()
-                
-                Section {
-                    Button {
-                        showingDeleteConfirm.toggle()
-                    } label: {
-                        Label("Delete Project", systemImage: "trash")
-                            .foregroundColor(.red)
-                    }
-                }
-                .padding(.vertical)
+            Section {
+                TextField("Project name", text: $name)
+                    .font(.title3)
             }
-            .onChange(of: name, perform: { name in project.name = name })
-            .onChange(of: detail, perform: { detail in project.detail = detail })
-            .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-            .onDisappear(perform: dataController.save)
-            .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
-                Button("Delete Project", role: .destructive) {
-                    delete(project: project)
+            .padding(.horizontal)
+            .padding(.bottom)
+            
+            Section {
+                TrackerView(project: project)
+            }
+            .padding()
+            
+            Section {
+                TextField("Notes", text: $detail, axis: .vertical)
+                    .lineLimit(...7)
+            }
+            .padding()
+            
+            Divider()
+                .padding()
+            
+            Section {
+                Button {
+                    showingDeleteConfirm.toggle()
+                } label: {
+                    Label("Delete Project", systemImage: "trash")
+                        .foregroundColor(.red)
                 }
             }
-        } else {
-            Text("Please select a project from the menu to begin.")
-                .italic()
-                .foregroundColor(.secondary)
+            .padding(.vertical)
+        }
+        .onChange(of: name, perform: { name in project.name = name })
+        .onChange(of: detail, perform: { detail in project.detail = detail })
+        .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
+        .onDisappear(perform: dataController.save)
+        .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete Project", role: .destructive) {
+                delete(project: project)
+            }
         }
     }
     

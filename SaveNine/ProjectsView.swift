@@ -48,8 +48,15 @@ struct ProjectsView: View {
                 }
             }
         } detail: {
-            NavigationStack(path: $path) {
-                ProjectDetailView(project: selectedProject )
+            if let project = selectedProject {
+                NavigationStack(path: $path) {
+                    ProjectDetailView(project: project )
+                }
+                
+            } else {
+                Text("Please select a project from the menu to begin.")
+                    .italic()
+                    .foregroundColor(.secondary)
             }
         }
     }
