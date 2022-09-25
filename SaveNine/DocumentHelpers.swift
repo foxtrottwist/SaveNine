@@ -14,7 +14,7 @@ func getDocumentsDirectory() -> URL {
 }
 
 func save(uiImage: UIImage, named name: String) {
-        if let data = uiImage.pngData() {
+        if let data = uiImage.jpegData(compressionQuality: 0.8) {
             let path = getDocumentsDirectory().appendingPathComponent(name)
             try? data.write(to: path)
         }
