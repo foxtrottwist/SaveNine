@@ -9,10 +9,10 @@ import PhotosUI
 import SwiftUI
 
 struct ProjectDetailView: View {
-    @ObservedObject var project: Project
+    let project: Project
     
-    @EnvironmentObject var dataController: DataController
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var dataController: DataController
     
     @State private var name = ""
     @State private var detail = ""
@@ -34,54 +34,54 @@ struct ProjectDetailView: View {
     
     var body: some View {
         ScrollView {
-            PhotoPickerView(uiImage: $image)
+            VStack {
+                PhotoPickerView(uiImage: $image)
                 
-            Section {
-                TextField("Project name", text: $name)
-                    .font(.title3)
-            }
-            .padding(.horizontal)
-            .padding(.bottom)
-            
-            Section {
-                TrackerView(project: project)
-            }
-            .padding()
-            
-            Section {
-                TextField("Notes", text: $detail, axis: .vertical)
-                    .lineLimit(...7)
-            }
-            .padding()
-            
-            Divider()
-                .padding()
-            
-            Section {
-                Button {
-                    showingDeleteConfirm.toggle()
-                } label: {
-                    Label("Delete Project", systemImage: "trash")
-                        .foregroundColor(.red)
+                Section {
+                    TrackerView(project: project)
                 }
+                .padding()
+                
+                Section {
+                    TextField("Project name", text: $name)
+                        .font(.title3)
+                }
+                .padding(.horizontal)
+                
+                Section {
+                    TextField("Notes", text: $detail, axis: .vertical)
+                        .lineLimit(...7)
+                }
+                .padding()
+                
+                ChecklistView(project: project)
+                
+                Divider()
+                    .padding()
+                
+                Section {
+                    Button {
+                        showingDeleteConfirm.toggle()
+                    } label: {
+                        Label("Delete Project", systemImage: "trash")
+                            .foregroundColor(.red)
+                    }
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
-        }
-        .onChange(of: name, perform: { name in project.name = name })
-        .onChange(of: detail, perform: { detail in project.detail = detail })
-        .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-        .onDisappear(perform: dataController.save)
-        .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
-            Button("Delete Project", role: .destructive) {
-                delete(project: project)
+            .navigationTitle($name)
+            .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: name, perform: { name in project.name = name })
+            .onChange(of: detail, perform: { detail in project.detail = detail })
+            .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
+            .onDisappear(perform: dataController.save)
+            .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+                Button("Delete Project", role: .destructive) {
+                    delete(project: project)
+                }
             }
         }
     }
-    
-    private func secondsValue(for date: Date) -> Double {
-           let seconds = Calendar.current.component(.second, from: date)
-           return Double(seconds) / 60
-       }
     
     func update(uiImage: UIImage?, in project: Project) {
         if let uiImage = uiImage  {

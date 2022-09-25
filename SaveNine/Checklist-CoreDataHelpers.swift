@@ -8,7 +8,7 @@
 import Foundation
 
 extension Checklist {
-    var itemListName: String {
+    var checklistName: String {
         name ?? "New List"
     }
 
