@@ -54,7 +54,9 @@ struct ProjectDetailView: View {
                 }
                 .padding()
                 
-                ChecklistView(project: project)
+                Section {
+                    ChecklistView(project: project)
+                }
                 
                 Divider()
                     .padding()
@@ -75,7 +77,7 @@ struct ProjectDetailView: View {
             .onChange(of: detail, perform: { detail in project.detail = detail })
             .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
             .onDisappear(perform: dataController.save)
-            .confirmationDialog("Are you sure you want to delete project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
                 Button("Delete Project", role: .destructive) {
                     delete(project: project)
                 }

@@ -9,7 +9,7 @@ import Foundation
 
 extension Item {
     var itemName: String {
-        name ?? "New Item"
+        name ?? ""
     }
     
     var itemDetail: String {

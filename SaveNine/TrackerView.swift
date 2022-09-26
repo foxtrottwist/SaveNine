@@ -68,7 +68,6 @@ struct TrackerView: View {
             HStack {
                 let timeTracked = format(duration: project.projectTotalDuration, in: .hours) + format(duration: project.projectTotalDuration, in: .minutes)
                 
-                HStack {
                     VStack {
                         Text("*Sessions*:")
                             .font(.callout)
@@ -90,8 +89,6 @@ struct TrackerView: View {
                             Text(timeTracked)
                         }
                     }
-                }
-                Spacer()
             }
             .padding(.vertical)
             

@@ -34,7 +34,6 @@ struct ChecklistView: View {
                 Section {
                     ForEach(checklist.checklistItems) { item in
                         ChecklistRowView(item: item)
-                        
                     }
                     
                     Button {

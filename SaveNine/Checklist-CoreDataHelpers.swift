@@ -9,7 +9,7 @@ import Foundation
 
 extension Checklist {
     var checklistName: String {
-        name ?? "New List"
+        name ?? ""
     }
 
     var checklistCreationDate: Date {
@@ -17,7 +17,15 @@ extension Checklist {
     }
     
     var checklistItems: [Item] {
-       items?.allObjects as? [Item] ?? []
+        let items = items?.allObjects as? [Item] ?? []
+        
+        return items.sorted { a, b in
+            if let a = a.creationDate, let b = b.creationDate {
+                return  a < b
+            } else {
+                return true
+            }
+        }
     }
 
     static var example: Checklist {
