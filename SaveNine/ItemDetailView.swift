@@ -27,7 +27,7 @@ struct ItemDetailView: View {
     }
         
     var body: some View {
-//        NavigationStack {
+        NavigationStack {
             Form {
                 TextField("Name", text: $name)
                 TextField("Notes", text: $detail, axis: .vertical)
@@ -60,7 +60,7 @@ struct ItemDetailView: View {
                     }
                 }
             }
-//        }
+        }
     }
         
     func save() {
