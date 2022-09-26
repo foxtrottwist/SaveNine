@@ -38,13 +38,7 @@ struct ChecklistView: View {
                     
                     Button {
                         withAnimation {
-                            checklist.project?.objectWillChange.send()
-                            
-                            let item = Item(context: managedObjectContext)
-                            item.checklist = checklist
-                            item.creationDate = Date()
-                            
-                            dataController.save()
+                            addItem(to: checklist)
                         }
                     } label: {
                         Label("Add New Item", systemImage: "plus")
@@ -55,6 +49,16 @@ struct ChecklistView: View {
                 .padding(.horizontal)
             }
         }
+    }
+    
+    func addItem(to checklist: Checklist) {
+        checklist.project?.objectWillChange.send()
+        
+        let item = Item(context: managedObjectContext)
+        item.checklist = checklist
+        item.creationDate = Date()
+        
+        dataController.save()
     }
 }
 
