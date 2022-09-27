@@ -37,6 +37,7 @@ struct ProjectsView: View {
                     .disabled(disabled)
                 }
             }
+            .listStyle(.inset)
             .navigationTitle("Projects")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
