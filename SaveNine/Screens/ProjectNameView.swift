@@ -34,7 +34,7 @@ struct ProjectNameView: View {
     }
 }
 
-struct ProjectRowView_Previews: PreviewProvider {
+struct ProjectNameView_Previews: PreviewProvider {
     static var previews: some View {
         ProjectNameView(project: Project.example)
     }

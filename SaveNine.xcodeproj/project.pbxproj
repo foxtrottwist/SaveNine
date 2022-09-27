@@ -12,6 +12,7 @@
 		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
 		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
 		652D025A28D7D3FB00F818E7 /* TimeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025928D7D3FB00F818E7 /* TimeHelpers.swift */; };
+		659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FDA6C28E28EC900899A2E /* ProjectRowView.swift */; };
 		65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314428CD552E00A91A47 /* SaveNineApp.swift */; };
 		65D2314728CD552E00A91A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314628CD552E00A91A47 /* ContentView.swift */; };
 		65D2314928CD552F00A91A47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314828CD552F00A91A47 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		652D025928D7D3FB00F818E7 /* TimeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelpers.swift; sourceTree = "<group>"; };
 		657081DC28D8E44A006C568D /* SaveNine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNine.entitlements; sourceTree = "<group>"; };
 		657081DD28D8E460006C568D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		659FDA6C28E28EC900899A2E /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		65D2314128CD552E00A91A47 /* SaveNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D2314428CD552E00A91A47 /* SaveNineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineApp.swift; sourceTree = "<group>"; };
 		65D2314628CD552E00A91A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				65D2315D28CD5B3B00A91A47 /* ProjectsView.swift */,
+				659FDA6C28E28EC900899A2E /* ProjectRowView.swift */,
 				65EF242928DF870A003749F3 /* ProjectNameView.swift */,
 				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
 				65F648B828E10B080086512D /* ChecklistView.swift */,
@@ -225,6 +228,7 @@
 				65F648B728E100EF0086512D /* ItemDetailView.swift in Sources */,
 				652D025828D79F9000F818E7 /* TimerView.swift in Sources */,
 				65EF242A28DF870A003749F3 /* ProjectNameView.swift in Sources */,
+				659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */,
 				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65F648B328E0FE180086512D /* ChecklistRowView.swift in Sources */,

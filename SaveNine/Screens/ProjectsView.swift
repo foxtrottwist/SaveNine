@@ -30,7 +30,9 @@ struct ProjectsView: View {
                         }
                 } else {
                     VStack {
-                        NavigationLink(project.projectName, value: project)
+                        NavigationLink(value: project) {
+                            ProjectRowView(project: project)
+                        }
                     }
                     .disabled(disabled)
                 }
