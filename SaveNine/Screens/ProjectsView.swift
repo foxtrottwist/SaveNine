@@ -11,51 +11,52 @@ struct ProjectsView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Project.creationDate, ascending: false)]) var projects: FetchedResults<Project>
-    
+    @State private var searchText = ""
     @State private var selectedProject: Project?
+    @State private var showClosedProjects = false
+    @State private var sortAscending = false
     @State private var path: [Project] = []
     @State private var disabled = false
     
     var body: some View {
         NavigationSplitView {
-            List(projects, selection: $selectedProject) { project in
-                if project.projectName.isEmpty {
-                    ProjectNameView(project: project)
-                        .onAppear {
-                            disabled = true
-                        }
-                        .onDisappear {
-                            disabled = false
-                        }
-                } else {
-                    VStack {
-                        NavigationLink(value: project) {
-                            ProjectRowView(project: project)
+            ProjectListView(selectedProject: $selectedProject, sortDescriptors: sortProjects(), predicate: searchProjects())
+                .listStyle(.inset)
+                .navigationTitle("Projects")
+                .searchable(text: $searchText)
+                .toolbar {
+                    ToolbarItem {
+                        Menu {
+                            Button {
+                                showClosedProjects.toggle()
+                            } label: {
+                                Label("Show closed projects", systemImage: "checkmark.square")
+                            }
+                            
+                            Picker("Sort By creation date", selection: $sortAscending) {
+                                Text("Newest First").tag(false)
+                                Text("Oldest First").tag(true)
+                            }
+                        } label: {
+                            Label("Menu", systemImage: "ellipsis.circle")
                         }
                     }
-                    .disabled(disabled)
-                }
-            }
-            .listStyle(.inset)
-            .navigationTitle("Projects")
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        addProject()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                        Text("**Add Project**")
+                    
+                    ToolbarItem(placement: .bottomBar) {
+                        Button {
+                            addProject()
+                        } label: {
+                            Image(systemName: "plus.circle")
+                            Text("**Add Project**")
+                        }
+                        .disabled(disabled)
                     }
-                    .disabled(disabled)
                 }
-            }
         } detail: {
             if let project = selectedProject {
                 NavigationStack(path: $path) {
                     ProjectDetailView(project: project )
                 }
-                
             } else {
                 Text("Please select a project from the menu to begin.")
                     .italic()
@@ -69,6 +70,18 @@ struct ProjectsView: View {
             newProject.id = UUID()
             newProject.closed = false
             newProject.creationDate = Date()
+    }
+    
+    func searchProjects() -> NSPredicate {
+        if searchText.isEmpty {
+            return NSPredicate(format: "closed = %d", showClosedProjects)
+        } else {
+            return NSPredicate(format: "closed = %d AND %K CONTAINS[c] %@", showClosedProjects, "name", searchText)
+        }
+    }
+    
+    func sortProjects() -> [NSSortDescriptor] {
+        return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortAscending)]
     }
 }
 
