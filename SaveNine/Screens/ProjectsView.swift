@@ -30,7 +30,11 @@ struct ProjectsView: View {
                             Button {
                                 showClosedProjects.toggle()
                             } label: {
-                                Label("Show closed projects", systemImage: "checkmark.square")
+                                if showClosedProjects {
+                                    Label("Show open projects", systemImage: "tray.full")
+                                } else {
+                                    Label("Show closed projects", systemImage: "archivebox")
+                                }
                             }
                             
                             Picker("Sort By creation date", selection: $sortAscending) {
