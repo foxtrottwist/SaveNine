@@ -50,7 +50,7 @@ struct ProjectsView: View {
                         Button {
                             addProject()
                         } label: {
-                            Image(systemName: "plus.circle")
+                            Image(systemName: "plus.circle.fill")
                             Text("**Add Project**")
                         }
                         .disabled(disabled)

@@ -49,17 +49,11 @@ struct ChecklistRowView: View {
             }
             .buttonStyle(.plain)
         }
-        .padding()
-        .onChange(of: name, perform: { _ in update() })
-        .onChange(of: completed, perform: { _ in update() })
+        .onChange(of: name, perform: { name in item.name = name })
+        .onChange(of: completed, perform: { completed in item.completed = completed })
         .sheet(isPresented: $showingItemDetailView) {
             ItemDetailView(item: item, name: $name)
         }
-    }
-    
-    func update() {
-        item.name = name
-        item.completed = completed
     }
 }
 

@@ -23,42 +23,27 @@ struct ChecklistView: View {
                     
                     dataController.save()
                 } label: {
-                    Label("Add List", systemImage: "list.dash")
+                    Text("**Add Checklist**")
                 }
                 
                 Spacer()
             }
-            .padding()
-                        
-            ForEach(project.projectChecklists) { checklist in
-                Section {
-                    ForEach(checklist.checklistItems) { item in
-                        ChecklistRowView(item: item)
-                    }
-                    
-                    Button {
-                        withAnimation {
-                            addItem(to: checklist)
+            .padding(.horizontal)
+            
+            List {
+                ForEach(project.projectChecklists) { checklist in
+                    Section {
+                        ForEach(checklist.checklistItems) { item in
+                            ChecklistRowView(item: item)
                         }
-                    } label: {
-                        Label("Add New Item", systemImage: "plus")
+                    } header: {
+                        ChecklistHeaderView(checklist: checklist)
                     }
-                } header: {
-                    ChecklistHeaderView(checklist: checklist)
                 }
-                .padding(.horizontal)
             }
+            .listStyle(.inset)
+            .scaledToFit()
         }
-    }
-    
-    func addItem(to checklist: Checklist) {
-        checklist.project?.objectWillChange.send()
-        
-        let item = Item(context: managedObjectContext)
-        item.checklist = checklist
-        item.creationDate = Date()
-        
-        dataController.save()
     }
 }
 

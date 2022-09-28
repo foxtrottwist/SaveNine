@@ -10,6 +10,7 @@ import SwiftUI
 struct ChecklistHeaderView: View {
     let checklist: Checklist
     
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
     @FocusState var focused: Bool
@@ -27,7 +28,6 @@ struct ChecklistHeaderView: View {
         VStack {
             HStack {
                 TextField("New List", text: $name)
-                    .font(.title3)
                     .foregroundColor(.blue)
                     .onAppear {
                         if name.isEmpty {
@@ -45,20 +45,34 @@ struct ChecklistHeaderView: View {
                     } label: {
                         Label("Delete List", systemImage: "trash")
                     }
+                    
+                    Button {
+                        withAnimation {
+                            addItem(to: checklist)
+                        }
+                    } label: {
+                        Label("Add New Item", systemImage: "plus")
+                    }
                 } label: {
                     Image(systemName: "ellipsis.circle")
                 }
             }
-            .padding(.top)
-            .padding(.horizontal)
             .confirmationDialog("Are you sure you want to this list?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
                 Button("Delete List", role: .destructive) {
                     dataController.delete(checklist)
                 }
             }
-            
-            Divider()
         }
+    }
+    
+    func addItem(to checklist: Checklist) {
+        checklist.project?.objectWillChange.send()
+        
+        let item = Item(context: managedObjectContext)
+        item.checklist = checklist
+        item.creationDate = Date()
+        
+        dataController.save()
     }
 }
 
