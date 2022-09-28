@@ -35,7 +35,11 @@ struct ChecklistHeaderView: View {
                         }
                     }
                     .focused($focused)
-                    .onChange(of: name, perform: { name in checklist.name = name })
+                    .onSubmit {
+                        if name.isEmpty {
+                            name = checklist.checklistName.isEmpty ? "New List" : checklist.checklistName
+                        }
+                    }
                 
                 Spacer()
                 
@@ -57,7 +61,7 @@ struct ChecklistHeaderView: View {
                     Image(systemName: "ellipsis.circle")
                 }
             }
-            .confirmationDialog("Are you sure you want to this list?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            .confirmationDialog("Are you sure you want to this list? All items in this list will be deleted as well.", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
                 Button("Delete List", role: .destructive) {
                     dataController.delete(checklist)
                 }

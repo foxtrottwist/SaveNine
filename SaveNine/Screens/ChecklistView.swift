@@ -14,35 +14,49 @@ struct ChecklistView: View {
     @EnvironmentObject var dataController: DataController
     
     var body: some View {
-        VStack {
-            HStack {
-                Button {
-                    let checklist = Checklist(context: managedObjectContext)
-                    checklist.project = project
-                    checklist.creationDate = Date()
-                    
-                    dataController.save()
-                } label: {
-                    Text("**Add Checklist**")
-                }
-                
-                Spacer()
-            }
-            .padding(.horizontal)
-            
+        if project.projectChecklists.isEmpty {
+            Text("Add lists to track supplies, tasks and more.")
+                .italic()
+                .foregroundColor(.secondary)
+        } else {
             List {
                 ForEach(project.projectChecklists) { checklist in
                     Section {
                         ForEach(checklist.checklistItems) { item in
                             ChecklistRowView(item: item)
                         }
+                        .onDelete(perform: { offsets in
+                            let items = checklist.checklistItems
+                            
+                            for offset in offsets {
+                                let item = items[offset]
+                                dataController.delete(item)
+                            }
+                            
+                            dataController.save()
+                        })
                     } header: {
                         ChecklistHeaderView(checklist: checklist)
                     }
                 }
             }
-            .listStyle(.inset)
-            .scaledToFit()
+            .listStyle(.plain)
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        Button {
+                            let checklist = Checklist(context: managedObjectContext)
+                            checklist.project = project
+                            checklist.creationDate = Date()
+                            
+                            dataController.save()
+                        } label: {
+                            Image(systemName: "plus.circle.fill")
+                            Text("**Add Checklist**")
+                        }
+                    }
+                }
+            }
         }
     }
 }

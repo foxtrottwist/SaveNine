@@ -90,9 +90,7 @@ struct TrackerView: View {
                         }
                     }
             }
-            .padding(.vertical)
-            
-            NavigationLink("View Sessions", destination: SessionsView(sessions: project.projectSessions))
+            .padding()
         }
         .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
             Button("Clear Timer", role: .destructive) {

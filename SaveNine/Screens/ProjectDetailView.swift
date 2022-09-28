@@ -38,25 +38,26 @@ struct ProjectDetailView: View {
                 PhotoPickerView(uiImage: $image)
                 
                 TrackerView(project: project)
-                    .padding()
                 
-                Section {
+                VStack(alignment: .leading) {
                     TextField("Project name", text: $name)
-                        .font(.title3)
-                }
-                .padding(.horizontal)
-                
-                Section {
+                        .font(.headline)
+                        .padding(.bottom)
+                    Text("Notes")
+                        .font(.caption)
                     TextField("Notes", text: $detail, axis: .vertical)
-                        .lineLimit(...7)
                 }
                 .padding()
                 
-                Section {
-                    ChecklistView(project: project)
+                List {
+                    NavigationLink("Checklists", destination: ChecklistView(project: project))
+                    NavigationLink("View Sessions", destination: SessionsView(sessions: project.projectSessions))
                 }
+                .listStyle(.plain)
+                .scaledToFit()
             }
-            .navigationTitle(project.projectName)
+            .navigationTitle("Project Details")
+            .navigationBarTitleDisplayMode(.inline)
             .onChange(of: name, perform: { name in project.name = name })
             .onChange(of: detail, perform: { detail in project.detail = detail })
             .onChange(of: image, perform: { image in update(uiImage: image, in: project) })

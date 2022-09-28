@@ -31,9 +31,9 @@ struct ProjectsView: View {
                                 showClosedProjects.toggle()
                             } label: {
                                 if showClosedProjects {
-                                    Label("Show open", systemImage: "tray.full")
+                                    Label("Show Open", systemImage: "tray.full")
                                 } else {
-                                    Label("Show archived", systemImage: "archivebox")
+                                    Label("Show Archived", systemImage: "archivebox")
                                 }
                             }
                             

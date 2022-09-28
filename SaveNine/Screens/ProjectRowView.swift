@@ -42,6 +42,7 @@ struct ProjectRowView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
                         .frame(width: 50, height: 50)
                 }
             }
