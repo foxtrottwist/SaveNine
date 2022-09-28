@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ProjectRowView: View {
-    let uiImage: UIImage?
-    
     @ObservedObject var project: Project
+    
+    let uiImage: UIImage?
     
     init(project: Project) {
         self.project = project

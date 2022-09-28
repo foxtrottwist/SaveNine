@@ -37,10 +37,8 @@ struct ProjectDetailView: View {
             VStack {
                 PhotoPickerView(uiImage: $image)
                 
-                Section {
-                    TrackerView(project: project)
-                }
-                .padding()
+                TrackerView(project: project)
+                    .padding()
                 
                 Section {
                     TextField("Project name", text: $name)
@@ -58,36 +56,37 @@ struct ProjectDetailView: View {
                     ChecklistView(project: project)
                 }
             }
-            .navigationTitle($name)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(project.projectName)
             .onChange(of: name, perform: { name in project.name = name })
             .onChange(of: detail, perform: { detail in project.detail = detail })
             .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
             .onDisappear(perform: dataController.save)
-            .toolbarTitleMenu {
-                RenameButton()
-                
-                Button {
-                    project.closed.toggle()
-                    
-                    dataController.save()
-                    
-                    dismiss()
-                } label: {
-                    if project.closed {
-                        Label("Reopen project", systemImage: "tray.full")
-                    } else {
-                        Label( "Archive project", systemImage: "archivebox")
+            .toolbar {
+                Menu {
+                    Button {
+                        project.closed.toggle()
+
+                        dataController.save()
+
+                        dismiss()
+                    } label: {
+                        if project.closed {
+                            Label("Reopen project", systemImage: "tray.full")
+                        } else {
+                            Label( "Archive project", systemImage: "archivebox")
+                        }
                     }
-                }
-                
-                Divider()
-                
-                Button {
-                    showingDeleteConfirm.toggle()
+
+                    Divider()
+
+                    Button {
+                        showingDeleteConfirm.toggle()
+                    } label: {
+                        Label("Delete Project", systemImage: "trash")
+                            .foregroundColor(.red)
+                    }
                 } label: {
-                    Label("Delete Project", systemImage: "trash")
-                        .foregroundColor(.red)
+                    Label("menu", systemImage: "ellipsis.circle")
                 }
             }
             .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {

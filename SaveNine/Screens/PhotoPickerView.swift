@@ -26,18 +26,14 @@ struct PhotoPickerView: View {
                         .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
                         .frame(width: 250, height: 250)
-                    
-                    Text("Update")
                 }
             } else {
                 VStack {
                     Image(systemName: "photo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 250, height: 150)
+                        .frame(width: 250, height: 250)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                    
-                    Text("Add Photo")
                 }
             }
             
