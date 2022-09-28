@@ -25,7 +25,7 @@ struct PhotoPickerView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
-                        .frame(width: 350, height: 250)
+                        .frame(width: 250, height: 250)
                     
                     Text("Update")
                 }

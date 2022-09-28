@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ProjectRowView: View {
-    let project: Project
     let uiImage: UIImage?
+    
+    @ObservedObject var project: Project
     
     init(project: Project) {
         self.project = project
@@ -41,7 +42,6 @@ struct ProjectRowView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                         .frame(width: 50, height: 50)
                 }
             }
