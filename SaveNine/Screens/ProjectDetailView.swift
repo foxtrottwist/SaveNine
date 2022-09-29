@@ -50,11 +50,16 @@ struct ProjectDetailView: View {
                 .padding()
                 
                 List {
-                    NavigationLink("Checklists", destination: ChecklistView(project: project))
-                    NavigationLink("View Sessions", destination: SessionsView(sessions: project.projectSessions))
+                    NavigationLink(destination: ChecklistView(project: project)) {
+                        Label("Checklists", systemImage: "list.triangle")
+                    }
+                    
+                    NavigationLink(destination: SessionsView(sessions: project.projectSessions)) {
+                        Label("View Sessions", systemImage: "stopwatch")
+                    }
                 }
                 .listStyle(.plain)
-                .scaledToFit()
+                .frame(height: 90)
             }
             .navigationTitle("Project Details")
             .navigationBarTitleDisplayMode(.inline)
