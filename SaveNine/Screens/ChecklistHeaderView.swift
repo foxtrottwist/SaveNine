@@ -30,13 +30,14 @@ struct ChecklistHeaderView: View {
         VStack {
             HStack {
                 TextField("New List", text: $name)
+                    .focused($focused)
+                    .font(.headline)
                     .foregroundColor(.blue)
                     .onAppear {
                         if name.isEmpty {
                             focused = true
                         }
                     }
-                    .focused($focused)
                     .onSubmit {
                         if name.isEmpty {
                             name = checklist.checklistName.isEmpty ? "New List" : checklist.checklistName
@@ -51,20 +52,23 @@ struct ChecklistHeaderView: View {
                 
                 Menu {
                     Button {
-                        showingDeleteConfirm = true
-                    } label: {
-                        Label("Delete List", systemImage: "trash")
-                    }
-                    
-                    Button {
                         withAnimation {
                             addItem()
                         }
                     } label: {
                         Label("Add New Item", systemImage: "plus")
                     }
+                    
+                    Divider()
+                    
+                    Button {
+                        showingDeleteConfirm = true
+                    } label: {
+                        Label("Delete List", systemImage: "trash")
+                    }
                 } label: {
                     Image(systemName: "ellipsis.circle")
+                        .font(.title3)
                 }
             }
             .confirmationDialog("Are you sure you want to this list? All items in this list will be deleted as well.", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {

@@ -23,7 +23,7 @@ struct ChecklistView: View {
                 ForEach(project.projectChecklists) { checklist in
                     Section {
                         ForEach(checklist.checklistItems) { item in
-                            ChecklistRowView(item: item, addItem: addItem(to: checklist))
+                            ChecklistRowView(item: item)
                         }
                         .onDelete(perform: { offsets in
                             let items = checklist.checklistItems
@@ -42,6 +42,7 @@ struct ChecklistView: View {
             }
         }
         .listStyle(.plain)
+        .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 HStack {

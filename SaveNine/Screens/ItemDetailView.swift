@@ -29,9 +29,9 @@ struct ItemDetailView: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Name", text: $name)
+                TextField("Name", text: $name, axis: .vertical)
+                
                 TextField("Notes", text: $detail, axis: .vertical)
-                    .lineLimit(...7)
                 
                 Section {
                     Picker("Priority", selection: $priority) {

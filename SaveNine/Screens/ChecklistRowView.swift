@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChecklistRowView: View {
     let item: Item
-    let addItem: () -> Void
     
     @EnvironmentObject var dataController: DataController
     
@@ -21,9 +20,8 @@ struct ChecklistRowView: View {
     
     
     
-    init(item: Item, addItem: @escaping () -> Void) {
+    init(item: Item) {
         self.item = item
-        self.addItem = addItem
         
         _name = State(wrappedValue: item.itemName)
         _completed = State(wrappedValue: item.completed)
@@ -42,15 +40,6 @@ struct ChecklistRowView: View {
                 .onAppear {
                     if name.isEmpty {
                         focused = true
-                    }
-                }
-                .onSubmit {
-                    if name.isEmpty {
-                        item.checklist?.project?.objectWillChange.send()
-                        
-                        dataController.delete(item)
-                    } else {
-                        addItem()
                     }
                 }
             
@@ -74,6 +63,6 @@ struct ChecklistRowView: View {
 
 struct ChecklistRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ChecklistRowView(item: Item.example, addItem: {})
+        ChecklistRowView(item: Item.example)
     }
 }

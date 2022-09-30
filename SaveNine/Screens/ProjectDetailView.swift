@@ -101,6 +101,7 @@ struct ProjectDetailView: View {
                 }
             }
         }
+        .scrollDismissesKeyboard(.interactively)
     }
     
     func update(uiImage: UIImage?, in project: Project) {

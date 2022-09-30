@@ -23,7 +23,7 @@ struct PhotoPickerView: View {
                 VStack {
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
                         .frame(width: 250, height: 250)
                 }
@@ -31,7 +31,7 @@ struct PhotoPickerView: View {
                 VStack {
                     Image(systemName: "photo")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(width: 250, height: 250)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                 }
