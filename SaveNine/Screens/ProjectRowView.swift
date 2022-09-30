@@ -33,7 +33,7 @@ struct ProjectRowView: View {
                     Text(project.projectDetail)
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .lineLimit(2)
+                        .lineLimit(3)
                 }
                 
                 Spacer()

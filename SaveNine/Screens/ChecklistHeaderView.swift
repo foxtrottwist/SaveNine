@@ -40,6 +40,7 @@ struct ChecklistHeaderView: View {
                             name = checklist.checklistName.isEmpty ? "New List" : checklist.checklistName
                         }
                     }
+                    .submitLabel(.done)
                 
                 Spacer()
                 

@@ -11,6 +11,7 @@ import SwiftUI
 struct ProjectDetailView: View {
     let project: Project
     
+    @Environment(\.defaultMinListRowHeight) var defaultMinListRowHeight
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var dataController: DataController
     
@@ -40,11 +41,10 @@ struct ProjectDetailView: View {
                 TrackerView(project: project)
                 
                 VStack(alignment: .leading) {
-                    TextField("Project name", text: $name)
-                        .font(.headline)
-                        .padding(.bottom)
-                    Text("Notes")
-                        .font(.caption)
+                    Text("*Notes*")
+                        .font(.callout)
+                        .fontWeight(.light)
+                    
                     TextField("Notes", text: $detail, axis: .vertical)
                 }
                 .padding()
@@ -59,9 +59,9 @@ struct ProjectDetailView: View {
                     }
                 }
                 .listStyle(.plain)
-                .frame(height: 90)
+                .frame(height: defaultMinListRowHeight * 2)
             }
-            .navigationTitle("Project Details")
+            .navigationTitle($name)
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: name, perform: { name in project.name = name })
             .onChange(of: detail, perform: { detail in project.detail = detail })

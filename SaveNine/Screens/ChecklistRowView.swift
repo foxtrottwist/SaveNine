@@ -26,19 +26,21 @@ struct ChecklistRowView: View {
     }
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Image(systemName: completed ? "checkmark.square.fill" : "square" )
+                .font(.title3)
                 .onTapGesture {
                     completed.toggle()
                 }
             
-            TextField("New Item", text: $name)
+            TextField("New Item", text: $name, axis: .vertical)
+                .focused($focused)
                 .onAppear {
                     if name.isEmpty {
                         focused = true
                     }
                 }
-                .focused($focused)
+                
             
             Spacer()
             
@@ -47,6 +49,7 @@ struct ChecklistRowView: View {
             } label: {
                 Image(systemName: "info.circle")
             }
+            .font(.title3)
             .buttonStyle(.plain)
         }
         .onChange(of: name, perform: { name in item.name = name })
