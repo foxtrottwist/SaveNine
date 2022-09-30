@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ChecklistRowView: View {
     let item: Item
+    let addItem: () -> Void
+    
+    @EnvironmentObject var dataController: DataController
     
     @FocusState var focused: Bool
     
@@ -18,8 +21,9 @@ struct ChecklistRowView: View {
     
     
     
-    init(item: Item) {
+    init(item: Item, addItem: @escaping () -> Void) {
         self.item = item
+        self.addItem = addItem
         
         _name = State(wrappedValue: item.itemName)
         _completed = State(wrappedValue: item.completed)
@@ -40,7 +44,15 @@ struct ChecklistRowView: View {
                         focused = true
                     }
                 }
-                
+                .onSubmit {
+                    if name.isEmpty {
+                        item.checklist?.project?.objectWillChange.send()
+                        
+                        dataController.delete(item)
+                    } else {
+                        addItem()
+                    }
+                }
             
             Spacer()
             
@@ -62,6 +74,6 @@ struct ChecklistRowView: View {
 
 struct ChecklistRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ChecklistRowView(item: Item.example)
+        ChecklistRowView(item: Item.example, addItem: {})
     }
 }
