@@ -31,7 +31,7 @@ struct ProjectRowView: View {
                         .lineLimit(2)
                     
                     Text(project.projectDetail)
-                        .font(.caption)
+                        .font(.footnote)
                         .foregroundColor(.secondary)
                         .lineLimit(3)
                 }
@@ -47,11 +47,22 @@ struct ProjectRowView: View {
                 }
             }
             
-            HStack {
-                Text("Tags")
-                    .font(.footnote)
-                    .foregroundColor(.clear)
-            }
+                HStack {
+                    Image(systemName: "tag")
+                        .font(.caption2)
+                        .foregroundColor(project.projectTags.isEmpty ? .clear : .secondary)
+                    
+                    ForEach(project.projectTags) { tag in
+                        if let tag = tag.name {
+                            Text(tag)
+                                .font(.footnote)
+                                .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+                        }
+                    }
+                }
+                .padding(.top, 0.25)
+                
+
         }
     }
 }

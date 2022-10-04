@@ -13,18 +13,23 @@ struct ProjectDetailView: View {
     
     @Environment(\.defaultMinListRowHeight) var defaultMinListRowHeight
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
+    
+    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
     
     @State private var name = ""
     @State private var detail = ""
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
+    @State private var tags: String = ""
     
     init(project: Project) {
         self.project = project
         
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
+        _tags = State(wrappedValue: project.projectTags.map { $0.ptagName }.joined(separator: " "))
         
         if !project.projectImage.isEmpty {
             if let uiImage = getImage(named: project.projectImage) {
@@ -46,6 +51,21 @@ struct ProjectDetailView: View {
                         .fontWeight(.light)
                     
                     TextField("Notes", text: $detail, axis: .vertical)
+                        .padding(.bottom)
+                    
+                    Text("*Tags*")
+                        .font(.callout)
+                        .fontWeight(.light)
+                    
+                    TextField("Text, separated by spaces", text: $tags)
+                        .autocorrectionDisabled(true)
+                        .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+                        .onSubmit {
+                            let tagNames = prepare(tags: tags)
+                            tags = tagNames.joined(separator: " ")
+                            
+                            update(tags: tagNames, in: project)
+                        }
                 }
                 .padding()
                 
@@ -116,6 +136,30 @@ struct ProjectDetailView: View {
         } else {
             deleteFile(named: name)
         }
+    }
+    
+    func prepare(tags: String) -> [String] {
+        var set = Set<String>()
+        return tags.components(separatedBy: " ").map { $0.lowercased() }
+            .filter { !$0.isEmpty && set.insert($0).inserted }.sorted { $0 < $1 }
+    }
+    
+    func update(tags: [String], in project: Project) {
+        guard tags != project.projectTags.map({ $0.name }) else { return }
+        
+        let updatedTags = tags.map { tagName in
+            if let existingTag = ptags.first(where: { $0.name == tagName }) {
+                return existingTag
+            } else {
+                let newTag = Ptag(context: managedObjectContext)
+                newTag.id = UUID()
+                newTag.name = tagName
+                
+                return newTag
+            }
+        }
+        
+        project.tags = Set(updatedTags) as NSSet
     }
     
     func delete(project: Project) {

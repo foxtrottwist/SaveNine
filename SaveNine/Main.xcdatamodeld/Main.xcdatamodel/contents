@@ -23,6 +23,12 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="checklists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Checklist" inverseName="project" inverseEntity="Checklist"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="project" inverseEntity="Session"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ptag" inverseName="projects" inverseEntity="Ptag"/>
+    </entity>
+    <entity name="Ptag" representedClassName="Ptag" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="tags" inverseEntity="Project"/>
     </entity>
     <entity name="Session" representedClassName="Session" syncable="YES" codeGenerationType="class">
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
