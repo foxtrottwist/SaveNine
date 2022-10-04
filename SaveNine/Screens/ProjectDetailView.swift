@@ -29,7 +29,7 @@ struct ProjectDetailView: View {
         
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
-        _tags = State(wrappedValue: project.projectTags.map { $0.ptagName }.joined(separator: " "))
+        _tags = State(wrappedValue: project.protectTagsString)
         
         if !project.projectImage.isEmpty {
             if let uiImage = getImage(named: project.projectImage) {
@@ -61,6 +61,8 @@ struct ProjectDetailView: View {
                         .autocorrectionDisabled(true)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                         .onSubmit {
+                            guard project.protectTagsString != tags else { return }
+                            
                             let tagNames = prepare(tags: tags)
                             tags = tagNames.joined(separator: " ")
                             
@@ -145,8 +147,6 @@ struct ProjectDetailView: View {
     }
     
     func update(tags: [String], in project: Project) {
-        guard tags != project.projectTags.map({ $0.name }) else { return }
-        
         let updatedTags = tags.map { tagName in
             if let existingTag = ptags.first(where: { $0.name == tagName }) {
                 return existingTag

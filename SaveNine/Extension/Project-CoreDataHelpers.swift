@@ -49,15 +49,11 @@ extension Project {
     }
     
     var projectTags: [Ptag] {
-        let tags = tags?.allObjects as? [Ptag] ?? []
-
-        return tags.sorted { a, b in
-            if let a = a.name, let b = b.name {
-                return a < b
-            } else {
-                return true
-            }
-        }
+        tags?.allObjects as? [Ptag] ?? []
+    }
+    
+    var protectTagsString: String {
+        projectTags.map { $0.ptagName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     
     var projectTotalDuration: Double {
