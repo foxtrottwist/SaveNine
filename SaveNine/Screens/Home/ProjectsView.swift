@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ProjectsView: View {
-    @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var dataController: DataController
+    
+    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
     
     @State private var searchText = ""
     @State private var selectedProject: Project?
     @State private var showClosedProjects = false
+    @State private var showingProjectFilters = false
     @State private var sortAscending = false
     @State private var path: [Project] = []
     @State private var disabled = false
@@ -27,17 +30,18 @@ struct ProjectsView: View {
                 .toolbar {
                     ToolbarItem {
                         Menu {
-                            Button {
-                                showClosedProjects.toggle()
-                            } label: {
-                                if showClosedProjects {
-                                    Label("Show Open", systemImage: "tray.full")
-                                } else {
-                                    Label("Show Archived", systemImage: "archivebox")
-                                }
+                            Picker("Project Status", selection: $showClosedProjects) {
+                                Label("Open", systemImage: "tray.full").tag(false)
+                                Label("Archived", systemImage: "archivebox").tag(true)
                             }
                             
-                            Picker("Sort By creation date", selection: $sortAscending) {
+                            Button {
+                                showingProjectFilters.toggle()
+                            } label: {
+                                Label("Tags", systemImage: "tag")
+                            }
+                            
+                            Picker("Sort By Creation Date", selection: $sortAscending) {
                                 Text("Newest First").tag(false)
                                 Text("Oldest First").tag(true)
                             }
@@ -55,6 +59,9 @@ struct ProjectsView: View {
                         }
                         .disabled(disabled)
                     }
+                }
+                .sheet(isPresented: $showingProjectFilters) {
+                    ProjectTagsView()
                 }
         } detail: {
             if let project = selectedProject {

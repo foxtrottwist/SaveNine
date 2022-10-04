@@ -58,6 +58,7 @@ struct ProjectDetailView: View {
                         .fontWeight(.light)
                     
                     TextField("Text, separated by spaces", text: $tags)
+                        .autocapitalization(.none)
                         .autocorrectionDisabled(true)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                         .onSubmit {
