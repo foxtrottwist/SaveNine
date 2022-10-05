@@ -50,10 +50,10 @@ struct ProjectRowView: View {
                 HStack {
                     Image(systemName: "tag")
                         .font(.caption2)
-                        .foregroundColor(project.protectTagsString.isEmpty ? .clear : .secondary)
+                        .foregroundColor(project.projectTagsString.isEmpty ? .clear : .secondary)
                     
                     
-                    Text(project.protectTagsString)
+                    Text(project.projectTagsString)
                         .font(.footnote)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                 }

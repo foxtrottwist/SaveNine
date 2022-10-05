@@ -52,7 +52,7 @@ extension Project {
         tags?.allObjects as? [Ptag] ?? []
     }
     
-    var protectTagsString: String {
+    var projectTagsString: String {
         projectTags.map { $0.ptagName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     

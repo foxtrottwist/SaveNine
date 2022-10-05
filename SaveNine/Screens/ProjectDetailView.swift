@@ -30,7 +30,7 @@ struct ProjectDetailView: View {
         
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
-        _tags = State(wrappedValue: project.protectTagsString)
+        _tags = State(wrappedValue: project.projectTagsString)
         
         if !project.projectImage.isEmpty {
             if let uiImage = getImage(named: project.projectImage) {
@@ -99,7 +99,7 @@ struct ProjectDetailView: View {
                 .onChange(of: detail, perform: { detail in project.detail = detail })
                 .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
                 .onChange(of: editing) { editing in
-                    guard !editing, project.protectTagsString != tags else { return }
+                    guard !editing, project.projectTagsString != tags else { return }
                     
                     let tagNames = prepare(tags: tags)
                     tags = tagNames.joined(separator: " ")
