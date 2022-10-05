@@ -11,7 +11,6 @@ import SwiftUI
 struct ProjectDetailView: View {
     let project: Project
     
-    @Environment(\.editMode) var editMode
     @Environment(\.defaultMinListRowHeight) var defaultMinListRowHeight
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -24,6 +23,7 @@ struct ProjectDetailView: View {
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
     @State private var tags: String = ""
+    @State private var editing = false
     
     init(project: Project) {
         self.project = project
@@ -43,10 +43,13 @@ struct ProjectDetailView: View {
         ScrollView {
             VStack {
                 PhotoPickerView(uiImage: $image)
-                    .disabled(editMode?.wrappedValue.isEditing != true )
+                    .disabled(!editing)
                 
-                if editMode?.wrappedValue.isEditing != true {
+                if !editing {
                     Text(name)
+                        .font(.title2)
+                    
+                    Divider()
                     
                     TrackerView(project: project)
                     
@@ -59,13 +62,13 @@ struct ProjectDetailView: View {
                             Label("View Sessions", systemImage: "stopwatch")
                         }
                     }
-                    .listStyle(.plain)
                     .frame(height: defaultMinListRowHeight * 2)
+                    .listStyle(.plain)
                 }
                 
                 Form {
-                    if editMode?.wrappedValue.isEditing == true {
-                        Text("*Project Name*")
+                    if editing {
+                        Text("Project Name")
                             .font(.callout)
                             .fontWeight(.light)
                         
@@ -89,10 +92,14 @@ struct ProjectDetailView: View {
                         .autocorrectionDisabled(true)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                 }
-                .disabled(editMode?.wrappedValue.isEditing != true)
+                .animation(.easeIn, value: editing)
+                .disabled(!editing)
                 .formStyle(.columns)
-                .onChange(of: editMode!.wrappedValue) { _ in
-                    guard project.protectTagsString != tags else { return }
+                .onChange(of: name, perform: { name in project.name = name })
+                .onChange(of: detail, perform: { detail in project.detail = detail })
+                .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
+                .onChange(of: editing) { editing in
+                    guard !editing, project.protectTagsString != tags else { return }
                     
                     let tagNames = prepare(tags: tags)
                     tags = tagNames.joined(separator: " ")
@@ -103,49 +110,49 @@ struct ProjectDetailView: View {
                 
                 
             }
-            .animation(.easeIn, value: editMode?.wrappedValue)
-            .navigationBarTitleDisplayMode(.inline)
-            .onChange(of: name, perform: { name in project.name = name })
-            .onChange(of: detail, perform: { detail in project.detail = detail })
-            .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-            .onDisappear(perform: dataController.save)
-            .toolbar {
-                EditButton()
-                
-                Menu {
-                    Button {
-                        project.closed.toggle()
-
-                        dataController.save()
-
-                        dismiss()
-                    } label: {
-                        if project.closed {
-                            Label("Reopen project", systemImage: "tray.full")
-                        } else {
-                            Label( "Archive project", systemImage: "archivebox")
-                        }
-                    }
-
-                    Divider()
-
-                    Button {
-                        showingDeleteConfirm.toggle()
-                    } label: {
-                        Label("Delete Project", systemImage: "trash")
-                            .foregroundColor(.red)
-                    }
-                } label: {
-                    Label("menu", systemImage: "ellipsis.circle")
-                }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .onDisappear(perform: dataController.save)
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            Button {
+                editing.toggle()
+            } label: {
+                Text(editing ? "Done" : "Edit")
             }
-            .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
-                Button("Delete Project", role: .destructive) {
-                    delete(project: project)
+            
+            Menu {
+                Button {
+                    project.closed.toggle()
+
+                    dataController.save()
+
+                    dismiss()
+                } label: {
+                    if project.closed {
+                        Label("Reopen project", systemImage: "tray.full")
+                    } else {
+                        Label( "Archive project", systemImage: "archivebox")
+                    }
                 }
+
+                Divider()
+
+                Button {
+                    showingDeleteConfirm.toggle()
+                } label: {
+                    Label("Delete Project", systemImage: "trash")
+                        .foregroundColor(.red)
+                }
+            } label: {
+                Label("menu", systemImage: "ellipsis.circle")
             }
         }
-        .scrollDismissesKeyboard(.interactively)
+        .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete Project", role: .destructive) {
+                delete(project: project)
+            }
+        }
     }
     
     func update(uiImage: UIImage?, in project: Project) {
