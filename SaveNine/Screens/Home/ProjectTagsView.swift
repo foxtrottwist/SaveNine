@@ -15,7 +15,7 @@ struct ProjectTagsView: View {
     
     var body: some View {
         List {
-            Button("Delete Tags") {
+            Button("Remove all Tags") {
                 ptags.forEach { dataController.delete($0) }
                 dataController.save()
             }
