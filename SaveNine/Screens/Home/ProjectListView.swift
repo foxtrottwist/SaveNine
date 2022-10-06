@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 9/27/22.
 //
 
+import CoreData
 import SwiftUI
 
 struct ProjectListView: View {
@@ -14,9 +15,9 @@ struct ProjectListView: View {
     
     @State private var disabled = false
     
-    init(selectedProject: Binding<Project?>, sortDescriptors: [NSSortDescriptor], predicate: NSPredicate) {
-        _selectedProject = selectedProject
-        _projects  = FetchRequest<Project>(entity: Project.entity(), sortDescriptors: sortDescriptors, predicate: predicate)
+    init(_ fetchRequest: NSFetchRequest<Project>, selection: Binding<Project?>) {
+        _selectedProject = selection
+        _projects  = FetchRequest<Project>(fetchRequest: fetchRequest)
         }
     
     var body: some View {
@@ -39,6 +40,6 @@ struct ProjectListView: View {
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectListView(selectedProject: .constant(Project.example), sortDescriptors: [NSSortDescriptor(keyPath: \Project.creationDate, ascending: false)], predicate: NSPredicate(format: "closed = %d", false))
+        ProjectListView(Project.fetchProjects(predicate: nil, sortDescriptors: nil), selection: .constant(Project.example))
     }
 }

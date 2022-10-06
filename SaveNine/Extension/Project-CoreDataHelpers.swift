@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 9/10/22.
 //
 
+import CoreData
 import Foundation
 
 extension Project {
@@ -71,6 +72,14 @@ extension Project {
         project.creationDate = Date()
         
         return project
+    }
+    
+    static func fetchProjects(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> NSFetchRequest<Project> {
+        let request = Project.fetchRequest()
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
+        
+        return request
     }
 }
 

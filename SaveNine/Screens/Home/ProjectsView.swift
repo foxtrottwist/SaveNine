@@ -5,25 +5,24 @@
 //  Created by Lawrence Horne on 9/10/22.
 //
 
+import CoreData
 import SwiftUI
 
 struct ProjectsView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
-    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
-    
     @State private var searchText = ""
     @State private var selectedProject: Project?
     @State private var showClosedProjects = false
-    @State private var showingProjectFilters = false
+    @State private var showingProjectTags = false
     @State private var sortAscending = false
     @State private var path: [Project] = []
     @State private var disabled = false
     
     var body: some View {
         NavigationSplitView {
-            ProjectListView(selectedProject: $selectedProject, sortDescriptors: sortProjects(), predicate: searchProjects())
+            ProjectListView(Project.fetchProjects(predicate: searchProjects(), sortDescriptors: sortProjects()), selection: $selectedProject)
                 .listStyle(.inset)
                 .navigationTitle("Projects")
                 .searchable(text: $searchText)
@@ -36,7 +35,7 @@ struct ProjectsView: View {
                             }
                             
                             Button {
-                                showingProjectFilters.toggle()
+                                showingProjectTags.toggle()
                             } label: {
                                 Label("Tags", systemImage: "tag")
                             }
@@ -60,7 +59,7 @@ struct ProjectsView: View {
                         .disabled(disabled)
                     }
                 }
-                .sheet(isPresented: $showingProjectFilters) {
+                .sheet(isPresented: $showingProjectTags) {
                     ProjectTagsView()
                 }
         } detail: {
