@@ -23,16 +23,16 @@ struct PhotoPickerView: View {
                 VStack {
                     image
                         .resizable()
-                        .scaledToFit()
-                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                        .scaledToFill()
                         .frame(width: 250, height: 250)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
             } else {
                 VStack {
                     Image(systemName: "photo")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 250, height: 250)
+                        .frame(width: 200, height: 200)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                 }
             }

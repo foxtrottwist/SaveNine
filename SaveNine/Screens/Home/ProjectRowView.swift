@@ -41,9 +41,9 @@ struct ProjectRowView: View {
                 if let uiImage = uiImage, let image = Image(uiImage: uiImage) {
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 5, height: 5)))
+                        .scaledToFill()
                         .frame(width: 50, height: 50)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
             }
             
