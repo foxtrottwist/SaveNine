@@ -23,4 +23,14 @@ extension Ptag {
         
         return request
     }
+    
+    static var example: Ptag {
+        let controller = DataController(inMemory: true)
+        let viewContext = controller.container.viewContext
+        
+        let ptag = Ptag(context: viewContext)
+        ptag.name = "fpp"
+        
+        return ptag
+    }
 }

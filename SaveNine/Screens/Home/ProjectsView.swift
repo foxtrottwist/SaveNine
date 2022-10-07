@@ -12,16 +12,32 @@ struct ProjectsView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
+    @State private var disabled = false
+    @State private var path: [Project] = []
     @State private var searchText = ""
     @State private var selectedProject: Project?
+    @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
     @State private var sortAscending = false
-    @State private var path: [Project] = []
-    @State private var disabled = false
     
     var body: some View {
         NavigationSplitView {
+            if showingProjectTags {
+                HStack {
+                    Button {
+                        showingProjectTags.toggle()
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+                            .padding(.trailing, 3)
+                    }
+                    
+                    ProjectTagsView(selection: $selectedTags)
+                }
+                .padding(.leading)
+            }
+            
             ProjectListView(Project.fetchProjects(predicate: searchProjects(), sortDescriptors: sortProjects()), selection: $selectedProject)
                 .listStyle(.inset)
                 .navigationTitle("Projects")
@@ -58,9 +74,6 @@ struct ProjectsView: View {
                         }
                         .disabled(disabled)
                     }
-                }
-                .sheet(isPresented: $showingProjectTags) {
-                    ProjectTagsView()
                 }
         } detail: {
             if let project = selectedProject {
