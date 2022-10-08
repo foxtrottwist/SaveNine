@@ -3,7 +3,7 @@
     <entity name="Checklist" representedClassName="Checklist" syncable="YES" codeGenerationType="class">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="checklist" inverseEntity="Item"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="checklist" inverseEntity="Item"/>
         <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="checklists" inverseEntity="Project"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
@@ -21,8 +21,8 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="checklists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Checklist" inverseName="project" inverseEntity="Checklist"/>
-        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Session" inverseName="project" inverseEntity="Session"/>
+        <relationship name="checklists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Checklist" inverseName="project" inverseEntity="Checklist"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Session" inverseName="project" inverseEntity="Session"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ptag" inverseName="projects" inverseEntity="Ptag"/>
     </entity>
     <entity name="Ptag" representedClassName="Ptag" syncable="YES" codeGenerationType="class">
