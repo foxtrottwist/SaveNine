@@ -38,7 +38,7 @@ struct ProjectsView: View {
                 .padding(.leading)
             }
             
-            ProjectListView(Project.fetchProjects(predicate: searchProjects(), sortDescriptors: sortProjects()), selection: $selectedProject)
+            ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()), selection: $selectedProject)
                 .listStyle(.inset)
                 .navigationTitle("Projects")
                 .searchable(text: $searchText)
@@ -95,12 +95,22 @@ struct ProjectsView: View {
             newProject.creationDate = Date()
     }
     
-    func searchProjects() -> NSPredicate {
-        if searchText.isEmpty {
+    func createPredicate() -> NSPredicate {
+        if selectedTags.isEmpty && searchText.isEmpty {
             return NSPredicate(format: "closed = %d", showClosedProjects)
-        } else {
+        } else if selectedTags.isEmpty {
             return NSPredicate(format: "closed = %d AND %K CONTAINS[c] %@", showClosedProjects, "name", searchText)
+        } else if searchText.isEmpty {
+            let basePredicate =  [NSPredicate(format: "closed = %d", showClosedProjects)]
+            let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
+            
+            return NSCompoundPredicate(andPredicateWithSubpredicates: basePredicate + tagPredicate)
         }
+        
+        let searchPredicate = [NSPredicate(format: "closed = %d AND %K CONTAINS[c] %@", showClosedProjects, "name", searchText)]
+        let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
+        
+        return NSCompoundPredicate(andPredicateWithSubpredicates: searchPredicate + tagPredicate)
     }
     
     func sortProjects() -> [NSSortDescriptor] {

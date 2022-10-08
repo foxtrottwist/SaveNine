@@ -16,11 +16,11 @@ struct TagView: View {
             Text(name)
         }
         .padding(10)
-        .background(Color(.systemGroupedBackground))
+        .background(Color(.clear))
         .clipShape(Capsule(style: .continuous))
         .overlay {
             Capsule(style: .continuous)
-                .stroke(color, lineWidth: 1)
+                .stroke(color, lineWidth: 2)
         }
     }
 }
