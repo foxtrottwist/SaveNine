@@ -96,21 +96,19 @@ struct ProjectsView: View {
     }
     
     func createPredicate() -> NSPredicate {
-        if selectedTags.isEmpty && searchText.isEmpty {
-            return NSPredicate(format: "closed = %d", showClosedProjects)
-        } else if selectedTags.isEmpty {
-            return NSPredicate(format: "closed = %d AND %K CONTAINS[c] %@", showClosedProjects, "name", searchText)
-        } else if searchText.isEmpty {
-            let basePredicate =  [NSPredicate(format: "closed = %d", showClosedProjects)]
-            let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
-            
-            return NSCompoundPredicate(andPredicateWithSubpredicates: basePredicate + tagPredicate)
-        }
-        
-        let searchPredicate = [NSPredicate(format: "closed = %d AND %K CONTAINS[c] %@", showClosedProjects, "name", searchText)]
+        let closedPredicate = NSPredicate(format: "closed = %d", showClosedProjects)
+        let searchPredicate = NSPredicate(format: "%K CONTAINS[c] %@", "name", searchText)
         let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
         
-        return NSCompoundPredicate(andPredicateWithSubpredicates: searchPredicate + tagPredicate)
+        if selectedTags.isEmpty && searchText.isEmpty {
+            return closedPredicate
+        } else if selectedTags.isEmpty {
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate, searchPredicate])
+        } else if searchText.isEmpty {
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate] + tagPredicate)
+        }
+        
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate, searchPredicate] + tagPredicate)
     }
     
     func sortProjects() -> [NSSortDescriptor] {
