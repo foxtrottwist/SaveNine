@@ -97,14 +97,20 @@ struct ProjectsView: View {
     
     func createPredicate() -> NSPredicate {
         let closedPredicate = NSPredicate(format: "closed = %d", showClosedProjects)
-        let searchPredicate = NSPredicate(format: "%K CONTAINS[c] %@", "name", searchText)
-        let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
         
         if selectedTags.isEmpty && searchText.isEmpty {
             return closedPredicate
-        } else if selectedTags.isEmpty {
+        }
+        
+        let searchPredicate = NSPredicate(format: "%K CONTAINS[c] %@", "name", searchText)
+        
+        if selectedTags.isEmpty {
             return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate, searchPredicate])
-        } else if searchText.isEmpty {
+        }
+        
+        let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
+        
+        if searchText.isEmpty {
             return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate] + tagPredicate)
         }
         
