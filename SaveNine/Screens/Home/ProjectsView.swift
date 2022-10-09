@@ -24,18 +24,20 @@ struct ProjectsView: View {
     var body: some View {
         NavigationSplitView {
             if showingProjectTags {
-                HStack {
                     Button {
-                        showingProjectTags.toggle()
+                        withAnimation {
+                            selectedTags = []
+                        }
                     } label: {
-                        Image(systemName: "xmark.circle")
-                            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                            .padding(.trailing, 3)
+                        Image(systemName: "tag.slash")
+                            .font(.callout)
+                        
+                        Text("Clear Tags \(selectedTags.count)")
+                            .font(.callout)
                     }
+                    .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                     
                     ProjectTagsView(selection: $selectedTags)
-                }
-                .padding(.leading)
             }
             
             ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()), selection: $selectedProject)

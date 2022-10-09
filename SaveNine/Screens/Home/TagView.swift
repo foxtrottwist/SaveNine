@@ -8,25 +8,71 @@
 import SwiftUI
 
 struct TagView: View {
-    let name: String
+    let tag: Ptag
     let color: Color
+    
+    @EnvironmentObject var dataController: DataController
+    
+    @State var name: String
+    @State var showingRenameAlert = false
+    @State var showingDeleteTagConfirmation = false
+    
+    init(tag: Ptag, color: Color) {
+        self.tag = tag
+        self.color = color
+        
+        _name = State(wrappedValue: tag.ptagName)
+    }
     
     var body: some View {
         VStack {
-            Text(name)
+            Text(tag.ptagName)
         }
         .padding(10)
-        .background(Color(.clear))
+        .background(Color(.systemGroupedBackground))
         .clipShape(Capsule(style: .continuous))
         .overlay {
             Capsule(style: .continuous)
                 .stroke(color, lineWidth: 2)
+        }
+        .contextMenu {
+            Button {
+                showingRenameAlert.toggle()
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+            
+            Divider()
+            
+            Button {
+                showingDeleteTagConfirmation.toggle()
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+        .alert("Rename Tag", isPresented: $showingRenameAlert) {
+            RenameTagView(name: $name) {
+                tag.ptagProjects.forEach {
+                    $0.objectWillChange.send()
+                }
+                
+                tag.name = name
+                
+                dataController.save()
+            }
+        } message: {
+            Text("Rename \(tag.ptagName) tag.")
+        }
+        .confirmationDialog("Are you sure you want to this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
+            Button("Delete Tag", role: .destructive) {
+                dataController.delete(tag)
+            }
         }
     }
 }
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView(name: "fpp", color: Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+        TagView(tag: Ptag.example, color: Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
     }
 }
