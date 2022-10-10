@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TagView: View {
     let tag: Ptag
-    let color: Color
+    let isActive: Bool
     
     @EnvironmentObject var dataController: DataController
     
@@ -17,9 +17,11 @@ struct TagView: View {
     @State var showingRenameAlert = false
     @State var showingDeleteTagConfirmation = false
     
-    init(tag: Ptag, color: Color) {
+    let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
+    
+    init(tag: Ptag, isActive: Bool) {
         self.tag = tag
-        self.color = color
+        self.isActive = isActive
         
         _name = State(wrappedValue: tag.ptagName)
     }
@@ -33,7 +35,7 @@ struct TagView: View {
         .clipShape(Capsule(style: .continuous))
         .overlay {
             Capsule(style: .continuous)
-                .stroke(color, lineWidth: 2)
+                .stroke(isActive ? activeTagColor : .clear, lineWidth: 2)
         }
         .contextMenu {
             Button {
@@ -56,7 +58,7 @@ struct TagView: View {
                     $0.objectWillChange.send()
                 }
                 
-                tag.name = name
+                tag.name = name.lowercased()
                 
                 dataController.save()
             }
@@ -66,6 +68,8 @@ struct TagView: View {
         .confirmationDialog("Are you sure you want to this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
             Button("Delete Tag", role: .destructive) {
                 dataController.delete(tag)
+                
+                dataController.save()
             }
         }
     }
@@ -73,6 +77,6 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView(tag: Ptag.example, color: Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+        TagView(tag: Ptag.example, isActive: false)
     }
 }

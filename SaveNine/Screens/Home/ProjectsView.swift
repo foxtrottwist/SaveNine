@@ -24,6 +24,16 @@ struct ProjectsView: View {
     var body: some View {
         NavigationSplitView {
             if showingProjectTags {
+                HStack {
+                    Button {
+                        showingProjectTags.toggle()
+                    } label: {
+                        Image(systemName: "xmark.circle")
+                            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+                    }
+                    
+                    Spacer()
+                    
                     Button {
                         withAnimation {
                             selectedTags = []
@@ -36,8 +46,10 @@ struct ProjectsView: View {
                             .font(.callout)
                     }
                     .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                    
-                    ProjectTagsView(selection: $selectedTags)
+                }
+                .padding([.horizontal, .top])
+                
+                ProjectTagsView(selection: $selectedTags)
             }
             
             ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()), selection: $selectedProject)

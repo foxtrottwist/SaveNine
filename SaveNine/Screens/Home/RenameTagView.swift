@@ -20,6 +20,8 @@ struct RenameTagView: View {
     
     var body: some View {
         TextField("Tag Name", text: $name)
+            .autocapitalization(.none)
+            .autocorrectionDisabled(true)
         
         Button("Cancel", role: .cancel) {}
         

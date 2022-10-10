@@ -15,24 +15,25 @@ struct ProjectTagsView: View {
     let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                if let ptags {
+        if ptags.isEmpty {
+            Text("Add tags to your projects to filter.")
+                .italic()
+                .foregroundColor(.secondary)
+                .padding(.vertical)
+        } else {
+            ScrollView(.horizontal) {
+                HStack {
                     ForEach(ptags) { tag in
                         Button {
-                           toggleSelection(tag: tag)
+                            toggleSelection(tag: tag)
                         } label: {
-                            TagView(tag: tag, color: selected(tag) ? activeTagColor : .clear)
+                            TagView(tag: tag, isActive: selection.contains(tag))
                         }
                     }
-                } else {
-                    Text("Add tags to your projects to filter projects shown in the list.")
-                        .italic()
-                        .foregroundColor(.secondary)
                 }
+                .buttonStyle(.plain)
+                .padding()
             }
-            .buttonStyle(.plain)
-            .padding()
         }
     }
     
@@ -42,10 +43,6 @@ struct ProjectTagsView: View {
         } else {
             selection.append(tag)
         }
-    }
-    
-    private func selected(_ tag: Ptag) -> Bool {
-        return selection.contains(tag)
     }
 }
 
