@@ -13,9 +13,12 @@ struct TagView: View {
     
     @EnvironmentObject var dataController: DataController
     
+    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
+    
     @State var name: String
-    @State var showingRenameAlert = false
     @State var showingDeleteTagConfirmation = false
+    @State var showingFailedToRenameAlert = false
+    @State var showingRenameAlert = false
     
     let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
     
@@ -41,7 +44,7 @@ struct TagView: View {
             Button {
                 showingRenameAlert.toggle()
             } label: {
-                Label("Edit", systemImage: "pencil")
+                Label("Rename", systemImage: "pencil")
             }
             
             Divider()
@@ -53,25 +56,37 @@ struct TagView: View {
             }
         }
         .alert("Rename Tag", isPresented: $showingRenameAlert) {
-            RenameTagView(name: $name) {
+            RenameTagView(name: $name, renameAction: renameAction, cancelAction: cancelAction)
+        }
+        .alert("Failed to Rename Tag", isPresented: $showingFailedToRenameAlert) {} message: {
+            Text("Could not rename tag, tag name already exists.")
+        }
+        .confirmationDialog("Are you sure you want to this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
+            Button("Delete Tag", role: .destructive) {
+                dataController.delete(tag)
+                dataController.save()
+            }
+        }
+    }
+    
+    func renameAction() {
+        if name != tag.ptagName && !name.isEmpty {
+            if ptags.contains(where: { $0.name == name }) {
+                showingFailedToRenameAlert.toggle()
+                name = tag.ptagName
+            } else {
                 tag.ptagProjects.forEach {
                     $0.objectWillChange.send()
                 }
                 
                 tag.name = name.lowercased()
-                
-                dataController.save()
-            }
-        } message: {
-            Text("Rename \(tag.ptagName) tag.")
-        }
-        .confirmationDialog("Are you sure you want to this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
-            Button("Delete Tag", role: .destructive) {
-                dataController.delete(tag)
-                
                 dataController.save()
             }
         }
+    }
+    
+    func cancelAction() {
+        name = tag.ptagName
     }
 }
 
