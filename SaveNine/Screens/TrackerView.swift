@@ -8,28 +8,23 @@
 import SwiftUI
 
 struct TrackerView: View {
+    let project: Project
+    
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @State var session: Session?
     @State var start: Date?
-    @State var tracking = false
     @State var showingClearConfirm = false
-    
-    let project: Project
-    let session: Session?
-    
-    
+    @State var tracking = false
     
     init(project: Project) {
         self.project = project
         
         if let session = project.projectSessions.last, session.endDate == nil {
-                self.session = session
-                
+                _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
                 _tracking = State(wrappedValue: true)
-        } else {
-            self.session = nil
         }
     }
     
@@ -105,9 +100,11 @@ struct TrackerView: View {
         let session = Session(context: managedObjectContext)
         session.startDate = start
         session.project = project
-        tracking = true
         
         dataController.save()
+        
+        tracking = true
+        self.session = session
     }
     
     func stopTimer() {
