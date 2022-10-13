@@ -71,7 +71,7 @@ struct ChecklistHeaderView: View {
                         .font(.title3)
                 }
             }
-            .confirmationDialog("Are you sure you want to this list? All items in this list will be deleted as well.", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
+            .confirmationDialog("Are you sure you want to delete this list? All items in this list will be deleted as well.", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
                 Button("Delete List", role: .destructive) {
                     dataController.delete(checklist)
                 }

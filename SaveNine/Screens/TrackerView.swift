@@ -64,9 +64,10 @@ struct TrackerView: View {
                 let timeTracked = format(duration: project.projectTotalDuration, in: .hours) + format(duration: project.projectTotalDuration, in: .minutes)
                 
                     VStack {
-                        Text("*Sessions*:")
+                        Text("Sessions:")
                             .font(.callout)
                             .fontWeight(.light)
+                            .italic()
                         
                         Text("\(tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
                     }
@@ -74,9 +75,10 @@ struct TrackerView: View {
                     Spacer()
                     
                     VStack {
-                        Text("*Time Tracked*:")
+                        Text("Time Tracked:")
                             .font(.callout)
                             .fontWeight(.light)
+                            .italic()
                         
                         if timeTracked.isEmpty {
                             Text("None")

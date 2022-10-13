@@ -84,7 +84,8 @@ struct ProjectsView: View {
                             addProject()
                         } label: {
                             Image(systemName: "plus.circle.fill")
-                            Text("**Add Project**")
+                            Text("Add Project")
+                                .bold()
                         }
                         .disabled(disabled)
                     }

@@ -76,16 +76,18 @@ struct ProjectDetailView: View {
                             .padding(.bottom)
                     }
                               
-                    Text("*Notes*")
+                    Text("Notes")
                         .font(.callout)
                         .fontWeight(.light)
+                        .italic()
                     
                     TextField("Notes", text: $detail, axis: .vertical)
                         .padding(.bottom)
                     
-                    Text("*Tags*")
+                    Text("Tags")
                         .font(.callout)
                         .fontWeight(.light)
+                        .italic()
                     
                     TextField("Text, separated by spaces", text: $tags)
                         .autocapitalization(.none)
@@ -143,7 +145,7 @@ struct ProjectDetailView: View {
                         .foregroundColor(.red)
                 }
             } label: {
-                Label("menu", systemImage: "ellipsis.circle")
+                Label("Menu", systemImage: "ellipsis.circle")
             }
         }
         .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {

@@ -61,7 +61,7 @@ struct TagView: View {
         .alert("Failed to Rename Tag", isPresented: $showingFailedToRenameAlert) {} message: {
             Text("Could not rename tag, tag name already exists.")
         }
-        .confirmationDialog("Are you sure you want to this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
+        .confirmationDialog("Are you sure you want to delete this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
             Button("Delete Tag", role: .destructive) {
                 dataController.delete(tag)
                 dataController.save()

@@ -54,7 +54,8 @@ struct ChecklistView: View {
                         dataController.save()
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                        Text("**Add Checklist**")
+                        Text("Add Checklist")
+                            .bold()
                     }
                 }
             }

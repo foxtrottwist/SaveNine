@@ -1,0 +1,121 @@
+/* 
+  Localizable.strings
+  SaveNine
+
+  Created by Lawrence Horne on 10/13/22.
+  
+*/
+
+
+
+"Add Checklist" = "Add Checklist";
+
+"Add lists to track supplies, tasks and more." = "Add lists to track supplies, tasks and more.";
+
+"Add New Item" = "Add New Item";
+
+"Add Project" = "Add Project";
+
+"Add tags to your projects to filter." = "Add tags to your projects to filter.";
+
+"Are you sure you want to clear the timer? No time will be tracked." = "Are you sure you want to clear the timer? No time will be tracked.";
+
+"Are you sure you want to delete this list? All items in this list will be deleted as well." = "Are you sure you want to delete this list? All items in this list will be deleted as well.";
+
+"Are you sure you want to delete this project?" = "Are you sure you want to delete this project?";
+
+"Are you sure you want to delete this tag?" = "Are you sure you want to delete this tag?";
+
+"Archived" = "Archived";
+
+"Archive project" = "Archive project";
+
+"Cancel" = "Cancel";
+
+"Checklists" = "Checklists";
+
+"Clear" = "Clear";
+
+"Clear Tags %lld" = "Clear Tags %lld";
+
+"Clear Timer" = "Clear Timer";
+
+"Could not rename tag, tag name already exists." = "Could not rename tag, tag name already exists.";
+
+"Delete List" = "Delete List";
+
+"Delete Project" = "Delete Project";
+
+"Delete Tag" = "Delete Tag";
+
+"Details" = "Details";
+
+"Done" = "Done";
+
+"Edit" = "Edit";
+
+"Export Sessions" = "Export Sessions";
+
+"Failed to Rename Tag" = "Failed to Rename Tag";
+
+"High" = "High";
+
+"Low" = "Low";
+
+"Medium" = "Medium";
+
+"Menu" = "Menu";
+
+"Name" = "Name";
+
+"New Item" = "New Item";
+
+"New List" = "New List";
+
+"Newest First" = "Newest First";
+
+"No time tracking sessions have been completed for this project." = "No time tracking sessions have been completed for this project.";
+
+"None" = "None";
+
+"Notes" = "Notes";
+
+"OK" = "OK";
+
+"Oldest First" = "Oldest First";
+
+"Open" = "Open";
+
+"Please select a project from the menu to begin." = "Please select a project from the menu to begin.";
+
+"Priority" = "Priority";
+
+"Project Name" = "Project Name";
+
+"Project Status" = "Project Status";
+
+"Projects" = "Projects";
+
+"Rename" = "Rename";
+
+"Rename Tag" = "Rename Tag";
+
+"Reopen project" = "Reopen project";
+
+"Sessions" = "Sessions";
+
+"Sessions:" = "Sessions:";
+
+"Sort By Creation Date" = "Sort By Creation Date";
+
+"Start Timer" = "Start Timer";
+
+"Stop Timer" = "Stop Timer";
+
+"Tag Name" = "Tag Name";
+
+"Tags" = "Tags";
+
+"Text, separated by spaces" = "Text, separated by spaces";
+
+"Time Tracked:" = "Time Tracked:";
