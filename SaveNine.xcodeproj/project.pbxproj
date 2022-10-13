@@ -15,7 +15,6 @@
 		6537EAD628E90D87004068CD /* Ptag-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */; };
 		6544E57D28F067E9009CB296 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544E57C28F067E9009CB296 /* TagView.swift */; };
 		65464D2128F26B74008E1EE6 /* RenameTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65464D2028F26B74008E1EE6 /* RenameTagView.swift */; };
-		657B49C528F627C30054CB77 /* TextFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B49C428F627C30054CB77 /* TextFile.swift */; };
 		658CF37228EBBEBF00DA1DA2 /* ProjectTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */; };
 		659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FDA6C28E28EC900899A2E /* ProjectRowView.swift */; };
 		65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314428CD552E00A91A47 /* SaveNineApp.swift */; };
@@ -50,7 +49,6 @@
 		65464D2028F26B74008E1EE6 /* RenameTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameTagView.swift; sourceTree = "<group>"; };
 		657081DC28D8E44A006C568D /* SaveNine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNine.entitlements; sourceTree = "<group>"; };
 		657081DD28D8E460006C568D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		657B49C428F627C30054CB77 /* TextFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFile.swift; sourceTree = "<group>"; };
 		658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagsView.swift; sourceTree = "<group>"; };
 		659FDA6C28E28EC900899A2E /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		65D2314128CD552E00A91A47 /* SaveNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +114,6 @@
 			children = (
 				65DD023E28D1318800567676 /* DocumentHelpers.swift */,
 				652D025928D7D3FB00F818E7 /* TimeHelpers.swift */,
-				657B49C428F627C30054CB77 /* TextFile.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -257,7 +254,6 @@
 				659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */,
 				6537EAD628E90D87004068CD /* Ptag-CoreDataHelpers.swift in Sources */,
 				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
-				657B49C528F627C30054CB77 /* TextFile.swift in Sources */,
 				65D2D75828E3E0A7008C8D1F /* ProjectListView.swift in Sources */,
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65F648B328E0FE180086512D /* ChecklistRowView.swift in Sources */,
