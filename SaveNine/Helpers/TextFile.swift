@@ -7,8 +7,15 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
-
-struct TextFile: FileDocument {
+// Currently not in use.
+struct TextFile: FileDocument, Transferable {
+    // Added for use with ShareLink.
+    static var transferRepresentation: some TransferRepresentation {
+          DataRepresentation(exportedContentType: .text) { data in
+              data.text.data(using: .ascii) ?? Data()
+          }
+      }
+    
     // tell the system we support only plain text
     static var readableContentTypes = [UTType.plainText]
 

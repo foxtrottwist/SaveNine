@@ -54,12 +54,12 @@ struct ProjectDetailView: View {
                     TrackerView(project: project)
                     
                     List {
-                        NavigationLink(destination: ChecklistView(project: project)) {
-                            Label("Checklists", systemImage: "list.triangle")
+                        NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: shareSessions(from: project))) {
+                            Label("Sessions", systemImage: "stopwatch")
                         }
                         
-                        NavigationLink(destination: SessionsView(sessions: project.projectSessions)) {
-                            Label("View Sessions", systemImage: "stopwatch")
+                        NavigationLink(destination: ChecklistView(project: project)) {
+                            Label("Checklists", systemImage: "list.triangle")
                         }
                     }
                     .frame(height: defaultMinListRowHeight * 2)
@@ -107,8 +107,6 @@ struct ProjectDetailView: View {
                     update(tags: tagNames, in: project)
                 }
                 .padding()
-                
-                
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -153,6 +151,24 @@ struct ProjectDetailView: View {
                 delete(project: project)
             }
         }
+    }
+    
+    func shareSessions(from project: Project) -> String {
+        var export = "\(project.projectName)\n\n"
+        
+        if !project.projectSessions.isEmpty {
+            let sessions = project.projectSessions.map {
+                "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(formatSession(duration: $0.duration))"
+             }.reduce("") { "\($0)\n\n\($1)" }
+            
+            export += """
+                \(sessions)
+                
+                Time Tracked: \(formatSession(duration: project.projectTotalDuration))
+                """
+        }
+        
+        return export
     }
     
     func update(uiImage: UIImage?, in project: Project) {

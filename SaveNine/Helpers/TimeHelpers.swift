@@ -37,6 +37,10 @@ func seconds(_ seconds: Int) -> String {
     return "0\(seconds)"
 }
 
+func formatSession(duration: Double) -> String {
+    return format(duration: duration, in: .hours) + format(duration: duration, in: .minutes) + format(duration: duration, in: .seconds)
+}
+
 func format(duration: Double, in format: TimeValue) -> String {
     let time = Int(duration.rounded(.up))
 
