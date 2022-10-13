@@ -37,11 +37,11 @@ struct SessionsView: View {
                     .onDelete(perform: deleteSession)
                 }
                 .toolbar {
-                    EditButton()
-                    
                     ShareLink(item: sharedSessions) {
                         Label ("Export Sessions", systemImage: "square.and.arrow.up")
                     }
+                    
+                    EditButton()
                 }
             }
     }

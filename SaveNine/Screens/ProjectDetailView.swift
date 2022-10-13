@@ -154,21 +154,19 @@ struct ProjectDetailView: View {
     }
     
     func shareSessions(from project: Project) -> String {
-        var export = "\(project.projectName)\n\n"
+        let sessions = project.projectSessions.map {
+            "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(longFormat(duration: $0.duration))"
+         }.reduce("") { "\($0)\n\n\($1)" }
         
-        if !project.projectSessions.isEmpty {
-            let sessions = project.projectSessions.map {
-                "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(longFormat(duration: $0.duration))"
-             }.reduce("") { "\($0)\n\n\($1)" }
+        let sharedSessions = """
+            \(project.projectName)
+            \(sessions)
             
-            export += """
-                \(sessions)
-                
-                Time Tracked: \(longFormat(duration: project.projectTotalDuration))
-                """
-        }
+            Time Tracked: \(longFormat(duration: project.projectTotalDuration))
+            """
+
         
-        return export
+        return sharedSessions
     }
     
     func update(uiImage: UIImage?, in project: Project) {
