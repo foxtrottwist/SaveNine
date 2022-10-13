@@ -37,7 +37,7 @@ func seconds(_ seconds: Int) -> String {
     return "0\(seconds)"
 }
 
-func formatSession(duration: Double) -> String {
+func longFormat(duration: Double) -> String {
     return format(duration: duration, in: .hours) + format(duration: duration, in: .minutes) + format(duration: duration, in: .seconds)
 }
 

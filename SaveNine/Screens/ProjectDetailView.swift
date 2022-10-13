@@ -158,13 +158,13 @@ struct ProjectDetailView: View {
         
         if !project.projectSessions.isEmpty {
             let sessions = project.projectSessions.map {
-                "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(formatSession(duration: $0.duration))"
+                "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(longFormat(duration: $0.duration))"
              }.reduce("") { "\($0)\n\n\($1)" }
             
             export += """
                 \(sessions)
                 
-                Time Tracked: \(formatSession(duration: project.projectTotalDuration))
+                Time Tracked: \(longFormat(duration: project.projectTotalDuration))
                 """
         }
         

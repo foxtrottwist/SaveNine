@@ -30,7 +30,7 @@ struct SessionsView: View {
                                 Text(startDate.formatted(date: .abbreviated, time: .shortened))
                                     .font(.callout)
                                     .foregroundColor(.secondary)
-                                Text(formatSession(duration: duration))
+                                Text(longFormat(duration: duration))
                             }
                         }
                     }
