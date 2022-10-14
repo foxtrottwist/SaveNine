@@ -95,7 +95,6 @@ struct ProjectDetailView: View {
                 .animation(.easeIn, value: editing)
                 .disabled(!editing)
                 .formStyle(.columns)
-                .onChange(of: name, perform: { name in project.name = name })
                 .onChange(of: detail, perform: { detail in project.detail = detail })
                 .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
                 .onChange(of: editing) { editing in
@@ -114,6 +113,15 @@ struct ProjectDetailView: View {
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
             Button {
+                if editing {
+                    if name.isEmpty {
+                        name = project.projectName
+                        project.name = name
+                    } else {
+                        project.name = name
+                    }
+                }
+                
                 editing.toggle()
             } label: {
                 Text(editing ? "Done" : "Edit")
@@ -145,6 +153,7 @@ struct ProjectDetailView: View {
             } label: {
                 Label("menu", systemImage: "ellipsis.circle")
             }
+            .disabled(editing)
         }
         .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
             Button("Delete Project", role: .destructive) {
