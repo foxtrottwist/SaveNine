@@ -137,7 +137,7 @@ struct ProjectDetailView: View {
     
     var projectDetailLinks: some View {
         List {
-            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: shareSessions(from: project))) {
+            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: project.projectShareSessions)) {
                 Label("Sessions", systemImage: "stopwatch")
             }
             
@@ -147,21 +147,6 @@ struct ProjectDetailView: View {
         }
         .frame(height: defaultMinListRowHeight * 2)
         .listStyle(.plain)
-    }
-    
-    func shareSessions(from project: Project) -> String {
-        let sessions = project.projectSessions.map {
-            "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(longFormat(duration: $0.duration))"
-         }.reduce("") { "\($0)\n\n\($1)" }
-        
-        let sharedSessions = """
-            \(project.projectName)
-            \(sessions)
-            
-            Time Tracked: \(project.projectFormattedDurationLong)
-            """
-
-        return sharedSessions
     }
     
     func update(uiImage: UIImage?, in project: Project) {

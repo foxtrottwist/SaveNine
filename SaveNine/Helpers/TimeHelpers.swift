@@ -62,7 +62,7 @@ func hours(from elapseTime: Int) -> Int {
 }
 
 func minutes(from elapseTime: Int) -> Int {
-    let hours = elapseTime / 60 / 60
+    let hours = hours(from: elapseTime)
     return (elapseTime - (hours * 60 * 60)) / 60
 }
 

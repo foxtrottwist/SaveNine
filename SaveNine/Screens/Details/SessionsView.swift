@@ -20,12 +20,13 @@ struct SessionsView: View {
             } else {
                 List {
                     ForEach(sessions) { session in
-                        if let duration = session.duration, let startDate = session.startDate, session.endDate != nil {
+                        if session.endDate != nil {
                             VStack(alignment: .leading) {
-                                Text(startDate.formatted(date: .abbreviated, time: .shortened))
+                                Text(session.formattedStartDate)
                                     .font(.callout)
                                     .foregroundColor(.secondary)
-                                Text(longFormat(duration: duration))
+                                
+                                Text(session.formattedDuration)
                             }
                         }
                     }
