@@ -46,24 +46,12 @@ struct ProjectDetailView: View {
                     .disabled(!editing)
                 
                 if !editing {
-                    Text(name)
-                        .font(.title2)
-                    
+                    Text(name).font(.title2)
                     Divider()
                     
                     TrackerView(project: project)
+                    projectDetailLinks
                     
-                    List {
-                        NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: shareSessions(from: project))) {
-                            Label("Sessions", systemImage: "stopwatch")
-                        }
-                        
-                        NavigationLink(destination: ChecklistView(project: project)) {
-                            Label("Checklists", systemImage: "list.triangle")
-                        }
-                    }
-                    .frame(height: defaultMinListRowHeight * 2)
-                    .listStyle(.plain)
                 }
                 
                 Form {
@@ -97,62 +85,68 @@ struct ProjectDetailView: View {
                 .animation(.easeIn, value: editing)
                 .disabled(!editing)
                 .formStyle(.columns)
+                .padding()
                 .onChange(of: name, perform: { name in project.name = name })
                 .onChange(of: detail, perform: { detail in project.detail = detail })
                 .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-                .onChange(of: editing) { editing in
-                    guard !editing, project.projectTagsString != tags else { return }
-                    
-                    let tagNames = prepare(tags: tags)
-                    tags = tagNames.joined(separator: " ")
-                    
-                    update(tags: tagNames, in: project)
-                }
-                .padding()
+                .onChange(of: editing, perform: editTags)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: dataController.save)
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
-            Button {
-                editing.toggle()
-            } label: {
-                Text(editing ? "Done" : "Edit")
-            }
-            
-            Menu {
-                Button {
-                    project.closed.toggle()
-
-                    dataController.save()
-
-                    dismiss()
-                } label: {
-                    if project.closed {
-                        Label("Reopen project", systemImage: "tray.full")
-                    } else {
-                        Label( "Archive project", systemImage: "archivebox")
-                    }
-                }
-
-                Divider()
-
-                Button {
-                    showingDeleteConfirm.toggle()
-                } label: {
-                    Label("Delete Project", systemImage: "trash")
-                        .foregroundColor(.red)
-                }
-            } label: {
-                Label("Menu", systemImage: "ellipsis.circle")
-            }
+            Button(editing ? "Done" : "Edit", action: { editing.toggle() })
+            projectDetailsMenuToolbarItem
         }
         .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
             Button("Delete Project", role: .destructive) {
                 delete(project: project)
             }
         }
+    }
+    
+    var projectDetailsMenuToolbarItem: some View {
+        Menu {
+            Button {
+                project.closed.toggle()
+
+                dataController.save()
+
+                dismiss()
+            } label: {
+                if project.closed {
+                    Label("Reopen project", systemImage: "tray.full")
+                } else {
+                    Label( "Archive project", systemImage: "archivebox")
+                }
+            }
+
+            Divider()
+
+            Button {
+                showingDeleteConfirm.toggle()
+            } label: {
+                Label("Delete Project", systemImage: "trash")
+                    .foregroundColor(.red)
+            }
+        } label: {
+            Label("Menu", systemImage: "ellipsis.circle")
+        }
+    }
+    
+    var projectDetailLinks: some View {
+        List {
+            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: shareSessions(from: project))) {
+                Label("Sessions", systemImage: "stopwatch")
+            }
+            
+            NavigationLink(destination: ChecklistView(project: project)) {
+                Label("Checklists", systemImage: "list.triangle")
+            }
+        }
+        .frame(height: defaultMinListRowHeight * 2)
+        .listStyle(.plain)
     }
     
     func shareSessions(from project: Project) -> String {
@@ -164,15 +158,14 @@ struct ProjectDetailView: View {
             \(project.projectName)
             \(sessions)
             
-            Time Tracked: \(longFormat(duration: project.projectTotalDuration))
+            Time Tracked: \(project.projectFormattedDurationLong)
             """
 
-        
         return sharedSessions
     }
     
     func update(uiImage: UIImage?, in project: Project) {
-        if let uiImage = uiImage  {
+        if let uiImage = uiImage {
             let id = project.id!
             let name = "\(id).png"
             project.image = name
@@ -187,8 +180,18 @@ struct ProjectDetailView: View {
     
     func prepare(tags: String) -> [String] {
         var set = Set<String>()
+        
         return tags.components(separatedBy: " ").map { $0.lowercased() }
             .filter { !$0.isEmpty && set.insert($0).inserted }.sorted { $0 < $1 }
+    }
+    
+    func editTags(_ editing: Bool) {
+        guard !editing, project.projectTagsString != tags else { return }
+        
+        let tagNames = prepare(tags: tags)
+        tags = tagNames.joined(separator: " ")
+        
+        update(tags: tagNames, in: project)
     }
     
     func update(tags: [String], in project: Project) {

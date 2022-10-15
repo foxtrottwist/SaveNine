@@ -21,16 +21,20 @@ struct ProjectNameView: View {
             .onAppear {
                 focused = true
             }
-            .onSubmit {
-                if name.isEmpty {
-                    dataController.delete(project)
-                } else {
-                    project.name = name
-                }
-                
-                dataController.save()
-            }
+            .onSubmit(submitProjectName)
             .submitLabel(.done)
+    }
+    
+    func submitProjectName() {
+        withAnimation {
+            if name.isEmpty {
+                dataController.delete(project)
+            } else {
+                project.name = name
+            }
+            
+            dataController.save()
+        }
     }
 }
 

@@ -14,49 +14,47 @@ struct ChecklistView: View {
     @EnvironmentObject var dataController: DataController
     
     var body: some View {
-        List {
-            if project.projectChecklists.isEmpty {
-                Text("Add lists to track supplies, tasks and more.")
-                    .italic()
-                    .foregroundColor(.secondary)
-            } else {
+        if project.projectChecklists.isEmpty {
+          NoContentView(message: "Add lists to track supplies, tasks and more.")
+                .toolbar {
+                    addChecklistToolbarItem
+                }
+        } else {
+            List {
                 ForEach(project.projectChecklists) { checklist in
                     Section {
                         ForEach(checklist.checklistItems) { item in
                             ChecklistRowView(item: item)
                         }
                         .onDelete(perform: { offsets in
-                            let items = checklist.checklistItems
-                            
-                            for offset in offsets {
-                                let item = items[offset]
-                                dataController.delete(item)
-                            }
-                            
-                            dataController.save()
+                            delete(checklist: checklist, offsets: offsets)
                         })
                     } header: {
                         ChecklistHeaderView(checklist: checklist, addItem: addItem(to: checklist))
                     }
                 }
             }
+            .listStyle(.plain)
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
+                addChecklistToolbarItem
+            }
         }
-        .listStyle(.plain)
-        .scrollDismissesKeyboard(.interactively)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                HStack {
-                    Button {
-                        let checklist = Checklist(context: managedObjectContext)
-                        checklist.project = project
-                        checklist.creationDate = Date()
-                        
-                        dataController.save()
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Add Checklist")
-                            .bold()
-                    }
+    }
+    
+    var addChecklistToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            HStack {
+                Button {
+                    let checklist = Checklist(context: managedObjectContext)
+                    checklist.project = project
+                    checklist.creationDate = Date()
+                    
+                    dataController.save()
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Add Checklist")
+                        .bold()
                 }
             }
         }
@@ -72,6 +70,17 @@ struct ChecklistView: View {
             
             dataController.save()
         }
+    }
+    
+    func delete(checklist: Checklist, offsets: IndexSet) {
+        let items = checklist.checklistItems
+        
+        for offset in offsets {
+            let item = items[offset]
+            dataController.delete(item)
+        }
+        
+        dataController.save()
     }
 }
 

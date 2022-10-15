@@ -35,6 +35,8 @@ struct ProjectListView: View {
                 .disabled(disabled)
             }
         }
+        .listStyle(.inset)
+        .navigationTitle("Projects")
     }
 }
 

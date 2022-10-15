@@ -38,14 +38,7 @@ struct ChecklistHeaderView: View {
                             focused = true
                         }
                     }
-                    .onSubmit {
-                        if name.isEmpty {
-                            name = checklist.checklistName.isEmpty ? "New List" : checklist.checklistName
-                            checklist.name = name
-                        } else {
-                            checklist.name = name
-                        }
-                    }
+                    .onSubmit(submitChecklistName)
                     .submitLabel(.done)
                 
                 Spacer()
@@ -76,6 +69,15 @@ struct ChecklistHeaderView: View {
                     dataController.delete(checklist)
                 }
             }
+        }
+    }
+    
+    func submitChecklistName() {
+        if name.isEmpty {
+            name = checklist.checklistName.isEmpty ? "New List" : checklist.checklistName
+            checklist.name = name
+        } else {
+            checklist.name = name
         }
     }
 }

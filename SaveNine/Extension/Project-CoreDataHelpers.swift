@@ -53,6 +53,14 @@ extension Project {
         tags?.allObjects as? [Ptag] ?? []
     }
     
+    var projectFormattedDurationLong: String {
+        longFormat(duration: projectTotalDuration)
+    }
+    
+    var projectFormattedDurationShort: String {
+        format(duration: projectTotalDuration, in: .hours) + format(duration: projectTotalDuration, in: .minutes)
+    }
+    
     var projectTagsString: String {
         projectTags.map { $0.ptagName }.sorted {$0 < $1 }.joined(separator: " ")
     }

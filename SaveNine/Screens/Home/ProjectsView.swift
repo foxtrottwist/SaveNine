@@ -24,71 +24,15 @@ struct ProjectsView: View {
     var body: some View {
         NavigationSplitView {
             if showingProjectTags {
-                HStack {
-                    Button {
-                        showingProjectTags.toggle()
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        withAnimation {
-                            selectedTags = []
-                        }
-                    } label: {
-                        Image(systemName: "tag.slash")
-                            .font(.callout)
-                        
-                        Text("Clear Tags \(selectedTags.count)")
-                            .font(.callout)
-                    }
-                    .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                }
-                .padding([.horizontal, .top])
-                
+                tagControls
                 ProjectTagsView(selection: $selectedTags)
             }
             
             ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()), selection: $selectedProject)
-                .listStyle(.inset)
-                .navigationTitle("Projects")
                 .searchable(text: $searchText)
                 .toolbar {
-                    ToolbarItem {
-                        Menu {
-                            Picker("Project Status", selection: $showClosedProjects) {
-                                Label("Open", systemImage: "tray.full").tag(false)
-                                Label("Archived", systemImage: "archivebox").tag(true)
-                            }
-                            
-                            Button {
-                                showingProjectTags.toggle()
-                            } label: {
-                                Label("Tags", systemImage: "tag")
-                            }
-                            
-                            Picker("Sort By Creation Date", selection: $sortAscending) {
-                                Text("Newest First").tag(false)
-                                Text("Oldest First").tag(true)
-                            }
-                        } label: {
-                            Label("Menu", systemImage: "ellipsis.circle")
-                        }
-                    }
-                    
-                    ToolbarItem(placement: .bottomBar) {
-                        Button {
-                            addProject()
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                            Text("Add Project")
-                                .bold()
-                        }
-                        .disabled(disabled)
-                    }
+                    menuToolbarItem
+                    addProjectBottomToolbarItem
                 }
         } detail: {
             if let project = selectedProject {
@@ -96,10 +40,72 @@ struct ProjectsView: View {
                     ProjectDetailView(project: project )
                 }
             } else {
-                Text("Please select a project from the menu to begin.")
-                    .italic()
-                    .foregroundColor(.secondary)
+                NoContentView(message: "Please select a project from the menu to begin.")
             }
+        }
+    }
+    
+    var tagControls: some View {
+        HStack {
+            Button {
+                showingProjectTags.toggle()
+            } label: {
+                Image(systemName: "xmark.circle")
+                    .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+            }
+            
+            Spacer()
+            
+            Button {
+                withAnimation {
+                    selectedTags = []
+                }
+            } label: {
+                Image(systemName: "tag.slash")
+                    .font(.callout)
+                
+                Text("Clear Tags \(selectedTags.count)")
+                    .font(.callout)
+            }
+            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
+        }
+        .padding([.horizontal, .top])
+    }
+    
+    var menuToolbarItem: some ToolbarContent {
+        ToolbarItem {
+            Menu {
+                Picker("Project Status", selection: $showClosedProjects) {
+                    Label("Open", systemImage: "tray.full").tag(false)
+                    Label("Archived", systemImage: "archivebox").tag(true)
+                }
+                
+                Button {
+                    showingProjectTags.toggle()
+                } label: {
+                    Label("Tags", systemImage: "tag")
+                }
+                
+                Picker("Sort By Creation Date", selection: $sortAscending) {
+                    Text("Newest First").tag(false)
+                    Text("Oldest First").tag(true)
+                }
+            } label: {
+                Label("Menu", systemImage: "ellipsis.circle")
+            }
+        }
+    }
+    
+    var addProjectBottomToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            Button {
+                addProject()
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                Text("Add Project")
+                    .bold()
+            }
+            .disabled(disabled)
         }
     }
     

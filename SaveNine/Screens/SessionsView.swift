@@ -15,13 +15,8 @@ struct SessionsView: View {
     
     var body: some View {
             if sessions.isEmpty || sessions.first?.endDate == nil {
-                VStack {
-                    Text("No time tracking sessions have been completed for this project.")
-                        .italic()
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                .padding()
+                NoContentView(message: "No time tracking sessions have been completed for this project.")
+                    .padding()
             } else {
                 List {
                     ForEach(sessions) { session in
