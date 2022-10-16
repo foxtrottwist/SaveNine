@@ -38,7 +38,7 @@ struct ProjectRowView: View {
                 
                 Spacer()
                 
-                if let uiImage = uiImage, let image = Image(uiImage: uiImage) {
+                if let uiImage, let image = Image(uiImage: uiImage) {
                     image
                         .resizable()
                         .scaledToFill()
