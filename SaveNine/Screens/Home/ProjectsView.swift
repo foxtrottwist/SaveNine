@@ -98,9 +98,7 @@ struct ProjectsView: View {
     
     var addProjectBottomToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .bottomBar) {
-            Button {
-                addProject()
-            } label: {
+            Button(action: addProject) {
                 Image(systemName: "plus.circle.fill")
                 Text("Add Project")
                     .bold()

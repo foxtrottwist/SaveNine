@@ -163,13 +163,6 @@ struct ProjectDetailView: View {
         }
     }
     
-    func prepare(tags: String) -> [String] {
-        var set = Set<String>()
-        
-        return tags.components(separatedBy: " ").map { $0.lowercased() }
-            .filter { !$0.isEmpty && set.insert($0).inserted }.sorted { $0 < $1 }
-    }
-    
     func editTags(_ editing: Bool) {
         guard !editing, project.projectTagsString != tags else { return }
         
@@ -179,8 +172,27 @@ struct ProjectDetailView: View {
         update(tags: tagNames, in: project)
     }
     
+    /// Accepts a string of words and validates that the entered text can be added as a tags.
+    /// - Parameter tags: A string representing the tags already associated with or to be added to the project.
+    /// - Returns: An array of unique strings representing the tags already associated with or to be added to the project.
+    func prepare(tags: String) -> [String] {
+        var set = Set<String>()
+        // Splits the provided string into separate words verifies
+        // that there is only a single instance of a word by attempting
+        // to insert them into a Set.
+        return tags.components(separatedBy: " ").map { $0.lowercased() }
+            .filter { !$0.isEmpty && set.insert($0).inserted }.sorted { $0 < $1 }
+    }
+    
+    
+    /// Handles associating of tags with a given project.
+    /// - Parameters:
+    ///   - tags: An array of strings representing tags to be associated with a project.
+    ///   - project: The Project that will be associated with the provided tags.
     func update(tags: [String], in project: Project) {
         let updatedTags = tags.map { tagName in
+            // If a tag with the provided name already exists, return
+            // it instead of creating a new one.
             if let existingTag = ptags.first(where: { $0.name == tagName }) {
                 return existingTag
             } else {

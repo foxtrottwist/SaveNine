@@ -71,6 +71,8 @@ struct TagView: View {
     
     func renameAction() {
         if name != tag.ptagName && !name.isEmpty {
+            // If a tag with the provided name already exists
+            // prevent having a duplicate tag and inform the user.
             if ptags.contains(where: { $0.name == name }) {
                 showingFailedToRenameAlert.toggle()
                 name = tag.ptagName
