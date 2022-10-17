@@ -54,10 +54,11 @@ struct ItemDetailView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("**Done**") {
+                    Button("Done") {
                         save()
                         dismiss()
                     }
+                    .bold()
                 }
             }
         }

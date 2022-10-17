@@ -8,11 +8,17 @@
 import Foundation
 import SwiftUI
 
+/// A helper to provide quick reference to the user's document directory.
+/// - Returns: The URL to the document directory.
 func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths.first!
 }
 
+/// Saves an UIImage as a jpeg to the user's document directory.
+/// - Parameters:
+///   - uiImage: The UIImage to save.
+///   - name: The name of the image file.
 func save(uiImage: UIImage, named name: String) {
         if let data = uiImage.jpegData(compressionQuality: 0.8) {
             let path = getDocumentsDirectory().appendingPathComponent(name)
@@ -20,6 +26,9 @@ func save(uiImage: UIImage, named name: String) {
         }
 }
 
+/// Retrieves an image from the user's document directory.
+/// - Parameter name: The name of the image file.
+/// - Returns: The image retrieved or nil if there was no name found for the name provided.
 func getImage(named name: String) -> UIImage? {
     let path = getDocumentsDirectory().appendingPathComponent(name).path
     
@@ -38,6 +47,8 @@ func getImage(named name: String) -> UIImage? {
        }
 }
 
+/// Deletes a file in the user's document directory if one found with the provided name.
+/// - Parameter name: The name of the file to deletes.
 func deleteFile(named name: String) {
     guard !name.isEmpty else { return }
     let url = getDocumentsDirectory().appendingPathComponent(name)

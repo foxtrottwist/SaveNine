@@ -15,22 +15,18 @@ struct SessionsView: View {
     
     var body: some View {
             if sessions.isEmpty || sessions.first?.endDate == nil {
-                VStack {
-                    Text("No time tracking sessions have been completed for this project.")
-                        .italic()
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                .padding()
+                NoContentView(message: "No time tracking sessions have been completed for this project.")
+                    .padding()
             } else {
                 List {
                     ForEach(sessions) { session in
-                        if let duration = session.duration, let startDate = session.startDate, session.endDate != nil {
+                        if session.endDate != nil {
                             VStack(alignment: .leading) {
-                                Text(startDate.formatted(date: .abbreviated, time: .shortened))
+                                Text(session.formattedStartDate)
                                     .font(.callout)
                                     .foregroundColor(.secondary)
-                                Text(longFormat(duration: duration))
+                                
+                                Text(session.formattedDuration)
                             }
                         }
                     }

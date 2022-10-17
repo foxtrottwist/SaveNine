@@ -46,24 +46,12 @@ struct ProjectDetailView: View {
                     .disabled(!editing)
                 
                 if !editing {
-                    Text(name)
-                        .font(.title2)
-                    
+                    Text(name).font(.title2)
                     Divider()
                     
                     TrackerView(project: project)
+                    projectDetailLinks
                     
-                    List {
-                        NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: shareSessions(from: project))) {
-                            Label("Sessions", systemImage: "stopwatch")
-                        }
-                        
-                        NavigationLink(destination: ChecklistView(project: project)) {
-                            Label("Checklists", systemImage: "list.triangle")
-                        }
-                    }
-                    .frame(height: defaultMinListRowHeight * 2)
-                    .listStyle(.plain)
                 }
                 
                 Form {
@@ -76,16 +64,18 @@ struct ProjectDetailView: View {
                             .padding(.bottom)
                     }
                               
-                    Text("*Notes*")
+                    Text("Notes")
                         .font(.callout)
                         .fontWeight(.light)
+                        .italic()
                     
                     TextField("Notes", text: $detail, axis: .vertical)
                         .padding(.bottom)
                     
-                    Text("*Tags*")
+                    Text("Tags")
                         .font(.callout)
                         .fontWeight(.light)
+                        .italic()
                     
                     TextField("Text, separated by spaces", text: $tags)
                         .autocapitalization(.none)
@@ -95,65 +85,18 @@ struct ProjectDetailView: View {
                 .animation(.easeIn, value: editing)
                 .disabled(!editing)
                 .formStyle(.columns)
+                .padding()
                 .onChange(of: detail, perform: { detail in project.detail = detail })
                 .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-                .onChange(of: editing) { editing in
-                    guard !editing, project.projectTagsString != tags else { return }
-                    
-                    let tagNames = prepare(tags: tags)
-                    tags = tagNames.joined(separator: " ")
-                    
-                    update(tags: tagNames, in: project)
-                }
-                .padding()
+                .onChange(of: editing, perform: editTags)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: dataController.save)
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
-            Button {
-                if editing {
-                    if name.isEmpty {
-                        name = project.projectName
-                        project.name = name
-                    } else {
-                        project.name = name
-                    }
-                }
-                
-                editing.toggle()
-            } label: {
-                Text(editing ? "Done" : "Edit")
-            }
-            
-            Menu {
-                Button {
-                    project.closed.toggle()
-
-                    dataController.save()
-
-                    dismiss()
-                } label: {
-                    if project.closed {
-                        Label("Reopen project", systemImage: "tray.full")
-                    } else {
-                        Label( "Archive project", systemImage: "archivebox")
-                    }
-                }
-
-                Divider()
-
-                Button {
-                    showingDeleteConfirm.toggle()
-                } label: {
-                    Label("Delete Project", systemImage: "trash")
-                        .foregroundColor(.red)
-                }
-            } label: {
-                Label("menu", systemImage: "ellipsis.circle")
-            }
-            .disabled(editing)
+            Button(editing ? "Done" : "Edit", action: editProject)
+            projectDetailsMenuToolbarItem
         }
         .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
             Button("Delete Project", role: .destructive) {
@@ -162,24 +105,63 @@ struct ProjectDetailView: View {
         }
     }
     
-    func shareSessions(from project: Project) -> String {
-        let sessions = project.projectSessions.map {
-            "\($0.startDate!.formatted(date: .abbreviated, time: .shortened))\n\(longFormat(duration: $0.duration))"
-         }.reduce("") { "\($0)\n\n\($1)" }
-        
-        let sharedSessions = """
-            \(project.projectName)
-            \(sessions)
-            
-            Time Tracked: \(longFormat(duration: project.projectTotalDuration))
-            """
+    var projectDetailsMenuToolbarItem: some View {
+        Menu {
+            Button {
+                project.closed.toggle()
+                dataController.save()
+                
+                dismiss()
+            } label: {
+                if project.closed {
+                    Label("Reopen project", systemImage: "tray.full")
+                } else {
+                    Label( "Archive project", systemImage: "archivebox")
+                }
+            }
 
-        
-        return sharedSessions
+            Divider()
+
+            Button {
+                showingDeleteConfirm.toggle()
+            } label: {
+                Label("Delete Project", systemImage: "trash")
+                    .foregroundColor(.red)
+            }
+        } label: {
+            Label("Menu", systemImage: "ellipsis.circle")
+        }
+    }
+    
+    var projectDetailLinks: some View {
+        List {
+            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: project.projectShareSessions)) {
+                Label("Sessions", systemImage: "stopwatch")
+            }
+            
+            NavigationLink(destination: ChecklistView(project: project)) {
+                Label("Checklists", systemImage: "list.triangle")
+            }
+        }
+        .frame(height: defaultMinListRowHeight * 2)
+        .listStyle(.plain)
+    }
+    
+    func editProject() {
+        if editing {
+            if name.isEmpty {
+                name = project.projectName
+                project.name = name
+            } else {
+                project.name = name
+            }
+        }
+
+        editing.toggle()
     }
     
     func update(uiImage: UIImage?, in project: Project) {
-        if let uiImage = uiImage  {
+        if let uiImage = uiImage {
             let id = project.id!
             let name = "\(id).png"
             project.image = name
@@ -192,14 +174,36 @@ struct ProjectDetailView: View {
         }
     }
     
+    func editTags(_ editing: Bool) {
+        guard !editing, project.projectTagsString != tags else { return }
+        
+        let tagNames = prepare(tags: tags)
+        tags = tagNames.joined(separator: " ")
+        
+        update(tags: tagNames, in: project)
+    }
+    
+    /// Accepts a string of words and validates that the entered text can be added as a tags.
+    /// - Parameter tags: A string representing the tags already associated with or to be added to the project.
+    /// - Returns: An array of unique strings representing the tags already associated with or to be added to the project.
     func prepare(tags: String) -> [String] {
         var set = Set<String>()
+        // Splits the provided string into separate words verifies
+        // that there is only a single instance of a word by attempting
+        // to insert them into a Set.
         return tags.components(separatedBy: " ").map { $0.lowercased() }
             .filter { !$0.isEmpty && set.insert($0).inserted }.sorted { $0 < $1 }
     }
     
+    
+    /// Handles associating of tags with a given project.
+    /// - Parameters:
+    ///   - tags: An array of strings representing tags to be associated with a project.
+    ///   - project: The Project that will be associated with the provided tags.
     func update(tags: [String], in project: Project) {
         let updatedTags = tags.map { tagName in
+            // If a tag with the provided name already exists, return
+            // it instead of creating a new one.
             if let existingTag = ptags.first(where: { $0.name == tagName }) {
                 return existingTag
             } else {

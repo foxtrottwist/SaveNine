@@ -35,7 +35,7 @@ struct RenameTagView: View {
     }
 }
 
-struct RenameTagVieww_Previews: PreviewProvider {
+struct RenameTagView_Previews: PreviewProvider {
     static var previews: some View {
         RenameTagView(name: .constant("quilting"), renameAction: {}, cancelAction: {})
     }

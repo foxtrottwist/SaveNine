@@ -21,16 +21,23 @@ struct ProjectNameView: View {
             .onAppear {
                 focused = true
             }
-            .onSubmit {
-                if name.isEmpty {
-                    dataController.delete(project)
-                } else {
-                    project.name = name
-                }
-                
-                dataController.save()
-            }
+            .onSubmit(submitProjectName)
             .submitLabel(.done)
+    }
+    
+    func submitProjectName() {
+        withAnimation {
+            if name.isEmpty {
+                // If a user initials adding a project but fails to give
+                // the project a name and submits, the project will be
+                // removed from the Projects view.
+                dataController.delete(project)
+            } else {
+                project.name = name
+            }
+            
+            dataController.save()
+        }
     }
 }
 
