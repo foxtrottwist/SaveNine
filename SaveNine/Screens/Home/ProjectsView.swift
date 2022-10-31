@@ -15,33 +15,28 @@ struct ProjectsView: View {
     @State private var disabled = false
     @State private var path: [Project] = []
     @State private var searchText = ""
-    @State private var selectedProject: Project?
     @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
     @State private var sortAscending = false
     
     var body: some View {
-        NavigationSplitView {
+        NavigationStack(path: $path) {
             if showingProjectTags {
                 tagControls
                 ProjectTagsView(selection: $selectedTags)
             }
             
-            ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()), selection: $selectedProject)
+            ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()))
                 .searchable(text: $searchText)
                 .toolbar {
                     menuToolbarItem
                     addProjectBottomToolbarItem
                 }
-        } detail: {
-            if let project = selectedProject {
-                NavigationStack(path: $path) {
-                    ProjectDetailView(project: project )
+                .navigationDestination(for: Project.self) { project in
+                    ProjectDetailView(project: project)
                 }
-            } else {
-                NoContentView(message: "Please select a project from the menu to begin.")
-            }
+                
         }
     }
     
