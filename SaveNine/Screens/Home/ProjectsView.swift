@@ -22,21 +22,41 @@ struct ProjectsView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            if showingProjectTags {
-                tagControls
-                ProjectTagsView(selection: $selectedTags)
+            FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
+                if projects.isEmpty {
+                    NoContentView(message: "Please add a project to begin.")
+                } else {
+                    if showingProjectTags {
+                        tagControls
+                        ProjectTagsView(selection: $selectedTags)
+                    }
+                    
+                    List(projects) { project in
+                        if project.projectName.isEmpty {
+                            ProjectNameView(project: project)
+                                .onAppear { disabled = true }
+                                .onDisappear { disabled = false }
+                        } else {
+                            VStack {
+                                NavigationLink(value: project) {
+                                    ProjectRowView(project: project)
+                                }
+                            }
+                            .disabled(disabled)
+                        }
+                    }
+                }
             }
-            
-            ProjectListView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects()))
-                .searchable(text: $searchText)
-                .toolbar {
-                    menuToolbarItem
-                    addProjectBottomToolbarItem
-                }
-                .navigationDestination(for: Project.self) { project in
-                    ProjectDetailView(project: project)
-                }
-                
+            .listStyle(.inset)
+            .navigationTitle("Projects")
+            .navigationDestination(for: Project.self) { project in
+                ProjectDetailView(project: project)
+            }
+            .searchable(text: $searchText)
+            .toolbar {
+                menuToolbarItem
+                addProjectBottomToolbarItem
+            }
         }
     }
     
@@ -88,6 +108,7 @@ struct ProjectsView: View {
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
             }
+            .disabled(disabled)
         }
     }
     

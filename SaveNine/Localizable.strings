@@ -27,8 +27,9 @@
 "Newest First" = "Newest First"; /* Picker options */
 "Oldest First" = "Oldest First"; /* Picker options */
 
-"Please select a project from the menu to begin." = "Please select a project from the menu to begin."; /* Empty State */
+"Please add a project to begin." = "Please add a project to begin."; /* Empty State */
 "Projects" = "Projects"; /* Navigation Title */
+"Project name" = "Project name"; /* New project placeholder text */
 
 
 /*
