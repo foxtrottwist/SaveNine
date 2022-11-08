@@ -13,6 +13,8 @@ struct SessionsView: View {
     
     @EnvironmentObject var dataController: DataController
     
+    @State private var showingSessionDetailView = false
+    
     var body: some View {
             if sessions.isEmpty || sessions.first?.endDate == nil {
                 NoContentView(message: "No time tracking sessions have been completed for this project.")
@@ -21,13 +23,7 @@ struct SessionsView: View {
                 List {
                     ForEach(sessions) { session in
                         if session.endDate != nil {
-                            VStack(alignment: .leading) {
-                                Text(session.formattedStartDate)
-                                    .font(.callout)
-                                    .foregroundColor(.secondary)
-                                
-                                Text(session.formattedDuration)
-                            }
+                            SessionRowView(session: session)
                         }
                     }
                     .onDelete(perform: deleteSession)

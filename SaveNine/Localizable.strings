@@ -83,7 +83,7 @@
 "Are you sure you want to clear the timer? No time will be tracked." = "Are you sure you want to clear the timer? No time will be tracked.";
 
 
-/* Checklist View*/
+/* Checklist View */
 "Add Checklist" = "Add Checklist";
 "Add lists to track supplies, tasks and more." = "Add lists to track supplies, tasks and more.";
 "Add New Item" = "Add New Item";
@@ -93,7 +93,7 @@
 "New List" = "New List";
 
 
-/* Item Details Sheet*/
+/* Item Details Sheet */
 "Details" = "Details";
 "High" = "High";
 "Low" = "Low";
@@ -103,5 +103,13 @@
 
 /* Sessions View */
 "Export Sessions" = "Export Sessions";
-/* Empty State */
+
+
+/* Sessions View Empty State */
 "No time tracking sessions have been completed for this project." = "No time tracking sessions have been completed for this project.";
+
+/* Sessions Details Sheet */
+"Session Details" = "Session Details";
+"Session Label" = "Session Label";
+"Starts" = "Starts";
+"Ends" = "Ends";
