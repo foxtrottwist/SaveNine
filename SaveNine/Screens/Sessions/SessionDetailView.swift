@@ -20,7 +20,7 @@ struct SessionDetailView: View {
     init(session: Session) {
         self.session = session
         
-        _label = State(wrappedValue: "")
+        _label = State(wrappedValue: session.sessionLabel)
         _startDate = State(wrappedValue: session.startDate!)
         _endDate = State(wrappedValue: session.endDate!)
     }
@@ -59,6 +59,7 @@ struct SessionDetailView: View {
     }
     
     func updateSession() {
+        session.label = label
         session.startDate = startDate
         session.endDate = endDate
         session.duration = endDate.timeIntervalSince(startDate)

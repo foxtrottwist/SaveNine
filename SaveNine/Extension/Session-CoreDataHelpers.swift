@@ -8,6 +8,10 @@
 import Foundation
 
 extension Session {
+    var sessionLabel: String {
+        label ?? ""
+    }
+    
     var formattedStartDate: String {
         guard let startDate else { return "" }
         
