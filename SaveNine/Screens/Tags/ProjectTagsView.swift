@@ -16,9 +16,7 @@ struct ProjectTagsView: View {
     
     var body: some View {
         if ptags.isEmpty {
-            Text("Add tags to your projects to filter.")
-                .italic()
-                .foregroundColor(.secondary)
+            NoContentView(message: "Add tags to your projects to filter.")
                 .padding(.vertical)
         } else {
             ScrollView(.horizontal) {

@@ -22,28 +22,24 @@ struct ProjectsView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
+            if showingProjectTags {
+                tagControls
+                ProjectTagsView(selection: $selectedTags)
+            }
+            
             FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
-                if projects.isEmpty {
-                    NoContentView(message: "Please add a project to begin.")
-                } else {
-                    if showingProjectTags {
-                        tagControls
-                        ProjectTagsView(selection: $selectedTags)
-                    }
-                    
-                    List(projects) { project in
-                        if project.projectName.isEmpty {
-                            ProjectNameView(project: project)
-                                .onAppear { disabled = true }
-                                .onDisappear { disabled = false }
-                        } else {
-                            VStack {
-                                NavigationLink(value: project) {
-                                    ProjectRowView(project: project)
-                                }
+                List(projects) { project in
+                    if project.projectName.isEmpty {
+                        ProjectNameView(project: project)
+                            .onAppear { disabled = true }
+                            .onDisappear { disabled = false }
+                    } else {
+                        VStack {
+                            NavigationLink(value: project) {
+                                ProjectRowView(project: project)
                             }
-                            .disabled(disabled)
                         }
+                        .disabled(disabled)
                     }
                 }
             }
@@ -54,6 +50,7 @@ struct ProjectsView: View {
             }
             .searchable(text: $searchText)
             .toolbar {
+                tagToggleToolbarItem
                 menuToolbarItem
                 addProjectBottomToolbarItem
             }
@@ -87,18 +84,24 @@ struct ProjectsView: View {
         .padding([.horizontal, .top])
     }
     
+    var tagToggleToolbarItem: some ToolbarContent {
+        ToolbarItem {
+            Button {
+                showingProjectTags.toggle()
+            } label: {
+                Label("Tags", systemImage: "tag")
+                    .font(.callout)
+            }
+            .disabled(disabled)
+        }
+    }
+    
     var menuToolbarItem: some ToolbarContent {
         ToolbarItem {
             Menu {
                 Picker("Project Status", selection: $showClosedProjects) {
                     Label("Open", systemImage: "tray.full").tag(false)
                     Label("Archived", systemImage: "archivebox").tag(true)
-                }
-                
-                Button {
-                    showingProjectTags.toggle()
-                } label: {
-                    Label("Tags", systemImage: "tag")
                 }
                 
                 Picker("Sort By Creation Date", selection: $sortAscending) {
@@ -124,10 +127,15 @@ struct ProjectsView: View {
     }
     
     func addProject() {
-            let newProject = Project(context: managedObjectContext)
-            newProject.id = UUID()
-            newProject.closed = false
-            newProject.creationDate = Date()
+        withAnimation {
+            selectedTags = []
+            showingProjectTags = false
+        }
+        
+        let newProject = Project(context: managedObjectContext)
+        newProject.id = UUID()
+        newProject.closed = false
+        newProject.creationDate = Date()
     }
     
     func createPredicate() -> NSPredicate {
