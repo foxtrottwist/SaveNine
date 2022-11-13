@@ -42,7 +42,7 @@ extension Project {
         
         return sessions.sorted { a, b in
             if let a = a.startDate, let b = b.startDate {
-                return  a < b
+                return  a > b
             } else {
                 return true
             }

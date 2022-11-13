@@ -16,7 +16,9 @@ struct SessionsView: View {
     @State private var showingSessionDetailView = false
     
     var body: some View {
-            if sessions.isEmpty || sessions.first?.endDate == nil {
+        // If there are no sessions or only one session that is incomplete, sessions.last?.endDate == nil.
+        // If there is more than one session because sessions are sorted newest to oldest, sessions.last?.endDate != nil
+            if sessions.isEmpty || sessions.last?.endDate == nil {
                 NoContentView(message: "No time tracking sessions have been completed for this project.")
                     .padding()
             } else {

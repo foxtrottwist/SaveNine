@@ -21,7 +21,7 @@ struct TrackerView: View {
     init(project: Project) {
         self.project = project
         
-        if let session = project.projectSessions.last, session.endDate == nil {
+        if let session = project.projectSessions.first, session.endDate == nil {
                 _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
                 _tracking = State(wrappedValue: true)
