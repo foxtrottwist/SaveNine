@@ -11,7 +11,6 @@
 		651CE21F28FB0A0500E1B248 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE21E28FB0A0500E1B248 /* NoContentView.swift */; };
 		651CE22628FB13D100E1B248 /* Session-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE22528FB13D100E1B248 /* Session-CoreDataHelpers.swift */; };
 		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
-		652D025228D7476000F818E7 /* DigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025128D7476000F818E7 /* DigitView.swift */; };
 		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
 		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
 		652D025A28D7D3FB00F818E7 /* TimeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025928D7D3FB00F818E7 /* TimeHelpers.swift */; };
@@ -48,7 +47,6 @@
 		651CE21E28FB0A0500E1B248 /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		651CE22528FB13D100E1B248 /* Session-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
-		652D025128D7476000F818E7 /* DigitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitView.swift; sourceTree = "<group>"; };
 		652D025528D79DA300F818E7 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		652D025728D79F9000F818E7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		652D025928D7D3FB00F818E7 /* TimeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelpers.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 			children = (
 				652AE94F28D6550E0001294F /* TrackerView.swift */,
 				652D025728D79F9000F818E7 /* TimerView.swift */,
-				652D025128D7476000F818E7 /* DigitView.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -338,7 +335,6 @@
 				651CE21F28FB0A0500E1B248 /* NoContentView.swift in Sources */,
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
-				652D025228D7476000F818E7 /* DigitView.swift in Sources */,
 				651CE22628FB13D100E1B248 /* Session-CoreDataHelpers.swift in Sources */,
 				652D025A28D7D3FB00F818E7 /* TimeHelpers.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,

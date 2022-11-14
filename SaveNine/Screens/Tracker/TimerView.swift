@@ -13,43 +13,17 @@ struct TimerView: View {
     var body: some View {
         if let start = start {
             TimelineView(.periodic(from: start, by: 1)) { _ in
-                let hours = digitsFrom(string: elapsedTime(since: start, in: .hours))
-                let minutes = digitsFrom(string: elapsedTime(since: start, in: .minutes))
-                let seconds = digitsFrom(string: elapsedTime(since: start, in: .seconds))
-                
-                HStack {
-                    DigitView(digit: hours.0)
-                    DigitView(digit: hours.1)
-                    Text(":")
-                    DigitView(digit: minutes.0)
-                    DigitView(digit: minutes.1)
-                    Text(":")
-                    DigitView(digit: seconds.0)
-                    DigitView(digit: seconds.1)
-                }
+                Text(.seconds(-start.timeIntervalSinceNow), format: .time(pattern: .hourMinuteSecond(padHourToLength: 2)))
                 .font(.largeTitle)
+                .monospacedDigit()
                 .padding()
             }
         } else {
-            HStack {
-                DigitView(digit: "0")
-                DigitView(digit: "0")
-                Text(":")
-                DigitView(digit: "0")
-                DigitView(digit: "0")
-                Text(":")
-                DigitView(digit: "0")
-                DigitView(digit: "0")
-            }
+            Text(.seconds(0), format: .time(pattern: .hourMinuteSecond(padHourToLength: 2)))
             .font(.largeTitle)
+            .monospacedDigit()
             .padding()
         }
-    }
-    
-    func digitsFrom(string: String) -> (String, String) {
-        let split = string.split(separator: "")
-
-        return (String(split.first ?? "0"), String(split.last ?? "0"))
     }
 }
 
