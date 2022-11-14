@@ -28,25 +28,13 @@ extension Project {
     var projectChecklists: [Checklist] {
         let checklists = checklists?.allObjects as? [Checklist] ?? []
         
-        return checklists.sorted { a, b in
-            if let a = a.creationDate, let b = b.creationDate {
-                return  a > b
-            } else {
-                return true
-            }
-        }
+        return checklists.sorted(using: KeyPathComparator(\.creationDate, order: .reverse))
     }
     
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
         
-        return sessions.sorted { a, b in
-            if let a = a.startDate, let b = b.startDate {
-                return  a > b
-            } else {
-                return true
-            }
-        }
+        return sessions.sorted(using: KeyPathComparator(\.startDate, order: .reverse))
     }
     
     var projectShareSessions: String {

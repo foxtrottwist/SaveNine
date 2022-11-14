@@ -19,13 +19,7 @@ extension Checklist {
     var checklistItems: [Item] {
         let items = items?.allObjects as? [Item] ?? []
         
-        return items.sorted { a, b in
-            if let a = a.creationDate, let b = b.creationDate {
-                return  a < b
-            } else {
-                return true
-            }
-        }
+        return items.sorted(using: KeyPathComparator(\.creationDate, order: .forward))
     }
 
     static var example: Checklist {
