@@ -1,5 +1,5 @@
 //
-//  Session-Helpers.swift
+//  Session-CoreDataHelpers.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 10/15/22.
@@ -8,10 +8,6 @@
 import Foundation
 
 extension Session {
-    var sessionLabel: String {
-        label ?? ""
-    }
-    
     var formattedStartDate: String {
         guard let startDate else { return "" }
         

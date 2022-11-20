@@ -13,14 +13,12 @@ struct SessionDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataController: DataController
     
-    @State private var label: String
     @State private var startDate: Date
     @State private var endDate: Date
     
     init(session: Session) {
         self.session = session
         
-        _label = State(wrappedValue: session.sessionLabel)
         _startDate = State(wrappedValue: session.startDate!)
         _endDate = State(wrappedValue: session.endDate!)
     }
@@ -29,16 +27,8 @@ struct SessionDetailView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Session Label", text: $label)
-                }
-                
-                Section {
                     DatePicker("Starts", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
                     DatePicker("Ends", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
-                }
-                
-                Section {
-                    Text(session.formattedDuration)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -59,7 +49,6 @@ struct SessionDetailView: View {
     }
     
     func updateSession() {
-        session.label = label
         session.startDate = startDate
         session.endDate = endDate
         session.duration = endDate.timeIntervalSince(startDate)
