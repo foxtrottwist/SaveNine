@@ -21,6 +21,6 @@ extension Session {
     }
     
     var formattedDuration: String {
-        longFormat(duration: duration)
+        Duration.seconds(duration).formatted(.time(pattern: .hourMinuteSecond(padHourToLength: 2)))
     }
 }

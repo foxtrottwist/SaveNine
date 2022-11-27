@@ -78,7 +78,7 @@ struct TrackerView: View {
                         .fontWeight(.light)
                         .italic()
                     
-                    Text(project.projectFormattedDurationShort.isEmpty ? "None" : project.projectFormattedDurationShort)
+                    Text(project.projectFormattedTotalDuration)
                 }
             }
             .padding()

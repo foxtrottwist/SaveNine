@@ -46,7 +46,7 @@ extension Project {
             \(projectName)
             \(sessions)
             
-            Time Tracked: \(projectFormattedDurationLong)
+            Time Tracked: \(projectFormattedTotalDuration)
             """
 
         return sharedSessions
@@ -61,15 +61,11 @@ extension Project {
     }
     
     var projectTotalDuration: Double {
-        projectSessions.compactMap { $0.duration }.reduce(0.0) { $0 + $1 }
+        projectSessions.map { $0.duration }.reduce(0.0) { $0 + $1 }
     }
     
-    var projectFormattedDurationLong: String {
-        longFormat(duration: projectTotalDuration)
-    }
-    
-    var projectFormattedDurationShort: String {
-        format(duration: projectTotalDuration, in: .hours) + format(duration: projectTotalDuration, in: .minutes)
+    var projectFormattedTotalDuration: String {
+        Duration.seconds(projectTotalDuration).formatted(.time(pattern: .hourMinuteSecond(padHourToLength: 2)))
     }
     
     static var example: Project {

@@ -13,7 +13,6 @@
 		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
 		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
 		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
-		652D025A28D7D3FB00F818E7 /* TimeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025928D7D3FB00F818E7 /* TimeHelpers.swift */; };
 		6537EAD628E90D87004068CD /* Ptag-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */; };
 		6544E57D28F067E9009CB296 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544E57C28F067E9009CB296 /* TagView.swift */; };
 		65464D2128F26B74008E1EE6 /* RenameTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65464D2028F26B74008E1EE6 /* RenameTagView.swift */; };
@@ -49,7 +48,6 @@
 		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		652D025528D79DA300F818E7 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		652D025728D79F9000F818E7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		652D025928D7D3FB00F818E7 /* TimeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelpers.swift; sourceTree = "<group>"; };
 		6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ptag-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		6544E57C28F067E9009CB296 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		65464D2028F26B74008E1EE6 /* RenameTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameTagView.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				65DD023E28D1318800567676 /* DocumentHelpers.swift */,
-				652D025928D7D3FB00F818E7 /* TimeHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -336,7 +333,6 @@
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
 				651CE22628FB13D100E1B248 /* Session-CoreDataHelpers.swift in Sources */,
-				652D025A28D7D3FB00F818E7 /* TimeHelpers.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
 				65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */,
 			);
