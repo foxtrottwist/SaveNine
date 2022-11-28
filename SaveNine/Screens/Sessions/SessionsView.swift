@@ -13,8 +13,6 @@ struct SessionsView: View {
     
     @EnvironmentObject var dataController: DataController
     
-    @State private var showingSessionDetailView = false
-    
     var body: some View {
         // If there are no sessions or only one session that is incomplete, sessions.last?.endDate == nil.
         // If there is more than one session because sessions are sorted newest to oldest, sessions.last?.endDate != nil
