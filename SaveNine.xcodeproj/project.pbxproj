@@ -21,6 +21,15 @@
 		6560AC37291AFD110047E2C6 /* SessionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560AC36291AFD110047E2C6 /* SessionRowView.swift */; };
 		658CF37228EBBEBF00DA1DA2 /* ProjectTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */; };
 		659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FDA6C28E28EC900899A2E /* ProjectRowView.swift */; };
+		65A51C1A294FBD1A00A3B960 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C19294FBD1A00A3B960 /* WidgetKit.framework */; };
+		65A51C1C294FBD1A00A3B960 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */; };
+		65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */; };
+		65A51C21294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */; };
+		65A51C23294FBD1A00A3B960 /* SaveNineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C22294FBD1A00A3B960 /* SaveNineWidget.swift */; };
+		65A51C26294FBD1A00A3B960 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A51C25294FBD1A00A3B960 /* Assets.xcassets */; };
+		65A51C28294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */; };
+		65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */; };
+		65A51C2C294FBD1A00A3B960 /* SaveNineWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314428CD552E00A91A47 /* SaveNineApp.swift */; };
 		65D2314728CD552E00A91A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314628CD552E00A91A47 /* ContentView.swift */; };
 		65D2314928CD552F00A91A47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314828CD552F00A91A47 /* Assets.xcassets */; };
@@ -41,6 +50,30 @@
 		65F648B928E10B080086512D /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648B828E10B080086512D /* ChecklistView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		65A51C2A294FBD1A00A3B960 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D2313928CD552E00A91A47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65A51C16294FBD1A00A3B960;
+			remoteInfo = SaveNineWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		65A51C2D294FBD1A00A3B960 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				65A51C2C294FBD1A00A3B960 /* SaveNineWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		651CE21A28F85FF100E1B248 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		651CE21E28FB0A0500E1B248 /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +91,15 @@
 		657081DD28D8E460006C568D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagsView.swift; sourceTree = "<group>"; };
 		659FDA6C28E28EC900899A2E /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
+		65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SaveNineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65A51C19294FBD1A00A3B960 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineWidgetBundle.swift; sourceTree = "<group>"; };
+		65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		65A51C22294FBD1A00A3B960 /* SaveNineWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineWidget.swift; sourceTree = "<group>"; };
+		65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SaveNineWidget.intentdefinition; sourceTree = "<group>"; };
+		65A51C25294FBD1A00A3B960 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65A51C27294FBD1A00A3B960 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65D2314128CD552E00A91A47 /* SaveNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D2314428CD552E00A91A47 /* SaveNineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineApp.swift; sourceTree = "<group>"; };
 		65D2314628CD552E00A91A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +122,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		65A51C14294FBD1A00A3B960 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65A51C1C294FBD1A00A3B960 /* SwiftUI.framework in Frameworks */,
+				65A51C1A294FBD1A00A3B960 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D2313E28CD552E00A91A47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,10 +235,34 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		65A51C18294FBD1A00A3B960 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C19294FBD1A00A3B960 /* WidgetKit.framework */,
+				65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65A51C1D294FBD1A00A3B960 /* SaveNineWidget */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
+				65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */,
+				65A51C22294FBD1A00A3B960 /* SaveNineWidget.swift */,
+				65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */,
+				65A51C25294FBD1A00A3B960 /* Assets.xcassets */,
+				65A51C27294FBD1A00A3B960 /* Info.plist */,
+			);
+			path = SaveNineWidget;
+			sourceTree = "<group>";
+		};
 		65D2313828CD552E00A91A47 = {
 			isa = PBXGroup;
 			children = (
 				65D2314328CD552E00A91A47 /* SaveNine */,
+				65A51C1D294FBD1A00A3B960 /* SaveNineWidget */,
+				65A51C18294FBD1A00A3B960 /* Frameworks */,
 				65D2314228CD552E00A91A47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -196,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				65D2314128CD552E00A91A47 /* SaveNine.app */,
+				65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,6 +306,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		65A51C16294FBD1A00A3B960 /* SaveNineWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65A51C30294FBD1A00A3B960 /* Build configuration list for PBXNativeTarget "SaveNineWidgetExtension" */;
+			buildPhases = (
+				65A51C13294FBD1A00A3B960 /* Sources */,
+				65A51C14294FBD1A00A3B960 /* Frameworks */,
+				65A51C15294FBD1A00A3B960 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SaveNineWidgetExtension;
+			productName = SaveNineWidgetExtension;
+			productReference = 65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		65D2314028CD552E00A91A47 /* SaveNine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D2314F28CD552F00A91A47 /* Build configuration list for PBXNativeTarget "SaveNine" */;
@@ -237,10 +330,12 @@
 				65D2313D28CD552E00A91A47 /* Sources */,
 				65D2313E28CD552E00A91A47 /* Frameworks */,
 				65D2313F28CD552E00A91A47 /* Resources */,
+				65A51C2D294FBD1A00A3B960 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				65A51C2B294FBD1A00A3B960 /* PBXTargetDependency */,
 			);
 			name = SaveNine;
 			productName = SaveNine;
@@ -254,9 +349,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					65A51C16294FBD1A00A3B960 = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					65D2314028CD552E00A91A47 = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -276,11 +374,20 @@
 			projectRoot = "";
 			targets = (
 				65D2314028CD552E00A91A47 /* SaveNine */,
+				65A51C16294FBD1A00A3B960 /* SaveNineWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		65A51C15294FBD1A00A3B960 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65A51C26294FBD1A00A3B960 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D2313F28CD552E00A91A47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -294,6 +401,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		65A51C13294FBD1A00A3B960 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65A51C21294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift in Sources */,
+				65A51C28294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
+				65A51C23294FBD1A00A3B960 /* SaveNineWidget.swift in Sources */,
+				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D2313D28CD552E00A91A47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +425,7 @@
 				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65F648B328E0FE180086512D /* ChecklistRowView.swift in Sources */,
+				65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
 				65F648B928E10B080086512D /* ChecklistView.swift in Sources */,
 				65F648B528E0FEEA0086512D /* ChecklistHeaderView.swift in Sources */,
 				658CF37228EBBEBF00DA1DA2 /* ProjectTagsView.swift in Sources */,
@@ -332,7 +451,71 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		65A51C2B294FBD1A00A3B960 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65A51C16294FBD1A00A3B960 /* SaveNineWidgetExtension */;
+			targetProxy = 65A51C2A294FBD1A00A3B960 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		65A51C2E294FBD1A00A3B960 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YY7893TQJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SaveNineWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SaveNineWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pawpawpixel.SaveNine.SaveNineWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65A51C2F294FBD1A00A3B960 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YY7893TQJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SaveNineWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SaveNineWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pawpawpixel.SaveNine.SaveNineWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		65D2314D28CD552F00A91A47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -450,6 +633,7 @@
 		65D2315028CD552F00A91A47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SaveNine/SaveNine.entitlements;
@@ -486,6 +670,7 @@
 		65D2315128CD552F00A91A47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = SaveNine/SaveNine.entitlements;
@@ -522,6 +707,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65A51C30294FBD1A00A3B960 /* Build configuration list for PBXNativeTarget "SaveNineWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A51C2E294FBD1A00A3B960 /* Debug */,
+				65A51C2F294FBD1A00A3B960 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65D2313C28CD552E00A91A47 /* Build configuration list for PBXProject "SaveNine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
