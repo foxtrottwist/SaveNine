@@ -44,15 +44,15 @@ struct ProjectsView: View {
                 }
             }
             .listStyle(.inset)
-            .navigationTitle("Projects")
+            .navigationTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
             .navigationDestination(for: Project.self) { project in
                 ProjectDetailView(project: project)
             }
             .searchable(text: $searchText)
             .toolbar {
+                addProjectToolbarItem
                 tagToggleToolbarItem
                 menuToolbarItem
-                addProjectBottomToolbarItem
             }
         }
     }
@@ -85,6 +85,15 @@ struct ProjectsView: View {
         .padding([.horizontal, .top])
     }
     
+    var addProjectToolbarItem: some ToolbarContent {
+        ToolbarItem {
+            Button(action: addProject) {
+                Label("Add Project", systemImage: "plus.square")
+            }
+            .disabled(disabled)
+        }
+    }
+    
     var tagToggleToolbarItem: some ToolbarContent {
         ToolbarItem {
             Button {
@@ -102,7 +111,7 @@ struct ProjectsView: View {
             Menu {
                 Picker("Project Status", selection: $showClosedProjects) {
                     Label("Open", systemImage: "tray.full").tag(false)
-                    Label("Archived", systemImage: "archivebox").tag(true)
+                    Label("Closed", systemImage: "archivebox").tag(true)
                 }
                 
                 Picker("Sort By Creation Date", selection: $sortAscending) {
@@ -111,17 +120,6 @@ struct ProjectsView: View {
                 }
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
-            }
-            .disabled(disabled)
-        }
-    }
-    
-    var addProjectBottomToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            Button(action: addProject) {
-                Image(systemName: "plus.circle.fill")
-                Text("Add Project")
-                    .bold()
             }
             .disabled(disabled)
         }

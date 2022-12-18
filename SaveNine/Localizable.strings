@@ -14,21 +14,21 @@
 "OK" = "OK";
 "Tags" = "Tags";
 
+/* Projects View */
+"Add Project" = "Add Project"; /* Button label for plus on top toolbar */
 
-/* Home View */
-"Add Project" = "Add Project"; /* Action Button on the bottom toolbar */
-
-/* Home View top toolbar menu */
+/* Projects View top toolbar menu */
 "Project Status" = "Project Status"; /* Picker title */
 "Open" = "Open"; /* Picker options */
-"Archived" = "Archived"; /* Picker options */
+"Closed" = "Closed"; /* Picker options */
 
 "Sort By Creation Date" = "Sort By Creation Date"; /* Picker title */
 "Newest First" = "Newest First"; /* Picker options */
 "Oldest First" = "Oldest First"; /* Picker options */
 
 "Please add a project to begin." = "Please add a project to begin."; /* Empty State */
-"Projects" = "Projects"; /* Navigation Title */
+"Open Projects" = "Open Projects"; /* Navigation title */
+"Closed Projects" = "Closed Projects"; /* Navigation title when showing closed projects */
 "Project name" = "Project name"; /* New project placeholder text */
 
 
@@ -51,12 +51,12 @@
 "Project Name" = "Project Name";  /* Field label and placeholder text */
 "Notes" = "Notes"; /* Field label and placeholder text */
 "Text, separated by spaces" = "Text, separated by spaces"; /* Placeholder text for Tags field. */
-"Checklists" = "Checklists";
-"Sessions" = "Sessions";
+"Checklists" = "Checklists"; /* Navigation Link */
+"Sessions" = "Sessions"; /* Navigation Link; Home - Navigation title */
 
 
 /* Project Details top toolbar menu */
-"Archive project" = "Archive project";
+"Close project" = "Close project";
 "Reopen project" = "Reopen project";
 "Delete Project" = "Delete Project";
 
@@ -113,3 +113,4 @@
 "Session Label" = "Session Label";
 "Starts" = "Starts";
 "Ends" = "Ends";
+"Duration" = "Duration";
