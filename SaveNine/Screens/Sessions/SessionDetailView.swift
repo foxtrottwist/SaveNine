@@ -15,12 +15,14 @@ struct SessionDetailView: View {
     
     @State private var startDate: Date
     @State private var endDate: Date
+    @State private var duration: Double
     
     init(session: Session) {
         self.session = session
         
         _startDate = State(wrappedValue: session.startDate!)
         _endDate = State(wrappedValue: session.endDate!)
+        _duration = State(wrappedValue: session.duration)
     }
     
     var body: some View {
@@ -30,9 +32,17 @@ struct SessionDetailView: View {
                     DatePicker("Starts", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
                     DatePicker("Ends", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
                 }
+                
+                Section {
+                    Text(Duration.seconds(duration).formatted(.time(pattern: .hourMinuteSecond(padHourToLength: 2))))
+                } header: {
+                    Text("Duration")
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Session Details")
+            .onChange(of: startDate, perform: { _ in updateDuration() })
+            .onChange(of: endDate, perform: { _ in updateDuration() })
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
@@ -48,7 +58,11 @@ struct SessionDetailView: View {
         }
     }
     
-    func updateSession() {
+    private func updateDuration() {
+        duration = endDate.timeIntervalSince(startDate)
+    }
+    
+    private func updateSession() {
         session.startDate = startDate
         session.endDate = endDate
         session.duration = endDate.timeIntervalSince(startDate)
