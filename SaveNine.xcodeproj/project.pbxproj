@@ -120,14 +120,6 @@
 			path = Reuseable;
 			sourceTree = "<group>";
 		};
-		651CE22328FB10E400E1B248 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
-			);
-			path = Details;
-			sourceTree = "<group>";
-		};
 		651CE22428FB125C00E1B248 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,14 +140,15 @@
 			path = Sessions;
 			sourceTree = "<group>";
 		};
-		658CF37028EBBE5D00DA1DA2 /* Home */ = {
+		658CF37028EBBE5D00DA1DA2 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */,
 				65EF242928DF870A003749F3 /* ProjectNameView.swift */,
 				659FDA6C28E28EC900899A2E /* ProjectRowView.swift */,
 				65D2315D28CD5B3B00A91A47 /* ProjectsView.swift */,
 			);
-			path = Home;
+			path = Projects;
 			sourceTree = "<group>";
 		};
 		659FDA6928E232A300899A2E /* Extension */ = {
@@ -183,8 +176,7 @@
 			children = (
 				6560AC31291AC5470047E2C6 /* Sessions */,
 				651CE22028FB0EC600E1B248 /* Checklists */,
-				651CE22328FB10E400E1B248 /* Details */,
-				658CF37028EBBE5D00DA1DA2 /* Home */,
+				658CF37028EBBE5D00DA1DA2 /* Projects */,
 				651CE22228FB10BF00E1B248 /* Reuseable */,
 				651CE22428FB125C00E1B248 /* Tags */,
 				651CE22128FB0EFA00E1B248 /* Tracker */,
