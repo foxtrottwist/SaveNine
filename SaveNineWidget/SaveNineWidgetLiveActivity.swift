@@ -5,53 +5,43 @@
 //  Created by Lawrence Horne on 12/18/22.
 //
 
-import ActivityKit
-import WidgetKit
 import SwiftUI
-
-struct SaveNineWidgetAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var value: Int
-    }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
-}
+import WidgetKit
 
 struct SaveNineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: SaveNineWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello")
-            }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
-            
+        ActivityConfiguration(for: TrackerAttributes.self) { context in
+            TimerLiveActivityView(context: context)
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Text(context.attributes.projectName)
+                        .dynamicIsland(verticalPlacement: .belowIfTooWide)
+                        .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
+                        .frame(width: context.attributes.projectName.count < 10 ? 110 : 150)
+                        .multilineTextAlignment(.leading)
+                        .font(context.attributes.projectName.count < 10 ? .title : .headline)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
-                }
-                DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
-                    // more content
+                    Text(context.state.start, style: .timer)
+                        .widgetTimer(width: 150)
+                        .dynamicIsland(verticalPlacement: .belowIfTooWide)
+                        .font(.largeTitle)
+                        .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
                 }
             } compactLeading: {
-                Text("L")
+                Text("S9")
+                    .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             } compactTrailing: {
-                Text("T")
+                Text(context.state.start, style: .timer)
+                    .widgetTimer(width: 55)
+                    .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             } minimal: {
-                Text("Min")
+                Image(systemName: "stopwatch")
+                    .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             }
             .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
+            .keylineTint(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
         }
     }
 }

@@ -11,6 +11,7 @@
 		651CE21F28FB0A0500E1B248 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE21E28FB0A0500E1B248 /* NoContentView.swift */; };
 		651CE22628FB13D100E1B248 /* Session-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE22528FB13D100E1B248 /* Session-CoreDataHelpers.swift */; };
 		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
+		652BFD01295F367000179792 /* WidgetTimer-Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFD00295F367000179792 /* WidgetTimer-Modifier.swift */; };
 		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
 		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
 		6537EAD628E90D87004068CD /* Ptag-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */; };
@@ -30,6 +31,9 @@
 		65A51C28294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */; };
 		65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */; };
 		65A51C2C294FBD1A00A3B960 /* SaveNineWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65A51C32294FC7C400A3B960 /* TrackerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */; };
+		65A51C33294FC7F400A3B960 /* TrackerAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */; };
+		65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */; };
 		65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314428CD552E00A91A47 /* SaveNineApp.swift */; };
 		65D2314728CD552E00A91A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314628CD552E00A91A47 /* ContentView.swift */; };
 		65D2314928CD552F00A91A47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314828CD552F00A91A47 /* Assets.xcassets */; };
@@ -79,6 +83,7 @@
 		651CE21E28FB0A0500E1B248 /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		651CE22528FB13D100E1B248 /* Session-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
+		652BFD00295F367000179792 /* WidgetTimer-Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetTimer-Modifier.swift"; sourceTree = "<group>"; };
 		652D025528D79DA300F818E7 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		652D025728D79F9000F818E7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ptag-CoreDataHelpers.swift"; sourceTree = "<group>"; };
@@ -100,6 +105,8 @@
 		65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = SaveNineWidget.intentdefinition; sourceTree = "<group>"; };
 		65A51C25294FBD1A00A3B960 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65A51C27294FBD1A00A3B960 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerAttributes.swift; sourceTree = "<group>"; };
+		65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerLiveActivityView.swift; sourceTree = "<group>"; };
 		65D2314128CD552E00A91A47 /* SaveNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D2314428CD552E00A91A47 /* SaveNineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineApp.swift; sourceTree = "<group>"; };
 		65D2314628CD552E00A91A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,6 +164,7 @@
 			children = (
 				652AE94F28D6550E0001294F /* TrackerView.swift */,
 				652D025728D79F9000F818E7 /* TimerView.swift */,
+				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -250,6 +258,8 @@
 				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
 				65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */,
 				65A51C22294FBD1A00A3B960 /* SaveNineWidget.swift */,
+				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
+				652BFD00295F367000179792 /* WidgetTimer-Modifier.swift */,
 				65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */,
 				65A51C25294FBD1A00A3B960 /* Assets.xcassets */,
 				65A51C27294FBD1A00A3B960 /* Info.plist */,
@@ -408,6 +418,9 @@
 				65A51C21294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift in Sources */,
 				65A51C28294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
 				65A51C23294FBD1A00A3B960 /* SaveNineWidget.swift in Sources */,
+				652BFD01295F367000179792 /* WidgetTimer-Modifier.swift in Sources */,
+				65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */,
+				65A51C33294FC7F400A3B960 /* TrackerAttributes.swift in Sources */,
 				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +446,7 @@
 				65D2315E28CD5B3B00A91A47 /* ProjectsView.swift in Sources */,
 				65D2314728CD552E00A91A47 /* ContentView.swift in Sources */,
 				65F648AF28E0FB370086512D /* Checklist-CoreDataHelpers.swift in Sources */,
+				65A51C32294FC7C400A3B960 /* TrackerAttributes.swift in Sources */,
 				6560AC35291AF6660047E2C6 /* SessionDetailView.swift in Sources */,
 				65D2315628CD590900A91A47 /* Project-CoreDataHelpers.swift in Sources */,
 				652D025628D79DA300F818E7 /* SessionsView.swift in Sources */,
@@ -566,7 +580,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -620,7 +634,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -646,6 +660,7 @@
 				INFOPLIST_FILE = SaveNine/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Save Nine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -683,6 +698,7 @@
 				INFOPLIST_FILE = SaveNine/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Save Nine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

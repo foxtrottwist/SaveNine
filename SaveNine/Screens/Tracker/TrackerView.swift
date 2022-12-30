@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 9/17/22.
 //
 
+import ActivityKit
 import SwiftUI
 
 struct TrackerView: View {
@@ -13,6 +14,7 @@ struct TrackerView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    @State var liveActivity: Activity<TrackerAttributes>?
     @State var session: Session?
     @State var start: Date?
     @State var showingClearConfirm = false
@@ -44,15 +46,14 @@ struct TrackerView: View {
                 
                 if tracking {
                     Button("Stop Timer") {
-                        withAnimation {
+                        Task {
+                            await stopLiveActivity()
                             stopTimer()
                         }
                     }
                 } else {
                     Button("Start Timer") {
-                        withAnimation {
-                            startTimer()
-                        }
+                        startTimer()
                     }
                 }
             }
@@ -85,12 +86,15 @@ struct TrackerView: View {
         }
         .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
             Button("Clear Timer", role: .destructive) {
-                clearTimer()
+                Task {
+                    await stopLiveActivity()
+                    clearTimer()
+                }
             }
         }
     }
     
-    func startTimer() {
+    private func startTimer() {
         start = Date()
         
         let session = Session(context: managedObjectContext)
@@ -101,9 +105,11 @@ struct TrackerView: View {
         
         tracking = true
         self.session = session
+        
+        startLiveActivity(date: start!)
     }
     
-    func stopTimer() {
+    private func stopTimer() {
         if let session = session {
             session.endDate = Date()
             if let startDate = start, let endDate = session.endDate {
@@ -117,7 +123,7 @@ struct TrackerView: View {
         }
     }
     
-    func clearTimer() {
+    private func clearTimer() {
         if let session = session {
             dataController.delete(session)
             start = nil
@@ -125,6 +131,27 @@ struct TrackerView: View {
             
             dataController.save()
         }
+    }
+   
+    private func startLiveActivity(date: Date) {
+        let attributes = TrackerAttributes(projectName: project.projectName)
+        let contentState = TrackerAttributes.ContentState(start: date)
+        
+        do {
+           try liveActivity = Activity.request(attributes: attributes, contentState: contentState)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func updateLiveActivity(date: Date?) async {
+        if let date {
+            await liveActivity?.update(using: TrackerAttributes.ContentState(start: date))
+        }
+    }
+    
+    private func stopLiveActivity(date: Date = Date()) async {
+        await liveActivity?.end(using: TrackerAttributes.ContentState(start: date), dismissalPolicy: .immediate)
     }
 }
 
