@@ -116,7 +116,7 @@ struct ProjectDetailView: View {
                 if project.closed {
                     Label("Reopen project", systemImage: "tray.full")
                 } else {
-                    Label( "Archive project", systemImage: "archivebox")
+                    Label( "Close project", systemImage: "archivebox")
                 }
             }
 
