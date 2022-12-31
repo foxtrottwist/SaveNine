@@ -12,6 +12,7 @@ struct SaveNineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TrackerAttributes.self) { context in
             TimerLiveActivityView(context: context)
+                .widgetURL(createProjectUrl(id: context.attributes.projectId))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -40,8 +41,16 @@ struct SaveNineWidgetLiveActivity: Widget {
                 Image(systemName: "stopwatch")
                     .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             }
-            .widgetURL(URL(string: "savenine://\(context.attributes.projectId)"))
+            .widgetURL(createProjectUrl(id: context.attributes.projectId))
             .keylineTint(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
         }
+    }
+    
+    
+    /// Creates URL for linking to the given project from the provided id.
+    /// - Parameter id: ID of the given project.
+    /// - Returns: An optional URL that may be passed to a link.
+    func createProjectUrl(id: UUID) -> URL? {
+        return URL(string: "savenine://\(id)")
     }
 }
