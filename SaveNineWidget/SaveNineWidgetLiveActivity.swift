@@ -16,22 +16,25 @@ struct SaveNineWidgetLiveActivity: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
+                    Spacer()
                     Text(context.attributes.projectName)
                         .dynamicIsland(verticalPlacement: .belowIfTooWide)
                         .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
-                        .frame(width: context.attributes.projectName.count < 10 ? 110 : 150)
-                        .multilineTextAlignment(.leading)
-                        .font(context.attributes.projectName.count < 10 ? .title : .headline)
+                        .font(.headline)
+                    Spacer()
                 }
+                
                 DynamicIslandExpandedRegion(.trailing) {
+                    Spacer()
                     Text(context.state.start, style: .timer)
-                        .widgetTimer(width: 150)
+                        .widgetTimer(width: 150, height: 10)
                         .dynamicIsland(verticalPlacement: .belowIfTooWide)
-                        .font(.largeTitle)
+                        .font(.title)
                         .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
+                    Spacer()
                 }
             } compactLeading: {
-                Text("S9")
+                Image(systemName: "stopwatch")
                     .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             } compactTrailing: {
                 Text(context.state.start, style: .timer)

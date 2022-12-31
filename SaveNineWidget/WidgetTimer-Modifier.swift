@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct WidgetTimer: ViewModifier {
-    let width: CGFloat
+    let width: CGFloat?
+    let height: CGFloat?
     
     func body(content: Content) -> some View {
         content
             .multilineTextAlignment(.trailing)
-            .frame(width: width)
+            .frame(width: width, height: height)
             .monospacedDigit()
     }
 }
 
 extension View {
-    func widgetTimer(width: CGFloat) -> some View {
-       modifier(WidgetTimer(width: width))
+    func widgetTimer(width: CGFloat, height: CGFloat? = nil) -> some View {
+       modifier(WidgetTimer(width: width, height: height))
     }
 }
