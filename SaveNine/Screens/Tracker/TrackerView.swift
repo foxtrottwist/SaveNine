@@ -36,9 +36,7 @@ struct TrackerView: View {
             
             HStack {
                 Button("Clear") {
-                    withAnimation {
-                        showingClearConfirm.toggle()
-                    }
+                    showingClearConfirm.toggle()
                 }
                 .disabled(!tracking)
                 
@@ -46,9 +44,10 @@ struct TrackerView: View {
                 
                 if tracking {
                     Button("Stop Timer") {
+                        stopTimer()
+                        
                         Task {
-                            await stopLiveActivity()
-                            stopTimer()
+                            await endLiveActivity()
                         }
                     }
                 } else {
@@ -86,9 +85,10 @@ struct TrackerView: View {
         }
         .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
             Button("Clear Timer", role: .destructive) {
+                clearTimer()
+                
                 Task {
-                    await stopLiveActivity()
-                    clearTimer()
+                    await endLiveActivity()
                 }
             }
         }
@@ -106,7 +106,7 @@ struct TrackerView: View {
         tracking = true
         self.session = session
         
-        startLiveActivity(date: start!)
+        requestLiveActivity(date: start!)
     }
     
     private func stopTimer() {
@@ -133,14 +133,16 @@ struct TrackerView: View {
         }
     }
    
-    private func startLiveActivity(date: Date) {
-        let attributes = TrackerAttributes(projectName: project.projectName, projectId: project.id!)
-        let contentState = TrackerAttributes.ContentState(start: date)
-        
-        do {
-           try liveActivity = Activity.request(attributes: attributes, contentState: contentState)
-        } catch {
-            print(error.localizedDescription)
+    private func requestLiveActivity(date: Date) {
+        if ActivityAuthorizationInfo().areActivitiesEnabled {
+            let attributes = TrackerAttributes(projectName: project.projectName, projectId: project.id!)
+            let contentState = TrackerAttributes.ContentState(start: date)
+            
+            do {
+               try liveActivity = Activity.request(attributes: attributes, contentState: contentState)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -150,8 +152,10 @@ struct TrackerView: View {
         }
     }
     
-    private func stopLiveActivity(date: Date = Date()) async {
-        await liveActivity?.end(using: TrackerAttributes.ContentState(start: date), dismissalPolicy: .immediate)
+    private func endLiveActivity(date: Date = Date()) async {
+        for activity in Activity<TrackerAttributes>.activities {
+            await activity.end(using: TrackerAttributes.ContentState(start: date), dismissalPolicy: .immediate)
+        }
     }
 }
 
