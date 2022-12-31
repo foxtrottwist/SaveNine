@@ -134,7 +134,7 @@ struct TrackerView: View {
     }
    
     private func startLiveActivity(date: Date) {
-        let attributes = TrackerAttributes(projectName: project.projectName)
+        let attributes = TrackerAttributes(projectName: project.projectName, projectId: project.id!)
         let contentState = TrackerAttributes.ContentState(start: date)
         
         do {

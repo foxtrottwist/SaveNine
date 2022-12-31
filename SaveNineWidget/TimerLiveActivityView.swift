@@ -13,22 +13,24 @@ struct TimerLiveActivityView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            
-            HStack {
+            Link(destination: URL(string: "savenine://\(context.attributes.projectId)")!) {
                 Spacer()
-                Text(context.attributes.projectName)
-                    .font(.headline)
-                
-                Spacer()
-                Text(context.state.start, style: .timer)
-                    .widgetTimer(width: 150)
-                    .lineLimit(1)
-                    .font(.largeTitle)
-                
+                HStack {
+                    Spacer()
+                    Text(context.attributes.projectName)
+                        .font(.headline)
+                    
+                    Spacer()
+                    Text(context.state.start, style: .timer)
+                        .widgetTimer(width: 150)
+                        .lineLimit(1)
+                        .font(.largeTitle)
+                    
+                    Spacer()
+                }
                 Spacer()
             }
-            Spacer()
+            
         }
     }
 }

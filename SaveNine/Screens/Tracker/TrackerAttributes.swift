@@ -16,4 +16,5 @@ struct TrackerAttributes: ActivityAttributes {
 
     // Fixed non-changing properties about your activity go here!
     var projectName: String
+    var projectId: UUID
 }

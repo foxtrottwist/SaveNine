@@ -40,7 +40,7 @@ struct SaveNineWidgetLiveActivity: Widget {
                 Image(systemName: "stopwatch")
                     .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
+            .widgetURL(URL(string: "savenine://\(context.attributes.projectId)"))
             .keylineTint(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
         }
     }

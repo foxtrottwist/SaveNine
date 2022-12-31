@@ -42,6 +42,15 @@ struct ProjectsView: View {
                         .disabled(disabled)
                     }
                 }
+                .onOpenURL(perform: { url in
+                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+                    guard let host = components?.host else { return }
+                    let project = projects.map { $0 }.filter { $0.id == UUID(uuidString: host) }
+                    
+                    if path.isEmpty || path.last?.id != UUID(uuidString: host) {
+                        path.append(contentsOf: project)
+                    }
+                })
             }
             .listStyle(.inset)
             .navigationTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
