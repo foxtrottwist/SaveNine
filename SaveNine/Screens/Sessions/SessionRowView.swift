@@ -16,13 +16,18 @@ struct SessionRowView: View {
         Button {
             showingSessionDetailView.toggle()
         } label: {
-            VStack(alignment: .leading) {
-                Text(session.formattedStartDate)
-                    .font(.callout)
-                    .foregroundColor(.secondary)
-                
-                Text(session.formattedDuration)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(session.formattedStartDate)
+                        .font(.callout)
+                        .foregroundColor(.secondary)
+                    
+                    Text(session.formattedDuration)
+                        .font(.title2)
+                }
+                Spacer()
             }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .sheet(isPresented: $showingSessionDetailView) {
