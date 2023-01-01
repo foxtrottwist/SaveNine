@@ -9,7 +9,7 @@ import PhotosUI
 import SwiftUI
 
 struct ProjectDetailView: View {
-    let project: Project
+    @ObservedObject var project: Project
     
     @Environment(\.defaultMinListRowHeight) var defaultMinListRowHeight
     @Environment(\.dismiss) private var dismiss
@@ -119,6 +119,7 @@ struct ProjectDetailView: View {
                     Label( "Close project", systemImage: "archivebox")
                 }
             }
+            .disabled(project.tracking)
 
             Divider()
 
@@ -128,6 +129,7 @@ struct ProjectDetailView: View {
                 Label("Delete Project", systemImage: "trash")
                     .foregroundColor(.red)
             }
+            .disabled(project.tracking)
         } label: {
             Label("Menu", systemImage: "ellipsis.circle")
         }

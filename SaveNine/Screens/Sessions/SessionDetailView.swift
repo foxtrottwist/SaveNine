@@ -63,6 +63,7 @@ struct SessionDetailView: View {
     }
     
     private func updateSession() {
+        session.project?.objectWillChange.send()
         session.startDate = startDate
         session.endDate = endDate
         session.duration = endDate.timeIntervalSince(startDate)

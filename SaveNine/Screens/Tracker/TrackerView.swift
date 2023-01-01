@@ -9,8 +9,8 @@ import ActivityKit
 import SwiftUI
 
 struct TrackerView: View {
-    let project: Project
-    
+    @ObservedObject var project: Project
+
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -101,6 +101,7 @@ struct TrackerView: View {
         let session = Session(context: managedObjectContext)
         session.startDate = start
         session.project = project
+        session.project?.objectWillChange.send()
         
         dataController.save()
         
@@ -112,7 +113,9 @@ struct TrackerView: View {
     
     private func stopTimer() {
         if let session = session {
+            session.project?.objectWillChange.send()
             session.endDate = Date()
+            
             if let startDate = start, let endDate = session.endDate {
                 session.duration = endDate.timeIntervalSince(startDate)
                 
