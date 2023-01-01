@@ -138,6 +138,7 @@ struct ProjectsView: View {
         withAnimation {
             selectedTags = []
             showingProjectTags = false
+            showClosedProjects = false
         }
         
         let newProject = Project(context: managedObjectContext)

@@ -54,6 +54,7 @@ struct TrackerView: View {
                     Button("Start Timer") {
                         startTimer()
                     }
+                    .disabled(project.closed)
                 }
             }
             .padding()
