@@ -14,19 +14,19 @@ struct TrackerView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @State var liveActivity: Activity<TrackerAttributes>?
-    @State var session: Session?
-    @State var start: Date?
-    @State var showingClearConfirm = false
-    @State var tracking = false
+    @State private var liveActivity: Activity<TrackerAttributes>?
+    @State private var session: Session?
+    @State private var start: Date?
+    @State private var showingClearConfirm = false
+    @State private var tracking = false
     
     init(project: Project) {
         self.project = project
         
-        if let session = project.projectSessions.first, session.endDate == nil {
+        if let session = project.projectSessions.first, project.tracking {
                 _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
-                _tracking = State(wrappedValue: true)
+                _tracking = State(wrappedValue: project.tracking)
         }
     }
     

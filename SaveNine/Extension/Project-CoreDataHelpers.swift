@@ -25,16 +25,29 @@ extension Project {
         creationDate ?? Date()
     }
     
+    
+    /// The Project's [Checklist] sorted in reverse chronological order.
     var projectChecklists: [Checklist] {
         let checklists = checklists?.allObjects as? [Checklist] ?? []
         
         return checklists.sorted(using: KeyPathComparator(\.creationDate, order: .reverse))
     }
     
+    /// The Project's [Session] sorted in reverse chronological order.
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
         
         return sessions.sorted(using: KeyPathComparator(\.startDate, order: .reverse))
+    }
+    
+    /// A Boolean value that indicates whether the Project is being tracked.
+    var tracking: Bool {
+        // A Session either
+        // 1. does not exist; -> false
+        // 2. exists and has a startDate & endDate both with a value; -> false
+        // 3. exists and has a startDate with a value, and endDate without a value.
+        //    This means the Session was created but not completed;  -> true
+        projectSessions.first?.endDate == nil
     }
     
     var projectShareSessions: String {
