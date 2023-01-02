@@ -47,7 +47,9 @@ extension Project {
         // 2. exists and has a startDate & endDate both with a value; -> false
         // 3. exists and has a startDate with a value, and endDate without a value.
         //    This means the Session was created but not completed;  -> true
-        projectSessions.first?.endDate == nil
+        guard let session = projectSessions.first else { return false }
+        
+        return session.endDate == nil
     }
     
     var projectShareSessions: String {
