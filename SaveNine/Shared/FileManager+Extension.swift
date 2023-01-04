@@ -1,36 +1,24 @@
 //
-//  AppGroupHelper.swift
+//  FileManager+Extension.swift
 //  SaveNine
 //
-//  Created by Lawrence Horne on 1/2/23.
+//  Created by Lawrence Horne on 1/4/23.
 //
 
 import Foundation
 
-let groupID = "group.com.pawpawpixel.SaveNine"
-let widgetDirectory = "Widgets"
-
-extension UserDefaults {
-    static var shared: UserDefaults {
-        guard let defaults = UserDefaults(suiteName: groupID) else {
-            fatalError("Missing app group")
-        }
-        
-        return defaults
-    }
-}
-
 extension FileManager {
     static var sharedContainer: URL {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID)!
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroupContainer.groupID.rawValue)!
     }
     
     static var widgetsDirectory: URL {
-        self.sharedContainer.appending(path: widgetDirectory)
+        self.sharedContainer.appending(path: AppGroupContainer.widgetDirectory.rawValue)
     }
     
     static func readWidgetData<T: Decodable>(_ type: T.Type, from file: String) -> T? {
-        let url = self.widgetsDirectory.appending(path: file + ".json")
+        let url = self.widgetsDirectory.appending(path: appendFileExtension(to: file, using: .json))
+        print("My name is Earl 👨🏻", url)
         
         guard self.default.fileExists(atPath: url.path()) else { return nil }
         guard let data = try? Data(contentsOf: url) else { return nil }
@@ -52,7 +40,7 @@ extension FileManager {
         }
     }
     
-    static func writeWidget<T: Encodable>(data object: T, to fileName: String) {
+    static func writeWidget<T: Encodable>(data object: T, to file: String) {
         let url = self.widgetsDirectory
         
         if !self.default.fileExists(atPath: url.path()) {
@@ -63,7 +51,8 @@ extension FileManager {
              }
         }
         
-        let path = url.appending(path: fileName + ".json")
+        let path = url.appending(path: appendFileExtension(to: file, using: .json))
+        print("My name is Earl 👨🏻", path)
         
         let encoder = JSONEncoder()
         let data = try? encoder.encode(object)
@@ -75,6 +64,3 @@ extension FileManager {
         }
     }
 }
-
-
-

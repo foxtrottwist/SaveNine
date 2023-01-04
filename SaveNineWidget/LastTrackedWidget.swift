@@ -1,5 +1,5 @@
 //
-//  SaveNineWidget.swift
+//  LastTrackedWidget.swift
 //  SaveNineWidget
 //
 //  Created by Lawrence Horne on 12/18/22.
@@ -10,32 +10,32 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent())
+    func placeholder(in context: Context) -> LastTrackedEntry {
+        LastTrackedEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let project = FileManager.readWidgetData(QuickProject.self, from: "lastTracked") ?? QuickProject.example
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LastTrackedEntry) -> ()) {
+        let project = FileManager.readWidgetData(QuickProject.self, from: S9WidgetKind.LastTracked.fileName) ?? QuickProject.example
         
-        let entry = SimpleEntry(date: Date(), project: project, configuration: configuration)
+        let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let project = FileManager.readWidgetData(QuickProject.self, from: "lastTracked") ?? QuickProject.example
-        let entry = SimpleEntry(date: Date(), project: project, configuration: configuration)
+        let project = FileManager.readWidgetData(QuickProject.self, from: S9WidgetKind.LastTracked.fileName) ?? QuickProject.example
+        let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
         let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct LastTrackedEntry: TimelineEntry {
     let date: Date
     let project: QuickProject
     let configuration: ConfigurationIntent
 }
 
-struct SaveNineWidgetEntryView: View {
+struct LastTrackedWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -48,12 +48,12 @@ struct SaveNineWidgetEntryView: View {
     }
 }
 
-struct SaveNineWidget: Widget {
-    let kind: String = "LastTracked"
+struct LastTrackedWidget: Widget {
+    let kind: String = S9WidgetKind.LastTracked.rawValue
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            SaveNineWidgetEntryView(entry: entry)
+            LastTrackedWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Last Tracked Project.")
         .description("See the details of the last project tracked and access it quickly.")
@@ -61,9 +61,9 @@ struct SaveNineWidget: Widget {
     }
 }
 
-struct SaveNineWidget_Previews: PreviewProvider {
+struct LastTrackedWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SaveNineWidgetEntryView(entry: SimpleEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent()))
+        LastTrackedWidgetEntryView(entry: LastTrackedEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
