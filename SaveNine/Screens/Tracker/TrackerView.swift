@@ -7,6 +7,7 @@
 
 import ActivityKit
 import SwiftUI
+import WidgetKit
 
 struct TrackerView: View {
     @ObservedObject var project: Project
@@ -123,6 +124,11 @@ struct TrackerView: View {
                 tracking = false
                 
                 dataController.save()
+                
+                let data = QuickProject(id: project.id!, name: project.projectName, modifiedData: session.formattedEndDate, sessionCount: project.projectSessions.count, timeTracked: project.projectFormattedTotalDuration)
+                
+                FileManager.writeWidget(data: data, to: "lastTracked")
+                WidgetCenter.shared.reloadTimelines(ofKind: "LastTracked")
             }
         }
     }

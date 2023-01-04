@@ -11,58 +11,59 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let project = FileManager.readWidgetData(QuickProject.self, from: "lastTracked") ?? QuickProject.example
+        
+        let entry = SimpleEntry(date: Date(), project: project, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let project = FileManager.readWidgetData(QuickProject.self, from: "lastTracked") ?? QuickProject.example
+        let entry = SimpleEntry(date: Date(), project: project, configuration: configuration)
+        let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let project: QuickProject
     let configuration: ConfigurationIntent
 }
 
-struct SaveNineWidgetEntryView : View {
+struct SaveNineWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            Text(entry.project.name)
+            Text(entry.project.modifiedData)
+            Text(entry.project.timeTracked)
+        }
+        .widgetURL(createProjectUrl(id: entry.project.id))
     }
 }
 
 struct SaveNineWidget: Widget {
-    let kind: String = "SaveNineWidget"
+    let kind: String = "LastTracked"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             SaveNineWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Last Tracked Project.")
+        .description("See the details of the last project tracked and access it quickly.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
 struct SaveNineWidget_Previews: PreviewProvider {
     static var previews: some View {
-        SaveNineWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        SaveNineWidgetEntryView(entry: SimpleEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
