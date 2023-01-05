@@ -34,7 +34,7 @@ struct SessionDetailView: View {
                 }
                 
                 Section {
-                    Text(Duration.seconds(duration).formatted(.time(pattern: .hourMinuteSecond(padHourToLength: 2))))
+                    Text(duration.formattedDuration)
                 } header: {
                     Text("Duration")
                 }

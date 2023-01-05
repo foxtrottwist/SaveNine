@@ -80,7 +80,7 @@ extension Project {
     }
     
     var projectFormattedTotalDuration: String {
-        Duration.seconds(projectTotalDuration).formatted(.time(pattern: .hourMinuteSecond(padHourToLength: 2)))
+        projectTotalDuration.formattedDuration
     }
     
     static var example: Project {

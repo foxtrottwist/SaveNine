@@ -10,12 +10,12 @@ import Foundation
 struct QuickProject: Codable {
     let id: UUID
     let name: String
-    let modifiedData: String
+    let modifiedDate: Date
     let sessionCount: Int
     let timeTracked: String
     
     static var example: QuickProject {
-        .init(id: UUID(), name: "Lucy Loo", modifiedData: Data().description, sessionCount: 3, timeTracked: 3600.description)
+        .init(id: UUID(), name: "Lucy Loo", modifiedDate: Date(), sessionCount: 3, timeTracked: 3734.formattedDuration)
     }
 }
 

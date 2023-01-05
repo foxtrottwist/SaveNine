@@ -13,16 +13,16 @@ struct TimerView: View {
     var body: some View {
         if let start = start {
             TimelineView(.periodic(from: start, by: 1)) { _ in
-                Text(.seconds(-start.timeIntervalSinceNow), format: .time(pattern: .hourMinuteSecond(padHourToLength: 2)))
+                Text(start.timeIntervalSinceNow.timerFormattedDuration)
+                    .font(.largeTitle)
+                    .monospacedDigit()
+                    .padding()
+            }
+        } else {
+            Text(0.formattedDuration)
                 .font(.largeTitle)
                 .monospacedDigit()
                 .padding()
-            }
-        } else {
-            Text(.seconds(0), format: .time(pattern: .hourMinuteSecond(padHourToLength: 2)))
-            .font(.largeTitle)
-            .monospacedDigit()
-            .padding()
         }
     }
 }
