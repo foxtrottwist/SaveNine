@@ -39,10 +39,30 @@ struct LastTrackedWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text(entry.project.name)
-            Text(entry.project.modifiedData)
-            Text(entry.project.timeTracked)
+        ZStack {
+            ContainerRelativeShape()
+                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(entry.project.name)
+                        .font(.headline)
+                        .lineLimit(2)
+                        .padding(1)
+                    
+                    Text(entry.project.timeTracked)
+                        .font(.callout)
+                    
+                    Spacer()
+                    
+                    Text(entry.project.modifiedDate.widgetFormattedDate)
+                        .font(.caption)
+                }
+                .foregroundColor(.black.opacity(0.6))
+                .padding()
+                
+                Spacer()
+            }
         }
         .widgetURL(createProjectUrl(id: entry.project.id))
     }
@@ -55,8 +75,8 @@ struct LastTrackedWidget: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             LastTrackedWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Last Tracked Project.")
-        .description("See the details of the last project tracked and access it quickly.")
+        .configurationDisplayName("Project")
+        .description("See the most recently tracked project and access it quickly.")
         .supportedFamilies([.systemSmall])
     }
 }
@@ -67,3 +87,5 @@ struct LastTrackedWidget_Previews: PreviewProvider {
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
+
+
