@@ -56,8 +56,9 @@ struct LastTrackedWidgetEntryView: View {
                     Spacer()
                     
                     Text(entry.project.modifiedDate.widgetFormattedDate)
-                        .font(.caption)
+                        .font(.footnote)
                 }
+                .fontWeight(.medium)
                 .foregroundColor(.black.opacity(0.6))
                 .padding()
                 
