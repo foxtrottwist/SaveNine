@@ -43,6 +43,14 @@ struct LastTrackedWidgetEntryView: View {
             ContainerRelativeShape()
                 .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
             
+            if let uiImage = FileManager.getImage(named: entry.project.image), let image = Image(uiImage: uiImage) {
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 160, height: 160)
+                    .opacity(0.2)
+            }
+            
             HStack {
                 VStack(alignment: .leading) {
                     Text(entry.project.name)
@@ -56,9 +64,10 @@ struct LastTrackedWidgetEntryView: View {
                     Spacer()
                     
                     Text(entry.project.modifiedDate.widgetFormattedDate)
-                        .font(.caption)
+                        .font(.footnote)
                 }
-                .foregroundColor(.black.opacity(0.6))
+                .foregroundColor(.black.opacity(0.7))
+                .fontWeight(.medium)
                 .padding()
                 
                 Spacer()
