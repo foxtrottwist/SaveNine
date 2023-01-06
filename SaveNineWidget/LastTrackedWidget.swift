@@ -46,17 +46,21 @@ struct LastTrackedWidgetEntryView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(entry.project.name)
-                        .font(.headline)
+                        .font(.callout)
                         .lineLimit(2)
                         .padding(1)
                     
                     Text(entry.project.timeTracked)
-                        .font(.callout)
+                        .font(.headline)
                     
                     Spacer()
                     
+                    Text("last tracked:")
+                        .font(.caption)
+                        .italic()
+                    
                     Text(entry.project.modifiedDate.widgetFormattedDate)
-                        .font(.footnote)
+                        .font(.subheadline)
                 }
                 .fontWeight(.medium)
                 .foregroundColor(.black.opacity(0.6))
