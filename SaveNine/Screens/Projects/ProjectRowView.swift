@@ -16,7 +16,7 @@ struct ProjectRowView: View {
         self.project = project
         
         if let imageName = project.image {
-            self.uiImage = getImage(named: imageName)
+            self.uiImage = FileManager.getImage(named: imageName)
         } else {
             self.uiImage = nil
         }

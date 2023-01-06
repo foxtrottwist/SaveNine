@@ -125,7 +125,14 @@ struct TrackerView: View {
                 
                 dataController.save()
                 
-                let data = QuickProject(id: project.id!, name: project.projectName, modifiedDate: endDate, sessionCount: project.projectSessions.count, timeTracked: project.projectFormattedTotalDuration)
+                let data = QuickProject(
+                    id: project.id!,
+                    name: project.projectName,
+                    image: project.projectImage,
+                    modifiedDate: endDate,
+                    sessionCount: project.projectSessions.count,
+                    timeTracked: project.projectFormattedTotalDuration
+                )
                 
                 FileManager.writeWidget(data: data, to: S9WidgetKind.LastTracked.fileName)
                 WidgetCenter.shared.reloadTimelines(ofKind: S9WidgetKind.LastTracked.rawValue)
