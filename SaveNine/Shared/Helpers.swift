@@ -9,10 +9,12 @@ import Foundation
 
 enum AppGroupContainer: String {
     case groupID = "group.com.pawpawpixel.SaveNine"
+    case imageDirectory = "Images"
     case widgetDirectory = "Widgets"
 }
 
 enum FileExtension: String {
+    case jpeg = ".jpeg"
     case json = ".json"
     case png = ".png"
 }
@@ -22,12 +24,14 @@ enum FileExtension: String {
 ///   - file: The Name of the file that will have the extension appending.
 ///   - using: The extension to use.
 /// - Returns: The complete file name with the extension appended.
-func appendFileExtension(to file: String, using: FileExtension) -> String {
+func appendFileExtension(to name: String, using: FileExtension) -> String {
     switch using {
+    case .jpeg:
+        return name + FileExtension.jpeg.rawValue
     case .json:
-        return file + FileExtension.json.rawValue
+        return name + FileExtension.json.rawValue
     case .png:
-        return file + FileExtension.png.rawValue
+        return name + FileExtension.png.rawValue
     }
 }
 
