@@ -21,6 +21,10 @@ extension Date {
             return self.hourMinute
         }
         
+        if Calendar.current.isDateInYesterday(self) {
+            return "Yesterday"
+        }
+        
         if Calendar.current.isDate(self, equalTo: .now, toGranularity: .weekOfYear) {
             return self.day
         }

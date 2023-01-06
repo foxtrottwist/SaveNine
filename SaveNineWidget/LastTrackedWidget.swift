@@ -40,25 +40,24 @@ struct LastTrackedWidgetEntryView: View {
 
     var body: some View {
         ZStack {
-            ContainerRelativeShape()
-                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
-            
             HStack {
                 VStack(alignment: .leading) {
                     Text(entry.project.name)
-                        .font(.headline)
+                        .font(.title3)
+                        .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                         .lineLimit(2)
-                        .padding(1)
+                        .padding(2)
                     
                     Text(entry.project.timeTracked)
-                        .font(.callout)
+                        .font(.headline)
                     
                     Spacer()
                     
                     Text(entry.project.modifiedDate.widgetFormattedDate)
-                        .font(.caption)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
-                .foregroundColor(.black.opacity(0.6))
+                .fontWeight(.medium)
                 .padding()
                 
                 Spacer()
