@@ -12,15 +12,32 @@ struct SessionRowView: View {
     
     @State private var showingSessionDetailView = false
     
+    var day: String {
+        (session.startDate?.relativeDescription(hourMinute: false))!
+    }
+    
+    var startTime: String {
+        session.startDate!.hourMinute
+    }
+    
+    var endTime: String {
+        session.endDate!.hourMinute
+    }
+    
+    var sessionDateDescription: some View {
+        Text("\(day) \(startTime) - \(endTime)")
+            .font(.callout)
+            .foregroundColor(.secondary)
+            .italic()
+    }
+    
     var body: some View {
         Button {
             showingSessionDetailView.toggle()
         } label: {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(session.formattedStartDate)
-                        .font(.callout)
-                        .foregroundColor(.secondary)
+                    sessionDateDescription
                     
                     Text(session.formattedDuration)
                         .font(.title2)
