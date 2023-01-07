@@ -70,6 +70,20 @@ struct SessionDetailView: View {
         
         dataController.save()
         dismiss()
+        
+        if let sessionProject = session.project, let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) {
+            if project.id == sessionProject.id {
+                let projectWidget = ProjectWidget(
+                    id: project.id,
+                    name: sessionProject.projectName,
+                    modifiedDate: endDate,
+                    sessionCount: sessionProject.projectSessions.count,
+                    timeTracked: sessionProject.projectFormattedTotalDuration
+                )
+                
+                projectWidget.writeMostRecentlyTrackedWidget()
+            }
+        }
     }
 }
 
