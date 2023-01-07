@@ -23,8 +23,9 @@ struct Provider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) ?? ProjectWidget.example
-        let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
-        let timeline = Timeline(entries: [entry], policy: .never)
+        let startOfDay = Calendar.current.startOfDay(for: Date())
+        let entry = LastTrackedEntry(date: startOfDay, project: project, configuration: configuration)
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
 }
