@@ -60,7 +60,7 @@ struct LastTrackedWidgetEntryView: View {
                         .font(.caption)
                         .italic()
                     
-                    Text(entry.project.modifiedDate.widgetFormattedDate)
+                    Text(entry.project.modifiedDate.relativeDescription())
                         .font(.subheadline)
                 }
                 .fontWeight(.medium)
