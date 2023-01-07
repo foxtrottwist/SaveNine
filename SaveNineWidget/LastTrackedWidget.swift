@@ -11,18 +11,18 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> LastTrackedEntry {
-        LastTrackedEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent())
+        LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LastTrackedEntry) -> ()) {
-        let project = FileManager.readWidgetData(QuickProject.self, from: S9WidgetKind.LastTracked.fileName) ?? QuickProject.example
+        let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) ?? ProjectWidget.example
         
         let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let project = FileManager.readWidgetData(QuickProject.self, from: S9WidgetKind.LastTracked.fileName) ?? QuickProject.example
+        let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) ?? ProjectWidget.example
         let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
         let timeline = Timeline(entries: [entry], policy: .never)
         completion(timeline)
@@ -31,7 +31,7 @@ struct Provider: IntentTimelineProvider {
 
 struct LastTrackedEntry: TimelineEntry {
     let date: Date
-    let project: QuickProject
+    let project: ProjectWidget
     let configuration: ConfigurationIntent
 }
 
@@ -88,7 +88,7 @@ struct LastTrackedWidget: Widget {
 
 struct LastTrackedWidget_Previews: PreviewProvider {
     static var previews: some View {
-        LastTrackedWidgetEntryView(entry: LastTrackedEntry(date: Date(), project: QuickProject.example, configuration: ConfigurationIntent()))
+        LastTrackedWidgetEntryView(entry: LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
