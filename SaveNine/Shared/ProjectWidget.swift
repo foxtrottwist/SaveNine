@@ -15,13 +15,13 @@ struct ProjectWidget: Codable {
     let sessionCount: Int
     let timeTracked: String
     
-    static var example: ProjectWidget {
-        .init(id: UUID(), name: "Lucy Loo", modifiedDate: Date(), sessionCount: 3, timeTracked: 3734.formattedDuration)
-    }
-    
     func writeMostRecentlyTrackedWidget() {
         FileManager.writeWidget(data: self, to: S9WidgetKind.LastTracked.fileName)
         WidgetCenter.shared.reloadTimelines(ofKind: S9WidgetKind.LastTracked.rawValue)
+    }
+    
+    static var example: ProjectWidget {
+        .init(id: UUID(), name: "Lucy Loo", modifiedDate: Date(), sessionCount: 3, timeTracked: 3734.formattedDuration)
     }
 }
 
