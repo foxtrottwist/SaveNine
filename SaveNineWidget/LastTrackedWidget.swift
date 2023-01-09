@@ -37,19 +37,26 @@ struct LastTrackedEntry: TimelineEntry {
 
 struct LastTrackedWidgetEntryView: View {
     var entry: Provider.Entry
+    
+//    var image: Image {
+//        let uiImage = FileManager.getImage(named: entry.project.image)!
+//        let image = Image(uiImage: uiImage)
+//        return image
+//    }
 
     var body: some View {
         ZStack {
-            ContainerRelativeShape()
-                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+//            ContainerRelativeShape()
+//                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+//                .opacity(0.25)
             
-            if let uiImage = FileManager.getImage(named: entry.project.image), let image = Image(uiImage: uiImage) {
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 160, height: 160)
-                    .opacity(0.2)
-            }
+//            if let uiImage = FileManager.getImage(named: entry.project.image), let image = Image(uiImage: uiImage) {
+//                image
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(width: 160, height: 160)
+//                    .opacity(0.2)
+//            }
             
             HStack {
                 VStack(alignment: .leading) {
@@ -73,6 +80,19 @@ struct LastTrackedWidgetEntryView: View {
                 Spacer()
             }
         }
+        .background(content: {
+            ZStack {
+                ContainerRelativeShape()
+                    .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+                    
+                if let uiImage = FileManager.getImage(named: entry.project.image), let image = Image(uiImage: uiImage) {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .opacity(0.2)
+                }
+            }
+        })
         .widgetURL(createProjectUrl(id: entry.project.id))
     }
 }
