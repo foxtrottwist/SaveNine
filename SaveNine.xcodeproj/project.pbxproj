@@ -210,6 +210,31 @@
 			path = Tags;
 			sourceTree = "<group>";
 		};
+		655869292976151C0015E20F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6558692A297615470015E20F /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C22294FBD1A00A3B960 /* LastTrackedWidget.swift */,
+				65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		6558692B297615970015E20F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				652BFD00295F367000179792 /* View+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6560AC31291AC5470047E2C6 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,11 +301,10 @@
 		65A51C1D294FBD1A00A3B960 /* SaveNineWidget */ = {
 			isa = PBXGroup;
 			children = (
+				655869292976151C0015E20F /* Views */,
+				6558692A297615470015E20F /* Widgets */,
+				6558692B297615970015E20F /* Extensions */,
 				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
-				65A51C20294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift */,
-				65A51C22294FBD1A00A3B960 /* LastTrackedWidget.swift */,
-				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
-				652BFD00295F367000179792 /* View+Extension.swift */,
 				65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */,
 				65A51C25294FBD1A00A3B960 /* Assets.xcassets */,
 				65A51C27294FBD1A00A3B960 /* Info.plist */,
