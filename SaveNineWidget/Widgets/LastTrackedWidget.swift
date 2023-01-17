@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: IntentTimelineProvider {
+struct LastTrackedProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> LastTrackedEntry {
         LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent())
     }
@@ -36,41 +36,38 @@ struct LastTrackedEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct LastTrackedWidgetEntryView: View {
-    var entry: Provider.Entry
+struct LastTrackedEntryView: View {
+    @Environment(\.widgetFamily) var family
+    var entry: LastTrackedProvider.Entry
 
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
-            
+        switch family {
+        case .systemSmall:
+            LastTrackedView(project: entry.project)
+        case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {
                     Text(entry.project.name)
-                        .font(.callout)
-                        .lineLimit(2)
-                        .padding(1)
                     
-                    Text(entry.project.timeTracked)
-                        .font(.headline)
+                    HStack {
+                        Image(systemName: "stopwatch")
+                        Text(entry.project.timeTracked)
+                    }
                     
-                    Spacer()
-                    
-                    Text("last tracked:")
-                        .font(.caption)
-                        .italic()
-                    
-                    Text(entry.project.modifiedDate.relativeDescription())
-                        .font(.subheadline)
+                    HStack {
+                        Image(systemName: "calendar")
+                        Text(entry.project.modifiedDate.relativeDescription())
+                    }
                 }
-                .fontWeight(.medium)
-                .foregroundColor(.black.opacity(0.6))
-                .padding()
-                
                 Spacer()
             }
+            .widgetURL(createProjectUrl(id: entry.project.id))
+            
+        case .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
+            EmptyView()
+        @unknown default:
+            EmptyView()
         }
-        .widgetURL(createProjectUrl(id: entry.project.id))
     }
 }
 
@@ -78,19 +75,19 @@ struct LastTrackedWidget: Widget {
     let kind: String = S9WidgetKind.LastTracked.rawValue
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            LastTrackedWidgetEntryView(entry: entry)
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: LastTrackedProvider()) { entry in
+            LastTrackedEntryView(entry: entry)
         }
         .configurationDisplayName("Project")
         .description("See the most recently tracked project and access it quickly.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([ .accessoryRectangular, .systemSmall])
     }
 }
 
 struct LastTrackedWidget_Previews: PreviewProvider {
     static var previews: some View {
-        LastTrackedWidgetEntryView(entry: LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        LastTrackedEntryView(entry: LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }
 

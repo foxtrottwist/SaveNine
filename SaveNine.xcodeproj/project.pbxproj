@@ -15,6 +15,7 @@
 		652D025628D79DA300F818E7 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* SessionsView.swift */; };
 		652D025828D79F9000F818E7 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025728D79F9000F818E7 /* TimerView.swift */; };
 		6537EAD628E90D87004068CD /* Ptag-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */; };
+		653B2DDD2976502400EAD9CD /* LastTrackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B2DDC2976502400EAD9CD /* LastTrackedView.swift */; };
 		6544E57D28F067E9009CB296 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6544E57C28F067E9009CB296 /* TagView.swift */; };
 		65464D2128F26B74008E1EE6 /* RenameTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65464D2028F26B74008E1EE6 /* RenameTagView.swift */; };
 		6560598F296A04740075C353 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7312966826E00CABB3C /* Date+Extension.swift */; };
@@ -101,6 +102,7 @@
 		652D025528D79DA300F818E7 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		652D025728D79F9000F818E7 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		6537EAD528E90D87004068CD /* Ptag-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ptag-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		653B2DDC2976502400EAD9CD /* LastTrackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTrackedView.swift; sourceTree = "<group>"; };
 		6544E57C28F067E9009CB296 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		65464D2028F26B74008E1EE6 /* RenameTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenameTagView.swift; sourceTree = "<group>"; };
 		6560AC2F291AA2AB0047E2C6 /* FetchRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRequestView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
+				653B2DDC2976502400EAD9CD /* LastTrackedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				65F4A7302965E5B900CABB3C /* S9WidgetKind.swift in Sources */,
 				65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
 				65A51C23294FBD1A00A3B960 /* LastTrackedWidget.swift in Sources */,
+				653B2DDD2976502400EAD9CD /* LastTrackedView.swift in Sources */,
 				65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */,
 				652BFD01295F367000179792 /* View+Extension.swift in Sources */,
 				65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */,
