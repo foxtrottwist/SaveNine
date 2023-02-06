@@ -23,5 +23,8 @@ struct ProjectWidget: Codable {
     static var example: ProjectWidget {
         .init(id: UUID(), name: "Lucy Loo", modifiedDate: Date(), sessionCount: 3, timeTracked: 3734.formattedDuration)
     }
+    
+    static var mostRecentlyTrackedProject: ProjectWidget? {
+        FileManager.readWidgetData(self, from: S9WidgetKind.LastTracked.fileName)
+    }
 }
-

@@ -71,7 +71,7 @@ struct SessionDetailView: View {
         dataController.save()
         dismiss()
         
-        if let sessionProject = session.project, let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) {
+        if let sessionProject = session.project, let project = ProjectWidget.mostRecentlyTrackedProject {
             if project.id == sessionProject.id {
                 let projectWidget = ProjectWidget(
                     id: project.id,

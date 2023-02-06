@@ -15,18 +15,19 @@ struct LastTrackedProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LastTrackedEntry) -> ()) {
-        let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) ?? ProjectWidget.example
-        
-        let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
-        completion(entry)
+        if let project = ProjectWidget.mostRecentlyTrackedProject {
+            let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
+            completion(entry)
+        }
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let project = FileManager.readWidgetData(ProjectWidget.self, from: S9WidgetKind.LastTracked.fileName) ?? ProjectWidget.example
-        let startOfDay = Calendar.current.startOfDay(for: Date())
-        let entry = LastTrackedEntry(date: startOfDay, project: project, configuration: configuration)
-        let timeline = Timeline(entries: [entry], policy: .atEnd)
-        completion(timeline)
+        if let project = ProjectWidget.mostRecentlyTrackedProject {
+            let startOfDay = Calendar.current.startOfDay(for: Date())
+            let entry = LastTrackedEntry(date: startOfDay, project: project, configuration: configuration)
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
+        }
     }
 }
 

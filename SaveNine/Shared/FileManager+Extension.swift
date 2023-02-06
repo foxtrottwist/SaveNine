@@ -36,7 +36,6 @@ extension FileManager {
                return uiImage
            } else {
                print("UIImage could not be created.")
-               
                return nil
            }
     }
@@ -68,7 +67,6 @@ extension FileManager {
            
         guard self.default.fileExists(atPath: url.path()) else {
                print("File does not exist at path: \(url)")
-               
                return
            }
            
