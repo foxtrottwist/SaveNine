@@ -1,5 +1,5 @@
 //
-//  Checklist-CoreDataHelpers.swift
+//  Checklist+CoreDataHelpers.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/25/22.
