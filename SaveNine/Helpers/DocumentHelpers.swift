@@ -27,7 +27,6 @@ func getImage(named name: String) -> UIImage? {
     
     guard FileManager.default.fileExists(atPath: path) else {
            print("Image does not exist at path: \(path)")
-           
            return nil
        }
     
@@ -35,7 +34,6 @@ func getImage(named name: String) -> UIImage? {
            return uiImage
        } else {
            print("UIImage could not be created.")
-           
            return nil
        }
 }
@@ -48,13 +46,11 @@ func deleteFile(named name: String) {
        
     guard FileManager.default.fileExists(atPath: url.path) else {
            print("File does not exist at path: \(url)")
-           
            return
        }
        
        do {
            try FileManager.default.removeItem(at: url)
-           
            print("\(name) was deleted.")
        } catch let error as NSError {
            print("Could not delete \(name): \(error)")
