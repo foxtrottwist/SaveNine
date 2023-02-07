@@ -47,8 +47,8 @@ extension FileManager {
     static func save(uiImage: UIImage, named name: String) {
         if let data = uiImage.jpegData(compressionQuality: 0.8) {
             let url = self.imageDirectory
-            createDirectoryIfNoneExist(at: url)
             
+            createDirectoryIfNoneExist(at: url)
             let path = url.appending(path: appendFileExtension(to: name, using: .jpeg))
            
             do {
@@ -106,8 +106,8 @@ extension FileManager {
     ///   - file: The name of the file to be written. The ".json" extension is appended by the method.
     static func writeWidget<T: Encodable>(data object: T, to file: String) {
         let url = self.widgetsDirectory
-        createDirectoryIfNoneExist(at: url)
         
+        createDirectoryIfNoneExist(at: url)
         let path = url.appending(path: appendFileExtension(to: file, using: .json))
         
         let encoder = JSONEncoder()
@@ -117,19 +117,6 @@ extension FileManager {
             try data?.write(to: path)
         } catch {
             print("Failed to write to \(path). Error: \(error.localizedDescription)")
-        }
-    }
-    
-    
-    /// Checks whether a the given directory exists and creates it if it does not.
-    /// - Parameter url: A file URL that specifies the directory to create.
-    static func createDirectoryIfNoneExist(at url: URL) {
-        if !self.default.fileExists(atPath: url.path()) {
-             do {
-                 try self.default.createDirectory(at: url, withIntermediateDirectories: false)
-             } catch {
-                 fatalError("Unable to create directory at \(url)")
-             }
         }
     }
 }
