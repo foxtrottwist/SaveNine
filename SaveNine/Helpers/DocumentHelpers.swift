@@ -14,8 +14,8 @@ import SwiftUI
 ///   - name: The name of the image file.
 func save(uiImage: UIImage, named name: String) {
         if let data = uiImage.jpegData(compressionQuality: 0.8) {
-            let path = URL.documentsDirectory.appendingPathComponent(name)
-            try? data.write(to: path)
+            let url = URL.documentsDirectory.appending(path: name)
+            try? data.write(to: url)
         }
 }
 
@@ -23,7 +23,7 @@ func save(uiImage: UIImage, named name: String) {
 /// - Parameter name: The name of the image file.
 /// - Returns: The image retrieved or nil if there was no name found for the name provided.
 func getImage(named name: String) -> UIImage? {
-    let path = URL.documentsDirectory.appendingPathComponent(name).path
+    let path = URL.documentsDirectory.appending(path: name).path()
     
     guard FileManager.default.fileExists(atPath: path) else {
            print("Image does not exist at path: \(path)")
@@ -42,9 +42,9 @@ func getImage(named name: String) -> UIImage? {
 /// - Parameter name: The name of the file to deletes.
 func deleteFile(named name: String) {
     guard !name.isEmpty else { return }
-    let url = URL.documentsDirectory.appendingPathComponent(name)
+    let url = URL.documentsDirectory.appending(path: name)
        
-    guard FileManager.default.fileExists(atPath: url.path) else {
+    guard FileManager.default.fileExists(atPath: url.path()) else {
            print("File does not exist at path: \(url)")
            return
        }
