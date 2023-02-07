@@ -24,8 +24,8 @@ enum FileExtension: String {
 ///   - file: The Name of the file that will have the extension appending.
 ///   - using: The extension to use.
 /// - Returns: The complete file name with the extension appended.
-func appendFileExtension(to name: String, using: FileExtension) -> String {
-    switch using {
+func appendFileExtension(to name: String, using ext: FileExtension) -> String {
+    switch ext {
     case .jpeg:
         return name + FileExtension.jpeg.rawValue
     case .json:
