@@ -23,4 +23,19 @@ extension Session {
     var formattedDuration: String {
         duration.formattedDuration
     }
+    
+    static var Example: Session {
+        let controller = DataController(inMemory: true)
+        let viewContext = controller.container.viewContext
+        
+        let session = Session(context: viewContext)
+        session.startDate = Date()
+        session.endDate = Date().advanced(by: 3600)
+        
+        if let startDate = session.startDate, let endDate = session.endDate {
+            session.duration = endDate.timeIntervalSince(startDate)
+        }
+        
+        return session
+    }
 }

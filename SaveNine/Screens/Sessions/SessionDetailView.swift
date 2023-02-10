@@ -20,8 +20,8 @@ struct SessionDetailView: View {
     init(session: Session) {
         self.session = session
         
-        _startDate = State(wrappedValue: session.startDate!)
-        _endDate = State(wrappedValue: session.endDate!)
+        _startDate = State(wrappedValue: session.startDate ?? Date())
+        _endDate = State(wrappedValue: session.endDate ?? Date())
         _duration = State(wrappedValue: session.duration)
     }
     
@@ -89,6 +89,6 @@ struct SessionDetailView: View {
 
 struct SessionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionDetailView(session: Project.example.projectSessions.first!)
+        SessionDetailView(session: Session.Example)
     }
 }

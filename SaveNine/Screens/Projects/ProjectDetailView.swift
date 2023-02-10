@@ -228,7 +228,10 @@ struct ProjectDetailView: View {
 }
 
 struct ProjectDetailView_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+    
     static var previews: some View {
         ProjectDetailView(project: Project.example)
+            .environmentObject(dataController)
     }
 }

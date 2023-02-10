@@ -55,6 +55,6 @@ struct SessionRowView: View {
 
 struct SessionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionRowView(session: Project.example.projectSessions.first!)
+        SessionRowView(session: Session.Example)
     }
 }
