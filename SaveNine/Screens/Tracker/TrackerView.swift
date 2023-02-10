@@ -33,6 +33,7 @@ struct TrackerView: View {
     
     var body: some View {
         VStack {
+            SessionLabelPickerView(sessionLabels: SessionLabel.Examples)
             TimerView(start: start)
             
             HStack {
