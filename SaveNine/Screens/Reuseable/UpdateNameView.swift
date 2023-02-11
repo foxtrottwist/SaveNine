@@ -1,5 +1,5 @@
 //
-//  RenameTagView.swift
+//  UpdateNameView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 10/8/22.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct RenameTagView: View {
-    let renameAction: () -> Void
+struct UpdateNameView: View {
     let cancelAction: () -> Void
+    let confirmAction: () -> Void
     
     @Binding var name: String
     
-    init(name: Binding<String>, renameAction: @escaping () -> Void, cancelAction: @escaping () -> Void) {
+    init(name: Binding<String>, cancelAction: @escaping () -> Void, confirmAction: @escaping () -> Void) {
         _name = name
         
-        self.renameAction = renameAction
         self.cancelAction = cancelAction
+        self.confirmAction = confirmAction
     }
     
     var body: some View {
-        TextField("Tag Name", text: $name)
+        TextField("Name", text: $name)
             .autocapitalization(.none)
             .autocorrectionDisabled(true)
         
@@ -30,13 +30,13 @@ struct RenameTagView: View {
         }
         
         Button("OK") {
-           renameAction()
+           confirmAction()
         }
     }
 }
 
-struct RenameTagView_Previews: PreviewProvider {
+struct UpdateNameView_Previews: PreviewProvider {
     static var previews: some View {
-        RenameTagView(name: .constant("quilting"), renameAction: {}, cancelAction: {})
+        UpdateNameView(name: .constant("quilting"),  cancelAction: {}, confirmAction: {})
     }
 }

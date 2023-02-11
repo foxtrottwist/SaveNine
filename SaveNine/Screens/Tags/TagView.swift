@@ -15,10 +15,10 @@ struct TagView: View {
     
     @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
     
-    @State var name: String
-    @State var showingDeleteTagConfirmation = false
-    @State var showingFailedToRenameAlert = false
-    @State var showingRenameAlert = false
+    @State private var name: String
+    @State private var showingDeleteTagConfirmation = false
+    @State private var showingFailedToRenameAlert = false
+    @State private var showingRenameAlert = false
     
     let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
     
@@ -56,7 +56,7 @@ struct TagView: View {
             }
         }
         .alert("Rename Tag", isPresented: $showingRenameAlert) {
-            RenameTagView(name: $name, renameAction: renameAction, cancelAction: cancelAction)
+            UpdateNameView(name: $name,  cancelAction: cancelAction, confirmAction: renameAction)
         }
         .alert("Failed to Rename Tag", isPresented: $showingFailedToRenameAlert) {} message: {
             Text("Could not rename tag, tag name already exists.")
