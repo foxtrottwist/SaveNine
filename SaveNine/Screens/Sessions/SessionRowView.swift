@@ -13,15 +13,15 @@ struct SessionRowView: View {
     @State private var showingSessionDetailView = false
     
     var day: String {
-        (session.startDate?.relativeDescription(hourMinute: false))!
+        (session.startDate?.relativeDescription(hourMinute: false)) ?? ""
     }
     
     var startTime: String {
-        session.startDate!.hourMinute
+        session.startDate?.hourMinute ?? ""
     }
     
     var endTime: String {
-        session.endDate!.hourMinute
+        session.endDate?.hourMinute ?? ""
     }
     
     var sessionDateDescription: some View {
