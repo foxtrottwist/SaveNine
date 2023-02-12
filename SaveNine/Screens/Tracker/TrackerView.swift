@@ -15,6 +15,7 @@ struct TrackerView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
+    @State private var label: String = ""
     @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
     @State private var start: Date?
@@ -24,16 +25,20 @@ struct TrackerView: View {
     init(project: Project) {
         self.project = project
         
-        if let session = project.projectSessions.first, project.tracking {
+        if let session = project.projectSessions.first {
+            _label = State(wrappedValue: session.sessionLabel)
+            
+            if project.tracking {
                 _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
                 _tracking = State(wrappedValue: project.tracking)
+            }
         }
     }
     
     var body: some View {
         VStack {
-            SessionLabelPickerView(selectedLabel: "")
+            SessionLabelPickerView(selectedLabel: $label)
             TimerView(start: start)
             
             HStack {
@@ -117,6 +122,7 @@ struct TrackerView: View {
         if let session = session {
             session.project?.objectWillChange.send()
             session.endDate = Date()
+            session.label = label
             
             if let startDate = start, let endDate = session.endDate {
                 session.duration = endDate.timeIntervalSince(startDate)

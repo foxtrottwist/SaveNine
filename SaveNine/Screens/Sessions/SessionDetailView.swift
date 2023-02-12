@@ -13,23 +13,25 @@ struct SessionDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataController: DataController
     
-    @State private var startDate: Date
-    @State private var endDate: Date
     @State private var duration: Double
+    @State private var endDate: Date
+    @State private var label: String
+    @State private var startDate: Date
     
     init(session: Session) {
         self.session = session
         
-        _startDate = State(wrappedValue: session.startDate ?? Date())
-        _endDate = State(wrappedValue: session.endDate ?? Date())
         _duration = State(wrappedValue: session.duration)
+        _endDate = State(wrappedValue: session.endDate ?? Date())
+        _label = State(wrappedValue: session.sessionLabel)
+        _startDate = State(wrappedValue: session.startDate ?? Date())
     }
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    SessionLabelPickerView(selectedLabel: "")
+                    SessionLabelPickerView(selectedLabel: $label)
                 }
                 
                 Section {
@@ -68,6 +70,7 @@ struct SessionDetailView: View {
     
     private func updateSession() {
         session.project?.objectWillChange.send()
+        session.label = label
         session.startDate = startDate
         session.endDate = endDate
         session.duration = endDate.timeIntervalSince(startDate)

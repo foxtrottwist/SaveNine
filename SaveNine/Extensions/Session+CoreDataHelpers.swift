@@ -1,5 +1,5 @@
 //
-//  Session+Extension.swift
+//  Session+CoreDataHelpers.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 10/15/22.
@@ -22,6 +22,10 @@ extension Session {
     
     var formattedDuration: String {
         duration.formattedDuration
+    }
+    
+    var sessionLabel: String {
+        label ?? ""
     }
     
     static var Example: Session {

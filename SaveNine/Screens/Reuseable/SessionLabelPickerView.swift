@@ -10,14 +10,15 @@ import SwiftUI
 struct SessionLabelPickerView: View {
     @EnvironmentObject var sessionLabels: SessionLabels
     
+    @Binding var selectedLabel: String
+    
     @State private var name = ""
     @State private var previousSelectedLabel = Defaults.none.rawValue
-    @State private var selectedLabel = Defaults.none.rawValue
     @State private var showingAddLabelAlert = false
     
-    init(selectedLabel: String) {
-        _selectedLabel = State(wrappedValue: selectedLabel)
-        _previousSelectedLabel = State(wrappedValue: selectedLabel)
+    init(selectedLabel: Binding<String>) {
+        _selectedLabel = selectedLabel
+        _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
     }
     
     enum Defaults: String {
@@ -59,7 +60,7 @@ struct SessionLabelPickerView: View {
         previousSelectedLabel = name
         selectedLabel = name
         name = ""
-//        sessionLabels.save()
+        sessionLabels.save()
             
     }
     
@@ -70,7 +71,7 @@ struct SessionLabelPickerView: View {
 
 struct SessionLabelPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionLabelPickerView(selectedLabel: "")
+        SessionLabelPickerView(selectedLabel: .constant(""))
             .environmentObject(SessionLabels())
     }
 }
