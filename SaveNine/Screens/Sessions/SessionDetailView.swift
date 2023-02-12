@@ -29,6 +29,10 @@ struct SessionDetailView: View {
         NavigationStack {
             Form {
                 Section {
+                    SessionLabelPickerView(selectedLabel: "")
+                }
+                
+                Section {
                     DatePicker("Starts", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
                     DatePicker("Ends", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
                 }
@@ -90,5 +94,6 @@ struct SessionDetailView: View {
 struct SessionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         SessionDetailView(session: Session.Example)
+            .environmentObject(SessionLabels())
     }
 }

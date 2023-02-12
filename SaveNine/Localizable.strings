@@ -117,7 +117,7 @@
 
 /* Sessions Details Sheet */
 "Session Details" = "Session Details";
-"Session Label" = "Session Label";
+"Label" = "Label";
 "Starts" = "Starts";
 "Ends" = "Ends";
 "Duration" = "Duration";

@@ -25,7 +25,7 @@ struct SessionLabelPickerView: View {
     }
     
     var body: some View {
-        Picker("Labels", selection: $selectedLabel) {
+        Picker("Label", selection: $selectedLabel) {
             ForEach(sessionLabels.labels) { sessionLabel in
                 Text(sessionLabel.name).tag(sessionLabel.name)
             }
@@ -45,9 +45,9 @@ struct SessionLabelPickerView: View {
     }
     
     func addLabel() {
-        if name.isEmpty
-        || name.lowercased().contains(Defaults.addLabel.rawValue.lowercased())
-        || name.lowercased().contains(Defaults.none.rawValue.lowercased()) {
+        if name.trimmingCharacters(in: .whitespaces).isEmpty
+            || name.lowercased().trimmingCharacters(in: .whitespaces) == Defaults.addLabel.rawValue.lowercased()
+            || name.lowercased().trimmingCharacters(in: .whitespaces) == Defaults.none.rawValue.lowercased() {
             name = ""
             return
         }
