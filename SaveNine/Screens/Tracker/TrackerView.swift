@@ -15,7 +15,7 @@ struct TrackerView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
-    @State private var label: String = ""
+    @State private var label: String = DefaultLabel.none.rawValue
     @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
     @State private var start: Date?

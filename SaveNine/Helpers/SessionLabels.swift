@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum DefaultLabel: String {
+    case addLabel = "Add Label"; case none = "None"
+}
+
 final class SessionLabels: ObservableObject {
     @Published var labels = [SessionLabel]()
     
@@ -21,9 +25,14 @@ final class SessionLabels: ObservableObject {
         }
     }
     
-    func add(label: SessionLabel) {
-        guard !labels.contains(where: { $0.name.lowercased() == label.name.lowercased() }) else { return }
-        labels.append(label)
+    func add(name: String) {
+        if name.trimmingCharacters(in: .whitespaces).isEmpty
+            || name.lowercased().trimmingCharacters(in: .whitespaces) == DefaultLabel.addLabel.rawValue.lowercased()
+            || name.lowercased().trimmingCharacters(in: .whitespaces) == DefaultLabel.none.rawValue.lowercased()
+            || labels.contains(where: { $0.name.lowercased() == name.lowercased() }) { return }
+        
+        labels.append(.init(id: UUID(), name: name, lastUsed: Date()))
+        save()
     }
     
     func get(_ id: UUID) -> SessionLabel? {
@@ -41,5 +50,24 @@ final class SessionLabels: ObservableObject {
     func save() {
         let data = try? JSONEncoder().encode(labels)
         try? data?.write(to: url)
+    }
+}
+
+struct SessionLabel: Codable, Identifiable {
+    let id: UUID
+    let name: String
+    let lastUsed: Date
+    
+    static var Example: SessionLabel {
+        .init(id: UUID(), name: "Quilting", lastUsed: Date())
+    }
+    
+    static var Examples: [SessionLabel] {
+        [
+            .init(id: UUID(), name: "Cutting", lastUsed: Date()),
+            .init(id: UUID(), name: "Designing", lastUsed: Date()),
+            .init(id: UUID(), name: "Influencing", lastUsed: Date()),
+            .init(id: UUID(), name: "Quilting", lastUsed: Date()),
+        ]
     }
 }

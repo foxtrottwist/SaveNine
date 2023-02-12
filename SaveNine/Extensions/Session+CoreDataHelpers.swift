@@ -25,7 +25,7 @@ extension Session {
     }
     
     var sessionLabel: String {
-        label ?? ""
+        label ?? DefaultLabel.none.rawValue
     }
     
     static var Example: Session {
