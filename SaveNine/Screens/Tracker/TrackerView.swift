@@ -12,8 +12,8 @@ import WidgetKit
 struct TrackerView: View {
     @ObservedObject var project: Project
 
-    @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
+    @EnvironmentObject var dataController: DataController
     
     @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
@@ -33,7 +33,7 @@ struct TrackerView: View {
     
     var body: some View {
         VStack {
-            SessionLabelPickerView(selectedLabel: "", sessionLabels: [])
+            SessionLabelPickerView(selectedLabel: "")
             TimerView(start: start)
             
             HStack {

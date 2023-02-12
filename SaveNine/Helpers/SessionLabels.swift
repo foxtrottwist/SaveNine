@@ -8,7 +8,7 @@
 import Foundation
 
 final class SessionLabels: ObservableObject {
-    @Published var sessionLabels = [SessionLabel]()
+    @Published var labels = [SessionLabel]()
     
     let url = URL.documentsDirectory.appending(path: appendFileExtension(to: "sessionLabels", using: .json))
     
@@ -17,29 +17,29 @@ final class SessionLabels: ObservableObject {
         guard let data = try? Data(contentsOf: url) else { return }
         
         if let labels = try? JSONDecoder().decode([SessionLabel].self, from: data) {
-            sessionLabels = labels
+            self.labels = labels
         }
     }
     
     func add(label: SessionLabel) {
-        guard !sessionLabels.contains(where: { $0.name.lowercased() == label.name.lowercased() }) else { return }
-        sessionLabels.append(label)
+        guard !labels.contains(where: { $0.name.lowercased() == label.name.lowercased() }) else { return }
+        labels.append(label)
     }
     
     func get(_ id: UUID) -> SessionLabel? {
-        return sessionLabels.first(where: { $0.id == id })
+        return labels.first(where: { $0.id == id })
     }
     
     func remove(label: SessionLabel) {
-        sessionLabels.removeAll(where: { $0.id == label.id })
+        labels.removeAll(where: { $0.id == label.id })
     }
     
     func removeAll() {
-        sessionLabels.removeAll()
+        labels.removeAll()
     }
     
     func save() {
-        let data = try? JSONEncoder().encode(sessionLabels)
+        let data = try? JSONEncoder().encode(labels)
         try? data?.write(to: url)
     }
 }
