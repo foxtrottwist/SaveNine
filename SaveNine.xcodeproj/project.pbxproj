@@ -49,13 +49,17 @@
 		65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */; };
 		65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023A28D121AD00567676 /* PhotoPickerView.swift */; };
 		65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* DocumentHelpers.swift */; };
+		65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
+		65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
+		65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
+		65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
 		65EF242A28DF870A003749F3 /* ProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF242928DF870A003749F3 /* ProjectNameView.swift */; };
 		65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7182964761C00CABB3C /* ProjectWidget.swift */; };
 		65F4A71A2964771100CABB3C /* ProjectWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7182964761C00CABB3C /* ProjectWidget.swift */; };
 		65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
 		65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
-		65F4A7262965BB4B00CABB3C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Extension.swift */; };
-		65F4A7272965BB4B00CABB3C /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Extension.swift */; };
+		65F4A7262965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */; };
+		65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */; };
 		65F4A72C2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */; };
 		65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */; };
 		65F4A72F2965E5B900CABB3C /* S9WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */; };
@@ -139,11 +143,13 @@
 		65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		65DD023A28D121AD00567676 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		65DD023E28D1318800567676 /* DocumentHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentHelpers.swift; sourceTree = "<group>"; };
+		65EC34F92999DA3A00AB396A /* FileManager+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Images.swift"; sourceTree = "<group>"; };
+		65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+AppGroup.swift"; sourceTree = "<group>"; };
 		65EF242928DF870A003749F3 /* ProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameView.swift; sourceTree = "<group>"; };
 		65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNineWidgetExtension.entitlements; sourceTree = "<group>"; };
 		65F4A7182964761C00CABB3C /* ProjectWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWidget.swift; sourceTree = "<group>"; };
 		65F4A7222965B0C900CABB3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		65F4A7252965BB4B00CABB3C /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Widgets.swift"; sourceTree = "<group>"; };
 		65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S9WidgetKind.swift; sourceTree = "<group>"; };
 		65F4A7312966826E00CABB3C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -375,7 +381,9 @@
 				65F4A7222965B0C900CABB3C /* Helpers.swift */,
 				65F4A7312966826E00CABB3C /* Date+Extension.swift */,
 				65F4A736296684FC00CABB3C /* Double+Extension.swift */,
-				65F4A7252965BB4B00CABB3C /* FileManager+Extension.swift */,
+				65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */,
+				65EC34F92999DA3A00AB396A /* FileManager+Images.swift */,
+				65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */,
 				65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */,
 				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
 				65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */,
@@ -486,7 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F4A7272965BB4B00CABB3C /* FileManager+Extension.swift in Sources */,
+				65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				65A51C21294FBD1A00A3B960 /* SaveNineWidgetLiveActivity.swift in Sources */,
 				65F4A73929668C2700CABB3C /* Double+Extension.swift in Sources */,
 				65F4A7322966826E00CABB3C /* Date+Extension.swift in Sources */,
@@ -496,11 +504,13 @@
 				65A51C23294FBD1A00A3B960 /* LastTrackedWidget.swift in Sources */,
 				653B2DDD2976502400EAD9CD /* LastTrackedView.swift in Sources */,
 				65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */,
+				65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				652BFD01295F367000179792 /* View+Extension.swift in Sources */,
 				65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */,
 				65A51C33294FC7F400A3B960 /* TrackerAttributes.swift in Sources */,
 				65F4A71A2964771100CABB3C /* ProjectWidget.swift in Sources */,
 				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
+				65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,14 +546,16 @@
 				6560AC37291AFD110047E2C6 /* SessionRowView.swift in Sources */,
 				65F648B128E0FBF90086512D /* Item+CoreDataHelpers.swift in Sources */,
 				65AFF19D299531EC009AB991 /* SessionLabelPickerView.swift in Sources */,
+				65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 				65464D2128F26B74008E1EE6 /* UpdateNameView.swift in Sources */,
 				6544E57D28F067E9009CB296 /* TagView.swift in Sources */,
 				651CE21F28FB0A0500E1B248 /* NoContentView.swift in Sources */,
-				65F4A7262965BB4B00CABB3C /* FileManager+Extension.swift in Sources */,
+				65F4A7262965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				6572FFB829981A96006493DB /* SessionLabels.swift in Sources */,
 				65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */,
 				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
+				65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */,
 				651CE22628FB13D100E1B248 /* Session+CoreDataHelpers.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
