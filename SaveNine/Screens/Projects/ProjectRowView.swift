@@ -15,10 +15,10 @@ struct ProjectRowView: View {
     init(project: Project) {
         self.project = project
         
-        if let imageName = project.image {
-            self.uiImage = getImage(named: imageName)
-        } else {
+        if project.projectImage.isEmpty {
             self.uiImage = nil
+        } else {
+            self.uiImage = FileManager.getImage(named: project.projectImage)
         }
     }
     
