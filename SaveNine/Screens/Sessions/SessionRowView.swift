@@ -39,8 +39,15 @@ struct SessionRowView: View {
                 VStack(alignment: .leading) {
                     sessionDateDescription
                     
-                    Text(session.formattedDuration)
-                        .font(.title2)
+                    HStack {
+                        Text(session.sessionLabel)
+                            .font(.headline)
+                            .foregroundColor(session.sessionLabel == DefaultLabel.none.rawValue ? .clear : nil)
+                        
+                        Spacer()
+                        Text(session.formattedDuration)
+                            .font(.title2)
+                    }
                 }
                 Spacer()
             }

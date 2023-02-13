@@ -28,6 +28,7 @@ struct SessionsView: View {
                     }
                     .onDelete(perform: deleteSession)
                 }
+                .listStyle(.grouped)
                 .toolbar {
                     ShareLink(item: sharedSessions) {
                         Label ("Export Sessions", systemImage: "square.and.arrow.up")
