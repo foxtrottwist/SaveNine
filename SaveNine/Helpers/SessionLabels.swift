@@ -26,10 +26,13 @@ final class SessionLabels: ObservableObject {
     }
     
     func add(name: String) {
-        if name.trimmingCharacters(in: .whitespaces).isEmpty
-            || name.lowercased().trimmingCharacters(in: .whitespaces) == DefaultLabel.addLabel.rawValue.lowercased()
-            || name.lowercased().trimmingCharacters(in: .whitespaces) == DefaultLabel.none.rawValue.lowercased()
-            || labels.contains(where: { $0.name.lowercased() == name.lowercased() }) { return }
+        let name = name.trimmingCharacters(in: .whitespaces)
+        let test = name.lowercased()
+        
+        if test.isEmpty
+            || test == DefaultLabel.addLabel.rawValue.lowercased()
+            || test == DefaultLabel.none.rawValue.lowercased()
+            || labels.contains(where: { $0.name.lowercased() == test }) { return }
         
         labels.append(.init(id: UUID(), name: name, lastUsed: Date()))
         save()
