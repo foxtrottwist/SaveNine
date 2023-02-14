@@ -11,7 +11,6 @@ import SwiftUI
 struct ProjectDetailView: View {
     @ObservedObject var project: Project
     
-    @Environment(\.defaultMinListRowHeight) var defaultMinListRowHeight
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
@@ -61,8 +60,6 @@ struct ProjectDetailView: View {
                     Divider()
                     
                     TrackerView(project: project)
-                    projectDetailLinks
-                    
                 }
                 
                 Form {
@@ -118,6 +115,16 @@ struct ProjectDetailView: View {
     
     var projectDetailsMenuToolbarItem: some View {
         Menu {
+            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: project.projectShareSessions)) {
+                Label("Sessions", systemImage: "clock")
+            }
+            
+            NavigationLink(destination: ChecklistView(project: project)) {
+                Label("Checklists", systemImage: "checklist")
+            }
+            
+            Divider()
+            
             Button {
                 project.closed.toggle()
                 dataController.save()
@@ -132,8 +139,6 @@ struct ProjectDetailView: View {
             }
             .disabled(project.tracking)
 
-            Divider()
-
             Button {
                 showingDeleteConfirm.toggle()
             } label: {
@@ -144,20 +149,6 @@ struct ProjectDetailView: View {
         } label: {
             Label("Menu", systemImage: "ellipsis.circle")
         }
-    }
-    
-    var projectDetailLinks: some View {
-        List {
-            NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: project.projectShareSessions)) {
-                Label("Sessions", systemImage: "stopwatch")
-            }
-            
-            NavigationLink(destination: ChecklistView(project: project)) {
-                Label("Checklists", systemImage: "list.triangle")
-            }
-        }
-        .frame(height: defaultMinListRowHeight * 2)
-        .listStyle(.plain)
     }
     
     func editProject() {
