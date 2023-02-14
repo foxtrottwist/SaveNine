@@ -9,6 +9,8 @@ import CoreData
 import SwiftUI
 
 struct ProjectsView: View {
+    static let tag: String? = "Projects"
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     

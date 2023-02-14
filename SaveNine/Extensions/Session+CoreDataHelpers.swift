@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 10/15/22.
 //
 
+import CoreData
 import Foundation
 
 extension Session {
@@ -41,5 +42,13 @@ extension Session {
         }
         
         return session
+    }
+    
+    static func fetchSessions(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> NSFetchRequest<Session> {
+        let request = Session.fetchRequest()
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptors
+        
+        return request
     }
 }

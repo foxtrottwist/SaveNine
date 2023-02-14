@@ -41,7 +41,7 @@ struct SessionRowView: View {
                     
                     HStack {
                         Text(session.sessionLabel)
-                            .font(.headline)
+                            .font(.callout)
                             .foregroundColor(session.sessionLabel == DefaultLabel.none.rawValue ? .clear : nil)
                         
                         Spacer()

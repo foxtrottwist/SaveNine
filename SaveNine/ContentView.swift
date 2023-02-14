@@ -7,9 +7,29 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
+    @SceneStorage("selectedView") var selectedView: String?
+    
     var body: some View {
-        ProjectsView()
+        TabView(selection: $selectedView) {
+            ProjectsView()
+                .tag(ProjectsView.tag)
+                .tabItem {
+                    Image(systemName: "tray")
+                    Text("Projects")
+                }
+            
+            
+            SessionsTabView()
+                .tag(SessionsTabView.tag)
+                .tabItem {
+                    Image(systemName: "clock")
+                    Text("Sessions")
+                }
+        }
+        .onOpenURL { _ in
+            selectedView = ProjectsView.tag
+        }
     }
 }
 
