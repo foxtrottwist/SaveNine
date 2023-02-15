@@ -45,15 +45,19 @@ struct SessionsTabView: View {
                         }
                         
                         Menu {
-                            Picker("Sort Options", selection: $sessionSort) {
+                            Picker("Sort Items", selection: $sessionSort) {
                                 Text("Project").tag(SessionSort.project)
                                 Text("Start Date").tag(SessionSort.startDate)
                             }
-                            Divider()
                             
-                            Picker("Sort By Date", selection: $sortAscending) {
-                                Text("Newest First").tag(false)
-                                Text("Oldest First").tag(true)
+                            Picker("Sort Items Options", selection: $sortAscending) {
+                                if sessionSort == .startDate {
+                                    Text("Newest First").tag(false)
+                                    Text("Oldest First").tag(true)
+                                } else if sessionSort == .project {
+                                    Text("Ascending").tag(true)
+                                    Text("Descending").tag(false)
+                                }
                             }
                         } label: {
                             Label("Sort By", systemImage: "arrow.up.arrow.down")
@@ -71,8 +75,7 @@ struct SessionsTabView: View {
     }
     
     private enum SessionSort {
-        case project
-        case startDate
+        case project, startDate
     }
     
     private func sortDescriptors() -> [NSSortDescriptor] {

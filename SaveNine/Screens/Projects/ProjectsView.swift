@@ -16,6 +16,7 @@ struct ProjectsView: View {
     
     @State private var disabled = false
     @State private var path: [Project] = []
+    @State private var projectSort = ProjectSort.creationDate
     @State private var searchText = ""
     @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
@@ -125,9 +126,23 @@ struct ProjectsView: View {
                     Label("Closed", systemImage: "archivebox").tag(true)
                 }
                 
-                Picker("Sort By Creation Date", selection: $sortAscending) {
-                    Text("Newest First").tag(false)
-                    Text("Oldest First").tag(true)
+                Menu {
+                    Picker("Sort Items", selection: $projectSort) {
+                        Text("Creation Date").tag(ProjectSort.creationDate)
+                        Text("Title").tag(ProjectSort.name)
+                    }
+                    
+                    Picker("Sort Items Options", selection: $sortAscending) {
+                        if projectSort == .creationDate {
+                            Text("Newest First").tag(false)
+                            Text("Oldest First").tag(true)
+                        } else if projectSort == .name {
+                            Text("Ascending").tag(true)
+                            Text("Descending").tag(false)
+                        }
+                    }
+                } label: {
+                    Label("Sort By", systemImage: "arrow.up.arrow.down")
                 }
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
@@ -149,30 +164,26 @@ struct ProjectsView: View {
         newProject.creationDate = Date()
     }
     
-    func createPredicate() -> NSPredicate {
-        let closedPredicate = NSPredicate(format: "closed = %d", showClosedProjects)
-        
-        if selectedTags.isEmpty && searchText.isEmpty {
-            return closedPredicate
-        }
-        
-        let searchPredicate = NSPredicate(format: "%K CONTAINS[c] %@", "name", searchText)
-        
-        if selectedTags.isEmpty {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate, searchPredicate])
-        }
-        
-        let tagPredicate = selectedTags.map { NSPredicate(format: "%@ IN tags.name", $0.ptagName) }
-        
-        if searchText.isEmpty {
-            return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate] + tagPredicate)
-        }
-        
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [closedPredicate, searchPredicate] + tagPredicate)
+    private func createPredicate() -> NSPredicate {
+        return FetchPredicate.create(
+            from: [
+                (.closed, showClosedProjects),
+                !searchText.isEmpty ? (.search, searchText) : nil,
+            ] + selectedTags.map { (.tag, $0.ptagName) }
+        )
+    }
+    
+    enum ProjectSort {
+        case creationDate, name
     }
     
     func sortProjects() -> [NSSortDescriptor] {
-        return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortAscending)]
+        switch projectSort {
+        case .creationDate:
+            return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortAscending)]
+        case .name:
+            return [NSSortDescriptor(keyPath: \Project.name, ascending: sortAscending)]
+        }
     }
 }
 

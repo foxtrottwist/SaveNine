@@ -23,8 +23,13 @@
 "Project Status" = "Project Status"; /* Picker title */
 "Open" = "Open"; /* Picker options */
 "Closed" = "Closed"; /* Picker options */
+"Creation Date" = "Creation Date";
+"Title" = "Title";
+"Ascending" = "Ascending";
+"Descending" = "Descending";
 
-"Sort By Creation Date" = "Sort By Creation Date"; /* Picker title */
+"Sort Items" = "Sort Items"; /* Picker title */
+"Sort Items Options" = "Sort Items Options"; /* Picker title */
 "Newest First" = "Newest First"; /* Picker options */
 "Oldest First" = "Oldest First"; /* Picker options */
 
