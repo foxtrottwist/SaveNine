@@ -17,7 +17,7 @@ extension FileManager {
     /// - Parameter name: The name of the image file. The ".jpeg" extension is appended by the method.
     /// - Returns: The image retrieved or nil if there was no image found.
     static func getImage(named name: String) -> UIImage? {
-        let url = self.imageDirectory.appending(path: appendFileExtension(to: name, using: .jpeg))
+        let url = self.imageDirectory.appending(path: FileExtension.append(to: name, using: .jpeg))
         
         guard self.default.fileExists(atPath: url.path()) else {
             print("Image does not exist at path: \(url)")
@@ -41,7 +41,7 @@ extension FileManager {
             let url = self.imageDirectory
             
             createDirectoryIfNoneExist(at: url)
-            let path = url.appending(path: appendFileExtension(to: name, using: .jpeg))
+            let path = url.appending(path: FileExtension.append(to: name, using: .jpeg))
            
             do {
                 try data.write(to: path)
@@ -55,7 +55,7 @@ extension FileManager {
     /// - Parameter name: The name of the file to delete. The ".jpeg" extension is appended by the method.
     static func deleteImage(named name: String) {
         guard !name.isEmpty else { return }
-        let url = imageDirectory.appending(path: appendFileExtension(to: name, using: .jpeg))
+        let url = imageDirectory.appending(path: FileExtension.append(to: name, using: .jpeg))
            
         guard self.default.fileExists(atPath: url.path()) else {
                print("File does not exist at path: \(url)")

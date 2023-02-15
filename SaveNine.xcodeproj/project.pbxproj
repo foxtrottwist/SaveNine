@@ -52,6 +52,8 @@
 		65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */; };
 		65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023A28D121AD00567676 /* PhotoPickerView.swift */; };
 		65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* DocumentHelpers.swift */; };
+		65DD6DC8299D299B00FA1E48 /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD6DC7299D299B00FA1E48 /* FileExtension.swift */; };
+		65DD6DC9299D299B00FA1E48 /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD6DC7299D299B00FA1E48 /* FileExtension.swift */; };
 		65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
 		65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
 		65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
@@ -149,6 +151,7 @@
 		65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		65DD023A28D121AD00567676 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		65DD023E28D1318800567676 /* DocumentHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentHelpers.swift; sourceTree = "<group>"; };
+		65DD6DC7299D299B00FA1E48 /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		65EC34F92999DA3A00AB396A /* FileManager+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Images.swift"; sourceTree = "<group>"; };
 		65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+AppGroup.swift"; sourceTree = "<group>"; };
 		65EF242928DF870A003749F3 /* ProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameView.swift; sourceTree = "<group>"; };
@@ -258,10 +261,10 @@
 		6560AC31291AC5470047E2C6 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
-				652D025528D79DA300F818E7 /* SessionsView.swift */,
+				6560AC34291AF6660047E2C6 /* SessionDetailView.swift */,
 				6560AC36291AFD110047E2C6 /* SessionRowView.swift */,
 				65C9A345299B3619001FABB1 /* SessionsTabView.swift */,
-				6560AC34291AF6660047E2C6 /* SessionDetailView.swift */,
+				652D025528D79DA300F818E7 /* SessionsView.swift */,
 			);
 			path = Sessions;
 			sourceTree = "<group>";
@@ -384,19 +387,28 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		65F4A71729646B8900CABB3C /* Shared */ = {
+		65DD6DC6299D294C00FA1E48 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				65F4A7222965B0C900CABB3C /* Helpers.swift */,
 				65F4A7312966826E00CABB3C /* Date+Extension.swift */,
 				65F4A736296684FC00CABB3C /* Double+Extension.swift */,
 				65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */,
 				65EC34F92999DA3A00AB396A /* FileManager+Images.swift */,
 				65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */,
 				65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */,
-				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
-				65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		65F4A71729646B8900CABB3C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				65DD6DC6299D294C00FA1E48 /* Extensions */,
+				65DD6DC7299D299B00FA1E48 /* FileExtension.swift */,
+				65F4A7222965B0C900CABB3C /* Helpers.swift */,
 				65F4A7182964761C00CABB3C /* ProjectWidget.swift */,
+				65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */,
+				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -512,6 +524,7 @@
 				65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
 				65A51C23294FBD1A00A3B960 /* LastTrackedWidget.swift in Sources */,
 				653B2DDD2976502400EAD9CD /* LastTrackedView.swift in Sources */,
+				65DD6DC9299D299B00FA1E48 /* FileExtension.swift in Sources */,
 				65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */,
 				65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				652BFD01295F367000179792 /* View+Extension.swift in Sources */,
@@ -556,6 +569,7 @@
 				65C827C8299C97FF00CAC4C0 /* ProjectFormView.swift in Sources */,
 				6560AC37291AFD110047E2C6 /* SessionRowView.swift in Sources */,
 				65F648B128E0FBF90086512D /* Item+CoreDataHelpers.swift in Sources */,
+				65DD6DC8299D299B00FA1E48 /* FileExtension.swift in Sources */,
 				65AFF19D299531EC009AB991 /* SessionLabelPickerView.swift in Sources */,
 				65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 				65C827C6299C836300CAC4C0 /* FetchPredicate.swift in Sources */,

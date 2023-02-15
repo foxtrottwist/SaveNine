@@ -7,28 +7,6 @@
 
 import Foundation
 
-enum FileExtension: String {
-    case jpeg = ".jpeg"
-    case json = ".json"
-    case png = ".png"
-}
-
-/// Appends a chosen file extension used within the project to the given file name.
-/// - Parameters:
-///   - file: The Name of the file that will have the extension appending.
-///   - using: The extension to use.
-/// - Returns: The complete file name with the extension appended.
-func appendFileExtension(to name: String, using ext: FileExtension) -> String {
-    switch ext {
-    case .jpeg:
-        return name + FileExtension.jpeg.rawValue
-    case .json:
-        return name + FileExtension.json.rawValue
-    case .png:
-        return name + FileExtension.png.rawValue
-    }
-}
-
 /// Checks whether a the given directory exists and creates it if it does not.
 /// - Parameter url: A file URL that specifies the directory to create.
    func createDirectoryIfNoneExist(at url: URL) {

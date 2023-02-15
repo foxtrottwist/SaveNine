@@ -18,7 +18,7 @@ extension FileManager {
     ///   - file: The name of the file to be retrieved. The ".json" extension is appended by the method.
     /// - Returns: The decoded data structure.
     static func readWidgetData<T: Decodable>(_ type: T.Type, from file: String) -> T? {
-        let url = self.widgetsDirectory.appending(path: appendFileExtension(to: file, using: .json))
+        let url = self.widgetsDirectory.appending(path: FileExtension.append(to: file, using: .json))
         
         guard self.default.fileExists(atPath: url.path()) else { return nil }
         guard let data = try? Data(contentsOf: url) else { return nil }
@@ -41,7 +41,7 @@ extension FileManager {
         let url = self.widgetsDirectory
         
         createDirectoryIfNoneExist(at: url)
-        let path = url.appending(path: appendFileExtension(to: file, using: .json))
+        let path = url.appending(path: FileExtension.append(to: file, using: .json))
         
         let encoder = JSONEncoder()
         let data = try? encoder.encode(object)

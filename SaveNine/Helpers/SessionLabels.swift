@@ -14,7 +14,7 @@ enum DefaultLabel: String {
 final class SessionLabels: ObservableObject {
     @Published var labels = [SessionLabel]()
     
-    let url = URL.documentsDirectory.appending(path: appendFileExtension(to: "sessionLabels", using: .json))
+    let url = URL.documentsDirectory.appending(path: FileExtension.append(to: "sessionLabels", using: .json))
     
     init() {
         guard FileManager.default.fileExists(atPath: url.path()) else { return }
