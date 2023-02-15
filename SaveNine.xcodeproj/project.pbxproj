@@ -217,7 +217,6 @@
 				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
 				651CE21E28FB0A0500E1B248 /* NoContentView.swift */,
 				6560AC2F291AA2AB0047E2C6 /* FetchRequestView.swift */,
-				65AFF19C299531EC009AB991 /* SessionLabelPickerView.swift */,
 				65464D2028F26B74008E1EE6 /* UpdateNameView.swift */,
 			);
 			path = Reuseable;
@@ -262,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				6560AC34291AF6660047E2C6 /* SessionDetailView.swift */,
+				65AFF19C299531EC009AB991 /* SessionLabelPickerView.swift */,
 				6560AC36291AFD110047E2C6 /* SessionRowView.swift */,
 				65C9A345299B3619001FABB1 /* SessionsTabView.swift */,
 				652D025528D79DA300F818E7 /* SessionsView.swift */,

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SessionLabelPickerView: View {
+    let disableAddLabel: Bool
+    
     @EnvironmentObject var sessionLabels: SessionLabels
     
     @Binding var selectedLabel: String
@@ -16,7 +18,9 @@ struct SessionLabelPickerView: View {
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false
     
-    init(selectedLabel: Binding<String>) {
+    init(selectedLabel: Binding<String>, disableAddLabel: Bool = false) {
+        self.disableAddLabel = disableAddLabel
+        
         _selectedLabel = selectedLabel
         _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
     }
@@ -27,9 +31,12 @@ struct SessionLabelPickerView: View {
                 Text(sessionLabel.name).tag(sessionLabel.name)
             }
             
-            Divider()
             Text(DefaultLabel.none.rawValue).tag(DefaultLabel.none.rawValue)
-            Text(DefaultLabel.addLabel.rawValue).tag(DefaultLabel.addLabel.rawValue)
+            
+            if !disableAddLabel {
+                Divider()
+                Text(DefaultLabel.addLabel.rawValue).tag(DefaultLabel.addLabel.rawValue)
+            }
         }
         .alert(DefaultLabel.addLabel.rawValue, isPresented: $showingAddLabelAlert) {
             UpdateNameView(name: $name, cancelAction: cancelAction, confirmAction: addLabel)

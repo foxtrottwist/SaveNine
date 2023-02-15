@@ -12,6 +12,7 @@
 "Edit" = "Edit";
 "Menu" = "Menu";
 "OK" = "OK";
+"Project" = "Project";
 "Projects" = "Projects";
 "Tags" = "Tags";
 
@@ -110,6 +111,13 @@
 
 /* Sessions View */
 "Export Sessions" = "Export Sessions";
+
+/* Sessions Menu */
+"Labels" = "Labels";
+"Clear Filter" = "Clear Filter";
+"Filter By" = "Filter By";
+"Sort By" = "Sort By";
+"Start Date" = "Start Date";
 
 
 /* Sessions View Empty State */
