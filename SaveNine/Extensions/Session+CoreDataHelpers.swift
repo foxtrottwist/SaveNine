@@ -11,13 +11,11 @@ import Foundation
 extension Session {
     var formattedStartDate: String {
         guard let startDate else { return "" }
-        
         return startDate.formatted(date: .abbreviated, time: .shortened)
     }
     
     var formattedEndDate: String {
         guard let endDate else { return "" }
-        
         return endDate.formatted(date: .abbreviated, time: .shortened)
     }
     
@@ -45,7 +43,7 @@ extension Session {
     }
     
     static func fetchSessions(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> NSFetchRequest<Session> {
-        let predicates = [NSPredicate(format: "duration != 0"), predicate].compactMap { $0 }
+        let predicates = [NSPredicate(format: "duration != 0 and project.closed = false"), predicate].compactMap { $0 }
         
         let request = Session.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
