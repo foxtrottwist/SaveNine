@@ -54,6 +54,7 @@ struct ProjectDetailView: View {
             VStack {
                 PhotoPickerView(uiImage: $image)
                     .disabled(!editing)
+                    .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
                 
                 if !editing {
                     Text(name).font(.title2)
@@ -62,41 +63,9 @@ struct ProjectDetailView: View {
                     TrackerView(project: project)
                 }
                 
-                Form {
-                    if editing {
-                        Text("Project Name")
-                            .font(.callout)
-                            .fontWeight(.light)
-                        
-                        TextField("Project Name", text: $name)
-                            .padding(.bottom)
-                    }
-                              
-                    Text("Notes")
-                        .font(.callout)
-                        .fontWeight(.light)
-                        .italic()
-                    
-                    TextField("Notes", text: $detail, axis: .vertical)
-                        .padding(.bottom)
-                    
-                    Text("Tags")
-                        .font(.callout)
-                        .fontWeight(.light)
-                        .italic()
-                    
-                    TextField("Text, separated by spaces", text: $tags)
-                        .autocapitalization(.none)
-                        .autocorrectionDisabled(true)
-                        .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                }
-                .animation(.easeIn, value: editing)
-                .disabled(!editing)
-                .formStyle(.columns)
-                .padding()
-                .onChange(of: detail, perform: { detail in project.detail = detail })
-                .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-                .onChange(of: editing, perform: editTags)
+                ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
+                    .onChange(of: detail, perform: { detail in project.detail = detail })
+                    .onChange(of: editing, perform: editTags)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -126,10 +95,7 @@ struct ProjectDetailView: View {
             Divider()
             
             Button {
-                project.closed.toggle()
-                dataController.save()
-                
-                dismiss()
+                toggleProjectClosed()
             } label: {
                 if project.closed {
                     Label("Reopen project", systemImage: "tray.full")
@@ -162,6 +128,12 @@ struct ProjectDetailView: View {
         }
 
         editing.toggle()
+    }
+    
+    func toggleProjectClosed() {
+        project.closed.toggle()
+        project.managedObjectContext?.refreshAllObjects()
+        dismiss()
     }
     
     func update(uiImage: UIImage?, in project: Project) {
