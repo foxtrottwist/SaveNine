@@ -45,8 +45,10 @@ extension Session {
     }
     
     static func fetchSessions(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> NSFetchRequest<Session> {
+        let predicates = [NSPredicate(format: "duration != 0"), predicate].compactMap { $0 }
+        
         let request = Session.fetchRequest()
-        request.predicate = predicate
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.sortDescriptors = sortDescriptors
         
         return request

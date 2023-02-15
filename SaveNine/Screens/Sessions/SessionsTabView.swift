@@ -10,12 +10,11 @@ import SwiftUI
 struct SessionsTabView: View {
     static let tag: String? = "Sessions"
 
-    let predicate = NSPredicate(format: "duration != 0")
     let sortDescriptors = [NSSortDescriptor(keyPath: \Session.startDate, ascending: false)]
     
     var body: some View {
         NavigationStack {
-            FetchRequestView(Session.fetchSessions(predicate: predicate, sortDescriptors: sortDescriptors)) { sessions in
+            FetchRequestView(Session.fetchSessions(predicate: FetchPredicate.create(from: []), sortDescriptors: sortDescriptors)) { sessions in
                 List(sessions) { session in
                     VStack(alignment: .leading) {
                         Text(session.project?.projectName ?? "")
