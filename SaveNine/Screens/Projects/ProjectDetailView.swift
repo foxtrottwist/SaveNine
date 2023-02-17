@@ -32,18 +32,7 @@ struct ProjectDetailView: View {
         _tags = State(wrappedValue: project.projectTagsString)
         
         if !project.projectImage.isEmpty {
-            if let uiImage = getImage(named: project.projectImage) {
-                _image = State(wrappedValue: uiImage)
-                // Temporary Migration code. If an image is stored in the documents directory
-                // preform the following.
-                let imageName = "\(project.id!)"
-                // Save to App Group container
-                FileManager.save (uiImage: uiImage, named: imageName)
-                // Delete the original file
-                deleteFile (named: project.projectImage)
-                // Rename the image to the id only (previously the extension was included)
-                project.image = imageName
-            } else if let uiImage = FileManager.getImage (named: project.projectImage) {
+            if let uiImage = FileManager.getImage (named: project.projectImage) {
                 _image = State (wrappedValue: uiImage)
             }
         }
@@ -146,8 +135,6 @@ struct ProjectDetailView: View {
                 FileManager.save(uiImage: uiImage, named: name)
             }
         } else {
-            // Temporary Migration code. The first call delete call will be removed.
-            deleteFile(named: project.projectImage)
             FileManager.deleteImage(named: project.projectImage)
         }
     }
@@ -197,8 +184,6 @@ struct ProjectDetailView: View {
     }
     
     func delete(project: Project) {
-        // Temporary Migration code. The first delete call will be removed
-        deleteFile(named: project.projectImage)
         FileManager.deleteImage(named: project.projectImage)
         dataController.delete(project)
         dismiss()

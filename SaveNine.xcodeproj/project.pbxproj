@@ -51,7 +51,7 @@
 		65D2315E28CD5B3B00A91A47 /* ProjectsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2315D28CD5B3B00A91A47 /* ProjectsTabView.swift */; };
 		65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */; };
 		65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023A28D121AD00567676 /* PhotoPickerView.swift */; };
-		65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* DocumentHelpers.swift */; };
+		65DD023F28D1318800567676 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD023E28D1318800567676 /* Helpers.swift */; };
 		65DD6DC8299D299B00FA1E48 /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD6DC7299D299B00FA1E48 /* FileExtension.swift */; };
 		65DD6DC9299D299B00FA1E48 /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DD6DC7299D299B00FA1E48 /* FileExtension.swift */; };
 		65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
@@ -152,7 +152,7 @@
 		65D2315D28CD5B3B00A91A47 /* ProjectsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTabView.swift; sourceTree = "<group>"; };
 		65D2316128CD6ED700A91A47 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
 		65DD023A28D121AD00567676 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
-		65DD023E28D1318800567676 /* DocumentHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentHelpers.swift; sourceTree = "<group>"; };
+		65DD023E28D1318800567676 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		65DD6DC7299D299B00FA1E48 /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		65EC34F92999DA3A00AB396A /* FileManager+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Images.swift"; sourceTree = "<group>"; };
 		65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+AppGroup.swift"; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		659FDA6A28E232AC00899A2E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				65DD023E28D1318800567676 /* DocumentHelpers.swift */,
+				65DD023E28D1318800567676 /* Helpers.swift */,
 				65C827C5299C836300CAC4C0 /* FetchPredicate.swift */,
 				6572FFB729981A96006493DB /* SessionLabelController.swift */,
 				65FC92D5299FFD4B008871A5 /* SortOption.swift */,
@@ -586,7 +586,7 @@
 				652AE95028D6550E0001294F /* TrackerView.swift in Sources */,
 				6572FFB829981A96006493DB /* SessionLabelController.swift in Sources */,
 				65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */,
-				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
+				65DD023F28D1318800567676 /* Helpers.swift in Sources */,
 				65FC92D6299FFD4B008871A5 /* SortOption.swift in Sources */,
 				65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */,
