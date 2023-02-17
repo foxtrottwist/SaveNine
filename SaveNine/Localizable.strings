@@ -25,13 +25,13 @@
 "Closed" = "Closed"; /* Picker options */
 "Creation Date" = "Creation Date";
 "Title" = "Title";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
 
-"Sort Items" = "Sort Items"; /* Picker title */
-"Sort Items Options" = "Sort Items Options"; /* Picker title */
+"Sort Options" = "Sort Options"; /* Picker title */
+"Sort Order" = "Sort Order"; /* Picker title */
 "Newest First" = "Newest First"; /* Picker options */
 "Oldest First" = "Oldest First"; /* Picker options */
+"Ascending" = "Ascending";
+"Descending" = "Descending";
 
 "Please add a project to begin." = "Please add a project to begin."; /* Empty State */
 "Open Projects" = "Open Projects"; /* Navigation title */

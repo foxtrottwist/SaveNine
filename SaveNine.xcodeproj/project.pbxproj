@@ -78,6 +78,8 @@
 		65F648B528E0FEEA0086512D /* ChecklistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648B428E0FEEA0086512D /* ChecklistHeaderView.swift */; };
 		65F648B728E100EF0086512D /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648B628E100EF0086512D /* ItemDetailView.swift */; };
 		65F648B928E10B080086512D /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F648B828E10B080086512D /* ChecklistView.swift */; };
+		65FC92D4299F2A9D008871A5 /* SortOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC92D3299F2A9D008871A5 /* SortOptionsView.swift */; };
+		65FC92D6299FFD4B008871A5 /* SortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC92D5299FFD4B008871A5 /* SortOption.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		65F648B428E0FEEA0086512D /* ChecklistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistHeaderView.swift; sourceTree = "<group>"; };
 		65F648B628E100EF0086512D /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
 		65F648B828E10B080086512D /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
+		65FC92D3299F2A9D008871A5 /* SortOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsView.swift; sourceTree = "<group>"; };
+		65FC92D5299FFD4B008871A5 /* SortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOption.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +221,7 @@
 				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
 				651CE21E28FB0A0500E1B248 /* NoContentView.swift */,
 				6560AC2F291AA2AB0047E2C6 /* FetchRequestView.swift */,
+				65FC92D3299F2A9D008871A5 /* SortOptionsView.swift */,
 				65464D2028F26B74008E1EE6 /* UpdateNameView.swift */,
 			);
 			path = Reuseable;
@@ -299,6 +304,7 @@
 				65DD023E28D1318800567676 /* DocumentHelpers.swift */,
 				65C827C5299C836300CAC4C0 /* FetchPredicate.swift */,
 				6572FFB729981A96006493DB /* SessionLabels.swift */,
+				65FC92D5299FFD4B008871A5 /* SortOption.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -581,11 +587,13 @@
 				6572FFB829981A96006493DB /* SessionLabels.swift in Sources */,
 				65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */,
 				65DD023F28D1318800567676 /* DocumentHelpers.swift in Sources */,
+				65FC92D6299FFD4B008871A5 /* SortOption.swift in Sources */,
 				65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */,
 				651CE22628FB13D100E1B248 /* Session+CoreDataHelpers.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
 				65DD023B28D121AD00567676 /* PhotoPickerView.swift in Sources */,
+				65FC92D4299F2A9D008871A5 /* SortOptionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

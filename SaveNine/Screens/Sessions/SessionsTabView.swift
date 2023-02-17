@@ -11,13 +11,13 @@ struct SessionsTabView: View {
     static let tag: String? = "Sessions"
 
     @State private var selectedLabel: String = ""
-    @State private var sessionSort = SessionSort.startDate
     @State private var sortAscending = false
+    @State private var sortOption = SortOption.startDate
     
     var body: some View {
         NavigationStack {
             FetchRequestView(
-                Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortDescriptors())
+                Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortSessions())
             ) { sessions in
                 List(sessions) { session in
                     VStack(alignment: .leading) {
@@ -44,24 +44,7 @@ struct SessionsTabView: View {
                             Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                         }
                         
-                        Menu {
-                            Picker("Sort Items", selection: $sessionSort) {
-                                Text("Project").tag(SessionSort.project)
-                                Text("Start Date").tag(SessionSort.startDate)
-                            }
-                            
-                            Picker("Sort Items Options", selection: $sortAscending) {
-                                if sessionSort == .startDate {
-                                    Text("Newest First").tag(false)
-                                    Text("Oldest First").tag(true)
-                                } else if sessionSort == .project {
-                                    Text("Ascending").tag(true)
-                                    Text("Descending").tag(false)
-                                }
-                            }
-                        } label: {
-                            Label("Sort By", systemImage: "arrow.up.arrow.down")
-                        }
+                        SortOptionsView(options: [.project, .startDate], sortOption: $sortOption, sortOrder: $sortAscending)
                     } label: {
                         Label("Sessions Menu", systemImage: "ellipsis.circle")
                     }
@@ -74,16 +57,14 @@ struct SessionsTabView: View {
         return FetchPredicate.create(from: [!selectedLabel.isEmpty ? (.label, selectedLabel) : nil])
     }
     
-    private enum SessionSort {
-        case project, startDate
-    }
-    
-    private func sortDescriptors() -> [NSSortDescriptor] {
-        switch sessionSort {
+    private func sortSessions() -> [NSSortDescriptor] {
+        switch sortOption {
         case .project:
             return [NSSortDescriptor(keyPath: \Session.project, ascending: sortAscending)]
         case .startDate:
             return [NSSortDescriptor(keyPath: \Session.startDate, ascending: sortAscending)]
+        default:
+            return []
         }
     }
 }

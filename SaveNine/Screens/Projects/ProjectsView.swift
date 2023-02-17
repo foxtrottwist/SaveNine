@@ -16,12 +16,12 @@ struct ProjectsView: View {
     
     @State private var disabled = false
     @State private var path: [Project] = []
-    @State private var projectSort = ProjectSort.creationDate
     @State private var searchText = ""
     @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
     @State private var sortAscending = false
+    @State private var sortOption = SortOption.creationDate
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -126,24 +126,7 @@ struct ProjectsView: View {
                     Label("Closed", systemImage: "archivebox").tag(true)
                 }
                 
-                Menu {
-                    Picker("Sort Items", selection: $projectSort) {
-                        Text("Creation Date").tag(ProjectSort.creationDate)
-                        Text("Title").tag(ProjectSort.name)
-                    }
-                    
-                    Picker("Sort Items Options", selection: $sortAscending) {
-                        if projectSort == .creationDate {
-                            Text("Newest First").tag(false)
-                            Text("Oldest First").tag(true)
-                        } else if projectSort == .name {
-                            Text("Ascending").tag(true)
-                            Text("Descending").tag(false)
-                        }
-                    }
-                } label: {
-                    Label("Sort By", systemImage: "arrow.up.arrow.down")
-                }
+                SortOptionsView(options: [SortOption.creationDate, SortOption.name], sortOption: $sortOption, sortOrder: $sortAscending)
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
             }
@@ -173,16 +156,14 @@ struct ProjectsView: View {
         )
     }
     
-    enum ProjectSort {
-        case creationDate, name
-    }
-    
     func sortProjects() -> [NSSortDescriptor] {
-        switch projectSort {
+        switch sortOption {
         case .creationDate:
             return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortAscending)]
         case .name:
             return [NSSortDescriptor(keyPath: \Project.name, ascending: sortAscending)]
+        default:
+            return []
         }
     }
 }
