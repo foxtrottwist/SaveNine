@@ -1,5 +1,5 @@
 //
-//  ProjectsView.swift
+//  ProjectsTabView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/10/22.
@@ -8,7 +8,7 @@
 import CoreData
 import SwiftUI
 
-struct ProjectsView: View {
+struct ProjectsTabView: View {
     static let tag: String? = "Projects"
     
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -126,7 +126,11 @@ struct ProjectsView: View {
                     Label("Closed", systemImage: "archivebox").tag(true)
                 }
                 
-                SortOptionsView(options: [SortOption.creationDate, SortOption.name], sortOption: $sortOption, sortOrder: $sortAscending)
+                SortOptionsView(
+                    sortOptions: [SortOption.creationDate, SortOption.name],
+                    selectedSortOption: $sortOption,
+                    selectedSortOrder: $sortAscending
+                )
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
             }
@@ -168,11 +172,11 @@ struct ProjectsView: View {
     }
 }
 
-struct ProjectsView_Previews: PreviewProvider {
+struct ProjectsTabView_Previews: PreviewProvider {
     static var dataController = DataController.preview
     
     static var previews: some View {
-        ProjectsView()
+        ProjectsTabView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
     }

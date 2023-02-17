@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct SortOptionsView: View {
-    let options: [SortOption]
+    let sortOptions: [SortOption]
     
     @Binding var selectedSortOption: SortOption
     @Binding var selectedSortOrder: Bool
    
-    init(options: [SortOption], sortOption: Binding<SortOption>, sortOrder: Binding<Bool>) {
-        self.options = options
+    init(sortOptions: [SortOption], selectedSortOption: Binding<SortOption>, selectedSortOrder: Binding<Bool>) {
+        self.sortOptions = sortOptions
         
-        _selectedSortOption = sortOption
-        _selectedSortOrder = sortOrder
+        _selectedSortOption = selectedSortOption
+        _selectedSortOrder = selectedSortOrder
     }
     
     var body: some View {
         Menu {
             Picker("Sort Options", selection: $selectedSortOption) {
-                ForEach(options, id: \.descriptor) { option in
-                    Text(option.descriptor).tag(option.self)
+                ForEach(sortOptions, id: \.descriptor) { sortOption in
+                    Text(sortOption.descriptor).tag(sortOption.self)
                 }
             }
             
@@ -43,6 +43,10 @@ struct SortOptionsView: View {
 
 struct SortOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        SortOptionsView(options: [.creationDate, .name], sortOption: .constant(.creationDate), sortOrder: .constant(Bool()))
+        SortOptionsView(
+            sortOptions: [.creationDate, .name],
+            selectedSortOption: .constant(.creationDate),
+            selectedSortOrder: .constant(Bool())
+        )
     }
 }

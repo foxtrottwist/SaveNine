@@ -10,14 +10,14 @@ import SwiftUI
 @main
 struct SaveNineApp: App {
     @StateObject var dataController: DataController
-    @StateObject var sessionLabels: SessionLabels
+    @StateObject var sessionLabelController: SessionLabelController
         
         init() {
             let dataController = DataController()
             _dataController = StateObject(wrappedValue: dataController)
             
-            let sessionLabel = SessionLabels()
-            _sessionLabels = StateObject(wrappedValue: sessionLabel)
+            let sessionLabel = SessionLabelController()
+            _sessionLabelController = StateObject(wrappedValue: sessionLabel)
         }
     
     var body: some Scene {
@@ -25,7 +25,7 @@ struct SaveNineApp: App {
             ContentView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(dataController)
-                .environmentObject(sessionLabels)
+                .environmentObject(sessionLabelController)
                 .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: save)
         }
     }

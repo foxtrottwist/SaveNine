@@ -184,6 +184,6 @@ struct TrackerView: View {
 struct TrackerView_Previews: PreviewProvider {
     static var previews: some View {
         TrackerView(project: Project.example)
-            .environmentObject(SessionLabels())
+            .environmentObject(SessionLabelController())
     }
 }

@@ -97,6 +97,6 @@ struct SessionDetailView: View {
 struct SessionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         SessionDetailView(session: Session.Example)
-            .environmentObject(SessionLabels())
+            .environmentObject(SessionLabelController())
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SessionLabels.swift
+//  SessionLabelController.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 2/11/23.
@@ -8,13 +8,14 @@
 import Foundation
 
 enum DefaultLabel: String {
-    case addLabel = "Add Label"; case none = "None"
+    case addLabel = "Add Label"
+    case none = "None"
 }
 
-final class SessionLabels: ObservableObject {
+final class SessionLabelController: ObservableObject {
     @Published var labels = [SessionLabel]()
     
-    let url = URL.documentsDirectory.appending(path: FileExtension.append(to: "sessionLabels", using: .json))
+    private let url = URL.documentsDirectory.appending(path: FileExtension.append(to: "sessionLabels", using: .json))
     
     init() {
         guard FileManager.default.fileExists(atPath: url.path()) else { return }

@@ -44,7 +44,11 @@ struct SessionsTabView: View {
                             Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                         }
                         
-                        SortOptionsView(options: [.project, .startDate], sortOption: $sortOption, sortOrder: $sortAscending)
+                        SortOptionsView(
+                            sortOptions: [.project, .startDate],
+                            selectedSortOption: $sortOption,
+                            selectedSortOrder: $sortAscending
+                        )
                     } label: {
                         Label("Sessions Menu", systemImage: "ellipsis.circle")
                     }

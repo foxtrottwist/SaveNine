@@ -10,7 +10,7 @@ import SwiftUI
 struct SessionLabelPickerView: View {
     let disableAddLabel: Bool
     
-    @EnvironmentObject var sessionLabels: SessionLabels
+    @EnvironmentObject var sessionLabelController: SessionLabelController
     
     @Binding var selectedLabel: String
     
@@ -27,7 +27,7 @@ struct SessionLabelPickerView: View {
     
     var body: some View {
         Picker("Label", selection: $selectedLabel) {
-            ForEach(sessionLabels.labels) { sessionLabel in
+            ForEach(sessionLabelController.labels) { sessionLabel in
                 Text(sessionLabel.name).tag(sessionLabel.name)
             }
             
@@ -50,7 +50,7 @@ struct SessionLabelPickerView: View {
     }
     
     func addLabel() {
-        sessionLabels.add(name: name)
+        sessionLabelController.add(name: name)
         previousSelectedLabel = name
         selectedLabel = name
         name = ""
@@ -64,6 +64,6 @@ struct SessionLabelPickerView: View {
 struct SessionLabelPickerView_Previews: PreviewProvider {
     static var previews: some View {
         SessionLabelPickerView(selectedLabel: .constant("None"))
-            .environmentObject(SessionLabels())
+            .environmentObject(SessionLabelController())
     }
 }

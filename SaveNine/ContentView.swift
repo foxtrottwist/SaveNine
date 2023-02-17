@@ -12,8 +12,8 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selectedView) {
-            ProjectsView()
-                .tag(ProjectsView.tag)
+            ProjectsTabView()
+                .tag(ProjectsTabView.tag)
                 .tabItem {
                     Image(systemName: "tray")
                     Text("Projects")
@@ -28,7 +28,7 @@ struct ContentView: View {
                 }
         }
         .onOpenURL { _ in
-            selectedView = ProjectsView.tag
+            selectedView = ProjectsTabView.tag
         }
     }
 }
