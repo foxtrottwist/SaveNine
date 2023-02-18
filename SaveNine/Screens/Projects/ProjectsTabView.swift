@@ -11,8 +11,8 @@ import SwiftUI
 struct ProjectsTabView: View {
     static let tag: String? = "Projects"
     
-    @StateObject private var sortController = SortController(defaultSort: SortOption.creationDate, sortAscending: false)
     @SceneStorage("projectSort") private var projectSort: Data?
+    @StateObject private var sortController = SortController(defaultSort: SortOption.creationDate, sortAscending: false)
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
@@ -43,15 +43,6 @@ struct ProjectsTabView: View {
                         .disabled(disabled)
                     }
                 }
-                .task {
-                    if let projectSort {
-                        sortController.jsonData = projectSort
-                    }
-
-                    for await _ in sortController.objectWillChangeSequence {
-                        projectSort = sortController.jsonData
-                    }
-                }
                 .onOpenURL(perform: { url in
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
                     guard let host = components?.host else { return }
@@ -72,6 +63,15 @@ struct ProjectsTabView: View {
                 addProjectToolbarItem
                 tagToggleToolbarItem
                 menuToolbarItem
+            }
+        }
+        .task {
+            if let projectSort {
+                sortController.jsonData = projectSort
+            }
+
+            for await _ in sortController.objectWillChangeSequence {
+                projectSort = sortController.jsonData
             }
         }
     }

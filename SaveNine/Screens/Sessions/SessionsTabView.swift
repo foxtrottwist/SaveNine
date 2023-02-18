@@ -10,9 +10,10 @@ import SwiftUI
 struct SessionsTabView: View {
     static let tag: String? = "Sessions"
 
+    @SceneStorage("sessionSort") private var sessionSort: Data?
+    @StateObject private var sortController = SortController(defaultSort: SortOption.startDate, sortAscending: false)
+    
     @State private var selectedLabel: String = ""
-    @State private var sortAscending = false
-    @State private var sortOption = SortOption.startDate
     
     var body: some View {
         NavigationStack {
@@ -46,13 +47,22 @@ struct SessionsTabView: View {
                         
                         SortOptionsView(
                             sortOptions: [.project, .startDate],
-                            selectedSortOption: $sortOption,
-                            selectedSortOrder: $sortAscending
+                            selectedSortOption: $sortController.sortOption,
+                            selectedSortOrder: $sortController.sortAscending
                         )
                     } label: {
                         Label("Sessions Menu", systemImage: "ellipsis.circle")
                     }
                 }
+            }
+        }
+        .task {
+            if let sessionSort {
+                sortController.jsonData = sessionSort
+            }
+
+            for await _ in sortController.objectWillChangeSequence {
+                sessionSort = sortController.jsonData
             }
         }
     }
@@ -62,11 +72,11 @@ struct SessionsTabView: View {
     }
     
     private func sortSessions() -> [NSSortDescriptor] {
-        switch sortOption {
+        switch sortController.sortOption {
         case .project:
-            return [NSSortDescriptor(keyPath: \Session.project, ascending: sortAscending)]
+            return [NSSortDescriptor(keyPath: \Session.project, ascending: sortController.sortAscending)]
         case .startDate:
-            return [NSSortDescriptor(keyPath: \Session.startDate, ascending: sortAscending)]
+            return [NSSortDescriptor(keyPath: \Session.startDate, ascending: sortController.sortAscending)]
         default:
             return []
         }
