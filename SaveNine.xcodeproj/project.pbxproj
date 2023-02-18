@@ -23,7 +23,7 @@
 		6560AC35291AF6660047E2C6 /* SessionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560AC34291AF6660047E2C6 /* SessionDetailView.swift */; };
 		6560AC37291AFD110047E2C6 /* SessionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560AC36291AFD110047E2C6 /* SessionRowView.swift */; };
 		6572FFB829981A96006493DB /* SessionLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6572FFB729981A96006493DB /* SessionLabelController.swift */; };
-		658CF37228EBBEBF00DA1DA2 /* ProjectTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */; };
+		658CF37228EBBEBF00DA1DA2 /* TagDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658CF37128EBBEBF00DA1DA2 /* TagDrawerView.swift */; };
 		659FDA6D28E28EC900899A2E /* ProjectRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FDA6C28E28EC900899A2E /* ProjectRowView.swift */; };
 		65A51C1A294FBD1A00A3B960 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C19294FBD1A00A3B960 /* WidgetKit.framework */; };
 		65A51C1C294FBD1A00A3B960 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */; };
@@ -124,7 +124,7 @@
 		657081DC28D8E44A006C568D /* SaveNine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNine.entitlements; sourceTree = "<group>"; };
 		657081DD28D8E460006C568D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6572FFB729981A96006493DB /* SessionLabelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLabelController.swift; sourceTree = "<group>"; };
-		658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagsView.swift; sourceTree = "<group>"; };
+		658CF37128EBBEBF00DA1DA2 /* TagDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagDrawerView.swift; sourceTree = "<group>"; };
 		659FDA6C28E28EC900899A2E /* ProjectRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRowView.swift; sourceTree = "<group>"; };
 		65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SaveNineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A51C19294FBD1A00A3B960 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -230,7 +230,7 @@
 		651CE22428FB125C00E1B248 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
-				658CF37128EBBEBF00DA1DA2 /* ProjectTagsView.swift */,
+				658CF37128EBBEBF00DA1DA2 /* TagDrawerView.swift */,
 				6544E57C28F067E9009CB296 /* TagView.swift */,
 			);
 			path = Tags;
@@ -560,7 +560,7 @@
 				65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
 				65F648B928E10B080086512D /* ChecklistView.swift in Sources */,
 				65F648B528E0FEEA0086512D /* ChecklistHeaderView.swift in Sources */,
-				658CF37228EBBEBF00DA1DA2 /* ProjectTagsView.swift in Sources */,
+				658CF37228EBBEBF00DA1DA2 /* TagDrawerView.swift in Sources */,
 				65F4A72C2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
 				65D2316228CD6ED700A91A47 /* ProjectDetailView.swift in Sources */,
 				65F4A72F2965E5B900CABB3C /* S9WidgetKind.swift in Sources */,

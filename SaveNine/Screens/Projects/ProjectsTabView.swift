@@ -25,10 +25,7 @@ struct ProjectsTabView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            if showingProjectTags {
-                tagControls
-                ProjectTagsView(selection: $selectedTags)
-            }
+            TagDrawerView(selection: $selectedTags, isPresented: $showingProjectTags)
             
             FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
                 List(projects) { project in
@@ -67,34 +64,6 @@ struct ProjectsTabView: View {
                 menuToolbarItem
             }
         }
-    }
-    
-    var tagControls: some View {
-        HStack {
-            Button {
-                showingProjectTags.toggle()
-            } label: {
-                Image(systemName: "xmark.circle")
-                    .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-            }
-            
-            Spacer()
-            
-            Button {
-                withAnimation {
-                    selectedTags = []
-                }
-            } label: {
-                Image(systemName: "tag.slash")
-                    .font(.callout)
-                
-                Text("Clear Tags \(selectedTags.count)")
-                    .font(.callout)
-                    .monospacedDigit()
-            }
-            .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-        }
-        .padding([.horizontal, .top])
     }
     
     var addProjectToolbarItem: some ToolbarContent {
