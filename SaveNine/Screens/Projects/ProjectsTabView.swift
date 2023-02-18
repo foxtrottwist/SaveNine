@@ -11,6 +11,9 @@ import SwiftUI
 struct ProjectsTabView: View {
     static let tag: String? = "Projects"
     
+    @StateObject private var sortController = SortController(defaultSort: SortOption.creationDate, sortAscending: false)
+    @SceneStorage("projectSort") private var projectSort: Data?
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
@@ -20,8 +23,6 @@ struct ProjectsTabView: View {
     @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
-    @State private var sortAscending = false
-    @State private var sortOption = SortOption.creationDate
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -40,6 +41,15 @@ struct ProjectsTabView: View {
                             }
                         }
                         .disabled(disabled)
+                    }
+                }
+                .task {
+                    if let projectSort {
+                        sortController.jsonData = projectSort
+                    }
+
+                    for await _ in sortController.objectWillChangeSequence {
+                        projectSort = sortController.jsonData
                     }
                 }
                 .onOpenURL(perform: { url in
@@ -97,8 +107,8 @@ struct ProjectsTabView: View {
                 
                 SortOptionsView(
                     sortOptions: [SortOption.creationDate, SortOption.name],
-                    selectedSortOption: $sortOption,
-                    selectedSortOrder: $sortAscending
+                    selectedSortOption: $sortController.sortOption,
+                    selectedSortOrder: $sortController.sortAscending
                 )
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
@@ -130,11 +140,11 @@ struct ProjectsTabView: View {
     }
     
     func sortProjects() -> [NSSortDescriptor] {
-        switch sortOption {
+        switch sortController.sortOption {
         case .creationDate:
-            return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortAscending)]
+            return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortController.sortAscending)]
         case .name:
-            return [NSSortDescriptor(keyPath: \Project.name, ascending: sortAscending)]
+            return [NSSortDescriptor(keyPath: \Project.name, ascending: sortController.sortAscending)]
         default:
             return []
         }
