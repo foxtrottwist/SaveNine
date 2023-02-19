@@ -12,9 +12,21 @@ final class SortController: ObservableObject, Codable {
     @Published var sortAscending: Bool
     @Published var sortOption: SortOption
     
-    init(defaultSort: SortOption, sortAscending: Bool) {
-        self.sortOption = defaultSort
-        self.sortAscending = sortAscending
+    private var listView = ""
+    
+    init(for listView: String, defaultSort: SortOption, sortAscending: Bool) {
+        self.listView = listView
+        let url = URL.documentsDirectory.appending(path: FileExtension.append(to: listView, using: .json))
+        
+        if FileManager.default.fileExists(atPath: url.path()),
+           let data = try? Data(contentsOf: url),
+           let model = try? JSONDecoder().decode(SortController.self, from: data) {
+            self.sortAscending = model.sortAscending
+            self.sortOption = model.sortOption
+        } else {
+            self.sortOption = defaultSort
+            self.sortAscending = sortAscending
+        }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -33,24 +45,10 @@ final class SortController: ObservableObject, Codable {
         sortOption = try container.decode(SortOption.self, forKey: .sortOption)
     }
     
-    var jsonData: Data? {
-        get {
-            try? JSONEncoder().encode(self)
-        }
-        
-        set {
-            guard let data = newValue, let model = try? JSONDecoder().decode(SortController.self, from: data) else { return }
-            sortAscending = model.sortAscending
-            sortOption = model.sortOption
-        }
+    func save() {
+        let url = URL.documentsDirectory.appending(path: FileExtension.append(to: listView, using: .json))
+        let data = try? JSONEncoder().encode(self)
+        try? data?.write(to: url)
     }
-    
-    var objectWillChangeSequence:
-            AsyncPublisher<Publishers.Buffer<ObservableObjectPublisher>>
-        {
-            objectWillChange
-                .buffer(size: 1, prefetch: .byRequest, whenFull: .dropOldest)
-                .values
-        }
 }
 

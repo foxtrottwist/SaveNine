@@ -10,8 +10,7 @@ import SwiftUI
 struct SessionsTabView: View {
     static let tag: String? = "Sessions"
 
-    @SceneStorage("sessionSort") private var sessionSort: Data?
-    @StateObject private var sortController = SortController(defaultSort: SortOption.startDate, sortAscending: false)
+    @StateObject private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
     
     @State private var selectedLabel: String = ""
     
@@ -31,6 +30,8 @@ struct SessionsTabView: View {
                 }
                 .listStyle(.grouped)
                 .navigationTitle("Sessions")
+                .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
+                .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
                 .toolbar {
                     Menu {
                         Menu {
@@ -54,15 +55,6 @@ struct SessionsTabView: View {
                         Label("Sessions Menu", systemImage: "ellipsis.circle")
                     }
                 }
-            }
-        }
-        .task {
-            if let sessionSort {
-                sortController.jsonData = sessionSort
-            }
-
-            for await _ in sortController.objectWillChangeSequence {
-                sessionSort = sortController.jsonData
             }
         }
     }
