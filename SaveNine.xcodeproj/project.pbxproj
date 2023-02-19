@@ -305,14 +305,12 @@
 			isa = PBXGroup;
 			children = (
 				65C827C5299C836300CAC4C0 /* FetchPredicate.swift */,
-				6572FFB729981A96006493DB /* SessionLabelController.swift */,
-				65FC92D929A11C92008871A5 /* SortController.swift */,
 				65FC92D5299FFD4B008871A5 /* SortOption.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		659FDA6B28E232CA00899A2E /* Screens */ = {
+		659FDA6B28E232CA00899A2E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6560AC31291AC5470047E2C6 /* Sessions */,
@@ -322,7 +320,7 @@
 				651CE22428FB125C00E1B248 /* Tags */,
 				651CE22128FB0EFA00E1B248 /* Tracker */,
 			);
-			path = Screens;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		65A51C18294FBD1A00A3B960 /* Frameworks */ = {
@@ -371,7 +369,8 @@
 		65D2314328CD552E00A91A47 /* SaveNine */ = {
 			isa = PBXGroup;
 			children = (
-				659FDA6B28E232CA00899A2E /* Screens */,
+				65F9F3A329A2E9D800D51D7B /* Controllers */,
+				659FDA6B28E232CA00899A2E /* Views */,
 				65F4A71729646B8900CABB3C /* Shared */,
 				659FDA6928E232A300899A2E /* Extensions */,
 				659FDA6A28E232AC00899A2E /* Helpers */,
@@ -380,7 +379,6 @@
 				65D2315228CD553F00A91A47 /* Main.xcdatamodeld */,
 				657081DC28D8E44A006C568D /* SaveNine.entitlements */,
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
-				65D2315B28CD5A1B00A91A47 /* DataController.swift */,
 				65D2314428CD552E00A91A47 /* SaveNineApp.swift */,
 				65D2314828CD552F00A91A47 /* Assets.xcassets */,
 				65D2314A28CD552F00A91A47 /* Preview Content */,
@@ -420,6 +418,16 @@
 				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		65F9F3A329A2E9D800D51D7B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65D2315B28CD5A1B00A91A47 /* DataController.swift */,
+				6572FFB729981A96006493DB /* SessionLabelController.swift */,
+				65FC92D929A11C92008871A5 /* SortController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
