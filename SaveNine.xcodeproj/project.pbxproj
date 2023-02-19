@@ -370,17 +370,17 @@
 			isa = PBXGroup;
 			children = (
 				65F9F3A329A2E9D800D51D7B /* Controllers */,
-				659FDA6B28E232CA00899A2E /* Views */,
-				65F4A71729646B8900CABB3C /* Shared */,
 				659FDA6928E232A300899A2E /* Extensions */,
 				659FDA6A28E232AC00899A2E /* Helpers */,
+				65F4A71729646B8900CABB3C /* Shared */,
+				659FDA6B28E232CA00899A2E /* Views */,
+				65D2314828CD552F00A91A47 /* Assets.xcassets */,
 				657081DD28D8E460006C568D /* Info.plist */,
 				651CE21A28F85FF100E1B248 /* Localizable.strings */,
 				65D2315228CD553F00A91A47 /* Main.xcdatamodeld */,
 				657081DC28D8E44A006C568D /* SaveNine.entitlements */,
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
 				65D2314428CD552E00A91A47 /* SaveNineApp.swift */,
-				65D2314828CD552F00A91A47 /* Assets.xcassets */,
 				65D2314A28CD552F00A91A47 /* Preview Content */,
 			);
 			path = SaveNine;
