@@ -25,6 +25,7 @@ struct ProjectsTabView: View {
     @State private var selectedTags: [Ptag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
+    @State private var showingSettingsView = false
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -68,52 +69,51 @@ struct ProjectsTabView: View {
                 ProjectDetailView(project: project)
             }
             .searchable(text: $searchText)
+            .sheet(isPresented: $showingSettingsView) {
+                SettingsView()
+            }
             .toolbar {
-                addProjectToolbarItem
-                tagToggleToolbarItem
-                menuToolbarItem
-            }
-        }
-    }
-    
-    var addProjectToolbarItem: some ToolbarContent {
-        ToolbarItem {
-            Button(action: addProject) {
-                Label("Add Project", systemImage: "plus.square")
-            }
-            .disabled(disabled)
-        }
-    }
-    
-    var tagToggleToolbarItem: some ToolbarContent {
-        ToolbarItem {
-            Button {
-                showingProjectTags.toggle()
-            } label: {
-                Label("Tags", systemImage: "tag")
-                    .font(.callout)
-            }
-            .disabled(disabled)
-        }
-    }
-    
-    var menuToolbarItem: some ToolbarContent {
-        ToolbarItem {
-            Menu {
-                Picker("Project Status", selection: $showClosedProjects) {
-                    Label("Open", systemImage: "tray.full").tag(false)
-                    Label("Closed", systemImage: "archivebox").tag(true)
+                ToolbarItem {
+                    Button(action: addProject) {
+                        Label("Add Project", systemImage: "plus.square")
+                    }
+                    .disabled(disabled)
                 }
                 
-                SortOptionsView(
-                    sortOptions: [SortOption.creationDate, SortOption.name],
-                    selectedSortOption: $sortController.sortOption,
-                    selectedSortOrder: $sortController.sortAscending
-                )
-            } label: {
-                Label("Menu", systemImage: "ellipsis.circle")
+                ToolbarItem {
+                    Button {
+                        showingProjectTags.toggle()
+                    } label: {
+                        Label("Tags", systemImage: "tag")
+                            .font(.callout)
+                    }
+                    .disabled(disabled)
+                }
+                
+                ToolbarItem {
+                    Menu {
+                        Button {
+                            showingSettingsView.toggle()
+                        } label: {
+                            Label("Settings", systemImage: "gear")
+                        }
+                        
+                        Picker("Project Status", selection: $showClosedProjects) {
+                            Label("Open", systemImage: "tray.full").tag(false)
+                            Label("Closed", systemImage: "archivebox").tag(true)
+                        }
+                        
+                        SortOptionsView(
+                            sortOptions: [SortOption.creationDate, SortOption.name],
+                            selectedSortOption: $sortController.sortOption,
+                            selectedSortOrder: $sortController.sortAscending
+                        )
+                    } label: {
+                        Label("Menu", systemImage: "ellipsis.circle")
+                    }
+                    .disabled(disabled)
+                }
             }
-            .disabled(disabled)
         }
     }
     
