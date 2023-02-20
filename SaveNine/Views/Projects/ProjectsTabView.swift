@@ -5,16 +5,19 @@
 //  Created by Lawrence Horne on 9/10/22.
 //
 
+import Combine
 import CoreData
 import SwiftUI
 
 struct ProjectsTabView: View {
     static let tag: String? = "Projects"
     
+    let subject: PassthroughSubject<String?, Never>
+    
     @StateObject private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
     
     @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject private var dataController: DataController
     
     @State private var disabled = false
     @State private var path: [Project] = []
@@ -51,6 +54,11 @@ struct ProjectsTabView: View {
                     
                     if path.isEmpty || path.last?.id != UUID(uuidString: host) {
                         path.append(contentsOf: project)
+                    }
+                })
+                .onReceive(subject, perform: { tab in
+                    if tab == Self.tag, !path.isEmpty {
+                        path = []
                     }
                 })
             }
@@ -147,7 +155,7 @@ struct ProjectsTabView_Previews: PreviewProvider {
     static var dataController = DataController.preview
     
     static var previews: some View {
-        ProjectsTabView()
+        ProjectsTabView(subject: PassthroughSubject<String?, Never>())
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
     }

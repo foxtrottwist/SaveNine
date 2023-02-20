@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @SceneStorage("selectedView") var selectedView: String?
+    @SceneStorage("selectedView") private var selectedView: String?
+    @StateObject private var tabController = TabController()
     
     var body: some View {
-        TabView(selection: $selectedView) {
-            ProjectsTabView()
+        TabView(selection: $tabController.selectedView) {
+            ProjectsTabView(subject: tabController.subject)
                 .tag(ProjectsTabView.tag)
                 .tabItem {
                     Image(systemName: "tray")
@@ -27,9 +28,9 @@ struct ContentView: View {
                     Text("Sessions")
                 }
         }
-        .onOpenURL { _ in
-            selectedView = ProjectsTabView.tag
-        }
+        .onAppear(perform: { tabController.selectedView = selectedView })
+        .onChange(of: tabController.selectedView) { _ in selectedView = tabController.selectedView }
+        .onOpenURL { _ in tabController.selectedView = ProjectsTabView.tag }
     }
 }
 
