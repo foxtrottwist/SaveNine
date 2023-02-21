@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct AppIconView: View {
-    @AppStorage("selectedAppIcon") private var selectedAppIcon: String = "AppIcon"
+    @AppStorage(StorageKey.selectedAppIcon.rawValue) private var selectedAppIcon: String = AppIcon.defaultIcon.rawValue
     
     var body: some View {
         List {
             ForEach(AppIcon.allCases, id: \.rawValue) { icon in
                 HStack {
-                    Image(uiImage: UIImage(named: icon.rawValue) ?? UIImage())
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 25, height: 25)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                    
+                    AppIconImageView(icon: icon.rawValue)
                     Text(icon.descriptor)
                     Spacer()
                     

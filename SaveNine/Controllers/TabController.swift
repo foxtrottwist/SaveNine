@@ -9,9 +9,9 @@ import Combine
 import Foundation
 
 final class TabController: ObservableObject {
-    @Published var selectedView: String? {
+    @Published var selectedTabView: String? {
         willSet {
-            if selectedView == newValue {
+            if selectedTabView == newValue {
                 subject.send(newValue)
             }
         }

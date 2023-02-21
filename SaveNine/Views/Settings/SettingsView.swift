@@ -9,12 +9,20 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @AppStorage(StorageKey.selectedAppIcon.rawValue) private var selectedAppIcon: String = "AppIcon"
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    NavigationLink("App Icon", destination: AppIconView())
+                    NavigationLink(destination: AppIconView()) {
+                        HStack {
+                            Text("App Icon")
+                            Spacer()
+                            AppIconImageView(icon: selectedAppIcon)
+                        }
+                    }
+                    
                     NavigationLink("Labels", destination: LabelsView())
                 }
                 

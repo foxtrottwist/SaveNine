@@ -17,6 +17,13 @@ struct LabelsView: View {
                     Text(label.name)
                     Spacer()
                 }
+                .contextMenu {
+                    Button {
+                        sessionLabelController.remove(label: label)
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
             }
             .onDelete(perform: deleteLabel)
         }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @SceneStorage("selectedView") private var selectedView: String?
+    @SceneStorage(StorageKey.selectedTabView.rawValue) private var selectedTabView: String?
     @StateObject private var tabController = TabController()
     
     var body: some View {
-        TabView(selection: $tabController.selectedView) {
+        TabView(selection: $tabController.selectedTabView) {
             ProjectsTabView(subject: tabController.subject)
                 .tag(ProjectsTabView.tag)
                 .tabItem {
@@ -28,9 +28,9 @@ struct ContentView: View {
                     Text("Sessions")
                 }
         }
-        .onAppear(perform: { tabController.selectedView = selectedView })
-        .onChange(of: tabController.selectedView) { _ in selectedView = tabController.selectedView }
-        .onOpenURL { _ in tabController.selectedView = ProjectsTabView.tag }
+        .onAppear(perform: { tabController.selectedTabView = selectedTabView })
+        .onChange(of: tabController.selectedTabView) { _ in selectedTabView = tabController.selectedTabView }
+        .onOpenURL { _ in tabController.selectedTabView = ProjectsTabView.tag }
     }
 }
 
