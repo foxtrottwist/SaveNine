@@ -16,7 +16,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 Section {
-                    AppIconView()
+                    NavigationLink("App Icon", destination: AppIconView())
                     NavigationLink("Labels", destination: LabelsView())
                 } header: {
                     Text("Customization")
