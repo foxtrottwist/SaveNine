@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct AppIconView: View {
+    @AppStorage("selectedAppIcon") private var selectedAppIcon: String = "AppIcon"
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Picker("App Icon", selection: $selectedAppIcon) {
+            Text("Default Icon").tag("AppIcon")
+            Text("Pawpaw Pink").tag("AppIcon-2")
+        }
+        .onChange(of: selectedAppIcon, perform: handleSelectedAppIcon)
+    }
+    
+    private func handleSelectedAppIcon(appIcon: String) {
+        if UIApplication.shared.supportsAlternateIcons {
+            if appIcon == "AppIcon" {
+                UIApplication.shared.setAlternateIconName(nil)
+            } else {
+                UIApplication.shared.setAlternateIconName(selectedAppIcon) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
 }
 
