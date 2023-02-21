@@ -118,6 +118,7 @@
 
 /* Sessions View */
 "Export Sessions" = "Export Sessions";
+"%@ %@ - %@" = "%@ %@ - %@"; /* Session Row relative {time/day} {startDate} - {endDate} */
 
 /* Sessions Menu */
 "Sessions Menu" = "Sessions Menu";

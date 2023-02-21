@@ -19,40 +19,45 @@ struct SessionsTabView: View {
             FetchRequestView(
                 Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortSessions())
             ) { sessions in
-                List(sessions) { session in
-                    VStack(alignment: .leading) {
-                        Text(session.project?.projectName ?? "")
-                            .font(.headline)
-                        
-                        SessionRowView(session: session)
-                    }
-                    
-                }
-                .listStyle(.grouped)
-                .navigationTitle("Sessions")
-                .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
-                .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
-                .toolbar {
-                    Menu {
-                        Menu {
-                            Button {
-                                selectedLabel.removeAll()
-                            } label: {
-                                Label("Clear Filter", systemImage: "xmark.circle")
-                            }
+                if sessions.isEmpty || sessions.last?.endDate == nil {
+                    NoContentView(message: "No time tracking sessions have been completed.")
+                        .padding()
+                } else {
+                    List(sessions) { session in
+                        VStack(alignment: .leading) {
+                            Text(session.project?.projectName ?? "")
+                                .font(.headline)
                             
-                            SessionLabelPickerView(selectedLabel: $selectedLabel, disableAddLabel: true)
-                        } label: {
-                            Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
+                            SessionRowView(session: session)
                         }
                         
-                        SortOptionsView(
-                            sortOptions: [.project, .startDate],
-                            selectedSortOption: $sortController.sortOption,
-                            selectedSortOrder: $sortController.sortAscending
-                        )
-                    } label: {
-                        Label("Sessions Menu", systemImage: "ellipsis.circle")
+                    }
+                    .listStyle(.grouped)
+                    .navigationTitle("Sessions")
+                    .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
+                    .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
+                    .toolbar {
+                        Menu {
+                            Menu {
+                                Button {
+                                    selectedLabel.removeAll()
+                                } label: {
+                                    Label("Clear Filter", systemImage: "xmark.circle")
+                                }
+                                
+                                SessionLabelPickerView(selectedLabel: $selectedLabel, disableAddLabel: true)
+                            } label: {
+                                Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
+                            }
+                            
+                            SortOptionsView(
+                                sortOptions: [.project, .startDate],
+                                selectedSortOption: $sortController.sortOption,
+                                selectedSortOrder: $sortController.sortAscending
+                            )
+                        } label: {
+                            Label("Sessions Menu", systemImage: "ellipsis.circle")
+                        }
                     }
                 }
             }
@@ -78,5 +83,6 @@ struct SessionsTabView: View {
 struct SessionsTabView_Previews: PreviewProvider {
     static var previews: some View {
         SessionsTabView()
+            .environmentObject(SessionLabelController())
     }
 }
