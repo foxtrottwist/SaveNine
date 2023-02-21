@@ -12,50 +12,30 @@ struct AppIconView: View {
     
     var body: some View {
         List {
-            HStack {
-                Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 25, height: 25)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                
-                Text("Default Icon")
-                
-                Spacer()
-                
-                if selectedAppIcon == "AppIcon" {
-                    Image(systemName: "checkmark.seal.fill")
-                        .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                }
-            }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                selectedAppIcon = "AppIcon"
-            }
-                
+            ForEach(AppIcon.allCases, id: \.rawValue) { icon in
                 HStack {
-                    Image(uiImage: UIImage(named: "AppIcon-2") ?? UIImage())
+                    Image(uiImage: UIImage(named: icon.rawValue) ?? UIImage())
                         .resizable()
                         .scaledToFill()
                         .frame(width: 25, height: 25)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                     
-                    Text("Pawpaw Pink")
-                    
+                    Text(icon.descriptor)
                     Spacer()
                     
-                    if selectedAppIcon == "AppIcon-2" {
+                    if selectedAppIcon == icon.rawValue {
                         Image(systemName: "checkmark.seal.fill")
                             .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                     }
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    selectedAppIcon = "AppIcon-2"
+                    selectedAppIcon = icon.rawValue
                 }
             }
-            .onChange(of: selectedAppIcon, perform: handleSelectedAppIcon)
         }
+        .onChange(of: selectedAppIcon, perform: handleSelectedAppIcon)
+    }
     
     private func handleSelectedAppIcon(appIcon: String) {
         if UIApplication.shared.supportsAlternateIcons {
