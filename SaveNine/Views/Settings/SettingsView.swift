@@ -19,23 +19,20 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    NavigationLink("About", destination: AboutView())
-                    
-                    Link(destination: URL(string: "https://www.apple.com")!) {
+//                    Link(destination: URL(string: "https://www.savenine.app")!) {
                         HStack {
                             Text("Homepage")
                                 .foregroundColor(.primary)
                             Spacer()
                             Text("savenine.app")
                                 .foregroundColor(.secondary)
-                        }
+//                        }
                     }
                     
                     HStack {
                         Text("Email")
                         Spacer()
                         Text("support@savenine.app")
-                            .foregroundColor(.secondary)
                     }
                 } header: {
                     Text("Support")
