@@ -11,11 +11,13 @@ struct AppIconImageView: View {
     let icon: String
     
     var body: some View {
-        Image(uiImage: UIImage(named: icon)!)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 25, height: 25)
-            .clipShape(RoundedRectangle(cornerRadius: 7))
+        if let uiImage = UIImage(named: icon) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 25, height: 25)
+                .clipShape(RoundedRectangle(cornerRadius: 7))
+        }
     }
 }
 
