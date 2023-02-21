@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dataController: DataController
-    @EnvironmentObject private var sessionLabelController: SessionLabelController
+    @State private var showingDeleteAllDataConfirmation = false
     
     var body: some View {
         NavigationStack {
@@ -31,7 +31,7 @@ struct SettingsView: View {
                 
                 Section {
                     Button {
-                        
+                        showingDeleteAllDataConfirmation.toggle()
                     } label: {
                         Label("Erase All Data", systemImage: "hand.raised")
                             .foregroundColor(.red)
@@ -39,6 +39,13 @@ struct SettingsView: View {
                 } header: {
                     Text("Danger Zone")
                 }
+            }
+            .confirmationDialog(
+                "Are you sure you want to erase all date? This cannot be undone.",
+                isPresented: $showingDeleteAllDataConfirmation,
+                titleVisibility: .visible
+            ) {
+                Button("Erase All Data", role: .destructive, action: deleteAllData)
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
@@ -48,6 +55,12 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+    private func deleteAllData() {
+//        dataController.deleteAll()
+        FileManager.deleteDocumentsDirectoryContents()
+        FileManager.deleteAppGroupContainerContents()
     }
 }
 

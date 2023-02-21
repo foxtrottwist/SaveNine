@@ -26,4 +26,15 @@ extension FileManager {
                print("Could not delete \(name): \(error)")
            }
     }
+    
+    static func deleteDocumentsDirectoryContents() {
+        let url = URL.documentsDirectory
+        
+        do {
+            try FileManager.default.removeItem(at: url)
+            print("Files at \(url) was deleted.")
+        } catch let error as NSError {
+            print("Could not delete files at \(url): \(error)")
+        }
+    }
 }
