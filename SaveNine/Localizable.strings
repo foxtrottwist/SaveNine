@@ -140,16 +140,15 @@
 
 /* Settings View */
 "Close" = "Close";
-"Customization" = "Customization";
 "App Icon" = "App Icon";
 "Labels" = "Labels";
 "Support" = "Support";
 "About" = "About";
-"Save Nine Website" = "Save Nine Website";
-"Danger Zone" = "Danger Zone";
-"Erase All Data" = "Erase All Data";
-"Are you sure you want to erase all date? This cannot be undone." = "Are you sure you want to erase all date? This cannot be undone.";
+"Homepage" = "Homepage";
+"savenine.app" = "savenine.app";
+"Email" = "Email";
+"support@savenine.app" = "support@savenine.app";
 
 /* App Icon Picker */
 "Default Icon" = "Default Icon";
-"Pawpaw Pink" = "Paw Paw Pink";
+"Pawpaw Pink" = "Pawpaw Pink";

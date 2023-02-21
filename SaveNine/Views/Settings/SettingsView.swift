@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var dataController: DataController
-    @State private var showingDeleteAllDataConfirmation = false
     
     var body: some View {
         NavigationStack {
@@ -18,34 +17,30 @@ struct SettingsView: View {
                 Section {
                     NavigationLink("App Icon", destination: AppIconView())
                     NavigationLink("Labels", destination: LabelsView())
-                } header: {
-                    Text("Customization")
                 }
                 
                 Section {
                     NavigationLink("About", destination: AboutView())
-                    Link("Save Nine Website", destination: URL(string: "https://www.apple.com")!)
+                    
+                    Link(destination: URL(string: "https://www.apple.com")!) {
+                        HStack {
+                            Text("Homepage")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Text("savenine.app")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Email")
+                        Spacer()
+                        Text("support@savenine.app")
+                            .foregroundColor(.secondary)
+                    }
                 } header: {
                     Text("Support")
                 }
-                
-                Section {
-                    Button {
-                        showingDeleteAllDataConfirmation.toggle()
-                    } label: {
-                        Label("Erase All Data", systemImage: "hand.raised")
-                            .foregroundColor(.red)
-                    }
-                } header: {
-                    Text("Danger Zone")
-                }
-            }
-            .confirmationDialog(
-                "Are you sure you want to erase all date? This cannot be undone.",
-                isPresented: $showingDeleteAllDataConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Erase All Data", role: .destructive, action: deleteAllData)
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
@@ -55,12 +50,6 @@ struct SettingsView: View {
                 }
             }
         }
-    }
-    
-    private func deleteAllData() {
-//        dataController.deleteAll()
-        FileManager.deleteDocumentsDirectoryContents()
-        FileManager.deleteAppGroupContainerContents()
     }
 }
 
