@@ -64,6 +64,6 @@ struct SessionLabelPickerView: View {
 struct SessionLabelPickerView_Previews: PreviewProvider {
     static var previews: some View {
         SessionLabelPickerView(selectedLabel: .constant("None"))
-            .environmentObject(SessionLabelController())
+            .environmentObject(SessionLabelController.preview)
     }
 }
