@@ -8,13 +8,35 @@
 import SwiftUI
 
 struct LabelsView: View {
+    @EnvironmentObject private var sessionLabelController: SessionLabelController
+    
     var body: some View {
-        Text("Hello, World!")
+        List {
+            ForEach(sessionLabelController.labels) { label in
+                HStack {
+                    Text(label.name)
+                    Spacer()
+                }
+            }
+            .onDelete(perform: deleteLabel)
+        }
+        .navigationTitle("Labels")
+        .toolbar {
+            EditButton()
+        }
     }
+    
+    private func deleteLabel(at offsets: IndexSet) {
+            for offset in offsets {
+                let label = sessionLabelController.labels[offset]
+                sessionLabelController.remove(label: label)
+            }
+        }
 }
 
 struct LabelsView_Previews: PreviewProvider {
     static var previews: some View {
         LabelsView()
+            .environmentObject(SessionLabelController.preview)
     }
 }

@@ -26,6 +26,12 @@ final class SessionLabelController: ObservableObject {
         }
     }
     
+    static var preview: SessionLabelController = {
+        let sessionLabelController = SessionLabelController()
+        sessionLabelController.labels = SessionLabel.Examples
+        return sessionLabelController
+    }()
+    
     func add(name: String) {
         let name = name.trimmingCharacters(in: .whitespaces)
         let test = name.lowercased()
@@ -36,6 +42,7 @@ final class SessionLabelController: ObservableObject {
             || labels.contains(where: { $0.name.lowercased() == test }) { return }
         
         labels.append(.init(id: UUID(), name: name, lastUsed: Date()))
+        labels = labels.sorted(using: KeyPathComparator(\.name))
         save()
     }
     
@@ -45,10 +52,12 @@ final class SessionLabelController: ObservableObject {
     
     func remove(label: SessionLabel) {
         labels.removeAll(where: { $0.id == label.id })
+        save()
     }
     
     func removeAll() {
         labels.removeAll()
+        save()
     }
     
     func save() {

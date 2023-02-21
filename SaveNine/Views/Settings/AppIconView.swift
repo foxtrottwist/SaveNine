@@ -29,6 +29,7 @@ struct AppIconView: View {
                     }
                 }
                 .contentShape(Rectangle())
+                .navigationTitle("App Icon")
                 .onTapGesture {
                     selectedAppIcon = icon.rawValue
                 }
