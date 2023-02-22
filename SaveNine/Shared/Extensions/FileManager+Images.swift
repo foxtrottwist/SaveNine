@@ -63,6 +63,7 @@ extension FileManager {
            }
            
            do {
+               print("File deleted at path \(url)")
                try self.default.removeItem(at: url)
            } catch let error as NSError {
                print("Could not delete \(name): \(error)")

@@ -19,7 +19,7 @@ struct SessionsTabView: View {
             FetchRequestView(
                 Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortSessions())
             ) { sessions in
-                if sessions.isEmpty || sessions.last?.endDate == nil {
+                if sessions.isEmpty {
                     NoContentView(message: "No time tracking sessions have been completed.")
                         .padding()
                 } else {

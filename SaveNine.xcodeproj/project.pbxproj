@@ -234,9 +234,9 @@
 		651CE22228FB10BF00E1B248 /* Reuseable */ = {
 			isa = PBXGroup;
 			children = (
-				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
-				651CE21E28FB0A0500E1B248 /* NoContentView.swift */,
 				6560AC2F291AA2AB0047E2C6 /* FetchRequestView.swift */,
+				651CE21E28FB0A0500E1B248 /* NoContentView.swift */,
+				65DD023A28D121AD00567676 /* PhotoPickerView.swift */,
 				65FC92D3299F2A9D008871A5 /* SortOptionsView.swift */,
 				65464D2028F26B74008E1EE6 /* UpdateNameView.swift */,
 			);

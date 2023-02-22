@@ -64,6 +64,7 @@
 "Text, separated by spaces" = "Text, separated by spaces"; /* Placeholder text for Tags field. */
 "Checklists" = "Checklists"; /* Navigation Link */
 "Sessions" = "Sessions"; /* Navigation Link; Home - Navigation title */
+"Clear Image" = "Clear Image";
 
 
 /* Project Details top toolbar menu */
