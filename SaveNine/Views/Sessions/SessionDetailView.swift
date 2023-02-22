@@ -35,8 +35,8 @@ struct SessionDetailView: View {
                 }
                 
                 Section {
-                    DatePicker("Starts", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
-                    DatePicker("Ends", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Starts", selection: $startDate, in: ...endDate, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("Ends", selection: $endDate, in: startDate..., displayedComponents: [.date, .hourAndMinute])
                 }
                 
                 Section {
