@@ -42,20 +42,16 @@ struct ProjectDocument: Codable {
     let creationDate: Date
     let detail: String
 //    let checkLists: [CheckListDocument]?
-//    let sessions: [SessionDocument]?
-    
-    static var example: ProjectDocument {
-        .init(id: UUID(), name: "It's Knot Spelled With a 'K'", closed: Bool(), creationDate: Date(), detail: "I didn't think was.")
-    }
+    let sessions: [SessionDocument]?
 }
 
-//struct SessionDocument: Codable {
-//    let duration: Float
-//    let endDate: Date
-//    let label: String
-//    let startDate: Date
-//}
-//
+struct SessionDocument: Codable {
+    let duration: Double
+    let endDate: Date
+    let label: String
+    let startDate: Date
+}
+
 //struct CheckListDocument: Codable {
 //    let name: String
 //    let creationDate: Date

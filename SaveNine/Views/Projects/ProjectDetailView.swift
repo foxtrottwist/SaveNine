@@ -42,6 +42,7 @@ struct ProjectDetailView: View {
         ScrollView {
             VStack {
                 PhotoPickerView(uiImage: $image)
+                    .font(.subheadline)
                     .padding(.bottom)
                     .disabled(!editing)
                     .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
@@ -68,7 +69,11 @@ struct ProjectDetailView: View {
                 delete(project: project)
             }
         }
-        .fileExporter(isPresented: $showingFileExporter, document: ProjectFile(contents: ProjectDocument.example), contentType: .json) { result in
+        .fileExporter(
+            isPresented: $showingFileExporter,
+            document: projectFile(from: project),
+            contentType: .json, defaultFilename: "\(project.projectName)"
+        ) { result in
             switch result {
             case .success(let url):
                 print("Saved to \(url)")
@@ -117,6 +122,31 @@ struct ProjectDetailView: View {
             .disabled(project.tracking)
         } label: {
             Label("Menu", systemImage: "ellipsis.circle")
+        }
+        .disabled(editing)
+    }
+    
+    func projectFile(from project: Project) -> ProjectFile {
+        return ProjectFile(
+            contents: .init(
+                id: project.id!,
+                name: project.projectName,
+                closed: project.closed,
+                creationDate: project.projectCreationDate,
+                detail: project.projectDetail,
+                sessions: sessionDocument(from: project.projectSessions)
+            )
+        )
+    }
+    
+    func sessionDocument(from sessions: [Session]) -> [SessionDocument] {
+        return sessions.map { session in
+            SessionDocument(
+                duration: session.duration,
+                endDate: session.endDate!,
+                label: session.sessionLabel,
+                startDate: session.startDate!
+            )
         }
     }
     
