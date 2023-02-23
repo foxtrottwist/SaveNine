@@ -11,7 +11,6 @@ struct SessionsTabView: View {
     static let tag: String? = "Sessions"
 
     @StateObject private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
-    
     @State private var selectedLabel: String = ""
     
     var body: some View {

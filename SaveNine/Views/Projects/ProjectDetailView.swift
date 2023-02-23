@@ -86,11 +86,7 @@ struct ProjectDetailView: View {
         .toolbar {
             Button(editing ? "Done" : "Edit", action: editProject)
             Menu {
-                NavigationLink(
-                    destination: SessionsView(
-                        sessions: project.projectSessions,
-                        sharedSessions: project.projectShareSessions
-                    )
+                NavigationLink(destination: ProjectSessionsView(project: project)
                 ) {
                     Label("Sessions", systemImage: "clock")
                 }
