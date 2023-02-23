@@ -19,6 +19,7 @@ struct ProjectDetailView: View {
     
     @State private var name = ""
     @State private var detail = ""
+    @State private var document: ProjectFile?
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
     @State private var showingFileExporter = false
@@ -71,7 +72,7 @@ struct ProjectDetailView: View {
         }
         .fileExporter(
             isPresented: $showingFileExporter,
-            document: projectFile(from: project),
+            document: document,
             contentType: .json, defaultFilename: "\(project.projectName)"
         ) { result in
             switch result {
@@ -96,6 +97,7 @@ struct ProjectDetailView: View {
             Divider()
             
             Button {
+                document = ProjectDocument.document(from: project)
                 showingFileExporter.toggle()
             } label: {
                 Label("Export", systemImage: "square.and.arrow.up")
@@ -124,30 +126,6 @@ struct ProjectDetailView: View {
             Label("Menu", systemImage: "ellipsis.circle")
         }
         .disabled(editing)
-    }
-    
-    func projectFile(from project: Project) -> ProjectFile {
-        return ProjectFile(
-            contents: .init(
-                id: project.id!,
-                name: project.projectName,
-                closed: project.closed,
-                creationDate: project.projectCreationDate,
-                detail: project.projectDetail,
-                sessions: sessionDocument(from: project.projectSessions)
-            )
-        )
-    }
-    
-    func sessionDocument(from sessions: [Session]) -> [SessionDocument] {
-        return sessions.map { session in
-            SessionDocument(
-                duration: session.duration,
-                endDate: session.endDate!,
-                label: session.sessionLabel,
-                startDate: session.startDate!
-            )
-        }
     }
     
     func editProject() {
