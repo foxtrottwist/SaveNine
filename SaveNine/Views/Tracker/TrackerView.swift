@@ -38,6 +38,7 @@ struct TrackerView: View {
     
     var body: some View {
         VStack {
+            Divider()
             SessionLabelPickerView(selectedLabel: $label)
             TimerView(start: start)
             

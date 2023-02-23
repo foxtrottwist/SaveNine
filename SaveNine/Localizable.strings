@@ -6,11 +6,13 @@
   
 */
 
-/* Often Used Text */
+/* Common Text */
 "Cancel" = "Cancel";
 "Delete" = "Delete";
 "Done" = "Done";
 "Edit" = "Edit";
+"Export" = "Export";
+"Import" = "Import";
 "Menu" = "Menu";
 "OK" = "OK";
 "Project" = "Project";

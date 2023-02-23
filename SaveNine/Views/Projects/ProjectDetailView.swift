@@ -21,12 +21,12 @@ struct ProjectDetailView: View {
     @State private var detail = ""
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
+    @State private var showingFileExporter = false
     @State private var tags: String = ""
     @State private var editing = false
     
     init(project: Project) {
         self.project = project
-        
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
         _tags = State(wrappedValue: project.projectTagsString)
@@ -42,13 +42,11 @@ struct ProjectDetailView: View {
         ScrollView {
             VStack {
                 PhotoPickerView(uiImage: $image)
+                    .padding(.bottom)
                     .disabled(!editing)
                     .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
                 
                 if !editing {
-                    Text(name).font(.title2)
-                    Divider()
-                    
                     TrackerView(project: project)
                 }
                 
@@ -57,21 +55,30 @@ struct ProjectDetailView: View {
                     .onChange(of: editing, perform: editTags)
             }
         }
+        .navigationTitle(name)
         .navigationBarTitleDisplayMode(.inline)
         .onDisappear(perform: dataController.save)
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
             Button(editing ? "Done" : "Edit", action: editProject)
-            projectDetailsMenuToolbarItem
+            detailsMenu
         }
         .confirmationDialog("Are you sure you want to delete this project?", isPresented: $showingDeleteConfirm, titleVisibility: .visible) {
             Button("Delete Project", role: .destructive) {
                 delete(project: project)
             }
         }
+        .fileExporter(isPresented: $showingFileExporter, document: ProjectFile(contents: ProjectDocument.example), contentType: .json) { result in
+            switch result {
+            case .success(let url):
+                print("Saved to \(url)")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
-    var projectDetailsMenuToolbarItem: some View {
+    var detailsMenu: some View {
         Menu {
             NavigationLink(destination: SessionsView(sessions: project.projectSessions, sharedSessions: project.projectShareSessions)) {
                 Label("Sessions", systemImage: "clock")
@@ -82,6 +89,13 @@ struct ProjectDetailView: View {
             }
             
             Divider()
+            
+            Button {
+                showingFileExporter.toggle()
+            } label: {
+                Label("Export", systemImage: "square.and.arrow.up")
+            }
+            .disabled(project.tracking)
             
             Button {
                 toggleProjectClosed()
