@@ -18,7 +18,6 @@ extension Checklist {
     
     var checklistItems: [Item] {
         let items = items?.allObjects as? [Item] ?? []
-        
         return items.sorted(using: KeyPathComparator(\.creationDate, order: .forward))
     }
 

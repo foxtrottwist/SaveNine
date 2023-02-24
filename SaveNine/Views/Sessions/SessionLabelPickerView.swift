@@ -20,7 +20,6 @@ struct SessionLabelPickerView: View {
     
     init(selectedLabel: Binding<String>, disableAddLabel: Bool = false) {
         self.disableAddLabel = disableAddLabel
-        
         _selectedLabel = selectedLabel
         _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
     }

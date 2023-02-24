@@ -29,14 +29,12 @@ extension Project {
     /// The Project's [Checklist] sorted in reverse chronological order.
     var projectChecklists: [Checklist] {
         let checklists = checklists?.allObjects as? [Checklist] ?? []
-        
         return checklists.sorted(using: KeyPathComparator(\.creationDate, order: .reverse))
     }
     
     /// The Project's [Session] sorted in reverse chronological order.
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
-        
         return sessions.sorted(using: KeyPathComparator(\.startDate, order: .reverse))
     }
     
@@ -48,7 +46,6 @@ extension Project {
         // 3. exists and has a startDate with a value, and endDate without a value.
         //    This means the Session was created but not completed;  -> true
         guard let session = projectSessions.first else { return false }
-        
         return session.endDate == nil
     }
     

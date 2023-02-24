@@ -11,9 +11,8 @@ struct ProjectNameView: View {
     let project: Project
     
     @EnvironmentObject var dataController: DataController
-    
-    @State private var name = ""
     @FocusState var focused: Bool
+    @State private var name = ""
     
     var body: some View {
         TextField("Project name", text: $name)

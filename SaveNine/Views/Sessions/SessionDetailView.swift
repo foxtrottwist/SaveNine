@@ -20,7 +20,6 @@ struct SessionDetailView: View {
     
     init(session: Session) {
         self.session = session
-        
         _duration = State(wrappedValue: session.duration)
         _endDate = State(wrappedValue: session.endDate ?? Date())
         _label = State(wrappedValue: session.sessionLabel)

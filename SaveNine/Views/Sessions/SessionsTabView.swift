@@ -29,7 +29,6 @@ struct SessionsTabView: View {
                             
                             SessionRowView(session: session)
                         }
-                        
                     }
                     .listStyle(.grouped)
                     .navigationTitle("Sessions")

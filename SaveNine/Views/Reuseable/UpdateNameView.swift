@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct UpdateNameView: View {
+    @Binding var name: String
+    
     let cancelAction: () -> Void
     let confirmAction: () -> Void
-    
-    @Binding var name: String
     
     init(name: Binding<String>, cancelAction: @escaping () -> Void, confirmAction: @escaping () -> Void) {
         _name = name

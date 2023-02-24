@@ -43,7 +43,6 @@ struct ProjectDetailView: View {
         ScrollView {
             VStack {
                 PhotoPickerView(uiImage: $image)
-                    .font(.subheadline)
                     .padding(.bottom)
                     .disabled(!editing)
                     .onChange(of: image, perform: { image in update(uiImage: image, in: project) })

@@ -14,7 +14,6 @@ extension Double {
     
     var timerFormattedDuration: String {
         let duration = -self
-        
         return duration.formattedDuration
     }
 }
