@@ -41,6 +41,7 @@ struct SettingsView: View {
                         Text("Email")
                         Spacer()
                         Text("support@savenine.app")
+                            .tint(.secondary)
                     }
                 } header: {
                     Text("Support")
