@@ -64,7 +64,6 @@ struct TagView: View {
         .confirmationDialog("Are you sure you want to delete this tag?", isPresented: $showingDeleteTagConfirmation, titleVisibility: .visible) {
             Button("Delete Tag", role: .destructive) {
                 dataController.delete(tag)
-                dataController.save()
             }
         }
     }

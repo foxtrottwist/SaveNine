@@ -41,7 +41,6 @@ struct ProjectSessionsView: View {
             let session = project.projectSessions[offset]
             session.project?.objectWillChange.send()
             dataController.delete(session)
-            dataController.save()
         }
     }
 }

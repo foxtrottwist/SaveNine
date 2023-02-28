@@ -79,8 +79,6 @@ struct ChecklistView: View {
             let item = items[offset]
             dataController.delete(item)
         }
-        
-        dataController.save()
     }
 }
 

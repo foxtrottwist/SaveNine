@@ -151,8 +151,6 @@ struct TrackerView: View {
             dataController.delete(session)
             start = nil
             tracking = false
-            
-            dataController.save()
         }
     }
    
