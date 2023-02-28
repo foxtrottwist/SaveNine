@@ -9,16 +9,8 @@ import SwiftUI
 
 @main
 struct SaveNineApp: App {
-    @StateObject var dataController: DataController
-    @StateObject var sessionLabelController: SessionLabelController
-        
-        init() {
-            let dataController = DataController()
-            _dataController = StateObject(wrappedValue: dataController)
-            
-            let sessionLabel = SessionLabelController()
-            _sessionLabelController = StateObject(wrappedValue: sessionLabel)
-        }
+    @StateObject var dataController = DataController()
+    @StateObject var sessionLabelController = SessionLabelController()
     
     var body: some Scene {
         WindowGroup {
