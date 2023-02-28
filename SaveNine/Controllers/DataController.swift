@@ -106,28 +106,37 @@ class DataController: ObservableObject {
     }
     
     func delete(_ object: NSManagedObject) {
+        objectWillChange.send()
         container.viewContext.delete(object)
+        save()
+    }
+    
+    private func delete(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) {
+        let batchDeleteRequest = NSBatchDeleteRequest (fetchRequest: fetchRequest)
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        
+        if let delete = try? container.viewContext.execute (batchDeleteRequest) as? NSBatchDeleteResult {
+            let changes = [NSDeletedObjectsKey: delete.result as? [NSManagedObject] ?? []]
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave:changes, into:[container.viewContext])
+        }
     }
     
     func deleteAll() {
         let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
-        let batchDeleteRequest1 = NSBatchDeleteRequest(fetchRequest: fetchRequest1)
-        _ = try? container.viewContext.execute(batchDeleteRequest1)
+        delete(fetchRequest1)
         
         let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = Checklist.fetchRequest()
-        let batchDeleteRequest2 = NSBatchDeleteRequest(fetchRequest: fetchRequest2)
-        _ = try? container.viewContext.execute(batchDeleteRequest2)
+        delete(fetchRequest2)
         
         let fetchRequest3: NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
-        let batchDeleteRequest3 = NSBatchDeleteRequest(fetchRequest: fetchRequest3)
-        _ = try? container.viewContext.execute(batchDeleteRequest3)
+        delete(fetchRequest3)
         
         let fetchRequest4: NSFetchRequest<NSFetchRequestResult> = Ptag.fetchRequest()
-        let batchDeleteRequest4 = NSBatchDeleteRequest(fetchRequest: fetchRequest4)
-        _ = try? container.viewContext.execute(batchDeleteRequest4)
+        delete(fetchRequest4)
         
         let fetchRequest5: NSFetchRequest<NSFetchRequestResult> = Project.fetchRequest()
-        let batchDeleteRequest5 = NSBatchDeleteRequest(fetchRequest: fetchRequest5)
-        _ = try? container.viewContext.execute(batchDeleteRequest5)
+        delete(fetchRequest5)
+        
+        save()
     }
 }
