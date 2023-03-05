@@ -12,7 +12,7 @@ struct AppIconView: View {
     
     var body: some View {
         List {
-            ForEach(AppIcon.allCases, id: \.rawValue) { icon in
+            ForEach(AppIcon.allCases) { icon in
                 HStack {
                     AppIconImageView(icon: icon.rawValue)
                     Text(icon.descriptor)

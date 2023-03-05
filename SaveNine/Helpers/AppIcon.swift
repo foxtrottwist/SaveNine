@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AppIcon: String, CaseIterable {
+enum AppIcon: String, Identifiable, CaseIterable {
     case defaultIcon = "AppIcon"
     case pawpawPink = "AppIcon-2"
     
@@ -18,5 +18,9 @@ enum AppIcon: String, CaseIterable {
         case .pawpawPink:
             return "Pawpaw Pink"
         }
+    }
+    
+    var id: String {
+        self.rawValue
     }
 }
