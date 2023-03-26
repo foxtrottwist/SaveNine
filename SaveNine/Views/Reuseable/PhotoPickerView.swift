@@ -22,9 +22,9 @@ struct PhotoPickerView: View {
     var body: some View {
         VStack {
             PhotosPicker(selection: $selectedItem, maxSelectionCount: 1, matching: .images) {
-                if let uiImage = selectedImage, let image = Image(uiImage: uiImage) {
+                if let uiImage = selectedImage {
                     VStack {
-                        image
+                        Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 250, height: 250)
