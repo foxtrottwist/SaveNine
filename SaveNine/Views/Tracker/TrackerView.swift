@@ -157,10 +157,10 @@ struct TrackerView: View {
     private func requestLiveActivity(date: Date) {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
             let attributes = TrackerAttributes(projectName: project.projectName, projectId: project.id!)
-            let contentState = TrackerAttributes.ContentState(start: date)
+            let contentState = ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil)
             
             do {
-               try liveActivity = Activity.request(attributes: attributes, contentState: contentState)
+               try liveActivity = Activity.request(attributes: attributes, content: contentState)
             } catch {
                 print(error.localizedDescription)
             }
@@ -169,13 +169,13 @@ struct TrackerView: View {
     
     private func updateLiveActivity(date: Date?) async {
         if let date {
-            await liveActivity?.update(using: TrackerAttributes.ContentState(start: date))
+            await liveActivity?.update(ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil))
         }
     }
     
     private func endLiveActivity(date: Date = Date()) async {
         for activity in Activity<TrackerAttributes>.activities {
-            await activity.end(using: TrackerAttributes.ContentState(start: date), dismissalPolicy: .immediate)
+            await activity.end(ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil), dismissalPolicy: .immediate)
         }
     }
 }
