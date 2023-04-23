@@ -19,7 +19,7 @@ struct SessionsTabView: View {
                 Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortSessions())
             ) { sessions in
                 if sessions.isEmpty {
-                    NoContentView(message: "No time tracking sessions have been completed.")
+                    NoContentView(message: "No sessions have been completed or match the current filter.")
                         .padding()
                 } else {
                     List(sessions) { session in

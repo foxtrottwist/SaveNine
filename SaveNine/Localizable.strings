@@ -133,8 +133,11 @@
 "Start Date" = "Start Date";
 
 
-/* Sessions View Empty State */
+/* Sessions View empty state */
 "No time tracking sessions have been completed for this project." = "No time tracking sessions have been completed for this project.";
+
+/* Sessions Tab View empty state */
+"No sessions have been completed or match the current filter." = "No sessions have been completed or match the current filter.";
 
 /* Sessions Details Sheet */
 "Session Details" = "Session Details";
