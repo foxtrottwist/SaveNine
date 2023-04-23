@@ -30,7 +30,11 @@ struct ContentView: View {
         }
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })
         .onChange(of: tabController.selectedTabView) { _ in selectedTabView = tabController.selectedTabView }
-        .onOpenURL { _ in tabController.selectedTabView = ProjectsTabView.tag }
+        .onOpenURL { _ in
+            if tabController.selectedTabView != ProjectsTabView.tag {
+                tabController.selectedTabView = ProjectsTabView.tag
+            }
+        }
     }
 }
 
