@@ -34,29 +34,29 @@ struct SessionsTabView: View {
                     .navigationTitle("Sessions")
                     .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
                     .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
-                    .toolbar {
-                        Menu {
-                            Menu {
-                                Button {
-                                    selectedLabel.removeAll()
-                                } label: {
-                                    Label("Clear Filter", systemImage: "xmark.circle")
-                                }
-                                
-                                SessionLabelPickerView(selectedLabel: $selectedLabel, disableAddLabel: true)
-                            } label: {
-                                Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
-                            }
-                            
-                            SortOptionsView(
-                                sortOptions: [.project, .startDate],
-                                selectedSortOption: $sortController.sortOption,
-                                selectedSortOrder: $sortController.sortAscending
-                            )
+                }
+            }
+            .toolbar {
+                Menu {
+                    Menu {
+                        Button {
+                            selectedLabel.removeAll()
                         } label: {
-                            Label("Sessions Menu", systemImage: "ellipsis.circle")
+                            Label("Clear Filter", systemImage: "xmark.circle")
                         }
+                        
+                        SessionLabelPickerView(selectedLabel: $selectedLabel, disableAddLabel: true)
+                    } label: {
+                        Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                     }
+                    
+                    SortOptionsView(
+                        sortOptions: [.project, .startDate],
+                        selectedSortOption: $sortController.sortOption,
+                        selectedSortOrder: $sortController.sortAscending
+                    )
+                } label: {
+                    Label("Sessions Menu", systemImage: "ellipsis.circle")
                 }
             }
         }
