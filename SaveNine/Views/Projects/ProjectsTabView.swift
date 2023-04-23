@@ -33,7 +33,7 @@ struct ProjectsTabView: View {
             
             FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
                 if projects.isEmpty {
-                    NoContentView(message: showClosedProjects ? "There currently no closed projects." : "Please add a project to begin.")
+                    NoContentView(message: showClosedProjects ? "There are currently no closed projects." : "Please add a project to begin.")
                         .padding()
                 } else {
                     List(projects) { project in
