@@ -32,44 +32,49 @@ struct ProjectsTabView: View {
             TagDrawerView(selection: $selectedTags, isPresented: $showingProjectTags)
             
             FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
-                List(projects) { project in
-                    if project.projectName.isEmpty {
-                        ProjectNameView(project: project)
-                            .onAppear { disabled = true }
-                            .onDisappear { disabled = false }
-                    } else {
-                        VStack {
-                            NavigationLink(value: project) {
-                                ProjectRowView(project: project)
+                if projects.isEmpty {
+                    NoContentView(message: showClosedProjects ? "There currently no closed projects." : "Please add a project to begin.")
+                        .padding()
+                } else {
+                    List(projects) { project in
+                        if project.projectName.isEmpty {
+                            ProjectNameView(project: project)
+                                .onAppear { disabled = true }
+                                .onDisappear { disabled = false }
+                        } else {
+                            VStack {
+                                NavigationLink(value: project) {
+                                    ProjectRowView(project: project)
+                                }
                             }
+                            .disabled(disabled)
                         }
-                        .disabled(disabled)
                     }
+                    .listStyle(.inset)
+                    .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
+                    .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
+                    .onOpenURL(perform: { url in
+                        let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+                        guard let host = components?.host else { return }
+                        let projectID = UUID(uuidString: host)
+                        let project = projects.map { $0 }.filter { $0.id == projectID }
+                        
+                        if path.last?.id != projectID {
+                            path.append(contentsOf: project)
+                        }
+                    })
+                    .onReceive(subject, perform: { tab in
+                        if tab == Self.tag, !path.isEmpty {
+                            path = []
+                        }
+                    })
+                    .searchable(text: $searchText)
                 }
-                .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
-                .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
-                .onOpenURL(perform: { url in
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                    guard let host = components?.host else { return }
-                    let projectID = UUID(uuidString: host)
-                    let project = projects.map { $0 }.filter { $0.id == projectID }
-                    
-                    if path.last?.id != projectID {
-                        path.append(contentsOf: project)
-                    }
-                })
-                .onReceive(subject, perform: { tab in
-                    if tab == Self.tag, !path.isEmpty {
-                        path = []
-                    }
-                })
             }
-            .listStyle(.inset)
             .navigationTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
             .navigationDestination(for: Project.self) { project in
                 ProjectDetailView(project: project)
             }
-            .searchable(text: $searchText)
             .sheet(isPresented: $showingSettingsView) {
                 SettingsView()
             }

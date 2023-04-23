@@ -37,7 +37,8 @@
 "Ascending" = "Ascending";
 "Descending" = "Descending";
 
-"Please add a project to begin." = "Please add a project to begin."; /* Empty State */
+"Please add a project to begin." = "Please add a project to begin."; /* Open Projects empty State */
+"There currently no closed projects." = "There currently no closed projects."; /* Closed Projects empty State */
 "Open Projects" = "Open Projects"; /* Navigation title */
 "Closed Projects" = "Closed Projects"; /* Navigation title when showing closed projects */
 "Project name" = "Project name"; /* New project placeholder text */

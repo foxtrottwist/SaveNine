@@ -31,11 +31,11 @@ struct SessionsTabView: View {
                         }
                     }
                     .listStyle(.grouped)
-                    .navigationTitle("Sessions")
                     .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
                     .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
                 }
             }
+            .navigationTitle("Sessions")
             .toolbar {
                 Menu {
                     Menu {
