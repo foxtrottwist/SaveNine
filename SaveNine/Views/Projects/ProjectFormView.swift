@@ -21,6 +21,7 @@ struct ProjectFormView: View {
                 Text("Project Name")
                     .font(.callout)
                     .fontWeight(.light)
+                    .italic()
                 
                 TextField("Project Name", text: $name)
                     .padding(.bottom)

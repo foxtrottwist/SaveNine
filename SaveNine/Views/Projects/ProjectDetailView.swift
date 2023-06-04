@@ -12,6 +12,7 @@ struct ProjectDetailView: View {
     @ObservedObject var project: Project
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
@@ -47,6 +48,7 @@ struct ProjectDetailView: View {
                 .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
             
             if !editing {
+                Divider()
                 TrackerView(project: project)
                     
                 List {
@@ -74,7 +76,7 @@ struct ProjectDetailView: View {
                         }
                     }
                 }
-                .frame(minHeight: 130)
+                .frame(minHeight: minHeight(from: dynamicTypeSize))
             }
             
             ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
@@ -221,6 +223,19 @@ struct ProjectDetailView: View {
         } else {
             FileManager.deleteImage(named: project.projectImage)
             project.image = nil
+        }
+    }
+    
+    private func minHeight(from dynamicTypeSize: DynamicTypeSize) -> CGFloat {
+        switch dynamicTypeSize {
+        case .xSmall, .small:
+            return 118
+        case .medium, .large:
+            return 132
+        case .xLarge, .xxLarge, .xxxLarge:
+            return 140
+        default:
+            return 200
         }
     }
 }
