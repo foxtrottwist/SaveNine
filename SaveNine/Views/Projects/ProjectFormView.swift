@@ -44,6 +44,7 @@ struct ProjectFormView: View {
                 .autocorrectionDisabled(true)
                 .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
         }
+        .disabled(!editing)
         .animation(.easeIn, value: editing)
         .formStyle(.columns)
         .padding()

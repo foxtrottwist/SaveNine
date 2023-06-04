@@ -144,13 +144,13 @@ struct ProjectDetailView: View {
         }
     }
     
-    func delete(project: Project) {
+    private func delete(project: Project) {
         FileManager.deleteImage(named: project.projectImage)
         dataController.delete(project)
         dismiss()
     }
     
-    func editProject() {
+    private func editProject() {
         if editing {
             if name.isEmpty {
                 name = project.projectName
@@ -162,7 +162,7 @@ struct ProjectDetailView: View {
         editing.toggle()
     }
     
-    func editTags(_ editing: Bool) {
+    private func editTags(_ editing: Bool) {
         guard !editing, project.projectTagsString != tags else { return }
         
         let tagNames = prepare(tags: tags)
@@ -173,7 +173,7 @@ struct ProjectDetailView: View {
     /// Accepts a string of words and validates that the entered text can be added as a tags.
     /// - Parameter tags: A string representing the tags already associated with or to be added to the project.
     /// - Returns: An array of unique strings representing the tags already associated with or to be added to the project.
-    func prepare(tags: String) -> [String] {
+    private func prepare(tags: String) -> [String] {
         var set = Set<String>()
         // Splits the provided string into separate words verifies
         // that there is only a single instance of a word by attempting
@@ -186,7 +186,7 @@ struct ProjectDetailView: View {
     /// - Parameters:
     ///   - tags: An array of strings representing tags to be associated with a project.
     ///   - project: The Project that will be associated with the provided tags.
-    func update(tags: [String], in project: Project) {
+    private func update(tags: [String], in project: Project) {
         let updatedTags = tags.map { tagName in
             // If a tag with the provided name already exists, return
             // it instead of creating a new one.
@@ -203,13 +203,13 @@ struct ProjectDetailView: View {
         project.tags = Set(updatedTags) as NSSet
     }
     
-    func toggleProjectClosed() {
+    private func toggleProjectClosed() {
         project.closed.toggle()
         project.managedObjectContext?.refreshAllObjects()
         dismiss()
     }
     
-    func update(uiImage: UIImage?, in project: Project) {
+    private func update(uiImage: UIImage?, in project: Project) {
         if let uiImage = uiImage {
             let id = project.id!
             let name = "\(id)"
