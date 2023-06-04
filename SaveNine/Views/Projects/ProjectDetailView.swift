@@ -41,48 +41,45 @@ struct ProjectDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
-                PhotoPickerView(uiImage: $image)
-                    .padding(.bottom)
-                    .disabled(!editing)
-                    .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
-                
-                if !editing {
-                    Divider()
-                    TrackerView(project: project)
+            PhotoPickerView(uiImage: $image)
+                .padding(.bottom)
+                .disabled(!editing)
+                .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
+            
+            if !editing {
+                TrackerView(project: project)
                     
-                    List {
-                        NavigationLink(destination: ProjectSessionsView(project: project)) {
-                            HStack {
-                                VStack {
-                                    Text("Sessions:")
-                                        .font(.callout)
-                                        .fontWeight(.light)
-                                        .italic()
-                                    
-                                    Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
-                                }
+                List {
+                    NavigationLink(destination: ProjectSessionsView(project: project)) {
+                        HStack {
+                            VStack {
+                                Text("Sessions:")
+                                    .font(.callout)
+                                    .fontWeight(.light)
+                                    .italic()
                                 
-                                Spacer()
+                                Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
+                            }
+                            
+                            Spacer()
+                            
+                            VStack {
+                                Text("Time Tracked:")
+                                    .font(.callout)
+                                    .fontWeight(.light)
+                                    .italic()
                                 
-                                VStack {
-                                    Text("Time Tracked:")
-                                        .font(.callout)
-                                        .fontWeight(.light)
-                                        .italic()
-                                    
-                                    Text(project.projectFormattedTotalDuration)
-                                }
+                                Text(project.projectFormattedTotalDuration)
                             }
                         }
                     }
-                    .frame(minHeight: 130)
                 }
-                
-                ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
-                    .onChange(of: detail, perform: { detail in project.detail = detail })
-                    .onChange(of: editing, perform: editTags)
+                .frame(minHeight: 130)
             }
+            
+            ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
+                .onChange(of: detail, perform: { detail in project.detail = detail })
+                .onChange(of: editing, perform: editTags)
         }
         .confirmationDialog(
             "Are you sure you want to delete this project?",
