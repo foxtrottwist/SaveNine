@@ -38,7 +38,6 @@ struct TrackerView: View {
     
     var body: some View {
         VStack {
-            Divider()
             SessionLabelPickerView(selectedLabel: $label)
             TimerView(start: start)
             
@@ -63,31 +62,6 @@ struct TrackerView: View {
                         startTimer()
                     }
                     .disabled(project.closed)
-                }
-            }
-            .padding()
-
-            Divider()
-            
-            HStack {
-                VStack {
-                    Text("Sessions:")
-                        .font(.callout)
-                        .fontWeight(.light)
-                        .italic()
-                    
-                    Text("\(tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
-                }
-                
-                Spacer()
-                
-                VStack {
-                    Text("Time Tracked:")
-                        .font(.callout)
-                        .fontWeight(.light)
-                        .italic()
-                    
-                    Text(project.projectFormattedTotalDuration)
                 }
             }
             .padding()

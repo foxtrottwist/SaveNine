@@ -48,7 +48,35 @@ struct ProjectDetailView: View {
                     .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
                 
                 if !editing {
+                    Divider()
                     TrackerView(project: project)
+                    
+                    List {
+                        NavigationLink(destination: ProjectSessionsView(project: project)) {
+                            HStack {
+                                VStack {
+                                    Text("Sessions:")
+                                        .font(.callout)
+                                        .fontWeight(.light)
+                                        .italic()
+                                    
+                                    Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
+                                }
+                                
+                                Spacer()
+                                
+                                VStack {
+                                    Text("Time Tracked:")
+                                        .font(.callout)
+                                        .fontWeight(.light)
+                                        .italic()
+                                    
+                                    Text(project.projectFormattedTotalDuration)
+                                }
+                            }
+                        }
+                    }
+                    .frame(minHeight: 130)
                 }
                 
                 ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
@@ -84,17 +112,8 @@ struct ProjectDetailView: View {
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
             Button(editing ? "Done" : "Edit", action: editProject)
+            
             Menu {
-                NavigationLink(destination: ProjectSessionsView(project: project)
-                ) {
-                    Label("Sessions", systemImage: "clock")
-                }
-                
-                NavigationLink(destination: ChecklistView(project: project)) {
-                    Label("Checklists", systemImage: "checklist")
-                }
-                
-                Divider()
                 Button {
                     document = ProjectDocument.document(from: project)
                     showingFileExporter.toggle()
