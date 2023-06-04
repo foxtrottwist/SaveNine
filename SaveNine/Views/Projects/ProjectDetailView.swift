@@ -128,7 +128,6 @@ struct ProjectDetailView: View {
                         Label( "Close project", systemImage: "archivebox")
                     }
                 }
-                .disabled(project.tracking)
                 
                 Divider()
                 Button {
@@ -141,7 +140,7 @@ struct ProjectDetailView: View {
             } label: {
                 Label("Menu", systemImage: "ellipsis.circle")
             }
-            .disabled(editing)
+            .disabled(editing || project.tracking)
         }
     }
     
