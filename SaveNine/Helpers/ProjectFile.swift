@@ -45,7 +45,7 @@ struct ProjectDocument: Codable {
     let closed: Bool
     let creationDate: Date
     let detail: String
-    let checklists: [ChecklistDocument]?
+//    let checklists: [ChecklistDocument]?
     let sessions: [SessionDocument]?
     
     static func document(from project: Project) -> ProjectFile {
@@ -56,7 +56,7 @@ struct ProjectDocument: Codable {
                 closed: project.closed,
                 creationDate: project.projectCreationDate,
                 detail: project.projectDetail,
-                checklists: ChecklistDocument.document(from: project.projectChecklists),
+//                checklists: ChecklistDocument.document(from: project.projectChecklists),
                 sessions: SessionDocument.document(from: project.projectSessions)
             )
         )
