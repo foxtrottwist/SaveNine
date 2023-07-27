@@ -370,6 +370,7 @@
 				6558692A297615470015E20F /* Widgets */,
 				6558692B297615970015E20F /* Extensions */,
 				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
+				65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */,
 				65A51C24294FBD1A00A3B960 /* SaveNineWidget.intentdefinition */,
 				65A51C25294FBD1A00A3B960 /* Assets.xcassets */,
 				65A51C27294FBD1A00A3B960 /* Info.plist */,
@@ -380,7 +381,6 @@
 		65D2313828CD552E00A91A47 = {
 			isa = PBXGroup;
 			children = (
-				65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */,
 				65D2314328CD552E00A91A47 /* SaveNine */,
 				65A51C1D294FBD1A00A3B960 /* SaveNineWidget */,
 				65A51C18294FBD1A00A3B960 /* Frameworks */,
@@ -665,7 +665,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SaveNineWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SaveNineWidget/SaveNineWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7YY7893TQJ;
@@ -694,7 +694,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = SaveNineWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SaveNineWidget/SaveNineWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7YY7893TQJ;
