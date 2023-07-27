@@ -30,10 +30,10 @@ struct AppIconView: View {
                 }
             }
         }
-        .onChange(of: selectedAppIcon, perform: handleSelectedAppIcon)
+        .onChange(of: selectedAppIcon) { handleSelection(appIcon: selectedAppIcon) }
     }
     
-    private func handleSelectedAppIcon(appIcon: String) {
+    private func handleSelection(appIcon: String) {
         if UIApplication.shared.supportsAlternateIcons {
             if appIcon == "AppIcon" {
                 UIApplication.shared.setAlternateIconName(nil)

@@ -40,7 +40,7 @@ struct PhotoPickerView: View {
                     }
                 }
             }
-            .onChange(of: selectedItem) { _ in
+            .onChange(of: selectedItem) {
                 guard let item = selectedItem.first else { return }
                 
                 Task {

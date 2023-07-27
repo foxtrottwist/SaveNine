@@ -31,8 +31,8 @@ struct SessionsTabView: View {
                         }
                     }
                     .listStyle(.grouped)
-                    .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
-                    .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
+                    .onChange(of: sortController.sortAscending) { sortController.save() }
+                    .onChange(of: sortController.sortOption) { sortController.save() }
                 }
             }
             .navigationTitle("Sessions")

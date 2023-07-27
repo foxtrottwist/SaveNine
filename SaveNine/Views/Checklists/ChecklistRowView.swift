@@ -53,8 +53,8 @@ struct ChecklistRowView: View {
             .font(.title3)
             .buttonStyle(.plain)
         }
-        .onChange(of: name, perform: { name in item.name = name })
-        .onChange(of: completed, perform: { completed in item.completed = completed })
+        .onChange(of: name) { item.name = name }
+        .onChange(of: completed) { item.completed = completed }
         .sheet(isPresented: $showingItemDetailView) {
             ItemDetailView(item: item, name: $name)
         }

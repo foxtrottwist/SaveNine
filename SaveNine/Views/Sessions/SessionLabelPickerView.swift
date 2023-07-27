@@ -40,8 +40,8 @@ struct SessionLabelPickerView: View {
         .alert(DefaultLabel.addLabel.rawValue, isPresented: $showingAddLabelAlert) {
             UpdateNameView(name: $name, cancelAction: cancelAction, confirmAction: addLabel)
         }
-        .onChange(of: selectedLabel) { label in
-            if label == DefaultLabel.addLabel.rawValue {
+        .onChange(of: selectedLabel) { 
+            if selectedLabel == DefaultLabel.addLabel.rawValue {
                 showingAddLabelAlert = true
                 selectedLabel = previousSelectedLabel
             }

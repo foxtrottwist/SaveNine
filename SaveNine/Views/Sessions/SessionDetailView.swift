@@ -46,8 +46,8 @@ struct SessionDetailView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Session Details")
-            .onChange(of: startDate, perform: { _ in updateDuration() })
-            .onChange(of: endDate, perform: { _ in updateDuration() })
+            .onChange(of: startDate) { updateDuration() }
+            .onChange(of: endDate) { updateDuration() }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {

@@ -51,8 +51,8 @@ struct ProjectsTabView: View {
                         }
                     }
                     .listStyle(.inset)
-                    .onChange(of: sortController.sortAscending, perform: { _ in sortController.save() })
-                    .onChange(of: sortController.sortOption, perform: { _ in sortController.save() })
+                    .onChange(of: sortController.sortAscending) { sortController.save() }
+                    .onChange(of: sortController.sortOption) { sortController.save() }
                     .onOpenURL(perform: { url in
                         let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
                         guard let host = components?.host else { return }

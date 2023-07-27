@@ -45,7 +45,7 @@ struct ProjectDetailView: View {
             PhotoPickerView(uiImage: $image)
                 .padding(.bottom)
                 .disabled(!editing)
-                .onChange(of: image, perform: { image in update(uiImage: image, in: project) })
+                .onChange(of: image) { update(uiImage: image, in: project) }
             
             if !editing {
                 Divider()
@@ -80,8 +80,8 @@ struct ProjectDetailView: View {
             }
             
             ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
-                .onChange(of: detail, perform: { detail in project.detail = detail })
-                .onChange(of: editing, perform: editTags)
+                .onChange(of: detail) { project.detail = detail }
+                .onChange(of: editing) { editTags(editing) }
         }
         .confirmationDialog(
             "Are you sure you want to delete this project?",
