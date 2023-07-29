@@ -27,7 +27,7 @@ extension Session {
         label ?? DefaultLabel.none.rawValue
     }
     
-    static var Example: Session {
+    static var preview: Session {
         let controller = DataController(inMemory: true)
         let viewContext = controller.container.viewContext
         
