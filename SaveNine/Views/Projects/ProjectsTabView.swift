@@ -22,7 +22,7 @@ struct ProjectsTabView: View {
     @State private var disabled = false
     @State private var path: [Project] = []
     @State private var searchText = ""
-    @State private var selectedTags: [Ptag] = []
+    @State private var selectedTags: [Tag] = []
     @State private var showClosedProjects = false
     @State private var showingProjectTags = false
     @State private var showingSettingsView = false
@@ -141,7 +141,7 @@ struct ProjectsTabView: View {
             from: [
                 (.closed, showClosedProjects),
                 !searchText.isEmpty ? (.search, searchText) : nil,
-            ] + selectedTags.map { (.tag, $0.ptagName) }
+            ] + selectedTags.map { (.tag, $0.tagName) }
         )
     }
     

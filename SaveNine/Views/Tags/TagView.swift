@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct TagView: View {
-    let tag: Ptag
+    let tag: Tag
     let isActive: Bool
     
     @EnvironmentObject var dataController: DataController
     
-    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
+    @FetchRequest(fetchRequest: Tag.fetchAllTags) var tags: FetchedResults<Tag>
     
     @State private var name: String
     @State private var showingDeleteTagConfirmation = false
@@ -22,16 +22,16 @@ struct TagView: View {
     
     let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
     
-    init(tag: Ptag, isActive: Bool) {
+    init(tag: Tag, isActive: Bool) {
         self.tag = tag
         self.isActive = isActive
         
-        _name = State(wrappedValue: tag.ptagName)
+        _name = State(wrappedValue: tag.tagName)
     }
     
     var body: some View {
         VStack {
-            Text(tag.ptagName)
+            Text(tag.tagName)
         }
         .padding(10)
         .background(Color(.systemGroupedBackground))
@@ -69,14 +69,14 @@ struct TagView: View {
     }
     
     func renameAction() {
-        if name != tag.ptagName && !name.isEmpty {
+        if name != tag.tagName && !name.isEmpty {
             // If a tag with the provided name already exists
             // prevent having a duplicate tag and inform the user.
-            if ptags.contains(where: { $0.name == name }) {
+            if tags.contains(where: { $0.name == name }) {
                 showingFailedToRenameAlert.toggle()
-                name = tag.ptagName
+                name = tag.tagName
             } else {
-                tag.ptagProjects.forEach {
+                tag.tagProjects.forEach {
                     $0.objectWillChange.send()
                 }
                 
@@ -87,12 +87,12 @@ struct TagView: View {
     }
     
     func cancelAction() {
-        name = tag.ptagName
+        name = tag.tagName
     }
 }
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView(tag: Ptag.example, isActive: false)
+        TagView(tag: Tag.example, isActive: false)
     }
 }

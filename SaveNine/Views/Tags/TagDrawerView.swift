@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TagDrawerView: View {
-    @Binding var selection: [Ptag]
+    @Binding var selection: [Tag]
     @Binding var isPresented: Bool
     
-    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
+    @FetchRequest(fetchRequest: Tag.fetchAllTags) var tags: FetchedResults<Tag>
     
     let activeTagColor = Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000)
     
@@ -43,13 +43,13 @@ struct TagDrawerView: View {
             }
             .padding([.horizontal, .top])
             
-            if ptags.isEmpty {
+            if tags.isEmpty {
                 NoContentView(message: "Add tags to your projects to filter.")
                     .padding(.vertical)
             } else {
                 ScrollView(.horizontal) {
                     HStack {
-                        ForEach(ptags) { tag in
+                        ForEach(tags) { tag in
                             Button {
                                 toggleSelection(tag: tag)
                             } label: {
@@ -64,7 +64,7 @@ struct TagDrawerView: View {
         }
     }
     
-    private func toggleSelection(tag: Ptag) {
+    private func toggleSelection(tag: Tag) {
         if let existingIndex = selection.firstIndex(where: { $0.id == tag.id }) {
             selection.remove(at: existingIndex)
         } else {
@@ -75,6 +75,6 @@ struct TagDrawerView: View {
 
 struct TagDrawerView_Previews: PreviewProvider {
     static var previews: some View {
-        TagDrawerView(selection: .constant([Ptag.example]), isPresented: .constant(Bool()))
+        TagDrawerView(selection: .constant([Tag.example]), isPresented: .constant(Bool()))
     }
 }

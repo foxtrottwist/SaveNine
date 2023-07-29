@@ -16,22 +16,22 @@ struct ProjectDetailView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     
-    @FetchRequest(fetchRequest: Ptag.fetchAllTags) var ptags: FetchedResults<Ptag>
+    @FetchRequest(fetchRequest: Tag.fetchAllTags) var fetchedTags: FetchedResults<Tag>
     
     @State private var name = ""
     @State private var detail = ""
+    @State private var displayTags: String = ""
     @State private var document: ProjectFile?
     @State private var image: UIImage?
     @State private var showingDeleteConfirm = false
     @State private var showingFileExporter = false
-    @State private var tags: String = ""
     @State private var editing = false
     
     init(project: Project) {
         self.project = project
         _name = State(wrappedValue: project.projectName)
         _detail = State(wrappedValue: project.projectDetail)
-        _tags = State(wrappedValue: project.projectTagsString)
+        _displayTags = State(wrappedValue: project.projectTagsString)
         
         if !project.projectImage.isEmpty {
             if let uiImage = FileManager.getImage (named: project.projectImage) {
@@ -79,7 +79,7 @@ struct ProjectDetailView: View {
                 .frame(minHeight: minHeight(from: dynamicTypeSize))
             }
             
-            ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $tags)
+            ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $displayTags)
                 .onChange(of: detail) { project.detail = detail }
                 .onChange(of: editing) { editTags(editing) }
         }
@@ -165,10 +165,10 @@ struct ProjectDetailView: View {
     }
     
     private func editTags(_ editing: Bool) {
-        guard !editing, project.projectTagsString != tags else { return }
+        guard !editing, project.projectTagsString != displayTags else { return }
         
-        let tagNames = prepare(tags: tags)
-        tags = tagNames.joined(separator: " ")
+        let tagNames = prepare(tags: displayTags)
+        displayTags = tagNames.joined(separator: " ")
         update(tags: tagNames, in: project)
     }
     
@@ -192,10 +192,10 @@ struct ProjectDetailView: View {
         let updatedTags = tags.map { tagName in
             // If a tag with the provided name already exists, return
             // it instead of creating a new one.
-            if let existingTag = ptags.first(where: { $0.name == tagName }) {
+            if let existingTag = fetchedTags.first(where: { $0.name == tagName }) {
                 return existingTag
             } else {
-                let newTag = Ptag(context: managedObjectContext)
+                let newTag = Tag(context: managedObjectContext)
                 newTag.id = UUID()
                 newTag.name = tagName
                 

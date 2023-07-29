@@ -70,7 +70,7 @@ class DataController: ObservableObject {
         }
         
         for t in tags {
-            let tag = Ptag(context: viewContext)
+            let tag = Tag(context: viewContext)
             tag.name = t
             tag.id = UUID()
         }
@@ -107,7 +107,7 @@ class DataController: ObservableObject {
         let fetchRequest3: NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
         delete(fetchRequest3)
         
-        let fetchRequest4: NSFetchRequest<NSFetchRequestResult> = Ptag.fetchRequest()
+        let fetchRequest4: NSFetchRequest<NSFetchRequestResult> = Tag.fetchRequest()
         delete(fetchRequest4)
         
         let fetchRequest5: NSFetchRequest<NSFetchRequestResult> = Project.fetchRequest()

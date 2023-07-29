@@ -56,12 +56,12 @@ extension Project {
         return sharedSessions
     }
     
-    var projectTags: [Ptag] {
-        tags?.allObjects as? [Ptag] ?? []
+    var projectTags: [Tag] {
+        tags?.allObjects as? [Tag] ?? []
     }
     
     var projectTagsString: String {
-        projectTags.map { $0.ptagName }.sorted {$0 < $1 }.joined(separator: " ")
+        projectTags.map { $0.tagName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     
     var projectTotalDuration: Double {
