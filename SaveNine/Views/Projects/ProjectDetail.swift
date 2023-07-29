@@ -10,20 +10,16 @@ import SwiftUI
 
 struct ProjectDetail: View {
     @ObservedObject var project: Project
-    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
-    
     @FetchRequest(fetchRequest: Tag.fetchAllTags) var fetchedTags: FetchedResults<Tag>
-    
     @State private var name = ""
     @State private var detail = ""
     @State private var displayTags: String = ""
     @State private var document: ProjectFile?
     @State private var image: UIImage?
-    @State private var showingDeleteConfirm = false
     @State private var showingFileExporter = false
     @State private var editing = false
     
@@ -77,18 +73,13 @@ struct ProjectDetail: View {
                 }
             }
             
-            ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $displayTags)
-                .onChange(of: detail) { project.detail = detail }
-                .onChange(of: editing) { editTags(editing) }
-        }
-        .confirmationDialog(
-            "Are you sure you want to delete this project?",
-            isPresented: $showingDeleteConfirm,
-            titleVisibility: .visible
-        ) {
-            Button("Delete Project", role: .destructive) {
-                delete(project: project)
-            }
+            TextField("Notes", text: $detail, axis: .vertical)
+                .padding(.bottom)
+            
+            TextField("Text, separated by spaces", text: $displayTags)
+                .autocapitalization(.none)
+                .autocorrectionDisabled(true)
+                .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
         }
         .fileExporter(
             isPresented: $showingFileExporter,
@@ -103,24 +94,20 @@ struct ProjectDetail: View {
                 print(error.localizedDescription)
             }
         }
-        .navigationTitle(name)
+        .navigationTitle($name)
         .navigationBarTitleDisplayMode(.inline)
+        .onChange(of: detail) { project.detail = detail }
+        .onChange(of: editing) { editTags(editing) }
         .onDisappear(perform: dataController.save)
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
-            Button(editing ? "Done" : "Edit", action: editProject)
-            
-            Menu {
-                Button {
-                    document = ProjectDocument.document(from: project)
-                    showingFileExporter.toggle()
-                } label: {
-                    Label("Export", systemImage: "square.and.arrow.up")
-                }
-                .disabled(project.tracking)
+            ToolbarTitleMenu {
+                RenameButton()
                 
                 Button {
-                    toggleProjectClosed()
+                    project.closed.toggle()
+                    project.managedObjectContext?.refreshAllObjects()
+                    dismiss()
                 } label: {
                     if project.closed {
                         Label("Reopen project", systemImage: "tray.full")
@@ -130,36 +117,16 @@ struct ProjectDetail: View {
                 }
                 
                 Divider()
+                
                 Button {
-                    showingDeleteConfirm.toggle()
+                    document = ProjectDocument.document(from: project)
+                    showingFileExporter.toggle()
                 } label: {
-                    Label("Delete Project", systemImage: "trash")
-                        .foregroundColor(.red)
+                    Label("Export", systemImage: "square.and.arrow.up")
                 }
                 .disabled(project.tracking)
-            } label: {
-                Label("Menu", systemImage: "ellipsis.circle")
-            }
-            .disabled(editing || project.tracking)
-        }
-    }
-    
-    private func delete(project: Project) {
-        FileManager.deleteImage(named: project.projectImage)
-        dataController.delete(project)
-        dismiss()
-    }
-    
-    private func editProject() {
-        if editing {
-            if name.isEmpty {
-                name = project.displayName
-                project.name = name
-            } else {
-                project.name = name
             }
         }
-        editing.toggle()
     }
     
     private func editTags(_ editing: Bool) {
@@ -203,12 +170,6 @@ struct ProjectDetail: View {
         project.tags = Set(updatedTags) as NSSet
     }
     
-    private func toggleProjectClosed() {
-        project.closed.toggle()
-        project.managedObjectContext?.refreshAllObjects()
-        dismiss()
-    }
-    
     private func update(uiImage: UIImage?, in project: Project) {
         if let uiImage = uiImage {
             let id = project.id!
@@ -223,27 +184,10 @@ struct ProjectDetail: View {
             project.image = nil
         }
     }
-    
-    private func minHeight(from dynamicTypeSize: DynamicTypeSize) -> CGFloat {
-        switch dynamicTypeSize {
-        case .xSmall, .small:
-            return 118
-        case .medium, .large:
-            return 132
-        case .xLarge, .xxLarge, .xxxLarge:
-            return 140
-        default:
-            return 200
-        }
-    }
 }
 
-struct ProjectDetailView_Previews: PreviewProvider {
-    static var dataController = DataController.preview
-    
-    static var previews: some View {
-        ProjectDetail(project: Project.preview)
-            .environment(SessionLabelController.preview)
-            .environmentObject(dataController)
-    }
+#Preview {
+    ProjectDetail(project: Project.preview)
+        .environment(SessionLabelController.preview)
+        .environmentObject(DataController.preview)
 }
