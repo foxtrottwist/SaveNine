@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 
 extension Tag {
-    var tagName: String {
+    var displayName: String {
         name ?? ""
     }
     

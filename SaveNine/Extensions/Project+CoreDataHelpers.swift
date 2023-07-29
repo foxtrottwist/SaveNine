@@ -14,7 +14,7 @@ extension Project {
     }
     
     var displayTags: String {
-        projectTags.map { $0.tagName }.sorted {$0 < $1 }.joined(separator: " ")
+        projectTags.map { $0.displayName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     
     var projectCreationDate: Date {

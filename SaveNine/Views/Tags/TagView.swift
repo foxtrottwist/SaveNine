@@ -26,12 +26,12 @@ struct TagView: View {
         self.tag = tag
         self.isActive = isActive
         
-        _name = State(wrappedValue: tag.tagName)
+        _name = State(wrappedValue: tag.displayName)
     }
     
     var body: some View {
         VStack {
-            Text(tag.tagName)
+            Text(tag.displayName)
         }
         .padding(10)
         .background(Color(.systemGroupedBackground))
@@ -69,12 +69,12 @@ struct TagView: View {
     }
     
     func renameAction() {
-        if name != tag.tagName && !name.isEmpty {
+        if name != tag.displayName && !name.isEmpty {
             // If a tag with the provided name already exists
             // prevent having a duplicate tag and inform the user.
             if tags.contains(where: { $0.name == name }) {
                 showingFailedToRenameAlert.toggle()
-                name = tag.tagName
+                name = tag.displayName
             } else {
                 tag.tagProjects.forEach {
                     $0.objectWillChange.send()
@@ -87,7 +87,7 @@ struct TagView: View {
     }
     
     func cancelAction() {
-        name = tag.tagName
+        name = tag.displayName
     }
 }
 

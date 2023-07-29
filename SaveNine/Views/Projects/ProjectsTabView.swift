@@ -137,7 +137,7 @@ struct ProjectsTabView: View {
             from: [
                 (.closed, showClosedProjects),
                 !searchText.isEmpty ? (.search, searchText) : nil,
-            ] + selectedTags.map { (.tag, $0.tagName) }
+            ] + selectedTags.map { (.tag, $0.displayName) }
         )
     }
     
