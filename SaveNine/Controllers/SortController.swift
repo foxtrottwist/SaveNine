@@ -7,10 +7,12 @@
 
 import Combine
 import Foundation
+import Observation
 
-final class SortController: ObservableObject, Codable {
-    @Published var sortAscending: Bool
-    @Published var sortOption: SortOption
+@Observable
+final class SortController: Codable {
+    var sortAscending: Bool
+    var sortOption: SortOption
     
     private var listView = ""
     

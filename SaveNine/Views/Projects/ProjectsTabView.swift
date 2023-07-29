@@ -11,14 +11,10 @@ import SwiftUI
 
 struct ProjectsTabView: View {
     static let tag: String? = "Projects"
-    
     let subject: PassthroughSubject<String?, Never>
-    
-    @StateObject private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
-    
+    @State private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject private var dataController: DataController
-    
     @State private var disabled = false
     @State private var path: [Project] = []
     @State private var searchText = ""
