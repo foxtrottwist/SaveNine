@@ -1,5 +1,5 @@
 //
-//  ProjectNameView.swift
+//  ProjectName.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/24/22.
@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct ProjectNameView: View {
+struct ProjectName: View {
     let project: Project
-    
     @EnvironmentObject var dataController: DataController
     @FocusState var focused: Bool
     @State private var name = ""
@@ -39,8 +38,6 @@ struct ProjectNameView: View {
     }
 }
 
-struct ProjectNameView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectNameView(project: Project.preview)
-    }
+#Preview {
+    ProjectName(project: Project.preview)
 }
