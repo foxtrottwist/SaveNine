@@ -25,8 +25,6 @@ struct ProjectsTabView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            TagDrawerView(selection: $selectedTags, isPresented: $showingProjectTags)
-            
             FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
                 if projects.isEmpty {
                     NoContentView(message: showClosedProjects ? "There are currently no closed projects." : "Please add a project to begin.")
@@ -78,16 +76,6 @@ struct ProjectsTabView: View {
                 ToolbarItem {
                     Button(action: addProject) {
                         Label("Add Project", systemImage: "plus.square")
-                    }
-                    .disabled(disabled)
-                }
-                
-                ToolbarItem {
-                    Button {
-                        showingProjectTags.toggle()
-                    } label: {
-                        Label("Tags", systemImage: "tag")
-                            .font(.callout)
                     }
                     .disabled(disabled)
                 }
