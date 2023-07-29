@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @SceneStorage(StorageKey.selectedTabView.rawValue) private var selectedTabView: String?
-    @StateObject private var tabController = TabController()
+    @State private var tabController = TabController()
     
     var body: some View {
         TabView(selection: $tabController.selectedTabView) {

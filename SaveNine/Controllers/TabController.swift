@@ -7,9 +7,11 @@
 
 import Combine
 import Foundation
+import Observation
 
-final class TabController: ObservableObject {
-    @Published var selectedTabView: String? {
+@Observable
+final class TabController {
+    var selectedTabView: String? {
         willSet {
             if selectedTabView == newValue {
                 subject.send(newValue)
