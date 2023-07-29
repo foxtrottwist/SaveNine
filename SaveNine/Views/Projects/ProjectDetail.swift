@@ -1,5 +1,5 @@
 //
-//  ProjectDetailView.swift
+//  ProjectDetail.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/10/22.
@@ -8,7 +8,7 @@
 import PhotosUI
 import SwiftUI
 
-struct ProjectDetailView: View {
+struct ProjectDetail: View {
     @ObservedObject var project: Project
     
     @Environment(\.dismiss) private var dismiss
@@ -244,7 +244,7 @@ struct ProjectDetailView_Previews: PreviewProvider {
     static var dataController = DataController.preview
     
     static var previews: some View {
-        ProjectDetailView(project: Project.preview)
+        ProjectDetail(project: Project.preview)
             .environment(SessionLabelController.preview)
             .environmentObject(dataController)
     }

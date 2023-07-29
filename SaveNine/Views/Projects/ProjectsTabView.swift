@@ -67,7 +67,7 @@ struct ProjectsTabView: View {
             }
             .navigationTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
             .navigationDestination(for: Project.self) { project in
-                ProjectDetailView(project: project)
+                ProjectDetail(project: project)
             }
             .sheet(isPresented: $showingSettingsView) {
                 SettingsView()
