@@ -1,5 +1,5 @@
 //
-//  ProjectRowView.swift
+//  ProjectRow.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/26/22.
@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-struct ProjectRowView: View {
+struct ProjectRow: View {
     @ObservedObject var project: Project
-    
-    let uiImage: UIImage?
+    private let uiImage: UIImage?
     
     init(project: Project) {
         self.project = project
@@ -40,32 +39,24 @@ struct ProjectRowView: View {
                 
                 if let uiImage {
                     Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                        .projectImage(width: 100, height: 100, cornerRadius: 10)
                 }
             }
             
-                HStack {
-                    Image(systemName: "tag")
-                        .font(.caption2)
-                        .foregroundColor(project.displayTags.isEmpty ? .clear : .secondary)
-                    
-                    
-                    Text(project.displayTags)
-                        .font(.footnote)
-                        .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
-                }
-                .padding(.top, 0.25)
+            HStack {
+                Image(systemName: "tag")
+                    .font(.caption2)
+                    .foregroundColor(project.displayTags.isEmpty ? .clear : .accent)
                 
-
+                Text(project.displayTags)
+                    .font(.footnote)
+                    .foregroundColor(.accent)
+            }
+            .padding(.top, 0.25)
         }
     }
 }
 
-struct ProjectRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectRowView(project: Project.preview)
-    }
+#Preview {
+    ProjectRow(project: Project.preview)
 }

@@ -38,7 +38,7 @@ struct ProjectsTabView: View {
                         } else {
                             VStack {
                                 NavigationLink(value: project) {
-                                    ProjectRowView(project: project)
+                                    ProjectRow(project: project)
                                 }
                             }
                             .disabled(disabled)
