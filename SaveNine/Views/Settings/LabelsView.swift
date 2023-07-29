@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LabelsView: View {
-    @EnvironmentObject private var sessionLabelController: SessionLabelController
+    @Environment(SessionLabelController.self)  private var sessionLabelController
     
     var body: some View {
         List {
@@ -44,6 +44,6 @@ struct LabelsView: View {
 struct LabelsView_Previews: PreviewProvider {
     static var previews: some View {
         LabelsView()
-            .environmentObject(SessionLabelController.preview)
+            .environment(SessionLabelController.preview)
     }
 }

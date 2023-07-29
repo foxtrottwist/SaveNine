@@ -81,6 +81,6 @@ struct SessionsTabView: View {
 struct SessionsTabView_Previews: PreviewProvider {
     static var previews: some View {
         SessionsTabView()
-            .environmentObject(SessionLabelController())
+            .environment(SessionLabelController())
     }
 }

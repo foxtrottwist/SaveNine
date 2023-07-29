@@ -6,14 +6,16 @@
 //
 
 import Foundation
+import Observation
 
 enum DefaultLabel: String {
     case addLabel = "Add Label"
     case none = "None"
 }
 
-final class SessionLabelController: ObservableObject {
-    @Published var labels = [SessionLabel]()
+@Observable
+final class SessionLabelController {
+    var labels = [SessionLabel]()
     
     private let url = URL.documentsDirectory.appending(path: FileExtension.append(to: "sessionLabels", using: .json))
     

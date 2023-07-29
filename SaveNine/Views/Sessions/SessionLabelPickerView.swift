@@ -9,11 +9,8 @@ import SwiftUI
 
 struct SessionLabelPickerView: View {
     let disableAddLabel: Bool
-    
-    @EnvironmentObject var sessionLabelController: SessionLabelController
-    
     @Binding var selectedLabel: String
-    
+    @Environment(SessionLabelController.self) var sessionLabelController
     @State private var name = ""
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false
@@ -63,6 +60,6 @@ struct SessionLabelPickerView: View {
 struct SessionLabelPickerView_Previews: PreviewProvider {
     static var previews: some View {
         SessionLabelPickerView(selectedLabel: .constant("None"))
-            .environmentObject(SessionLabelController.preview)
+            .environment(SessionLabelController.preview)
     }
 }
