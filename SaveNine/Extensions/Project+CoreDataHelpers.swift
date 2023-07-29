@@ -25,13 +25,6 @@ extension Project {
         creationDate ?? Date()
     }
     
-    
-    /// The Project's [Checklist] sorted in reverse chronological order.
-    var projectChecklists: [Checklist] {
-        let checklists = checklists?.allObjects as? [Checklist] ?? []
-        return checklists.sorted(using: KeyPathComparator(\.creationDate, order: .reverse))
-    }
-    
     /// The Project's [Session] sorted in reverse chronological order.
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []

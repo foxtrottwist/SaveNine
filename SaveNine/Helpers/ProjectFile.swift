@@ -63,42 +63,6 @@ struct ProjectDocument: Codable {
     }
 }
 
-struct ChecklistDocument: Codable {
-    let name: String
-    let creationDate: Date
-    let items: [ItemDocument]?
-    
-    static func document(from checklists: [Checklist]) -> [ChecklistDocument]{
-        return checklists.map { checklist in
-            ChecklistDocument(
-                name: checklist.checklistName,
-                creationDate: checklist.checklistCreationDate,
-                items: ItemDocument.document(from: checklist.checklistItems)
-            )
-        }
-    }
-}
-
-struct ItemDocument: Codable {
-    let name: String
-    let completed: Bool
-    let creationDate: Date
-    let detail: String
-    let priority: Int16
-    
-    static func document(from items: [Item]) -> [ItemDocument] {
-        return items.map { item in
-            ItemDocument(
-                name: item.itemName,
-                completed: item.completed,
-                creationDate: item.itemCreationDate,
-                detail: item.itemDetail,
-                priority: item.priority
-            )
-        }
-    }
-}
-
 struct SessionDocument: Codable {
     let duration: Double
     let endDate: Date

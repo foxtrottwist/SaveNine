@@ -59,7 +59,6 @@ class DataController: ObservableObject {
     func createSampleData() throws {
         let viewContext = container.viewContext
         let projects = ["OMG David!", "Chip, the Goldfinch", "Deep Dive", "Ursula Minor", "Big G, the Giraffe"]
-        let checklists = ["Supplies", "Todos", "Ideas"]
         let tags = ["fpp", "quilting", "animals"]
         
         for p in projects {
@@ -68,23 +67,6 @@ class DataController: ObservableObject {
             project.id = UUID()
             project.creationDate = Date()
             project.closed = Bool.random()
-            
-            for c in checklists {
-                let checklist = Checklist(context: viewContext)
-                checklist.name = c
-                checklist.items = []
-                checklist.creationDate = Date()
-                checklist.project = project
-                
-                for i in 1...3 {
-                     let item = Item(context: viewContext)
-                     item.name = "Item number \(i)"
-                     item.creationDate = Date()
-                     item.completed = Bool.random()
-                     item.checklist = checklist
-                     item.priority = Int16.random(in: 1...3)
-                 }
-            }
         }
         
         for t in tags {
@@ -122,12 +104,6 @@ class DataController: ObservableObject {
     }
     
     func deleteAll() {
-        let fetchRequest1: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
-        delete(fetchRequest1)
-        
-        let fetchRequest2: NSFetchRequest<NSFetchRequestResult> = Checklist.fetchRequest()
-        delete(fetchRequest2)
-        
         let fetchRequest3: NSFetchRequest<NSFetchRequestResult> = Session.fetchRequest()
         delete(fetchRequest3)
         
