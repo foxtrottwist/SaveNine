@@ -93,6 +93,6 @@ struct TagView: View {
 
 struct TagView_Previews: PreviewProvider {
     static var previews: some View {
-        TagView(tag: Tag.example, isActive: false)
+        TagView(tag: Tag.preview, isActive: false)
     }
 }

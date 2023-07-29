@@ -24,7 +24,7 @@ extension Tag {
         return request
     }
     
-    static var example: Tag {
+    static var preview: Tag {
         let controller = DataController(inMemory: true)
         let viewContext = controller.container.viewContext
         

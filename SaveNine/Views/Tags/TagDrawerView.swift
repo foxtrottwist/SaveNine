@@ -75,6 +75,6 @@ struct TagDrawerView: View {
 
 struct TagDrawerView_Previews: PreviewProvider {
     static var previews: some View {
-        TagDrawerView(selection: .constant([Tag.example]), isPresented: .constant(Bool()))
+        TagDrawerView(selection: .constant([Tag.preview]), isPresented: .constant(Bool()))
     }
 }
