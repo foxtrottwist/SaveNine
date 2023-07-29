@@ -41,42 +41,40 @@ struct ProjectDetail: View {
     }
     
     var body: some View {
-        ScrollView {
-            PhotoPickerView(uiImage: $image)
-                .padding(.bottom)
-                .disabled(!editing)
-                .onChange(of: image) { update(uiImage: image, in: project) }
+        Form {
+            Section {
+                ProjectImage(project: project)
+            }
+            .listRowBackground(Color.clear)
             
-            if !editing {
-                Divider()
+         
+            Section {
                 TrackerView(project: project)
+            }
                     
-                List {
-                    NavigationLink(destination: ProjectSessionsView(project: project)) {
-                        HStack {
-                            VStack {
-                                Text("Sessions:")
-                                    .font(.callout)
-                                    .fontWeight(.light)
-                                    .italic()
-                                
-                                Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
-                            }
+            Section {
+                NavigationLink(destination: ProjectSessionsView(project: project)) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Sessions")
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                                .italic()
                             
-                            Spacer()
+                            Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
+                        }
+                        
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text("Time Tracked")
+                                .font(.callout)
+                                .fontWeight(.semibold)
+                                .italic()
                             
-                            VStack {
-                                Text("Time Tracked:")
-                                    .font(.callout)
-                                    .fontWeight(.light)
-                                    .italic()
-                                
-                                Text(project.timeTracked)
-                            }
+                            Text(project.timeTracked)
                         }
                     }
                 }
-                .frame(minHeight: minHeight(from: dynamicTypeSize))
             }
             
             ProjectFormView(editing: editing, name: $name, detail: $detail, tags: $displayTags)
