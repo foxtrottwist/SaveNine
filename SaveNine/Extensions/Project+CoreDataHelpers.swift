@@ -72,7 +72,7 @@ extension Project {
         projectTotalDuration.formattedDuration
     }
     
-    static var example: Project {
+    static var preview: Project {
         let controller = DataController(inMemory: true)
         let viewContext = controller.container.viewContext
         

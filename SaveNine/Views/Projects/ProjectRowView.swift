@@ -66,6 +66,6 @@ struct ProjectRowView: View {
 
 struct ProjectRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectRowView(project: Project.example)
+        ProjectRowView(project: Project.preview)
     }
 }

@@ -47,6 +47,6 @@ struct ProjectSessionsView: View {
 
 struct ProjectSessionsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectSessionsView(project: Project.example)
+        ProjectSessionsView(project: Project.preview)
     }
 }
