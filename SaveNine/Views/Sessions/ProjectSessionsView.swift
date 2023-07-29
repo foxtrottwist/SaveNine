@@ -28,7 +28,7 @@ struct ProjectSessionsView: View {
             }
             .listStyle(.grouped)
             .toolbar {
-                ShareLink(item: project.projectShareSessions) {
+                ShareLink(item: project.sessionsShareLinkItem) {
                     Label ("Export Sessions", systemImage: "square.and.arrow.up")
                 }
                 EditButton()

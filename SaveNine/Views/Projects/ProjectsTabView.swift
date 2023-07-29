@@ -33,7 +33,7 @@ struct ProjectsTabView: View {
                         .padding()
                 } else {
                     List(projects) { project in
-                        if project.projectName.isEmpty {
+                        if project.displayName.isEmpty {
                             ProjectNameView(project: project)
                                 .onAppear { disabled = true }
                                 .onDisappear { disabled = false }

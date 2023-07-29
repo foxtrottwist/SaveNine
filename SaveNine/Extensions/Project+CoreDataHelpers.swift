@@ -9,26 +9,56 @@ import CoreData
 import Foundation
 
 extension Project {
-    var projectName: String {
+    var displayName: String {
         name ?? ""
     }
     
-    var projectImage: String {
-        image ?? ""
-    }
-    
-    var projectDetail: String {
-        detail ?? ""
+    var displayTags: String {
+        projectTags.map { $0.tagName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     
     var projectCreationDate: Date {
         creationDate ?? Date()
     }
     
+    var projectDetail: String {
+        detail ?? ""
+    }
+    
+    var projectImage: String {
+        image ?? ""
+    }
+    
+    var projectModificationDate: Date {
+        modificationDate ?? Date()
+    }
+    
     /// The Project's [Session] sorted in reverse chronological order.
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
         return sessions.sorted(using: KeyPathComparator(\.startDate, order: .reverse))
+    }
+    
+    var projectTags: [Tag] {
+        tags?.allObjects as? [Tag] ?? []
+    }
+    
+    var sessionsShareLinkItem: String {
+        let sessions = projectSessions.sorted(using: KeyPathComparator(\.startDate)).map {
+            "\($0.sessionLabel)\n\($0.formattedStartDate)\n\( $0.formattedDuration)"
+         }.reduce("") { "\($0)\n\n\($1)" }
+        
+        let sharedSessions = """
+            \(displayName)
+            Time Tracked: \(timeTracked)
+            \(sessions)
+            """
+
+        return sharedSessions
+    }
+    
+    var timeTracked: String {
+        projectSessions.map { $0.duration }.reduce(0.0) { $0 + $1 }.formattedDuration
     }
     
     /// A Boolean value that indicates whether the Project is being tracked.
@@ -40,36 +70,6 @@ extension Project {
         //    This means the Session was created but not completed;  -> true
         guard let session = projectSessions.first else { return false }
         return session.endDate == nil
-    }
-    
-    var projectShareSessions: String {
-        let sessions = projectSessions.sorted(using: KeyPathComparator(\.startDate)).map {
-            "\($0.sessionLabel)\n\($0.formattedStartDate)\n\( $0.formattedDuration)"
-         }.reduce("") { "\($0)\n\n\($1)" }
-        
-        let sharedSessions = """
-            \(projectName)
-            Time Tracked: \(projectFormattedTotalDuration)
-            \(sessions)
-            """
-
-        return sharedSessions
-    }
-    
-    var projectTags: [Tag] {
-        tags?.allObjects as? [Tag] ?? []
-    }
-    
-    var projectTagsString: String {
-        projectTags.map { $0.tagName }.sorted {$0 < $1 }.joined(separator: " ")
-    }
-    
-    var projectTotalDuration: Double {
-        projectSessions.map { $0.duration }.reduce(0.0) { $0 + $1 }
-    }
-    
-    var projectFormattedTotalDuration: String {
-        projectTotalDuration.formattedDuration
     }
     
     static var preview: Project {

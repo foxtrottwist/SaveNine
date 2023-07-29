@@ -29,9 +29,9 @@ struct ProjectDetailView: View {
     
     init(project: Project) {
         self.project = project
-        _name = State(wrappedValue: project.projectName)
+        _name = State(wrappedValue: project.displayName)
         _detail = State(wrappedValue: project.projectDetail)
-        _displayTags = State(wrappedValue: project.projectTagsString)
+        _displayTags = State(wrappedValue: project.displayTags)
         
         if !project.projectImage.isEmpty {
             if let uiImage = FileManager.getImage (named: project.projectImage) {
@@ -71,7 +71,7 @@ struct ProjectDetailView: View {
                                     .fontWeight(.light)
                                     .italic()
                                 
-                                Text(project.projectFormattedTotalDuration)
+                                Text(project.timeTracked)
                             }
                         }
                     }
@@ -155,7 +155,7 @@ struct ProjectDetailView: View {
     private func editProject() {
         if editing {
             if name.isEmpty {
-                name = project.projectName
+                name = project.displayName
                 project.name = name
             } else {
                 project.name = name
@@ -165,7 +165,7 @@ struct ProjectDetailView: View {
     }
     
     private func editTags(_ editing: Bool) {
-        guard !editing, project.projectTagsString != displayTags else { return }
+        guard !editing, project.displayTags != displayTags else { return }
         
         let tagNames = prepare(tags: displayTags)
         displayTags = tagNames.joined(separator: " ")

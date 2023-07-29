@@ -109,10 +109,10 @@ struct TrackerView: View {
                 
                 let projectWidget = ProjectWidget(
                     id: project.id!,
-                    name: project.projectName,
+                    name: project.displayName,
                     modifiedDate: endDate,
                     sessionCount: project.projectSessions.count,
-                    timeTracked: project.projectFormattedTotalDuration
+                    timeTracked: project.timeTracked
                 )
                 
                 projectWidget.writeMostRecentlyTrackedWidget()
@@ -130,7 +130,7 @@ struct TrackerView: View {
    
     private func requestLiveActivity(date: Date) {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
-            let attributes = TrackerAttributes(projectName: project.projectName, projectId: project.id!)
+            let attributes = TrackerAttributes(projectName: project.displayName, projectId: project.id!)
             let contentState = ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil)
             
             do {

@@ -81,10 +81,10 @@ struct SessionDetailView: View {
             if project.id == sessionProject.id {
                 let projectWidget = ProjectWidget(
                     id: project.id,
-                    name: sessionProject.projectName,
+                    name: sessionProject.displayName,
                     modifiedDate: endDate,
                     sessionCount: sessionProject.projectSessions.count,
-                    timeTracked: sessionProject.projectFormattedTotalDuration
+                    timeTracked: sessionProject.timeTracked
                 )
                 
                 projectWidget.writeMostRecentlyTrackedWidget()

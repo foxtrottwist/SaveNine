@@ -23,7 +23,7 @@ struct SessionsTabView: View {
                 } else {
                     List(sessions) { session in
                         VStack(alignment: .leading) {
-                            Text(session.project?.projectName ?? "")
+                            Text(session.project?.displayName ?? "")
                                 .font(.headline)
                             
                             SessionRowView(session: session)

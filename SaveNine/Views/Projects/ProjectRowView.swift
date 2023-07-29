@@ -26,7 +26,7 @@ struct ProjectRowView: View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text(project.projectName)
+                    Text(project.displayName)
                         .font(.headline)
                         .lineLimit(2)
                     
@@ -50,10 +50,10 @@ struct ProjectRowView: View {
                 HStack {
                     Image(systemName: "tag")
                         .font(.caption2)
-                        .foregroundColor(project.projectTagsString.isEmpty ? .clear : .secondary)
+                        .foregroundColor(project.displayTags.isEmpty ? .clear : .secondary)
                     
                     
-                    Text(project.projectTagsString)
+                    Text(project.displayTags)
                         .font(.footnote)
                         .foregroundColor(Color(red: 0.639, green: 0.392, blue: 0.533, opacity: 1.000))
                 }
