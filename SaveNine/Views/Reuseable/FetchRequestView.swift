@@ -25,6 +25,6 @@ struct FetchRequestView<T: NSManagedObject, Content: View>: View {
 
 struct FetchRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        FetchRequestView(Project.fetchProjects(predicate: nil, sortDescriptors: nil), { _ in EmptyView() })
+        FetchRequestView(Session.fetchSessions(predicate: nil, sortDescriptors: nil), { _ in EmptyView() })
     }
 }

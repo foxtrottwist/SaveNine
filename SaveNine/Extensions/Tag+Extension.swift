@@ -1,5 +1,5 @@
 //
-//  Tag+CoreDataHelpers.swift
+//  Tag+Extension.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 10/1/22.
@@ -11,17 +11,6 @@ import Foundation
 extension Tag {
     var displayName: String {
         name ?? ""
-    }
-    
-    var tagProjects: [Project] {
-        projects?.allObjects as? [Project] ?? []
-    }
-    
-    static var fetchAllTags: NSFetchRequest<Tag> {
-        let request = Tag.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Tag.name, ascending: true)]
-        
-        return request
     }
     
     static var preview: Tag {

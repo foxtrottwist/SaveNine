@@ -1,5 +1,5 @@
 //
-//  Project+CoreDataHelpers.swift
+//  Project+Extension.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/10/22.
@@ -33,7 +33,6 @@ extension Project {
         modificationDate ?? Date()
     }
     
-    /// The Project's [Session] sorted in reverse chronological order.
     var projectSessions: [Session] {
         let sessions = sessions?.allObjects as? [Session] ?? []
         return sessions.sorted(using: KeyPathComparator(\.startDate, order: .reverse))
@@ -83,14 +82,6 @@ extension Project {
         project.creationDate = Date()
         
         return project
-    }
-    
-    static func fetchProjects(predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?) -> NSFetchRequest<Project> {
-        let request = Project.fetchRequest()
-        request.predicate = predicate
-        request.sortDescriptors = sortDescriptors
-        
-        return request
     }
 }
 
