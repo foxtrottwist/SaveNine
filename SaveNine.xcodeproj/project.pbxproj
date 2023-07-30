@@ -265,7 +265,6 @@
 		6560AC31291AC5470047E2C6 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
-				652D025528D79DA300F818E7 /* ProjectSessions.swift */,
 				6560AC34291AF6660047E2C6 /* SessionDetail.swift */,
 				65AFF19C299531EC009AB991 /* SessionLabelPicker.swift */,
 				6560AC36291AFD110047E2C6 /* SessionRow.swift */,
@@ -282,6 +281,7 @@
 				65011C482A75E45700E36090 /* ProjectList.swift */,
 				65EF242928DF870A003749F3 /* ProjectName.swift */,
 				659FDA6C28E28EC900899A2E /* ProjectRow.swift */,
+				652D025528D79DA300F818E7 /* ProjectSessions.swift */,
 				65FC3F522A75DBE500D76AFE /* ProjectsSearchResults.swift */,
 				65011C4C2A75EFD700E36090 /* ProjectsSidebar.swift */,
 				65D2315D28CD5B3B00A91A47 /* ProjectsSplitView.swift */,
