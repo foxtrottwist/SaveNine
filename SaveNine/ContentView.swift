@@ -13,8 +13,8 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $tabController.selectedTabView) {
-            ProjectsTabView(subject: tabController.subject)
-                .tag(ProjectsTabView.tag)
+            ProjectsSplitView(subject: tabController.subject)
+                .tag(ProjectsSplitView.tag)
                 .tabItem {
                     Image(systemName: "tray")
                     Text("Projects")
@@ -31,8 +31,8 @@ struct ContentView: View {
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })
         .onChange(of: tabController.selectedTabView) {  selectedTabView = tabController.selectedTabView }
         .onOpenURL { _ in
-            if tabController.selectedTabView != ProjectsTabView.tag {
-                tabController.selectedTabView = ProjectsTabView.tag
+            if tabController.selectedTabView != ProjectsSplitView.tag {
+                tabController.selectedTabView = ProjectsSplitView.tag
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  ProjectsTabView.swift
+//  ProjectsNavigationSplitView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/10/22.
@@ -9,7 +9,7 @@ import Combine
 import CoreData
 import SwiftUI
 
-struct ProjectsTabView: View {
+struct ProjectsSplitView: View {
     static let tag: String? = "Projects"
     let subject: PassthroughSubject<String?, Never>
     @State private var disabled = false
@@ -67,7 +67,7 @@ struct ProjectsTabView_Previews: PreviewProvider {
     static var dataController = DataController.preview
     
     static var previews: some View {
-        ProjectsTabView(subject: PassthroughSubject<String?, Never>())
+        ProjectsSplitView(subject: PassthroughSubject<String?, Never>())
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
     }
