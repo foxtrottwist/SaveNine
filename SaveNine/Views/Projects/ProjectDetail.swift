@@ -11,10 +11,9 @@ import SwiftUI
 struct ProjectDetail: View {
     @ObservedObject var project: Project
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
-    @FetchRequest(fetchRequest: Tag.fetchAllTags) var fetchedTags: FetchedResults<Tag>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\Tag.name, order: .forward)]) private var fetchedTags: FetchedResults<Tag>
     @State private var name = ""
     @State private var detail = ""
     @State private var displayTags: String = ""
@@ -106,7 +105,6 @@ struct ProjectDetail: View {
                 
                 Button {
                     project.closed.toggle()
-                    project.managedObjectContext?.refreshAllObjects()
                     dismiss()
                 } label: {
                     if project.closed {
