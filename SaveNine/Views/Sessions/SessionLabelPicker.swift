@@ -1,5 +1,5 @@
 //
-//  SessionLabelPickerView.swift
+//  SessionLabelPicker.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 2/9/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionLabelPickerView: View {
+struct SessionLabelPicker: View {
     let disableAddLabel: Bool
     @Binding var selectedLabel: String
     @Environment(SessionLabelController.self) var sessionLabelController
@@ -59,7 +59,7 @@ struct SessionLabelPickerView: View {
 
 struct SessionLabelPickerView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionLabelPickerView(selectedLabel: .constant("None"))
+        SessionLabelPicker(selectedLabel: .constant("None"))
             .environment(SessionLabelController.preview)
     }
 }

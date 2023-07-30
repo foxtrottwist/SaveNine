@@ -21,8 +21,8 @@ struct ContentView: View {
                 }
             
             
-            SessionsTabView()
-                .tag(SessionsTabView.tag)
+            SessionsNavigationStack()
+                .tag(SessionsNavigationStack.tag)
                 .tabItem {
                     Image(systemName: "clock")
                     Text("Sessions")

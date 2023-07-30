@@ -1,5 +1,5 @@
 //
-//  SessionRowView.swift
+//  SessionRow.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 11/8/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionRowView: View {
+struct SessionRow: View {
     @ObservedObject var session: Session
     @State private var showingSessionDetailView = false
     
@@ -54,13 +54,13 @@ struct SessionRowView: View {
         }
         .buttonStyle(.plain)
         .sheet(isPresented: $showingSessionDetailView) {
-            SessionDetailView(session: session)
+            SessionDetail(session: session)
         }
     }
 }
 
 struct SessionRowView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionRowView(session: Session.preview)
+        SessionRow(session: Session.preview)
     }
 }

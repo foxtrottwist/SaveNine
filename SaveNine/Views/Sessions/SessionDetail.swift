@@ -1,5 +1,5 @@
 //
-//  SessionDetailView.swift
+//  SessionDetail.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 11/8/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionDetailView: View {
+struct SessionDetail: View {
     let session: Session
     
     @Environment(\.dismiss) var dismiss
@@ -30,7 +30,7 @@ struct SessionDetailView: View {
         NavigationStack {
             Form {
                 Section {
-                    SessionLabelPickerView(selectedLabel: $label)
+                    SessionLabelPicker(selectedLabel: $label)
                 }
                 
                 Section {
@@ -95,7 +95,7 @@ struct SessionDetailView: View {
 
 struct SessionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionDetailView(session: Session.preview)
+        SessionDetail(session: Session.preview)
             .environment(SessionLabelController.preview)
     }
 }

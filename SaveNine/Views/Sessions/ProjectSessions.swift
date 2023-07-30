@@ -1,5 +1,5 @@
 //
-//  ProjectSessionsView.swift
+//  ProjectSessions.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/18/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProjectSessionsView: View {
+struct ProjectSessions: View {
     @ObservedObject var project: Project
     @EnvironmentObject private var dataController: DataController
     
@@ -21,7 +21,7 @@ struct ProjectSessionsView: View {
             List {
                 ForEach(project.projectSessions) { session in
                     if session.endDate != nil {
-                        SessionRowView(session: session)
+                        SessionRow(session: session)
                     }
                 }
                 .onDelete(perform: deleteSession)
@@ -31,6 +31,7 @@ struct ProjectSessionsView: View {
                 ShareLink(item: project.sessionsShareLinkItem) {
                     Label ("Export Sessions", systemImage: "square.and.arrow.up")
                 }
+                
                 EditButton()
             }
         }
@@ -47,6 +48,6 @@ struct ProjectSessionsView: View {
 
 struct ProjectSessionsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectSessionsView(project: Project.preview)
+        ProjectSessions(project: Project.preview)
     }
 }

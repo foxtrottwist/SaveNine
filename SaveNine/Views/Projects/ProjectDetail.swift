@@ -48,7 +48,7 @@ struct ProjectDetail: View {
             }
                     
             Section {
-                NavigationLink(destination: ProjectSessionsView(project: project)) {
+                NavigationLink(destination: ProjectSessions(project: project)) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Sessions")

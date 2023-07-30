@@ -1,5 +1,5 @@
 //
-//  SessionsTabView.swift
+//  SessionsNavigationStack.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 2/13/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionsTabView: View {
+struct SessionsNavigationStack: View {
     static let tag: String? = "Sessions"
     @State private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
     @State private var selectedLabel: String = ""
@@ -26,7 +26,7 @@ struct SessionsTabView: View {
                             Text(session.project?.displayName ?? "")
                                 .font(.headline)
                             
-                            SessionRowView(session: session)
+                            SessionRow(session: session)
                         }
                     }
                     .listStyle(.grouped)
@@ -44,7 +44,7 @@ struct SessionsTabView: View {
                             Label("Clear Filter", systemImage: "xmark.circle")
                         }
                         
-                        SessionLabelPickerView(selectedLabel: $selectedLabel, disableAddLabel: true)
+                        SessionLabelPicker(selectedLabel: $selectedLabel, disableAddLabel: true)
                     } label: {
                         Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                     }
@@ -79,7 +79,7 @@ struct SessionsTabView: View {
 
 struct SessionsTabView_Previews: PreviewProvider {
     static var previews: some View {
-        SessionsTabView()
+        SessionsNavigationStack()
             .environment(SessionLabelController())
     }
 }
