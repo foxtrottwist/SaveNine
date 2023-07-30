@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProjectList: View {
+    @Binding var path: [Project]
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\Project.creationDate, order: .forward)]) private var projects: FetchedResults<Project>
     @State private var disabled = false
@@ -31,6 +32,16 @@ struct ProjectList: View {
             }
         }
         .listStyle(.inset)
+        .onOpenURL(perform: { url in
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            guard let host = components?.host else { return }
+            let projectID = UUID(uuidString: host)
+            let project = projects.map { $0 }.filter { $0.id == projectID }
+            
+            if path.last?.id != projectID {
+                path.append(contentsOf: project)
+            }
+        })
         .searchable(text: $searchText, placement: .navigationBarDrawer)
         .toolbar {
             ToolbarItem {
@@ -51,5 +62,5 @@ struct ProjectList: View {
 }
 
 #Preview {
-    ProjectList()
+    ProjectList(path: .constant([]))
 }

@@ -12,131 +12,53 @@ import SwiftUI
 struct ProjectsTabView: View {
     static let tag: String? = "Projects"
     let subject: PassthroughSubject<String?, Never>
-    @State private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject private var dataController: DataController
     @State private var disabled = false
     @State private var path: [Project] = []
-    @State private var searchText = ""
-    @State private var selectedTags: [Tag] = []
-    @State private var showClosedProjects = false
-    @State private var showingProjectTags = false
+    @State private var projectNavigation = ProjectNavigation()
     @State private var showingSettingsView = false
+    @State private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
     
     var body: some View {
-        NavigationStack(path: $path) {
-            FetchRequestView(Project.fetchProjects(predicate: createPredicate(), sortDescriptors: sortProjects())) { projects in
-                if projects.isEmpty {
-                    NoContentView(message: showClosedProjects ? "There are currently no closed projects." : "Please add a project to begin.")
-                        .padding()
-                } else {
-                    List(projects) { project in
-                        if project.displayName.isEmpty {
-                            ProjectName(project: project)
-                                .onAppear { disabled = true }
-                                .onDisappear { disabled = false }
-                        } else {
-                            VStack {
-                                NavigationLink(value: project) {
-                                    ProjectRow(project: project)
-                                }
-                            }
-                            .disabled(disabled)
-                        }
-                    }
-                    .listStyle(.inset)
+        NavigationSplitView {
+            ProjectsSidebar(projectNavigation: projectNavigation)
+        } detail: {
+            NavigationStack(path: $path) {
+                ProjectList(path: $path)
                     .onChange(of: sortController.sortAscending) { sortController.save() }
                     .onChange(of: sortController.sortOption) { sortController.save() }
-                    .onOpenURL(perform: { url in
-                        let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                        guard let host = components?.host else { return }
-                        let projectID = UUID(uuidString: host)
-                        let project = projects.map { $0 }.filter { $0.id == projectID }
-                        
-                        if path.last?.id != projectID {
-                            path.append(contentsOf: project)
-                        }
-                    })
                     .onReceive(subject, perform: { tab in
                         if tab == Self.tag, !path.isEmpty {
                             path = []
                         }
                     })
-                    .searchable(text: $searchText)
-                }
-            }
-            .navigationTitle(showClosedProjects ? "Closed Projects" : "Open Projects")
-            .navigationDestination(for: Project.self) { project in
-                ProjectDetail(project: project)
-            }
-            .sheet(isPresented: $showingSettingsView) {
-                SettingsView()
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addProject) {
-                        Label("Add Project", systemImage: "plus.square")
+                    .navigationTitle(projectNavigation.filter?.name ?? "")
+                    .navigationDestination(for: Project.self) { project in
+                        ProjectDetail(project: project)
                     }
-                    .disabled(disabled)
-                }
-                
-                ToolbarItem {
-                    Menu {
-                        Button {
-                            showingSettingsView.toggle()
-                        } label: {
-                            Label("Settings", systemImage: "gear")
-                        }
-                        
-                        Picker("Project Status", selection: $showClosedProjects) {
-                            Label("Open", systemImage: "tray.full").tag(false)
-                            Label("Closed", systemImage: "archivebox").tag(true)
-                        }
-                        
-                        SortOptionsView(
-                            sortOptions: [SortOption.creationDate, SortOption.name],
-                            selectedSortOption: $sortController.sortOption,
-                            selectedSortOrder: $sortController.sortAscending
-                        )
-                    } label: {
-                        Label("Menu", systemImage: "ellipsis.circle")
+                    .sheet(isPresented: $showingSettingsView) {
+                        SettingsView()
                     }
-                    .disabled(disabled)
-                }
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing, content: {
+                            Menu {
+                                Button {
+                                    showingSettingsView.toggle()
+                                } label: {
+                                    Label("Settings", systemImage: "gear")
+                                }
+                                
+                                SortOptionsView(
+                                    sortOptions: [SortOption.creationDate, SortOption.name],
+                                    selectedSortOption: $sortController.sortOption,
+                                    selectedSortOrder: $sortController.sortAscending
+                                )
+                            } label: {
+                                Label("Menu", systemImage: "ellipsis.circle")
+                            }
+                            .disabled(disabled)
+                        })
+                    }
             }
-        }
-    }
-    
-    func addProject() {
-        withAnimation {
-            selectedTags = []
-            showingProjectTags = false
-            showClosedProjects = false
-        }
-        
-        let newProject = Project(context: managedObjectContext)
-        newProject.id = UUID()
-        newProject.closed = false
-        newProject.creationDate = Date()
-    }
-    
-    private func createPredicate() -> NSPredicate {
-        return FetchPredicate.create(
-            from: [
-                (.closed, showClosedProjects),
-                !searchText.isEmpty ? (.search, searchText) : nil,
-            ] + selectedTags.map { (.tag, $0.displayName) }
-        )
-    }
-    
-    func sortProjects() -> [NSSortDescriptor] {
-        switch sortController.sortOption {
-        case .creationDate:
-            return [NSSortDescriptor(keyPath: \Project.creationDate, ascending: sortController.sortAscending)]
-        case .name:
-            return [NSSortDescriptor(keyPath: \Project.name, ascending: sortController.sortAscending)]
-        default:
-            return []
         }
     }
 }
