@@ -76,8 +76,7 @@
 /* Project Details top toolbar menu */
 "Close project" = "Close project";
 "Reopen project" = "Reopen project";
-"Delete Project" = "Delete Project";
-
+"Manage Tags" = "Manage Tags";
 
 /*
  Project deletion confirmation
