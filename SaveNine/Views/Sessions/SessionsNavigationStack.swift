@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SessionsNavigationStack: View {
-    static let tag: String? = "Sessions"
     @State private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
     @State private var selectedLabel: String = ""
     
@@ -60,6 +59,8 @@ struct SessionsNavigationStack: View {
             }
         }
     }
+    
+    static let tag: String? = "Sessions"
     
     private func createPredicate() -> NSPredicate {
         return FetchPredicate.create(from: [!selectedLabel.isEmpty ? (.label, selectedLabel) : nil])

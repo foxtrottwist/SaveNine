@@ -10,7 +10,6 @@ import CoreData
 import SwiftUI
 
 struct ProjectsSplitView: View {
-    static let tag: String? = "Projects"
     let subject: PassthroughSubject<String?, Never>
     @Environment(Navigation.self) private var navigation
     @State private var disabled = false
@@ -24,7 +23,7 @@ struct ProjectsSplitView: View {
     
     var body: some View {
         NavigationSplitView {
-            ProjectsSidebar(navigation: navigation)
+            AppSidebar(navigation: navigation)
                 .navigationTitle("Save Nine")
         } detail: {
             NavigationStack(path: $path) {
@@ -70,6 +69,8 @@ struct ProjectsSplitView: View {
             }
         }
     }
+    
+    static let tag: String? = "Projects"
 }
 
 struct ProjectsTabView_Previews: PreviewProvider {

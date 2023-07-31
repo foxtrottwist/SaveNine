@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProjectsSidebar: View {
+struct AppSidebar: View {
     @Bindable var navigation: Navigation
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @EnvironmentObject private var dataController: DataController
@@ -57,5 +57,5 @@ struct ProjectsSidebar: View {
 }
 
 #Preview {
-    ProjectsSidebar(navigation: Navigation())
+    AppSidebar(navigation: Navigation())
 }

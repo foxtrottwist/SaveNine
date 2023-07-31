@@ -17,14 +17,14 @@ struct AppTabView: View {
                 .tag(ProjectsSplitView.tag)
                 .tabItem {
                     Image(systemName: "tray")
-                    Text("Projects")
+                    Text(ProjectsSplitView.tag!)
                 }
             
             SessionsNavigationStack()
                 .tag(SessionsNavigationStack.tag)
                 .tabItem {
                     Image(systemName: "clock")
-                    Text("Sessions")
+                    Text(SessionsNavigationStack.tag!)
                 }
         }
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })
