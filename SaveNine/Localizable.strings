@@ -95,7 +95,9 @@
  */
 "Clear" = "Clear";
 "Start Timer" = "Start Timer";
+"Start" = "Start";
 "Stop Timer" = "Stop Timer";
+"Stop" = "Stop";
 "Sessions:" = "Sessions:";
 "Time Tracked:" = "Time Tracked:";
 "None" = "None"; /* Displayed by when no time has been tracked */

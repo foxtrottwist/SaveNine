@@ -15,6 +15,7 @@
 		651CE21B28F85FF100E1B248 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651CE21A28F85FF100E1B248 /* Localizable.strings */; };
 		651CE21F28FB0A0500E1B248 /* NoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE21E28FB0A0500E1B248 /* NoContentView.swift */; };
 		651CE22628FB13D100E1B248 /* Session+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651CE22528FB13D100E1B248 /* Session+Extension.swift */; };
+		652437352A783AFD00C839C9 /* StopwatchSafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */; };
 		652AE95028D6550E0001294F /* TrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* TrackerView.swift */; };
 		652BFD01295F367000179792 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFD00295F367000179792 /* View+Extension.swift */; };
 		652D025628D79DA300F818E7 /* ProjectSessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* ProjectSessions.swift */; };
@@ -123,6 +124,7 @@
 		651CE21A28F85FF100E1B248 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		651CE21E28FB0A0500E1B248 /* NoContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentView.swift; sourceTree = "<group>"; };
 		651CE22528FB13D100E1B248 /* Session+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+Extension.swift"; sourceTree = "<group>"; };
+		652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchSafeAreaInset.swift; sourceTree = "<group>"; };
 		652AE94F28D6550E0001294F /* TrackerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerView.swift; sourceTree = "<group>"; };
 		652BFD00295F367000179792 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		652D025528D79DA300F818E7 /* ProjectSessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSessions.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				652D025728D79F9000F818E7 /* TimerView.swift */,
 				652AE94F28D6550E0001294F /* TrackerView.swift */,
+				652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 				65D2315E28CD5B3B00A91A47 /* AppNavigationSplitView.swift in Sources */,
 				65D2314728CD552E00A91A47 /* ContentView.swift in Sources */,
 				65011C4D2A75EFD700E36090 /* AppSidebar.swift in Sources */,
+				652437352A783AFD00C839C9 /* StopwatchSafeAreaInset.swift in Sources */,
 				65C9A346299B3619001FABB1 /* SessionNavigationStack.swift in Sources */,
 				65FC92DA29A11C92008871A5 /* SortController.swift in Sources */,
 				65A51C32294FC7C400A3B960 /* TrackerAttributes.swift in Sources */,

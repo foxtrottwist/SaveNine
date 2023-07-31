@@ -14,15 +14,11 @@ struct TimerView: View {
         if let start = start {
             TimelineView(.periodic(from: start, by: 1)) { _ in
                 Text(start.timeIntervalSinceNow.timerFormattedDuration)
-                    .font(.largeTitle)
                     .monospacedDigit()
-                    .padding()
             }
         } else {
             Text(0.formattedDuration)
-                .font(.largeTitle)
                 .monospacedDigit()
-                .padding()
         }
     }
 }
