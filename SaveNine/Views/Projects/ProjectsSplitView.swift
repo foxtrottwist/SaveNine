@@ -27,7 +27,7 @@ struct ProjectsSplitView: View {
                 .navigationTitle("Save Nine")
         } detail: {
             if navigation.filter == .sessions {
-                SessionsNavigationStack()
+                SessionNavigationStack()
             } else {
                 ProjectNavigationStack(path: $path)
                     .onChange(of: sortController.sortAscending) { sortController.save() }

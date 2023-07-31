@@ -20,11 +20,11 @@ struct AppTabView: View {
                     Text(ProjectsSplitView.tag!)
                 }
             
-            SessionsNavigationStack()
-                .tag(SessionsNavigationStack.tag)
+            SessionNavigationStack()
+                .tag(SessionNavigationStack.tag)
                 .tabItem {
                     Image(systemName: "clock")
-                    Text(SessionsNavigationStack.tag!)
+                    Text(SessionNavigationStack.tag!)
                 }
         }
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })

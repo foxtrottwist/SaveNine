@@ -1,5 +1,5 @@
 //
-//  SessionsNavigationStack.swift
+//  SessionNavigationStack.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 2/13/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SessionsNavigationStack: View {
+struct SessionNavigationStack: View {
     @State private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
     @State private var selectedLabel: String = ""
     
@@ -78,9 +78,7 @@ struct SessionsNavigationStack: View {
     }
 }
 
-struct SessionsTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        SessionsNavigationStack()
-            .environment(SessionLabelController())
-    }
+#Preview {
+    SessionNavigationStack()
+        .environment(SessionLabelController())
 }
