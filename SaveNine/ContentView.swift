@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private var navigation = Navigation()
+    private var navigation = AppNavigation()
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     
     var body: some View {
@@ -16,7 +16,7 @@ struct ContentView: View {
             if prefersTabNavigation {
                 AppTabView()
             } else {
-                ProjectsSplitView()
+                AppNavigationSplitView()
             }
         }
         .environment(navigation)

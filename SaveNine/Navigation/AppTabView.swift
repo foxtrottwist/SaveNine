@@ -13,11 +13,11 @@ struct AppTabView: View {
     
     var body: some View {
         TabView(selection: $tabController.selectedTabView) {
-            ProjectsSplitView(subject: tabController.subject)
-                .tag(ProjectsSplitView.tag)
+            AppNavigationSplitView(subject: tabController.subject)
+                .tag(AppNavigationSplitView.tag)
                 .tabItem {
                     Image(systemName: "tray")
-                    Text(ProjectsSplitView.tag!)
+                    Text(AppNavigationSplitView.tag!)
                 }
             
             SessionNavigationStack()
@@ -30,8 +30,8 @@ struct AppTabView: View {
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })
         .onChange(of: tabController.selectedTabView) {  selectedTabView = tabController.selectedTabView }
         .onOpenURL { _ in
-            if tabController.selectedTabView != ProjectsSplitView.tag {
-                tabController.selectedTabView = ProjectsSplitView.tag
+            if tabController.selectedTabView != AppNavigationSplitView.tag {
+                tabController.selectedTabView = AppNavigationSplitView.tag
             }
         }
     }

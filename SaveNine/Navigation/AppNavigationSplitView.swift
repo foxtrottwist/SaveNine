@@ -1,5 +1,5 @@
 //
-//  ProjectsNavigationSplitView.swift
+//  AppNavigationSplitView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/10/22.
@@ -9,9 +9,9 @@ import Combine
 import CoreData
 import SwiftUI
 
-struct ProjectsSplitView: View {
+struct AppNavigationSplitView: View {
     let subject: PassthroughSubject<String?, Never>
-    @Environment(Navigation.self) private var navigation
+    @Environment(AppNavigation.self) private var navigation
     @State private var disabled = false
     @State private var path: [Project] = []
     @State private var showingSettingsView = false
@@ -24,7 +24,6 @@ struct ProjectsSplitView: View {
     var body: some View {
         NavigationSplitView {
             AppSidebar(navigation: navigation)
-                .navigationTitle("Save Nine")
         } detail: {
             if navigation.filter == .sessions {
                 SessionNavigationStack()
@@ -72,9 +71,9 @@ struct ProjectsTabView_Previews: PreviewProvider {
     static var dataController = DataController.preview
     
     static var previews: some View {
-        ProjectsSplitView(subject: PassthroughSubject<String?, Never>())
+        AppNavigationSplitView(subject: PassthroughSubject<String?, Never>())
             .environment(\.managedObjectContext, dataController.container.viewContext)
-            .environment(Navigation())
+            .environment(AppNavigation())
             .environmentObject(dataController)
     }
 }

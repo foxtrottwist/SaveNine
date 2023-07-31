@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppSidebar: View {
-    @Bindable var navigation: Navigation
+    @Bindable var navigation: AppNavigation
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @EnvironmentObject private var dataController: DataController
     @FetchRequest(sortDescriptors: [SortDescriptor(\Tag.name, order: .forward)]) private var tags
@@ -57,5 +57,5 @@ struct AppSidebar: View {
 }
 
 #Preview {
-    AppSidebar(navigation: Navigation())
+    AppSidebar(navigation: AppNavigation())
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct ProjectNavigationStack: View {
     @Binding var path: [Project]
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(Navigation.self) private var navigation
+    @Environment(AppNavigation.self) private var navigation
     @FetchRequest(sortDescriptors: [SortDescriptor(\Project.creationDate, order: .forward)]) private var projects: FetchedResults<Project>
     @State private var disabled = false
     @State private var searchText = ""
