@@ -54,7 +54,7 @@ struct Tracker: View {
         requestLiveActivity(date: start!)
     }
     
-    private func stopTimer() {
+    private func stopTimer() async {
         if let session = session {
             session.project?.objectWillChange.send()
             session.endDate = Date()
@@ -79,6 +79,8 @@ struct Tracker: View {
                 projectWidget.writeMostRecentlyTrackedWidget()
             }
         }
+        
+        await endLiveActivity()
     }
     
     private func clearTimer() {

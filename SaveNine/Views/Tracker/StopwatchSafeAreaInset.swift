@@ -11,7 +11,7 @@ struct StopwatchSafeAreaInset: View {
     let start: Date?
     let tracking: Bool
     let startAction: () -> Void
-    let stopAction: () -> Void
+    let stopAction: () async -> Void
     
     var body: some View {
         ZStack {
@@ -26,7 +26,11 @@ struct StopwatchSafeAreaInset: View {
                 Spacer()
                 
                 if tracking {
-                    Button(action: stopAction) {
+                    Button {
+                        Task {
+                           await stopAction()
+                        }
+                    } label: {
                         Label("Stop", systemImage: "stop.fill")
                     }
                 } else {
