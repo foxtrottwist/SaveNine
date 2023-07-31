@@ -9,10 +9,17 @@ import SwiftUI
 
 struct ProjectsSidebar: View {
     @Bindable var projectNavigation: ProjectNavigation
+    @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @EnvironmentObject private var dataController: DataController
     @FetchRequest(sortDescriptors: [SortDescriptor(\Tag.name, order: .forward)]) private var tags
     
-    private let defaultFilters: [Filter] = [.open, .closed, .all]
+    private var defaultFilters: [Filter] {
+        if prefersTabNavigation {
+            return [.open, .closed, .all]
+        } else {
+            return [.open, .closed, .all, .sessions]
+        }
+    }
     
     private var filters: [Filter] {
         tags.map {

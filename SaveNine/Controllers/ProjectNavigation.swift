@@ -25,4 +25,5 @@ struct Filter: Identifiable, Hashable, Codable {
     static var all = Filter(id: UUID(), name: "All Projects", icon: "tray")
     static var open = Filter(id: UUID(), name: "Open Projects", icon: "tray.full")
     static var closed = Filter(id: UUID(), name: "Closed Projects", icon: "archivebox")
+    static var sessions = Filter(id: UUID(), name: "Sessions", icon:  "clock")
 }
