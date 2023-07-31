@@ -1,5 +1,5 @@
 //
-//  ProjectList.swift
+//  ProjectNavigationStack.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 7/29/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProjectList: View {
+struct ProjectNavigationStack: View {
     @Binding var path: [Project]
     @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(Navigation.self) private var navigation
@@ -69,5 +69,5 @@ struct ProjectList: View {
 }
 
 #Preview {
-    ProjectList(path: .constant([]))
+    ProjectNavigationStack(path: .constant([]))
 }

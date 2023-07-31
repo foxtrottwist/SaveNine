@@ -29,7 +29,7 @@ struct ProjectsSplitView: View {
             if navigation.filter == .sessions {
                 SessionsNavigationStack()
             } else {
-                ProjectList(path: $path)
+                ProjectNavigationStack(path: $path)
                     .onChange(of: sortController.sortAscending) { sortController.save() }
                     .onChange(of: sortController.sortOption) { sortController.save() }
                     .onReceive(subject, perform: { tab in

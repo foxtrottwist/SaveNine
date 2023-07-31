@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65011C492A75E45700E36090 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65011C482A75E45700E36090 /* ProjectList.swift */; };
+		65011C492A75E45700E36090 /* ProjectNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65011C482A75E45700E36090 /* ProjectNavigationStack.swift */; };
 		65011C4B2A75E8E700E36090 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65011C4A2A75E8E700E36090 /* Navigation.swift */; };
 		65011C4D2A75EFD700E36090 /* AppSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65011C4C2A75EFD700E36090 /* AppSidebar.swift */; };
 		6518916429A5372200ACE985 /* AppIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916329A5372200ACE985 /* AppIconImageView.swift */; };
@@ -115,7 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		65011C482A75E45700E36090 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
+		65011C482A75E45700E36090 /* ProjectNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNavigationStack.swift; sourceTree = "<group>"; };
 		65011C4A2A75E8E700E36090 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		65011C4C2A75EFD700E36090 /* AppSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSidebar.swift; sourceTree = "<group>"; };
 		6518916329A5372200ACE985 /* AppIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconImageView.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 			children = (
 				65D2316128CD6ED700A91A47 /* ProjectDetail.swift */,
 				65FC3F4A2A75C6AE00D76AFE /* ProjectImage.swift */,
-				65011C482A75E45700E36090 /* ProjectList.swift */,
+				65011C482A75E45700E36090 /* ProjectNavigationStack.swift */,
 				65EF242928DF870A003749F3 /* ProjectName.swift */,
 				659FDA6C28E28EC900899A2E /* ProjectRow.swift */,
 				652D025528D79DA300F818E7 /* ProjectSessions.swift */,
@@ -595,7 +595,7 @@
 				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65011C4B2A75E8E700E36090 /* Navigation.swift in Sources */,
 				65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
-				65011C492A75E45700E36090 /* ProjectList.swift in Sources */,
+				65011C492A75E45700E36090 /* ProjectNavigationStack.swift in Sources */,
 				6518916629A5387300ACE985 /* StorageKey.swift in Sources */,
 				65F4A72C2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
 				65D2316228CD6ED700A91A47 /* ProjectDetail.swift in Sources */,
