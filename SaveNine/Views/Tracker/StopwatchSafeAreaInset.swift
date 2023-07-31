@@ -19,7 +19,7 @@ struct StopwatchSafeAreaInset: View {
                 .fill(.ultraThickMaterial)
             
             HStack {
-                TimerView(start: start)
+                TimerTimelineView(start: start)
                     .font(.title)
                 
                 Spacer()

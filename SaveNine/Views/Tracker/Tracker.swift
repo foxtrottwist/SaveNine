@@ -1,5 +1,5 @@
 //
-//  TrackerView.swift
+//  Tracker.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/17/22.
@@ -9,7 +9,7 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-struct TrackerView: View {
+struct Tracker: View {
     @ObservedObject var project: Project
 
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -39,7 +39,7 @@ struct TrackerView: View {
     var body: some View {
         VStack {
             SessionLabelPicker(selectedLabel: $label)
-            TimerView(start: start)
+            TimerTimelineView(start: start)
             
             HStack {
                 Button("Clear") {
@@ -154,9 +154,7 @@ struct TrackerView: View {
     }
 }
 
-struct TrackerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrackerView(project: Project.preview)
-            .environment(SessionLabelController())
-    }
+#Preview {
+    Tracker(project: Project.preview)
+        .environment(SessionLabelController())
 }

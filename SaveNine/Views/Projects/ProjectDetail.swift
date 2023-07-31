@@ -38,7 +38,7 @@ struct ProjectDetail: View {
             }
             
             Section {
-                TrackerView(project: project)
+                Tracker(project: project)
             }
                     
             Section {

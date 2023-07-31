@@ -1,5 +1,5 @@
 //
-//  TimerView.swift
+//  TimerTimelineView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 9/18/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimerView: View {
+struct TimerTimelineView: View {
     let start: Date?
     
     var body: some View {
@@ -25,6 +25,6 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(start: Date())
+        TimerTimelineView(start: Date())
     }
 }
