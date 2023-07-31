@@ -9,10 +9,8 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-struct Tracker<Content: View>: View {
+struct Tracker: View {
     @ObservedObject var project: Project
-    let content: (Context) -> Content
-    
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
     @State private var label: String = DefaultLabel.none.rawValue
@@ -22,9 +20,8 @@ struct Tracker<Content: View>: View {
     @State private var showingClearConfirm = false
     @State private var tracking = false
     
-    init(project: Project,  @ViewBuilder _ content: @escaping (Context) -> Content) {
+    init(project: Project) {
         self.project = project
-        self.content = content
         
         if let session = project.projectSessions.first {
             _label = State(wrappedValue: session.sessionLabel)
@@ -38,7 +35,7 @@ struct Tracker<Content: View>: View {
     }
     
     var body: some View {
-        content(Context(start: start, clearTimer: clearTimer, startAction: startTimer, stopAction: stopTimer))
+        StopwatchSafeAreaInset(start: start, tracking: tracking, startAction: startTimer, stopAction: stopTimer)
     }
     
     private func startTimer() {
@@ -118,16 +115,7 @@ struct Tracker<Content: View>: View {
     }
 }
 
-struct Context {
-    let start: Date?
-    let clearTimer: () -> Void
-    let startAction: () -> Void
-    let stopAction: () -> Void
-}
-
 #Preview {
-    Tracker(project: Project.preview, { _ in
-        StopwatchSafeAreaInset(start: .now, tracking: true, startAction: {}, stopAction: {})
-    })
-    .environment(SessionLabelController())
+    Tracker(project: Project.preview)
+        .environment(SessionLabelController())
 }

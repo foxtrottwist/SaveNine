@@ -69,9 +69,7 @@ struct ProjectDetail: View {
             }
         }
         .safeAreaInset(edge: .bottom, content: {
-            Tracker(project: project) { context in
-                StopwatchSafeAreaInset(start: context.start, tracking: context.tracking, startAction: context.startAction, stopAction: context.stopAction)
-            }
+            Tracker(project: project)
         })
         .fileExporter(
             isPresented: $showingFileExporter,
