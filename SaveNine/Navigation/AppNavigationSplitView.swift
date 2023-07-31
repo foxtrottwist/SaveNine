@@ -14,8 +14,6 @@ struct AppNavigationSplitView: View {
     @Environment(AppNavigation.self) private var navigation
     @State private var disabled = false
     @State private var path: [Project] = []
-    @State private var showingSettingsView = false
-    @State private var sortController = SortController(for: "projectSort", defaultSort: SortOption.creationDate, sortAscending: false)
     
     init(subject: PassthroughSubject<String?, Never> = .init()) {
         self.subject = subject
@@ -29,36 +27,11 @@ struct AppNavigationSplitView: View {
                 SessionNavigationStack()
             } else {
                 ProjectNavigationStack(path: $path)
-                    .onChange(of: sortController.sortAscending) { sortController.save() }
-                    .onChange(of: sortController.sortOption) { sortController.save() }
                     .onReceive(subject, perform: { tab in
                         if tab == Self.tag, !path.isEmpty {
                             path = []
                         }
                     })
-                    .sheet(isPresented: $showingSettingsView) {
-                        SettingsView()
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing, content: {
-                            Menu {
-                                Button {
-                                    showingSettingsView.toggle()
-                                } label: {
-                                    Label("Settings", systemImage: "gear")
-                                }
-                                
-                                SortOptionsView(
-                                    sortOptions: [SortOption.creationDate, SortOption.name],
-                                    selectedSortOption: $sortController.sortOption,
-                                    selectedSortOrder: $sortController.sortAscending
-                                )
-                            } label: {
-                                Label("Menu", systemImage: "ellipsis.circle")
-                            }
-                            .disabled(disabled)
-                        })
-                    }
             }
             
         }
