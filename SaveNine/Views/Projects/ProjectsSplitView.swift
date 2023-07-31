@@ -26,47 +26,42 @@ struct ProjectsSplitView: View {
             AppSidebar(navigation: navigation)
                 .navigationTitle("Save Nine")
         } detail: {
-            NavigationStack(path: $path) {
-                if navigation.filter == .sessions {
-                   SessionsNavigationStack()
-                } else {
-                    ProjectList(path: $path)
-                        .onChange(of: sortController.sortAscending) { sortController.save() }
-                        .onChange(of: sortController.sortOption) { sortController.save() }
-                        .onReceive(subject, perform: { tab in
-                            if tab == Self.tag, !path.isEmpty {
-                                path = []
-                            }
-                        })
-                        .navigationTitle(navigation.filter?.name ?? "")
-                        .navigationDestination(for: Project.self) { project in
-                            ProjectDetail(project: project)
+            if navigation.filter == .sessions {
+                SessionsNavigationStack()
+            } else {
+                ProjectList(path: $path)
+                    .onChange(of: sortController.sortAscending) { sortController.save() }
+                    .onChange(of: sortController.sortOption) { sortController.save() }
+                    .onReceive(subject, perform: { tab in
+                        if tab == Self.tag, !path.isEmpty {
+                            path = []
                         }
-                        .sheet(isPresented: $showingSettingsView) {
-                            SettingsView()
-                        }
-                        .toolbar {
-                            ToolbarItem(placement: .topBarTrailing, content: {
-                                Menu {
-                                    Button {
-                                        showingSettingsView.toggle()
-                                    } label: {
-                                        Label("Settings", systemImage: "gear")
-                                    }
-                                    
-                                    SortOptionsView(
-                                        sortOptions: [SortOption.creationDate, SortOption.name],
-                                        selectedSortOption: $sortController.sortOption,
-                                        selectedSortOrder: $sortController.sortAscending
-                                    )
+                    })
+                    .sheet(isPresented: $showingSettingsView) {
+                        SettingsView()
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing, content: {
+                            Menu {
+                                Button {
+                                    showingSettingsView.toggle()
                                 } label: {
-                                    Label("Menu", systemImage: "ellipsis.circle")
+                                    Label("Settings", systemImage: "gear")
                                 }
-                                .disabled(disabled)
-                            })
-                        }
-                }
+                                
+                                SortOptionsView(
+                                    sortOptions: [SortOption.creationDate, SortOption.name],
+                                    selectedSortOption: $sortController.sortOption,
+                                    selectedSortOrder: $sortController.sortAscending
+                                )
+                            } label: {
+                                Label("Menu", systemImage: "ellipsis.circle")
+                            }
+                            .disabled(disabled)
+                        })
+                    }
             }
+            
         }
     }
     
