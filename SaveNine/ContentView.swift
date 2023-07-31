@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private var projectNavigation = ProjectNavigation()
+    private var navigation = Navigation()
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     
     var body: some View {
@@ -19,7 +19,7 @@ struct ContentView: View {
                 ProjectsSplitView()
             }
         }
-        .environment(projectNavigation)
+        .environment(navigation)
     }
 }
 

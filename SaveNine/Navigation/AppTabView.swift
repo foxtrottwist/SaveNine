@@ -20,7 +20,6 @@ struct AppTabView: View {
                     Text("Projects")
                 }
             
-            
             SessionsNavigationStack()
                 .tag(SessionsNavigationStack.tag)
                 .tabItem {

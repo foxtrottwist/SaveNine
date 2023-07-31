@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectsSidebar: View {
-    @Bindable var projectNavigation: ProjectNavigation
+    @Bindable var navigation: Navigation
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @EnvironmentObject private var dataController: DataController
     @FetchRequest(sortDescriptors: [SortDescriptor(\Tag.name, order: .forward)]) private var tags
@@ -28,7 +28,7 @@ struct ProjectsSidebar: View {
     }
     
     var body: some View {
-        List(selection: $projectNavigation.filter) {
+        List(selection: $navigation.filter) {
             ForEach(defaultFilters) { filter in
                 NavigationLink(value: filter) {
                     Label(filter.name, systemImage: filter.icon)
@@ -57,5 +57,5 @@ struct ProjectsSidebar: View {
 }
 
 #Preview {
-    ProjectsSidebar(projectNavigation: ProjectNavigation())
+    ProjectsSidebar(navigation: Navigation())
 }

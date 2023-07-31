@@ -12,7 +12,7 @@ import SwiftUI
 struct ProjectsSplitView: View {
     static let tag: String? = "Projects"
     let subject: PassthroughSubject<String?, Never>
-    @Environment(ProjectNavigation.self) private var projectNavigation
+    @Environment(Navigation.self) private var navigation
     @State private var disabled = false
     @State private var path: [Project] = []
     @State private var showingSettingsView = false
@@ -24,11 +24,11 @@ struct ProjectsSplitView: View {
     
     var body: some View {
         NavigationSplitView {
-            ProjectsSidebar(projectNavigation: projectNavigation)
+            ProjectsSidebar(navigation: navigation)
                 .navigationTitle("Save Nine")
         } detail: {
             NavigationStack(path: $path) {
-                if projectNavigation.filter == .sessions {
+                if navigation.filter == .sessions {
                    SessionsNavigationStack()
                 } else {
                     ProjectList(path: $path)
@@ -39,7 +39,7 @@ struct ProjectsSplitView: View {
                                 path = []
                             }
                         })
-                        .navigationTitle(projectNavigation.filter?.name ?? "")
+                        .navigationTitle(navigation.filter?.name ?? "")
                         .navigationDestination(for: Project.self) { project in
                             ProjectDetail(project: project)
                         }
@@ -78,7 +78,7 @@ struct ProjectsTabView_Previews: PreviewProvider {
     static var previews: some View {
         ProjectsSplitView(subject: PassthroughSubject<String?, Never>())
             .environment(\.managedObjectContext, dataController.container.viewContext)
-            .environment(ProjectNavigation())
+            .environment(Navigation())
             .environmentObject(dataController)
     }
 }

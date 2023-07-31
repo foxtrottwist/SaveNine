@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-final class ProjectNavigation {
+final class Navigation {
     // FIXME: investigate why path does not update correctly.
     var path: [Project] = []
     var filter: Filter? = Filter.open
