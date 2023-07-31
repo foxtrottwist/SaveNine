@@ -216,9 +216,9 @@
 		651CE22128FB0EFA00E1B248 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */,
 				652D025728D79F9000F818E7 /* TimerTimelineView.swift */,
 				652AE94F28D6550E0001294F /* Tracker.swift */,
-				652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";

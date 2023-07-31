@@ -21,15 +21,16 @@ struct StopwatchSafeAreaInset: View {
             HStack {
                 TimerTimelineView(start: start)
                     .font(.title)
+                    .onTapGesture(perform: {})
                 
                 Spacer()
                 
                 if tracking {
-                    Button(action: {}) {
+                    Button(action: stopAction) {
                         Label("Stop", systemImage: "stop.fill")
                     }
                 } else {
-                    Button(action: {}) {
+                    Button(action: startAction) {
                         Label("Start", systemImage: "play.fill")
                     }
                 }

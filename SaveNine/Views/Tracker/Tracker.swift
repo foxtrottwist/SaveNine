@@ -9,12 +9,12 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
-struct Tracker: View {
+struct Tracker<Content: View>: View {
     @ObservedObject var project: Project
-
+    let content: (Context) -> Content
+    
     @Environment(\.managedObjectContext) var managedObjectContext
     @EnvironmentObject var dataController: DataController
-    
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
@@ -22,8 +22,9 @@ struct Tracker: View {
     @State private var showingClearConfirm = false
     @State private var tracking = false
     
-    init(project: Project) {
+    init(project: Project,  @ViewBuilder _ content: @escaping (Context) -> Content) {
         self.project = project
+        self.content = content
         
         if let session = project.projectSessions.first {
             _label = State(wrappedValue: session.sessionLabel)
@@ -37,44 +38,7 @@ struct Tracker: View {
     }
     
     var body: some View {
-        VStack {
-            SessionLabelPicker(selectedLabel: $label)
-            TimerTimelineView(start: start)
-            
-            HStack {
-                Button("Clear") {
-                    showingClearConfirm.toggle()
-                }
-                .disabled(!tracking)
-                
-                Spacer()
-                
-                if tracking {
-                    Button("Stop Timer") {
-                        stopTimer()
-                        
-                        Task {
-                            await endLiveActivity()
-                        }
-                    }
-                } else {
-                    Button("Start Timer") {
-                        startTimer()
-                    }
-                    .disabled(project.closed)
-                }
-            }
-            .padding()
-        }
-        .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
-            Button("Clear Timer", role: .destructive) {
-                clearTimer()
-                
-                Task {
-                    await endLiveActivity()
-                }
-            }
-        }
+        content(Context(start: start, clearTimer: clearTimer, startAction: startTimer, stopAction: stopTimer))
     }
     
     private func startTimer() {
@@ -154,7 +118,16 @@ struct Tracker: View {
     }
 }
 
+struct Context {
+    let start: Date?
+    let clearTimer: () -> Void
+    let startAction: () -> Void
+    let stopAction: () -> Void
+}
+
 #Preview {
-    Tracker(project: Project.preview)
-        .environment(SessionLabelController())
+    Tracker(project: Project.preview, { _ in
+        StopwatchSafeAreaInset(start: .now, tracking: true, startAction: {}, stopAction: {})
+    })
+    .environment(SessionLabelController())
 }

@@ -38,10 +38,6 @@ struct ProjectDetail: View {
             }
             
             Section {
-                Tracker(project: project)
-            }
-                    
-            Section {
                 NavigationLink(destination: ProjectSessions(project: project)) {
                     HStack {
                         VStack(alignment: .leading) {
@@ -72,6 +68,11 @@ struct ProjectDetail: View {
                 Label("Manage Tags", systemImage: "tag.square")
             }
         }
+        .safeAreaInset(edge: .bottom, content: {
+            Tracker(project: project) { context in
+                StopwatchSafeAreaInset(start: context.start, tracking: context.tracking, startAction: context.startAction, stopAction: context.stopAction)
+            }
+        })
         .fileExporter(
             isPresented: $showingFileExporter,
             document: document,
