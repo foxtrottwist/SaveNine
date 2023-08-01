@@ -28,8 +28,8 @@ public class Project {
         image: String? = nil,
         modificationDate: Date? = nil,
         name: String? = nil,
-        sessions: [Session]? = nil,
-        tags: [Tag]? = nil
+        sessions: [Session]? = [],
+        tags: [Tag]? = []
     ) {
         self.creationDate = creationDate
         self.detail = detail

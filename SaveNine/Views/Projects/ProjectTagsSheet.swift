@@ -12,11 +12,11 @@ struct ProjectTagsSheet: View {
     var project: Project
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\Tag.name, order: .forward)]) private var fetchedTags: FetchedResults<Tag>
     @State private var newTags: [Tag] = []
     @State private var tag = ""
     @State private var tagsPendingAddition: [Tag] = []
     @State private var tagsPendingRemoval: [Tag] = []
+    @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name)])) private var fetchedTags: [Tag]
     
     var tags: [Tag] {
         (newTags + fetchedTags).sorted(using: KeyPathComparator(\.name, order: .forward))
@@ -61,7 +61,7 @@ struct ProjectTagsSheet: View {
                     Button("Done") {
                         addTag()
                         newTags.removeAll()
-//                        tagsPendingAddition.forEach { project.tags.append($0) }
+                        tagsPendingAddition.forEach { project.tags!.append($0) }
                         tagsPendingRemoval.forEach(removeTag)
                         dismiss()
                     }
@@ -89,20 +89,20 @@ struct ProjectTagsSheet: View {
     }
     
     private func addTag() {
-//        guard !tag.isEmpty else { return }
-//        let name = tag.trimmingCharacters(in: .whitespaces)
-//        let existingTag = fetchedTags.first(where: { $0.name?.lowercased() == name.lowercased() })
-//
-//        if let existingTag {
-//            tagsPendingAddition.append(existingTag)
-//            tag.removeAll()
-//            return
-//        }
-//
-//        let newTag = Tag(name: name, projects: [])
-//        tagsPendingAddition.append(newTag)
-//        newTags.append(newTag)
-//        tag.removeAll()
+        guard !tag.isEmpty else { return }
+        let name = tag.trimmingCharacters(in: .whitespaces)
+        let existingTag = fetchedTags.first(where: { $0.name?.lowercased() == name.lowercased() })
+
+        if let existingTag {
+            tagsPendingAddition.append(existingTag)
+            tag.removeAll()
+            return
+        }
+
+        let newTag = Tag(name: name, projects: [])
+        tagsPendingAddition.append(newTag)
+        newTags.append(newTag)
+        tag.removeAll()
     }
     
     private func handleSelection(tag: Tag, isSelected selected: Bool) {
@@ -116,12 +116,12 @@ struct ProjectTagsSheet: View {
     }
     
     private func removeTag(tag: Tag) {
-//        if let index = project.tags.firstIndex(of: tag) {
-//            project.tags.remove(at: index)
-//        }
+        if let index = project.tags!.firstIndex(of: tag) {
+            project.tags!.remove(at: index)
+        }
     }
 }
 
-//#Preview {
-//    ProjectTagsSheet()
-//}
+#Preview {
+    ProjectTagsSheet(project: Project.preview)
+}
