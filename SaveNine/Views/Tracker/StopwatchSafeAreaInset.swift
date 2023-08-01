@@ -12,18 +12,26 @@ struct StopwatchSafeAreaInset: View {
     let tracking: Bool
     let startAction: () -> Void
     let stopAction: () async -> Void
+    let onTap: () -> Void
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(.ultraThickMaterial)
+                .fill(.ultraThinMaterial)
             
             HStack {
-                TimerTimelineView(start: start)
-                    .font(.title)
-                    .onTapGesture(perform: {})
+                HStack {
+                    TimerTimelineView(start: start)
+                        .font(.title)
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    onTap()
+                }
                 
-                Spacer()
                 
                 if tracking {
                     Button {
@@ -43,10 +51,10 @@ struct StopwatchSafeAreaInset: View {
         }
         .frame(height: 70)
         .padding()
-        .shadow(color: .secondary, radius: 10, x: 0, y: 15)
+        .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
     }
 }
 
 #Preview {
-    StopwatchSafeAreaInset(start: .now, tracking: true, startAction: {}, stopAction: {})
+    StopwatchSafeAreaInset(start: .now, tracking: true, startAction: {}, stopAction: {}, onTap: {})
 }
