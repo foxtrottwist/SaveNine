@@ -5,26 +5,27 @@
 //  Created by Lawrence Horne on 11/8/22.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
-struct FetchRequestView<T: NSManagedObject, Content: View>: View {
-    @FetchRequest var fetchedResults: FetchedResults<T>
+struct FetchRequestView<T: PersistentModel, Content: View>: View {
+    @Query private var queryResult: [T]
     
-    let content: (FetchedResults<T>) -> Content
+    let content: ([T]) -> Content
     
-    init(_ fetchRequest: NSFetchRequest<T>, @ViewBuilder _ content: @escaping (FetchedResults<T>) -> Content) {
-        _fetchedResults  = FetchRequest(fetchRequest: fetchRequest)
+    init(_ fetchDescriptor: FetchDescriptor<T>, @ViewBuilder _ content: @escaping ([T]) -> Content) {
+        _queryResult = Query(fetchDescriptor, animation: .snappy)
         self.content = content
     }
     
     var body: some View {
-        self.content(fetchedResults)
+        self.content(queryResult)
     }
 }
 
 struct FetchRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        FetchRequestView(Session.fetchSessions(predicate: nil, sortDescriptors: nil), { _ in EmptyView() })
+        FetchRequestView<Project, EmptyView>(FetchDescriptor(), { _ in EmptyView() })
+            .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
     }
 }
