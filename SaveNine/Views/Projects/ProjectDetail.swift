@@ -9,10 +9,8 @@ import PhotosUI
 import SwiftUI
 
 struct ProjectDetail: View {
-    @ObservedObject var project: Project
+    var project: Project
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var dataController: DataController
     @State private var name = ""
     @State private var detail = ""
     @State private var document: ProjectFile?
@@ -87,7 +85,6 @@ struct ProjectDetail: View {
         .navigationTitle($name)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: detail) { project.detail = detail }
-        .onDisappear(perform: dataController.save)
         .scrollDismissesKeyboard(.interactively)
         .sheet(isPresented: $showingTagsSheet, content: {
             ProjectTagsSheet(project: project)
@@ -97,10 +94,10 @@ struct ProjectDetail: View {
                 RenameButton()
                 
                 Button {
-                    project.closed.toggle()
+                    project.closed!.toggle()
                     dismiss()
                 } label: {
-                    if project.closed {
+                    if project.closed! {
                         Label("Reopen project", systemImage: "tray.full")
                     } else {
                         Label( "Close project", systemImage: "archivebox")
@@ -124,5 +121,5 @@ struct ProjectDetail: View {
 #Preview {
     ProjectDetail(project: Project.preview)
         .environment(SessionLabelController.preview)
-        .environmentObject(DataController.preview)
 }
+
