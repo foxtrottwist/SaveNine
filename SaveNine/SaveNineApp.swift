@@ -9,20 +9,13 @@ import SwiftUI
 
 @main
 struct SaveNineApp: App {
-    @StateObject var dataController = DataController()
     var sessionLabelController = SessionLabelController()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environment(sessionLabelController)
-                .environmentObject(dataController)
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: save)
+                .modelContainer(for: [Project.self, Session.self, Tag.self])
         }
-    }
-    
-    func save(_ note: Notification) {
-        dataController.save()
     }
 }
