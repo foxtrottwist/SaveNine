@@ -92,7 +92,7 @@ struct Tracker: View {
                     }
                     .padding()
                 }
-                .presentationDetents([.fraction(0.3)])
+                .presentationDetents([.fraction(0.4)])
                 .presentationDragIndicator(.visible)
                 .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
                     Button("Clear Timer", role: .destructive) {
