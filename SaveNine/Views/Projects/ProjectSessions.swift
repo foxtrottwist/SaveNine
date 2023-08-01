@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProjectSessions: View {
-    @ObservedObject var project: Project
-    @EnvironmentObject private var dataController: DataController
+    var project: Project
+    @Environment (\.modelContext) private var modelContext
     
     var body: some View {
         // If there are no sessions or only one session that is incomplete, sessions.last?.endDate == nil.
@@ -40,8 +40,7 @@ struct ProjectSessions: View {
     func deleteSession(at offsets: IndexSet) {
         for offset in offsets {
             let session = project.projectSessions[offset]
-            session.project?.objectWillChange.send()
-            dataController.delete(session)
+            modelContext.delete(session)
         }
     }
 }
