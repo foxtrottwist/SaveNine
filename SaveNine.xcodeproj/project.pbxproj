@@ -51,9 +51,7 @@
 		65D2314728CD552E00A91A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314628CD552E00A91A47 /* ContentView.swift */; };
 		65D2314928CD552F00A91A47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314828CD552F00A91A47 /* Assets.xcassets */; };
 		65D2314C28CD552F00A91A47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314B28CD552F00A91A47 /* Preview Assets.xcassets */; };
-		65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 65D2315228CD553F00A91A47 /* Main.xcdatamodeld */; };
 		65D2315628CD590900A91A47 /* Project+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2315528CD590900A91A47 /* Project+Extension.swift */; };
-		65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2315B28CD5A1B00A91A47 /* DataController.swift */; };
 		65D2315E28CD5B3B00A91A47 /* AppNavigationSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2315D28CD5B3B00A91A47 /* AppNavigationSplitView.swift */; };
 		65D2316228CD6ED700A91A47 /* ProjectDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2316128CD6ED700A91A47 /* ProjectDetail.swift */; };
 		65D32BB82A79AB1300AC9F6B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D32BB52A79AB1300AC9F6B /* Session.swift */; };
@@ -164,9 +162,7 @@
 		65D2314628CD552E00A91A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		65D2314828CD552F00A91A47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D2314B28CD552F00A91A47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		65D2315328CD553F00A91A47 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		65D2315528CD590900A91A47 /* Project+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+Extension.swift"; sourceTree = "<group>"; };
-		65D2315B28CD5A1B00A91A47 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		65D2315D28CD5B3B00A91A47 /* AppNavigationSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationSplitView.swift; sourceTree = "<group>"; };
 		65D2316128CD6ED700A91A47 /* ProjectDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetail.swift; sourceTree = "<group>"; };
 		65D32BB52A79AB1300AC9F6B /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -395,7 +391,6 @@
 				65D2314828CD552F00A91A47 /* Assets.xcassets */,
 				657081DD28D8E460006C568D /* Info.plist */,
 				651CE21A28F85FF100E1B248 /* Localizable.strings */,
-				65D2315228CD553F00A91A47 /* Main.xcdatamodeld */,
 				657081DC28D8E44A006C568D /* SaveNine.entitlements */,
 				65D2314628CD552E00A91A47 /* ContentView.swift */,
 				65D2314428CD552E00A91A47 /* SaveNineApp.swift */,
@@ -463,7 +458,6 @@
 		65F9F3A329A2E9D800D51D7B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				65D2315B28CD5A1B00A91A47 /* DataController.swift */,
 				6572FFB729981A96006493DB /* SessionLabelController.swift */,
 				65FC92D929A11C92008871A5 /* SortController.swift */,
 				65F9F3A429A2EC0600D51D7B /* TabController.swift */,
@@ -612,8 +606,6 @@
 				6537EAD628E90D87004068CD /* Tag+Extension.swift in Sources */,
 				65D32BBA2A79AB1300AC9F6B /* Tag.swift in Sources */,
 				653899DB29A449AE008E39B4 /* AppIcon.swift in Sources */,
-				65D2315C28CD5A1B00A91A47 /* DataController.swift in Sources */,
-				65D2315428CD553F00A91A47 /* Main.xcdatamodeld in Sources */,
 				65011C4B2A75E8E700E36090 /* AppNavigation.swift in Sources */,
 				65A51C29294FBD1A00A3B960 /* SaveNineWidget.intentdefinition in Sources */,
 				65011C492A75E45700E36090 /* ProjectNavigationStack.swift in Sources */,
@@ -961,19 +953,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		65D2315228CD553F00A91A47 /* Main.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				65D2315328CD553F00A91A47 /* Main.xcdatamodel */,
-			);
-			currentVersion = 65D2315328CD553F00A91A47 /* Main.xcdatamodel */;
-			path = Main.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 65D2313928CD552E00A91A47 /* Project object */;
 }
