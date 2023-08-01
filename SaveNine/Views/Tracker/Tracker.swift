@@ -10,9 +10,8 @@ import SwiftUI
 import WidgetKit
 
 struct Tracker: View {
-    @ObservedObject var project: Project
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @EnvironmentObject var dataController: DataController
+    var project: Project
+    @Environment (\.modelContext) private var modelContext
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
@@ -107,32 +106,21 @@ struct Tracker: View {
     private func startTimer() {
         start = Date()
         
-        let session = Session(context: managedObjectContext)
-        session.startDate = start
-        session.project = project
-        session.project?.objectWillChange.send()
-        
-        dataController.save()
-        
+        let session = Session(label: label, startDate: start, project: project)
         tracking = true
         self.session = session
-        
         requestLiveActivity(date: start!)
     }
     
     private func stopTimer() async {
         if let session = session {
-            session.project?.objectWillChange.send()
             session.endDate = Date()
             session.label = label
             
             if let startDate = start, let endDate = session.endDate {
                 session.duration = endDate.timeIntervalSince(startDate)
-                
                 start = nil
                 tracking = false
-                
-                dataController.save()
                 
                 let projectWidget = ProjectWidget(
                     id: project.id!,
@@ -151,7 +139,7 @@ struct Tracker: View {
     
     private func clearTimer() async {
         if let session = session {
-            dataController.delete(session)
+            modelContext.delete(session)
             start = nil
             tracking = false
         }
@@ -188,4 +176,5 @@ struct Tracker: View {
 #Preview {
     Tracker(project: Project.preview)
         .environment(SessionLabelController())
+        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

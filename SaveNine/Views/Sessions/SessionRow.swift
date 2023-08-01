@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SessionRow: View {
-    @ObservedObject var session: Session
+    var session: Session
     @State private var showingSessionDetailView = false
     
     var day: String {
