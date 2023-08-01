@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectRow: View {
-    @ObservedObject var project: Project
+    var project: Project
     private let uiImage: UIImage?
     
     init(project: Project) {
