@@ -18,7 +18,7 @@ struct StopwatchSafeAreaInset: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(.ultraThinMaterial)
+                .fill(.ultraThickMaterial)
             
             HStack {
                 HStack {

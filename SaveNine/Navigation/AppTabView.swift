@@ -13,19 +13,23 @@ struct AppTabView: View {
     
     var body: some View {
         TabView(selection: $tabController.selectedTabView) {
-            AppNavigationSplitView(subject: tabController.subject)
-                .tag(AppNavigationSplitView.tag)
-                .tabItem {
-                    Image(systemName: "tray")
-                    Text(AppNavigationSplitView.tag!)
-                }
-            
-            SessionNavigationStack()
-                .tag(SessionNavigationStack.tag)
-                .tabItem {
-                    Image(systemName: "clock")
-                    Text(SessionNavigationStack.tag!)
-                }
+            Group {
+                AppNavigationSplitView(subject: tabController.subject)
+                    .tag(AppNavigationSplitView.tag)
+                    .tabItem {
+                        Image(systemName: "tray")
+                        Text(AppNavigationSplitView.tag!)
+                    }
+                
+                SessionNavigationStack()
+                    .tag(SessionNavigationStack.tag)
+                    .tabItem {
+                        Image(systemName: "clock")
+                        Text(SessionNavigationStack.tag!)
+                    }
+            }
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarBackground(.ultraThinMaterial, for: .tabBar)
         }
         .onAppear(perform: { tabController.selectedTabView = selectedTabView })
         .onChange(of: tabController.selectedTabView) {  selectedTabView = tabController.selectedTabView }

@@ -44,64 +44,64 @@ struct Tracker: View {
             onTap: { showingStopWatchSheet.toggle() }
         )
         .sheet(isPresented: $showingStopWatchSheet) {
-                VStack {
-                    SessionLabelPicker(selectedLabel: $label)
-                        .padding(.top)
-                    TimerTimelineView(start: start)
-                        .font(.largeTitle)
+            VStack {
+                SessionLabelPicker(selectedLabel: $label)
+                    .padding(.top)
+                TimerTimelineView(start: start)
+                    .font(.largeTitle)
+                
+                HStack {
+                    VStack {
+                        Button {
+                            showingClearConfirm.toggle()
+                        } label: {
+                            Text("Clear")
+                                .padding()
+                                .contentShape(Circle())
+                        }
+                    }
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .clipShape(Circle())
+                    .disabled(!tracking)
                     
-                    HStack {
-                        VStack {
+                    Spacer()
+                    
+                    VStack {
+                        if tracking {
                             Button {
-                                showingClearConfirm.toggle()
+                                Task {
+                                    await stopTimer()
+                                }
                             } label: {
-                                Text("Clear")
+                                Text("Stop")
+                                    .padding()
+                                    .contentShape(Circle())
+                            }
+                        } else {
+                            Button(action: startTimer) {
+                                Text("Start")
                                     .padding()
                                     .contentShape(Circle())
                             }
                         }
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .clipShape(Circle())
-                        .disabled(!tracking)
-                        
-                        Spacer()
-                        
-                        VStack {
-                            if tracking {
-                                Button {
-                                    Task {
-                                        await stopTimer()
-                                    }
-                                } label: {
-                                    Text("Stop")
-                                        .padding()
-                                        .contentShape(Circle())
-                                }
-                            } else {
-                                Button(action: startTimer) {
-                                    Text("Start")
-                                        .padding()
-                                        .contentShape(Circle())
-                                }
-                            }
-                        }
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .clipShape(Circle())
                     }
                     .padding()
+                    .background(.ultraThickMaterial)
+                    .clipShape(Circle())
                 }
-                .presentationDetents([.fraction(0.4)])
-                .presentationDragIndicator(.visible)
-                .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
-                    Button("Clear Timer", role: .destructive) {
-                        Task {
-                            await clearTimer()
-                        }
+                .padding()
+            }
+            .presentationDetents([.fraction(0.4)])
+            .presentationDragIndicator(.visible)
+            .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
+                Button("Clear Timer", role: .destructive) {
+                    Task {
+                        await clearTimer()
                     }
                 }
             }
+        }
     }
     
     private func startTimer() {
