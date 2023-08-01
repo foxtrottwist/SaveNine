@@ -5,15 +5,15 @@
 //  Created by Lawrence Horne on 7/29/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ProjectNavigationStack: View {
     @Binding var path: [Project]
-    @Environment(\.managedObjectContext) var managedObjectContext
     @Environment(AppNavigation.self) private var navigation
-    @FetchRequest(sortDescriptors: [SortDescriptor(\Project.creationDate, order: .forward)]) private var projects: FetchedResults<Project>
     @State private var disabled = false
     @State private var searchText = ""
+    @Query(sort: \Project.creationDate, order: .reverse) private var projects: [Project]
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -61,13 +61,11 @@ struct ProjectNavigationStack: View {
     }
     
     func addProject() {
-        let newProject = Project(context: managedObjectContext)
-        newProject.id = UUID()
-        newProject.closed = false
-        newProject.creationDate = Date()
+        let newProject = Project(creationDate: .now)
     }
 }
 
 #Preview {
     ProjectNavigationStack(path: .constant([]))
+        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

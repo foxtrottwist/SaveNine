@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ProjectsSearchResults<Content: View>: View {
-    let projects: FetchedResults<Project>
+    let projects: [Project]
     let searchText: String
     let content: (Project) -> Content
-    @EnvironmentObject private var dataController: DataController
+    @Environment (\.modelContext) private var modelContext
     
-    init(projects: FetchedResults<Project>, searchText: String, @ViewBuilder _ content: @escaping (Project) -> Content) {
+    init(projects: [Project], searchText: String, @ViewBuilder _ content: @escaping (Project) -> Content) {
         self.projects =  projects
         self.searchText = searchText
         self.content = content
@@ -40,12 +40,13 @@ struct ProjectsSearchResults<Content: View>: View {
     private func deleteProjects(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                dataController.delete(projects[index])
+                modelContext.delete(projects[index])
             }
         }
     }
 }
-// Uncomment after switching to SwiftData
-//#Preview {
-//    ProjectsSearchResults(projects: [Project.preview], searchText: "", { _ in EmptyView() })
-//}
+
+#Preview {
+    ProjectsSearchResults(projects: [Project.preview], searchText: "", { _ in EmptyView() })
+        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+}
