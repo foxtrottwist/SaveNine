@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectName: View {
     let project: Project
-    @EnvironmentObject var dataController: DataController
+    @Environment (\.modelContext) private var modelContext
     @FocusState var focused: Bool
     @State private var name = ""
     
@@ -29,10 +29,9 @@ struct ProjectName: View {
                 // If a user starts to add a project but fails to give
                 // the project a name and submits, the project will be
                 // removed from the Projects view.
-                dataController.delete(project)
+                modelContext.delete(project)
             } else {
                 project.name = name
-                dataController.save()
             }
         }
     }
