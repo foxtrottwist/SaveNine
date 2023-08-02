@@ -11,6 +11,7 @@ import SwiftUI
 struct ProjectNavigationStack: View {
     @Binding var path: [Project]
     @Environment(AppNavigation.self) private var navigation
+    @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
     @State private var searchText = ""
     @Query(sort: \Project.creationDate, order: .reverse) private var projects: [Project]
@@ -61,7 +62,7 @@ struct ProjectNavigationStack: View {
     }
     
     func addProject() {
-        let newProject = Project(creationDate: .now)
+        modelContext.insert(Project(name: ""))
     }
 }
 

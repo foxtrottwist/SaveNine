@@ -99,7 +99,7 @@ struct ProjectTagsSheet: View {
             return
         }
 
-        let newTag = Tag(name: name, projects: [])
+        let newTag = Tag(name: name)
         tagsPendingAddition.append(newTag)
         newTags.append(newTag)
         tag.removeAll()

@@ -22,12 +22,12 @@ public class Project {
     @Relationship(inverse: \Tag.projects) var tags: [Tag]?
 
     init(
-        creationDate: Date? = nil,
+        creationDate: Date? = .now,
         detail: String? = nil,
         id: UUID? = nil,
         image: String? = nil,
         modificationDate: Date? = nil,
-        name: String? = nil,
+        name: String?,
         sessions: [Session]? = [],
         tags: [Tag]? = []
     ) {

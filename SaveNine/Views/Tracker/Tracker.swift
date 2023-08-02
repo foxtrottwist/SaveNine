@@ -105,10 +105,10 @@ struct Tracker: View {
     
     private func startTimer() {
         start = Date()
-        
-        let session = Session(label: label, startDate: start, project: project)
         tracking = true
+        let session = Session(label: label, startDate: start, project: project)
         self.session = session
+        modelContext.insert(session)
         requestLiveActivity(date: start!)
     }
     

@@ -18,7 +18,7 @@ public class Session {
     var startDate: Date?
     var project: Project?
 
-    init(id: UUID? = UUID(), label: String? = nil, startDate: Date? = nil, project: Project? = nil) {
+    init(id: UUID? = UUID(), label: String?, startDate: Date?, project: Project?) {
         self.label = label
         self.startDate = startDate
         self.project = project
