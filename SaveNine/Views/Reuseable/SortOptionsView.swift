@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SortOptionsView: View {
     let sortOptions: [SortOption]
-    
     @Binding var selectedSortOption: SortOption
     @Binding var selectedSortOrder: Bool
    

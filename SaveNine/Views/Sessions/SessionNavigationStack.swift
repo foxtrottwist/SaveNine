@@ -18,8 +18,10 @@ struct SessionNavigationStack: View {
                 FetchDescriptor<Session>(sortBy: [SortDescriptor(\.endDate, order: .reverse)])
             ) { sessions in
                 if sessions.isEmpty {
-                    NoContentView(message: "No sessions have been completed or match the current filter.")
-                        .padding()
+                    ContentUnavailableView(
+                        "No sessions have been completed or match the current filter.",
+                        systemImage: "hourglass.bottomhalf.filled"
+                    )
                 } else {
                     List(sessions) { session in
                         VStack(alignment: .leading) {

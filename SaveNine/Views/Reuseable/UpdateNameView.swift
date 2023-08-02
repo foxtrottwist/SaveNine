@@ -9,7 +9,6 @@ import SwiftUI
 
 struct UpdateNameView: View {
     @Binding var name: String
-    
     let cancelAction: () -> Void
     let confirmAction: () -> Void
     

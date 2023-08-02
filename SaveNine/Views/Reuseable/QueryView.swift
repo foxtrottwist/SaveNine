@@ -10,7 +10,6 @@ import SwiftUI
 
 struct QueryView<T: PersistentModel, Content: View>: View {
     @Query private var queryResult: [T]
-    
     let content: ([T]) -> Content
     
     init(_ fetchDescriptor: FetchDescriptor<T>, @ViewBuilder _ content: @escaping ([T]) -> Content) {

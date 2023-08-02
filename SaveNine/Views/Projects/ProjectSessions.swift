@@ -15,8 +15,7 @@ struct ProjectSessions: View {
         // If there are no sessions or only one session that is incomplete, sessions.last?.endDate == nil.
         // If there is more than one session because sessions are sorted newest to oldest, sessions.last?.endDate != nil
         if project.projectSessions.isEmpty || project.projectSessions.last?.endDate == nil {
-            NoContentView(message: "No time tracking sessions have been completed for this project.")
-                .padding()
+            ContentUnavailableView("No time tracking sessions have been completed for this project.", systemImage: "hourglass.bottomhalf.filled")
         } else {
             List {
                 ForEach(project.projectSessions) { session in
