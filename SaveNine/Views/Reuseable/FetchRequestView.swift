@@ -23,9 +23,7 @@ struct FetchRequestView<T: PersistentModel, Content: View>: View {
     }
 }
 
-struct FetchRequestView_Previews: PreviewProvider {
-    static var previews: some View {
-        FetchRequestView<Project, EmptyView>(FetchDescriptor(), { _ in EmptyView() })
-            .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
-    }
+#Preview {
+    FetchRequestView<Project, EmptyView>(FetchDescriptor(), { _ in EmptyView() })
+        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }
