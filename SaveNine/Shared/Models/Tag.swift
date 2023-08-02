@@ -11,11 +11,11 @@ import SwiftData
 
 @Model
 public class Tag {
-    var id: UUID?
+    public var id: UUID?
     var name: String?
     var projects: [Project]?
 
-    init(id: UUID? = UUID(), name: String?, projects: [Project]? = nil) {
+    init(id: UUID? = UUID(), name: String?, projects: [Project]? = []) {
         self.id = id
         self.name = name
         self.projects = projects

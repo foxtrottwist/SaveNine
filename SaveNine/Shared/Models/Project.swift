@@ -14,7 +14,7 @@ public class Project {
     var closed: Bool? = false
     var creationDate: Date?
     var detail: String?
-    var id: UUID?
+    public var id: UUID?
     var image: String?
     var modificationDate: Date?
     var name: String?
@@ -24,7 +24,7 @@ public class Project {
     init(
         creationDate: Date? = .now,
         detail: String? = nil,
-        id: UUID? = nil,
+        id: UUID? = UUID(),
         image: String? = nil,
         modificationDate: Date? = nil,
         name: String?,

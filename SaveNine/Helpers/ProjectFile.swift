@@ -52,7 +52,7 @@ struct ProjectDocument: Codable {
             contents: .init(
                 id: project.id!,
                 name: project.displayName,
-                closed: project.closed,
+                closed: project.closed!,
                 creationDate: project.projectCreationDate,
                 detail: project.projectDetail,
                 sessions: SessionDocument.document(from: project.projectSessions)
@@ -70,7 +70,7 @@ struct SessionDocument: Codable {
     static func document(from sessions: [Session]) -> [SessionDocument] {
         return sessions.map { session in
             SessionDocument(
-                duration: session.duration,
+                duration: session.duration!,
                 endDate: session.endDate!,
                 label: session.sessionLabel,
                 startDate: session.startDate!

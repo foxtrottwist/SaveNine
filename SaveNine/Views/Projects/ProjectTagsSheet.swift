@@ -36,7 +36,7 @@ struct ProjectTagsSheet: View {
                     List {
                         ForEach(tags) { tag in
                             let selected = !tagsPendingRemoval.contains(tag) && (
-                                ((project.tags?.contains(tag)) != nil) || tagsPendingAddition.contains(tag)
+                                project.tags!.contains(tag) || tagsPendingAddition.contains(tag)
                             )
                             
                             Button {

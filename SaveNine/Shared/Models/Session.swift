@@ -13,7 +13,7 @@ import SwiftData
 public class Session {
     var duration: Double? = 0
     var endDate: Date?
-    var id: UUID?
+    public var id: UUID?
     var label: String?
     var startDate: Date?
     var project: Project?
