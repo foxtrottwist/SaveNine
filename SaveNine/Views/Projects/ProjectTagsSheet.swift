@@ -18,7 +18,7 @@ struct ProjectTagsSheet: View {
     @State private var tagsPendingRemoval: [Tag] = []
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name)])) private var fetchedTags: [Tag]
     
-    var tags: [Tag] {
+    private var tags: [Tag] {
         (newTags + fetchedTags).sorted(using: KeyPathComparator(\.name, order: .forward))
     }
     

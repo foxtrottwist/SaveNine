@@ -13,7 +13,7 @@ struct ProjectsSearchResults<Content: View>: View {
     let content: (Project) -> Content
     @Environment (\.modelContext) private var modelContext
     
-    var searchResult: [Project] {
+    private var searchResult: [Project] {
         if searchText.isEmpty { return projects }
         return projects.filter { $0.displayName.lowercased().contains(searchText.lowercased()) }
     }
