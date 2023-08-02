@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SessionDetail: View {
     let session: Session
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     @State private var duration: Double
     @State private var endDate: Date
     @State private var label: String
