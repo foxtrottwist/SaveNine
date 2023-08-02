@@ -40,12 +40,10 @@ struct AppNavigationSplitView: View {
 }
 
 struct ProjectsTabView_Previews: PreviewProvider {
-    static var dataController = DataController.preview
     
     static var previews: some View {
         AppNavigationSplitView(subject: PassthroughSubject<String?, Never>())
-            .environment(\.managedObjectContext, dataController.container.viewContext)
             .environment(AppNavigation())
-            .environmentObject(dataController)
+            .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
     }
 }
