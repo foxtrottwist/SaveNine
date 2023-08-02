@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 2/13/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SessionNavigationStack: View {
@@ -14,7 +15,7 @@ struct SessionNavigationStack: View {
     var body: some View {
         NavigationStack {
             FetchRequestView(
-                Session.fetchSessions(predicate: createPredicate(), sortDescriptors: sortSessions())
+                FetchDescriptor<Session>(sortBy: [SortDescriptor(\.endDate, order: .reverse)])
             ) { sessions in
                 if sessions.isEmpty {
                     NoContentView(message: "No sessions have been completed or match the current filter.")
@@ -61,21 +62,6 @@ struct SessionNavigationStack: View {
     }
     
     static let tag: String? = "Sessions"
-    
-    private func createPredicate() -> NSPredicate {
-        return FetchPredicate.create(from: [!selectedLabel.isEmpty ? (.label, selectedLabel) : nil])
-    }
-    
-    private func sortSessions() -> [NSSortDescriptor] {
-        switch sortController.sortOption {
-        case .project:
-            return [NSSortDescriptor(keyPath: \Session.project, ascending: sortController.sortAscending)]
-        case .startDate:
-            return [NSSortDescriptor(keyPath: \Session.startDate, ascending: sortController.sortAscending)]
-        default:
-            return []
-        }
-    }
 }
 
 #Preview {
