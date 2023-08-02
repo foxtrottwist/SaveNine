@@ -19,6 +19,7 @@ public class Session {
     var project: Project?
 
     init(id: UUID? = UUID(), label: String?, startDate: Date?, project: Project?) {
+        self.id = id
         self.label = label
         self.startDate = startDate
         self.project = project
