@@ -14,41 +14,32 @@ struct ProjectNavigationStack: View {
     @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
     @State private var searchText = ""
-    @Query(sort: \Project.creationDate, order: .reverse) private var projects: [Project]
     
     var body: some View {
         NavigationStack(path: $path) {
-            List {
-                ProjectsSearchResults(projects: projects, searchText: searchText) { project in
-                    if project.displayName.isEmpty {
-                        ProjectName(project: project)
-                            .onAppear { disabled = true }
-                            .onDisappear { disabled = false }
-                    } else {
-                        VStack {
-                            NavigationLink(value: project) {
-                                ProjectRow(project: project)
+            QueryView(FetchDescriptor(sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
+                List {
+                    ProjectsSearchResults(projects: projects, searchText: searchText) { project in
+                        if project.displayName.isEmpty {
+                            ProjectName(project: project)
+                                .onAppear { disabled = true }
+                                .onDisappear { disabled = false }
+                        } else {
+                            VStack {
+                                NavigationLink(value: project) {
+                                    ProjectRow(project: project)
+                                }
                             }
+                            .disabled(disabled)
                         }
-                        .disabled(disabled)
                     }
                 }
-            }
+            })
             .listStyle(.inset)
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
             .navigationTitle(navigation.filter?.name ?? "")
-            .onOpenURL(perform: { url in
-                let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                guard let host = components?.host else { return }
-                let projectID = UUID(uuidString: host)
-                let project = projects.map { $0 }.filter { $0.id == projectID }
-                
-                if path.last?.id != projectID {
-                    path.append(contentsOf: project)
-                }
-            })
             .searchable(text: $searchText, placement: .navigationBarDrawer)
             .toolbar {
                 ToolbarItem {
