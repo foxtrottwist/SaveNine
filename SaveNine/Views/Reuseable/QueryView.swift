@@ -1,5 +1,5 @@
 //
-//  FetchRequestView.swift
+//  QueryView.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 11/8/22.
@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct FetchRequestView<T: PersistentModel, Content: View>: View {
+struct QueryView<T: PersistentModel, Content: View>: View {
     @Query private var queryResult: [T]
     
     let content: ([T]) -> Content
@@ -24,6 +24,6 @@ struct FetchRequestView<T: PersistentModel, Content: View>: View {
 }
 
 #Preview {
-    FetchRequestView<Project, EmptyView>(FetchDescriptor(), { _ in EmptyView() })
+    QueryView<Project, EmptyView>(FetchDescriptor(), { _ in EmptyView() })
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

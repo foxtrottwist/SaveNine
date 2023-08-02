@@ -14,7 +14,7 @@ struct SessionNavigationStack: View {
     
     var body: some View {
         NavigationStack {
-            FetchRequestView(
+            QueryView(
                 FetchDescriptor<Session>(sortBy: [SortDescriptor(\.endDate, order: .reverse)])
             ) { sessions in
                 if sessions.isEmpty {
