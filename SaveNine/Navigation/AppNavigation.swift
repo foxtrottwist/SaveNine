@@ -12,7 +12,7 @@ import Observation
 final class AppNavigation {
     // FIXME: investigate why path does not update correctly.
     var path: [Project] = []
-    var filter: Filter? = Filter.open
+    var filter: Filter? = .open
     
     init() {}
 }

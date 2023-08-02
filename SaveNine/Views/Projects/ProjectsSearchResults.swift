@@ -13,6 +13,11 @@ struct ProjectsSearchResults<Content: View>: View {
     let content: (Project) -> Content
     @Environment (\.modelContext) private var modelContext
     
+    var searchResult: [Project] {
+        if searchText.isEmpty { return projects }
+        return projects.filter { $0.displayName.lowercased().contains(searchText.lowercased()) }
+    }
+    
     init(projects: [Project], searchText: String, @ViewBuilder _ content: @escaping (Project) -> Content) {
         self.projects =  projects
         self.searchText = searchText
@@ -20,20 +25,14 @@ struct ProjectsSearchResults<Content: View>: View {
     }
     
     var body: some View {
-        if searchText.isEmpty {
-            ForEach(projects, content: content).onDelete(perform: deleteProjects)
-        } else {
-            ForEach(
-                projects.filter {
-                    if let name = $0.name {
-                        name.lowercased().contains(searchText.lowercased())
-                    } else {
-                        false
-                    }
-                },
-                content: content
-            )
-            .onDelete(perform: deleteProjects)
+        List {
+            ForEach(searchResult, content: content)
+                .onDelete(perform: deleteProjects)
+        }
+        .overlay {
+            if searchResult.isEmpty, !searchText.isEmpty {
+                ContentUnavailableView.search
+            }
         }
     }
     

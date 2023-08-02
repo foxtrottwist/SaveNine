@@ -18,20 +18,18 @@ struct ProjectNavigationStack: View {
     var body: some View {
         NavigationStack(path: $path) {
             QueryView(FetchDescriptor(sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
-                List {
-                    ProjectsSearchResults(projects: projects, searchText: searchText) { project in
-                        if project.displayName.isEmpty {
-                            ProjectName(project: project)
-                                .onAppear { disabled = true }
-                                .onDisappear { disabled = false }
-                        } else {
-                            VStack {
-                                NavigationLink(value: project) {
-                                    ProjectRow(project: project)
-                                }
+                ProjectsSearchResults(projects: projects, searchText: searchText) { project in
+                    if project.displayName.isEmpty {
+                        ProjectName(project: project)
+                            .onAppear { disabled = true }
+                            .onDisappear { disabled = false }
+                    } else {
+                        VStack {
+                            NavigationLink(value: project) {
+                                ProjectRow(project: project)
                             }
-                            .disabled(disabled)
                         }
+                        .disabled(disabled)
                     }
                 }
             })
