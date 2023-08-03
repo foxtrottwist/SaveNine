@@ -21,7 +21,7 @@ struct MostRecentlyTrackedProvider: IntentTimelineProvider {
         }
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<MostRecentlyTrackedEntry>) -> ()) {
         if let project = Project.mostRecentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let entry = MostRecentlyTrackedEntry(date: startOfDay, project: project, configuration: configuration)
