@@ -1,5 +1,5 @@
 //
-//  LastTrackedWidget.swift
+//  MostRecentlyTrackedWidget.swift
 //  SaveNineWidget
 //
 //  Created by Lawrence Horne on 12/18/22.
@@ -9,14 +9,14 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct LastTrackedProvider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> LastTrackedEntry {
-        LastTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent())
+struct MostRecentlyTrackedProvider: IntentTimelineProvider {
+    func placeholder(in context: Context) -> MostRecentlyTrackedEntry {
+        MostRecentlyTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LastTrackedEntry) -> ()) {
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (MostRecentlyTrackedEntry) -> ()) {
         if let project = Project.mostRecentlyTracked {
-            let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
+            let entry = MostRecentlyTrackedEntry(date: Date(), project: project, configuration: configuration)
             completion(entry)
         }
     }
@@ -24,22 +24,22 @@ struct LastTrackedProvider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         if let project = Project.mostRecentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
-            let entry = LastTrackedEntry(date: startOfDay, project: project, configuration: configuration)
+            let entry = MostRecentlyTrackedEntry(date: startOfDay, project: project, configuration: configuration)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
     }
 }
 
-struct LastTrackedEntry: TimelineEntry {
+struct MostRecentlyTrackedEntry: TimelineEntry {
     let date: Date
     let project: Project
     let configuration: ConfigurationIntent
 }
 
-struct LastTrackedEntryView: View {
+struct MostRecentlyTrackedEntryView: View {
     @Environment(\.widgetFamily) var family
-    var entry: LastTrackedProvider.Entry
+    var entry: MostRecentlyTrackedProvider.Entry
 
     var body: some View {
         switch family {
@@ -72,12 +72,12 @@ struct LastTrackedEntryView: View {
     }
 }
 
-struct LastTrackedWidget: Widget {
+struct MostRecentlyTrackedWidget: Widget {
     let kind: String = WidgetKind.MostRecentlyTracked.rawValue
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: LastTrackedProvider()) { entry in
-            LastTrackedEntryView(entry: entry)
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: MostRecentlyTrackedProvider()) { entry in
+            MostRecentlyTrackedEntryView(entry: entry)
         }
         .configurationDisplayName("Project")
         .description("See the most recently tracked project and access it quickly.")
@@ -86,7 +86,7 @@ struct LastTrackedWidget: Widget {
 }
 
 #Preview {
-    LastTrackedEntryView(entry: LastTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent()))
+    MostRecentlyTrackedEntryView(entry: MostRecentlyTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent()))
         .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
 }
 
