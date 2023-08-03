@@ -12,18 +12,18 @@ import Observation
 final class AppNavigation {
     // FIXME: investigate why path does not update correctly.
     var path: [Project] = []
-    var filter: Filter? = .open
+    var filter: AppNavigationLink? = .open
     
     init() {}
 }
 
-struct Filter: Identifiable, Hashable, Codable {
+struct AppNavigationLink: Identifiable, Hashable, Codable {
     var id: UUID
     var name: String
     var icon: String
     
-    static var all = Filter(id: UUID(), name: "All Projects", icon: "tray")
-    static var open = Filter(id: UUID(), name: "Open Projects", icon: "tray.full")
-    static var closed = Filter(id: UUID(), name: "Closed Projects", icon: "archivebox")
-    static var sessions = Filter(id: UUID(), name: "Sessions", icon:  "clock")
+    static var all = AppNavigationLink(id: UUID(), name: "All Projects", icon: "tray")
+    static var open = AppNavigationLink(id: UUID(), name: "Open Projects", icon: "tray.full")
+    static var closed = AppNavigationLink(id: UUID(), name: "Closed Projects", icon: "archivebox")
+    static var sessions = AppNavigationLink(id: UUID(), name: "Sessions", icon:  "clock")
 }

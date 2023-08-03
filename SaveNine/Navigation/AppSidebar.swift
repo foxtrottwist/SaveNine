@@ -14,32 +14,27 @@ struct AppSidebar: View {
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
     
-    private var defaultFilters: [Filter] {
-        if prefersTabNavigation {
-            return [.open, .closed, .all]
-        } else {
-            return [.open, .closed, .all, .sessions]
-        }
+    private var defaultLinks: [AppNavigationLink] {
+        prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
     }
-    
-    private var filters: [Filter] {
+    private var Links: [AppNavigationLink] {
         tags.map {
-            Filter(id: $0.id!, name: $0.name!, icon: "tag")
+            AppNavigationLink(id: $0.id!, name: $0.name!, icon: "tag")
         }
     }
     
     var body: some View {
         List(selection: $navigation.filter) {
-            ForEach(defaultFilters) { filter in
+            ForEach(defaultLinks) { filter in
                 NavigationLink(value: filter) {
                     Label(filter.name, systemImage: filter.icon)
                 }
             }
             
             Section("Tags") {
-                ForEach(filters) { filter in
-                    NavigationLink(value: filter) {
-                        Label(filter.name, systemImage: filter.icon)
+                ForEach(Links) { link in
+                    NavigationLink(value: link) {
+                        Label(link.name, systemImage: link.icon)
                     }
                 }
                 .onDelete(perform: deleteTags)
