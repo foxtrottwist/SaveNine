@@ -120,11 +120,14 @@ extension Project {
     }
     
     static var preview: Project {
-        .init(
+        let project = Project(
             detail: "Everything but the leaf.",
             name: "OMG David!",
             sessions: [Session.preview],
             tags: [Tag.preview]
         )
+        
+        project.modificationDate = Session.preview.endDate
+        return project
     }
 }

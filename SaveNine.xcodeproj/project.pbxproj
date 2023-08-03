@@ -69,8 +69,6 @@
 		65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
 		65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
 		65EF242A28DF870A003749F3 /* ProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF242928DF870A003749F3 /* ProjectName.swift */; };
-		65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7182964761C00CABB3C /* ProjectWidget.swift */; };
-		65F4A71A2964771100CABB3C /* ProjectWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7182964761C00CABB3C /* ProjectWidget.swift */; };
 		65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
 		65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
 		65F4A7262965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */; };
@@ -175,7 +173,6 @@
 		65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+AppGroup.swift"; sourceTree = "<group>"; };
 		65EF242928DF870A003749F3 /* ProjectName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectName.swift; sourceTree = "<group>"; };
 		65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNineWidgetExtension.entitlements; sourceTree = "<group>"; };
-		65F4A7182964761C00CABB3C /* ProjectWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWidget.swift; sourceTree = "<group>"; };
 		65F4A7222965B0C900CABB3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Widgets.swift"; sourceTree = "<group>"; };
 		65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
@@ -443,7 +440,6 @@
 				65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */,
 				65DD6DC7299D299B00FA1E48 /* FileExtension.swift */,
 				65F4A7222965B0C900CABB3C /* Helpers.swift */,
-				65F4A7182964761C00CABB3C /* ProjectWidget.swift */,
 				65F4A72E2965E5B900CABB3C /* S9WidgetKind.swift */,
 				65A51C31294FC7C400A3B960 /* TrackerAttributes.swift */,
 			);
@@ -581,7 +577,6 @@
 				652BFD01295F367000179792 /* View+Extension.swift in Sources */,
 				65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */,
 				65A51C33294FC7F400A3B960 /* TrackerAttributes.swift in Sources */,
-				65F4A71A2964771100CABB3C /* ProjectWidget.swift in Sources */,
 				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
 				65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 			);
@@ -641,7 +636,6 @@
 				65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */,
 				65FC92D6299FFD4B008871A5 /* SortOption.swift in Sources */,
 				65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
-				65F4A7192964761C00CABB3C /* ProjectWidget.swift in Sources */,
 				6518916429A5372200ACE985 /* AppIconImageView.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
 				65FC92D4299F2A9D008871A5 /* SortOptionsView.swift in Sources */,

@@ -11,18 +11,18 @@ import Intents
 
 struct LastTrackedProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> LastTrackedEntry {
-        LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent())
+        LastTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (LastTrackedEntry) -> ()) {
-        if let project = ProjectWidget.mostRecentlyTrackedProject {
+        if let project = Project.mostRecentlyTracked {
             let entry = LastTrackedEntry(date: Date(), project: project, configuration: configuration)
             completion(entry)
         }
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        if let project = ProjectWidget.mostRecentlyTrackedProject {
+        if let project = Project.mostRecentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let entry = LastTrackedEntry(date: startOfDay, project: project, configuration: configuration)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
@@ -33,7 +33,7 @@ struct LastTrackedProvider: IntentTimelineProvider {
 
 struct LastTrackedEntry: TimelineEntry {
     let date: Date
-    let project: ProjectWidget
+    let project: Project
     let configuration: ConfigurationIntent
 }
 
@@ -48,7 +48,7 @@ struct LastTrackedEntryView: View {
         case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {
-                    Text(entry.project.name)
+                    Text(entry.project.displayName)
                     
                     HStack {
                         Image(systemName: "stopwatch")
@@ -57,12 +57,12 @@ struct LastTrackedEntryView: View {
                     
                     HStack {
                         Image(systemName: "calendar")
-                        Text(entry.project.modifiedDate.relativeDescription())
+                        Text(entry.project.modificationDate!.relativeDescription())
                     }
                 }
                 Spacer()
             }
-            .widgetURL(createProjectUrl(id: entry.project.id))
+            .widgetURL(createProjectUrl(id: entry.project.id!))
             
         case .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
             EmptyView()
@@ -85,11 +85,9 @@ struct LastTrackedWidget: Widget {
     }
 }
 
-struct LastTrackedWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        LastTrackedEntryView(entry: LastTrackedEntry(date: Date(), project: ProjectWidget.example, configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-    }
+#Preview {
+    LastTrackedEntryView(entry: LastTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent()))
+        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
 }
 
 

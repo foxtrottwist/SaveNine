@@ -123,15 +123,7 @@ struct Tracker: View {
                start = nil
                tracking = false
                
-               let projectWidget = ProjectWidget(
-                   id: project.id!,
-                   name: project.displayName,
-                   modifiedDate: endDate,
-                   sessionCount: project.projectSessions.count,
-                   timeTracked: project.timeTracked
-               )
-               
-               projectWidget.writeMostRecentlyTrackedWidget()
+               WidgetCenter.shared.reloadTimelines(ofKind: S9WidgetKind.LastTracked.rawValue)
            }
            
            

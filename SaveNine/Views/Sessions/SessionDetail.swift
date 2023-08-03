@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SessionDetail: View {
     let session: Session
@@ -71,19 +72,13 @@ struct SessionDetail: View {
         session.duration = endDate.timeIntervalSince(startDate)
         dismiss()
         
-        if let sessionProject = session.project, let project = ProjectWidget.mostRecentlyTrackedProject {
+        if let sessionProject = session.project, let project = Project.mostRecentlyTracked {
             if project.id == sessionProject.id {
-                let projectWidget = ProjectWidget(
-                    id: project.id,
-                    name: sessionProject.displayName,
-                    modifiedDate: endDate,
-                    sessionCount: sessionProject.projectSessions.count,
-                    timeTracked: sessionProject.timeTracked
-                )
-                
-                projectWidget.writeMostRecentlyTrackedWidget()
+                project.modificationDate = endDate
             }
         }
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: S9WidgetKind.LastTracked.rawValue)
     }
 }
 

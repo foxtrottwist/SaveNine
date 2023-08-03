@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct LastTrackedView: View {
-    let project: ProjectWidget
+    let project: Project
     
     var body: some View {
         ZStack {
@@ -18,7 +18,7 @@ struct LastTrackedView: View {
             
             HStack {
                 VStack(alignment: .leading) {
-                    Text(project.name)
+                    Text(project.displayName)
                         .font(.callout)
                         .lineLimit(2)
                         .padding(1)
@@ -32,7 +32,7 @@ struct LastTrackedView: View {
                         .font(.caption)
                         .italic()
                     
-                    Text(project.modifiedDate.relativeDescription())
+                    Text(project.modificationDate!.relativeDescription())
                         .font(.subheadline)
                 }
                 .fontWeight(.medium)
@@ -42,13 +42,11 @@ struct LastTrackedView: View {
                 Spacer()
             }
         }
-        .widgetURL(createProjectUrl(id: project.id))
+        .widgetURL(createProjectUrl(id: project.id!))
     }
 }
 
-struct LastTrackedView_Previews: PreviewProvider {
-    static var previews: some View {
-        LastTrackedView(project: ProjectWidget.example)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
+#Preview {
+    LastTrackedView(project: Project.preview)
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
 }
