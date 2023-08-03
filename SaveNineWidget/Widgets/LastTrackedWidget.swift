@@ -73,7 +73,7 @@ struct LastTrackedEntryView: View {
 }
 
 struct LastTrackedWidget: Widget {
-    let kind: String = WidgetKind.LastTracked.rawValue
+    let kind: String = WidgetKind.MostRecentlyTracked.rawValue
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: LastTrackedProvider()) { entry in
