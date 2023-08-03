@@ -104,38 +104,39 @@ struct Tracker: View {
     }
     
     private func startTimer() {
-        start = Date()
-        tracking = true
-        let session = Session(label: label, startDate: start, project: project)
-        self.session = session
-        modelContext.insert(session)
-        requestLiveActivity(date: start!)
-    }
-    
-    private func stopTimer() async {
-        if let session = session {
-            session.endDate = Date()
-            session.label = label
-            
-            if let startDate = start, let endDate = session.endDate {
-                session.duration = endDate.timeIntervalSince(startDate)
-                start = nil
-                tracking = false
-                
-                let projectWidget = ProjectWidget(
-                    id: project.id!,
-                    name: project.displayName,
-                    modifiedDate: endDate,
-                    sessionCount: project.projectSessions.count,
-                    timeTracked: project.timeTracked
-                )
-                
-                projectWidget.writeMostRecentlyTrackedWidget()
-            }
-        }
-        
-        await endLiveActivity()
-    }
+           start = Date()
+           tracking = true
+           let session = Session(label: label, startDate: start, project: project)
+           self.session = session
+           project.sessions?.append(session)
+           requestLiveActivity(date: start!)
+       }
+       
+       private func stopTimer() async {
+           if let session = session, let startDate = start {
+               let endDate = Date()
+               
+               project.modificationDate = endDate
+               session.endDate = endDate
+               session.label = label
+               session.duration = endDate.timeIntervalSince(startDate)
+               start = nil
+               tracking = false
+               
+               let projectWidget = ProjectWidget(
+                   id: project.id!,
+                   name: project.displayName,
+                   modifiedDate: endDate,
+                   sessionCount: project.projectSessions.count,
+                   timeTracked: project.timeTracked
+               )
+               
+               projectWidget.writeMostRecentlyTrackedWidget()
+           }
+           
+           
+           await endLiveActivity()
+       }
     
     private func clearTimer() async {
         if let session = session {

@@ -105,6 +105,20 @@ extension Project {
         return session.endDate == nil
     }
     
+    static var mostRecentlyTracked: Project? {
+        guard let container = try? ModelContainer(for: [Project.self, Session.self, Tag.self]) else {
+            return nil
+        }
+        
+        let modelContext = ModelContext(container)
+        
+        let fetchDescriptor = FetchDescriptor<Project>(
+            predicate: #Predicate { $0.modificationDate != nil }, sortBy: [SortDescriptor(\.modificationDate)]
+        )
+        
+        return try! modelContext.fetch(fetchDescriptor).first
+    }
+    
     static var preview: Project {
         .init(
             detail: "Everything but the leaf.",

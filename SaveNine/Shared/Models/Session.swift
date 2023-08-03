@@ -11,7 +11,7 @@ import SwiftData
 
 @Model
 public class Session {
-    var duration: Double? = 0
+    var duration: Double?
     var endDate: Date?
     public var id: UUID?
     var label: String?
@@ -19,6 +19,7 @@ public class Session {
     var project: Project?
 
     init(id: UUID? = UUID(), label: String?, startDate: Date?, project: Project?) {
+        self.duration = 0
         self.id = id
         self.label = label
         self.startDate = startDate

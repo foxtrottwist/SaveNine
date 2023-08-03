@@ -8,11 +8,6 @@
 import Foundation
 import Observation
 
-enum DefaultLabel: String {
-    case addLabel = "Add Label"
-    case none = "None"
-}
-
 @Observable
 final class SessionLabelController {
     var labels = [SessionLabel]()
