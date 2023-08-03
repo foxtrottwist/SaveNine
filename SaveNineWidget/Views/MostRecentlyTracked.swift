@@ -1,5 +1,5 @@
 //
-//  LastTrackedView.swift
+//  MostRecentlyTracked.swift
 //  SaveNineWidgetExtension
 //
 //  Created by Lawrence Horne on 1/16/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct LastTrackedView: View {
+struct MostRecentlyTracked: View {
     let project: Project
     
     var body: some View {
@@ -47,6 +47,6 @@ struct LastTrackedView: View {
 }
 
 #Preview {
-    LastTrackedView(project: Project.preview)
+    MostRecentlyTracked(project: Project.preview)
         .previewContext(WidgetPreviewContext(family: .systemSmall))
 }
