@@ -24,7 +24,7 @@ struct MostRecentlyTracked: View {
             
             Text(project.modificationDate!.relativeDescription())
                 .foregroundStyle(.black.opacity(0.5))
-                .font(.subheadline)
+                .font(.caption)
             
             Spacer()
         }
