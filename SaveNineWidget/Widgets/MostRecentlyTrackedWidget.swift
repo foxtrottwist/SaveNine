@@ -78,6 +78,10 @@ struct MostRecentlyTrackedWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: MostRecentlyTrackedProvider()) { entry in
             MostRecentlyTrackedEntryView(entry: entry)
+                .containerBackground(for: .widget) {
+                    ContainerRelativeShape()
+                        .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+                }
         }
         .configurationDisplayName("Project")
         .description("See the most recently tracked project and access it quickly.")

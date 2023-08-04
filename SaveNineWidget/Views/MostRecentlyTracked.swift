@@ -12,36 +12,25 @@ struct MostRecentlyTracked: View {
     let project: Project
     
     var body: some View {
-        ZStack {
-            ContainerRelativeShape()
-                .fill(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000).gradient)
+        VStack(alignment: .leading) {
+            Text(project.displayName)
+                .font(.caption)
+                .foregroundStyle(.black)
+                .lineLimit(2)
             
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(project.displayName)
-                        .font(.callout)
-                        .lineLimit(2)
-                        .padding(1)
-                    
-                    Text(project.timeTracked)
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text("last tracked:")
-                        .font(.caption)
-                        .italic()
-                    
-                    Text(project.modificationDate!.relativeDescription())
-                        .font(.subheadline)
-                }
-                .fontWeight(.medium)
-                .foregroundColor(.black.opacity(0.6))
-                .padding()
-                
-                Spacer()
-            }
+            Text(project.timeTracked)
+                .font(.title)
+                .minimumScaleFactor(0.8)
+            
+            Text(project.modificationDate!.relativeDescription())
+                .foregroundStyle(.black.opacity(0.5))
+                .font(.subheadline)
+            
+            Spacer()
         }
+        .fontWeight(.medium)
+        .foregroundStyle(.black.opacity(0.7))
+        .frame(maxWidth: .infinity, alignment: .leading)
         .widgetURL(createProjectUrl(id: project.id!))
     }
 }
