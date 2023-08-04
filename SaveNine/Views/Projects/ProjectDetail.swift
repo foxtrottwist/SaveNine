@@ -85,6 +85,7 @@ struct ProjectDetail: View {
         .navigationTitle($name)
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: detail) { project.detail = detail }
+        .onChange(of: name) { project.name = name }
         .scrollDismissesKeyboard(.interactively)
         .sheet(isPresented: $showingTagsSheet, content: {
             ProjectTagsSheet(project: project)
