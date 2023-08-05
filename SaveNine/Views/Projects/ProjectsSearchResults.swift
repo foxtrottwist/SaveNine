@@ -14,8 +14,11 @@ struct ProjectsSearchResults<Content: View>: View {
     @Environment (\.modelContext) private var modelContext
     
     private var searchResult: [Project] {
-        if searchText.isEmpty { return projects }
-        return projects.filter { $0.displayName.lowercased().contains(searchText.lowercased()) }
+        if searchText.isEmpty {
+            projects
+        } else {
+            projects.filter { $0.displayName.localizedCaseInsensitiveContains(searchText) }
+        }
     }
     
     init(projects: [Project], searchText: String, @ViewBuilder _ content: @escaping (Project) -> Content) {

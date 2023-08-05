@@ -12,14 +12,14 @@ struct RecentlyTrackedProvider: TimelineProvider {
     func placeholder(in context: Context) -> RecentlyTrackedEntry {
         RecentlyTrackedEntry(date: Date(), project: Project.preview)
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
         if let project = Project.mostRecentlyTracked {
             let entry = RecentlyTrackedEntry(date: Date(), project: project)
             completion(entry)
         }
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
         if let project = Project.mostRecentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
@@ -38,7 +38,7 @@ struct RecentlyTrackedEntry: TimelineEntry {
 struct RecentlyTrackedEntryView: View {
     var entry: RecentlyTrackedProvider.Entry
     @Environment(\.widgetFamily) var family
-
+    
     var body: some View {
         switch family {
         case .systemSmall:
@@ -67,8 +67,8 @@ struct RecentlyTrackedEntryView: View {
 }
 
 struct RecentlyTrackedWidget: Widget {
-    let kind: String = WidgetKind.MostRecentlyTracked.rawValue
-
+    let kind: String = WidgetKind.RecentlyTracked.rawValue
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: RecentlyTrackedProvider()) { entry in
             RecentlyTrackedEntryView(entry: entry)

@@ -8,5 +8,5 @@
 import Foundation
 
 enum WidgetKind: String {
-    case MostRecentlyTracked
+    case RecentlyTracked
 }

@@ -78,7 +78,7 @@ struct SessionDetail: View {
             }
         }
         
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.MostRecentlyTracked.rawValue)
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
     }
 }
 

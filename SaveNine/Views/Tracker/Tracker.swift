@@ -123,7 +123,7 @@ struct Tracker: View {
                start = nil
                tracking = false
                
-               WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.MostRecentlyTracked.rawValue)
+               WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
            }
            
            
