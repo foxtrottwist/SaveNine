@@ -11,7 +11,7 @@ import WidgetKit
 struct SaveNineWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TrackerAttributes.self) { context in
-            TimerLiveActivityView(context: context)
+            TimerActivityLockScreenView(context: context)
                 .widgetURL(createProjectUrl(id: context.attributes.projectId))
         } dynamicIsland: { context in
             DynamicIsland {
