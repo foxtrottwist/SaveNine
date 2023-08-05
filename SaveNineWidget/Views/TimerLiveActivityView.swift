@@ -15,7 +15,6 @@ struct TimerLiveActivityView: View {
         VStack {
             Spacer()
             HStack {
-                Spacer()
                 Text(context.attributes.projectName)
                     .font(.headline)
                     
@@ -25,8 +24,8 @@ struct TimerLiveActivityView: View {
                     .lineLimit(1)
                     .font(.largeTitle)
                     
-                Spacer()
             }
+            .padding()
             Spacer()
         }
     }
