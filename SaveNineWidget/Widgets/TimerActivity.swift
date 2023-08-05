@@ -1,5 +1,5 @@
 //
-//  SaveNineWidgetLiveActivity.swift
+//  TimerActivity.swift
 //  SaveNineWidget
 //
 //  Created by Lawrence Horne on 12/18/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct SaveNineWidgetLiveActivity: Widget {
+struct TimerActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TrackerAttributes.self) { context in
             TimerActivityLockScreenView(context: context)
