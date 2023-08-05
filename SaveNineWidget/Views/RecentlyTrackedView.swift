@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct MostRecentlyTracked: View {
+struct RecentlyTrackedView: View {
     let project: Project
     
     var body: some View {
@@ -36,6 +36,6 @@ struct MostRecentlyTracked: View {
 }
 
 #Preview {
-    MostRecentlyTracked(project: Project.preview)
+    RecentlyTrackedView(project: Project.preview)
         .previewContext(WidgetPreviewContext(family: .systemSmall))
 }

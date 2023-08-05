@@ -44,7 +44,7 @@ struct MostRecentlyTrackedEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            MostRecentlyTracked(project: entry.project)
+            RecentlyTrackedView(project: entry.project)
         case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {

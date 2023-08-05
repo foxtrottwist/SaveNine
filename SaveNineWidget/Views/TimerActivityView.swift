@@ -23,7 +23,6 @@ struct TimerActivityView: View {
                     .widgetTimer(width: 150)
                     .lineLimit(1)
                     .font(.largeTitle)
-                    
             }
             .padding()
             Spacer()
