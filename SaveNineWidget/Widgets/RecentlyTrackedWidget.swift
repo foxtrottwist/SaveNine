@@ -7,24 +7,23 @@
 
 import WidgetKit
 import SwiftUI
-import Intents
 
-struct RecentlyTrackedProvider: IntentTimelineProvider {
+struct RecentlyTrackedProvider: TimelineProvider {
     func placeholder(in context: Context) -> RecentlyTrackedEntry {
-        RecentlyTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent())
+        RecentlyTrackedEntry(date: Date(), project: Project.preview)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
         if let project = Project.mostRecentlyTracked {
-            let entry = RecentlyTrackedEntry(date: Date(), project: project, configuration: configuration)
+            let entry = RecentlyTrackedEntry(date: Date(), project: project)
             completion(entry)
         }
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
         if let project = Project.mostRecentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
-            let entry = RecentlyTrackedEntry(date: startOfDay, project: project, configuration: configuration)
+            let entry = RecentlyTrackedEntry(date: startOfDay, project: project)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
@@ -34,7 +33,6 @@ struct RecentlyTrackedProvider: IntentTimelineProvider {
 struct RecentlyTrackedEntry: TimelineEntry {
     let date: Date
     let project: Project
-    let configuration: ConfigurationIntent
 }
 
 struct RecentlyTrackedEntryView: View {
@@ -44,7 +42,7 @@ struct RecentlyTrackedEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            RecentlyTrackedView(project: entry.project)
+            ProjectWidgetView(project: entry.project)
         case .accessoryRectangular:
             HStack {
                 VStack(alignment: .leading) {
@@ -76,7 +74,7 @@ struct RecentlyTrackedWidget: Widget {
     let kind: String = WidgetKind.MostRecentlyTracked.rawValue
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: RecentlyTrackedProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: RecentlyTrackedProvider()) { entry in
             RecentlyTrackedEntryView(entry: entry)
                 .containerBackground(for: .widget) {
                     ContainerRelativeShape()
@@ -89,9 +87,11 @@ struct RecentlyTrackedWidget: Widget {
     }
 }
 
-#Preview {
-    RecentlyTrackedEntryView(entry: RecentlyTrackedEntry(date: Date(), project: Project.preview, configuration: ConfigurationIntent()))
-        .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+#Preview(as: .systemSmall) {
+    RecentlyTrackedWidget()
+} timeline: {
+    RecentlyTrackedEntry(date: Date(), project: Project.preview)
 }
+
 
 
