@@ -36,8 +36,8 @@ struct RecentlyTrackedEntry: TimelineEntry {
 }
 
 struct RecentlyTrackedEntryView: View {
-    @Environment(\.widgetFamily) var family
     var entry: RecentlyTrackedProvider.Entry
+    @Environment(\.widgetFamily) var family
 
     var body: some View {
         switch family {
@@ -47,21 +47,17 @@ struct RecentlyTrackedEntryView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(entry.project.displayName)
-                    
                     HStack {
                         Image(systemName: "stopwatch")
                         Text(entry.project.timeTracked)
                     }
-                    
                     HStack {
                         Image(systemName: "calendar")
                         Text(entry.project.modificationDate!.relativeDescription())
                     }
                 }
-                Spacer()
             }
             .widgetURL(createProjectUrl(id: entry.project.id!))
-            
         case .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
             EmptyView()
         @unknown default:
