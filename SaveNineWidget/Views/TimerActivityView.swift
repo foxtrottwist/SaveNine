@@ -1,5 +1,5 @@
 //
-//  TimerActivityLockScreenView.swift
+//  TimerActivityView.swift
 //  SaveNineWidgetExtension
 //
 //  Created by Lawrence Horne on 12/19/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct TimerActivityLockScreenView: View {
+struct TimerActivityView: View {
     let context: ActivityViewContext<TrackerAttributes>
     
     var body: some View {
