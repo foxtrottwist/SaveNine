@@ -12,6 +12,6 @@ import SwiftUI
 struct SaveNineWidgetBundle: WidgetBundle {
     var body: some Widget {
         RecentlyTrackedWidget()
-        TimerActivity()
+        TimerLiveActivity()
     }
 }
