@@ -102,32 +102,31 @@ struct Tracker: View {
     }
     
     private func startTimer() {
-           start = Date()
-           tracking = true
-           let session = Session(label: label, startDate: start, project: project)
-           self.session = session
-           project.sessions?.append(session)
+        start = Date()
+        tracking = true
+        let session = Session(label: label, startDate: start, project: project)
+        self.session = session
+        project.sessions?.append(session)
         
-           TimerActivity.shared.requestLiveActivity(project: project, date: start!)
-       }
-       
-       private func stopTimer() async {
-           if let session = session, let startDate = start {
-               let endDate = Date()
-               
-               project.modificationDate = endDate
-               session.endDate = endDate
-               session.label = label
-               session.duration = endDate.timeIntervalSince(startDate)
-               start = nil
-               tracking = false
-               
-               WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
-           }
-           
-           
-           await TimerActivity.shared.endLiveActivity()
-       }
+        TimerActivity.shared.requestLiveActivity(project: project, date: start!)
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
+    }
+    
+    private func stopTimer() async {
+        if let session = session, let startDate = start {
+            let endDate = Date()
+            
+            project.modificationDate = endDate
+            session.endDate = endDate
+            session.label = label
+            session.duration = endDate.timeIntervalSince(startDate)
+            start = nil
+            tracking = false
+        }
+        
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
+        await TimerActivity.shared.endLiveActivity()
+    }
     
     private func clearTimer() async {
         if let session = session {
@@ -136,6 +135,7 @@ struct Tracker: View {
             tracking = false
         }
         
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
         await TimerActivity.shared.endLiveActivity()
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import AppIntents
-import Foundation
 import SwiftData
 import WidgetKit
 
@@ -36,19 +35,19 @@ struct StartTimer: AppIntent {
             currentSession?.endDate = endDate
             currentSession?.duration = endDate.timeIntervalSince(currentSession!.startDate!)
             project.modificationDate = endDate
+            await TimerActivity.shared.endLiveActivity()
         } else {
-            let session = Session(label: nil, startDate: .now, project: project)
+            let startDate = Date()
+            let session = Session(label: nil, startDate: startDate, project: project)
             project.sessions?.append(session)
+            TimerActivity.shared.requestLiveActivity(project: project, date: startDate)
         }
         
         try! modelContext.save()
-        
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
-        
         return .result()
     }
 }
-    
+
 struct ProjectEntity: AppEntity, Identifiable {
     var id: UUID
     var name: String
