@@ -5,7 +5,6 @@
 //  Created by Lawrence Horne on 8/5/23.
 //
 
-import Foundation
 import SwiftData
 
 public final class Persistence {}

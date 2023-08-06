@@ -5,7 +5,6 @@
 //  Created by Lawrence Horne on 9/17/22.
 //
 
-import ActivityKit
 import SwiftUI
 import WidgetKit
 
@@ -13,7 +12,6 @@ struct Tracker: View {
     var project: Project
     @Environment (\.modelContext) private var modelContext
     @State private var label: String = DefaultLabel.none.rawValue
-    @State private var liveActivity: Activity<TrackerAttributes>?
     @State private var session: Session?
     @State private var start: Date?
     @State private var showingClearConfirm = false
@@ -109,7 +107,8 @@ struct Tracker: View {
            let session = Session(label: label, startDate: start, project: project)
            self.session = session
            project.sessions?.append(session)
-           requestLiveActivity(date: start!)
+        
+           TimerActivity.shared.requestLiveActivity(project: project, date: start!)
        }
        
        private func stopTimer() async {
@@ -127,7 +126,7 @@ struct Tracker: View {
            }
            
            
-           await endLiveActivity()
+           await TimerActivity.shared.endLiveActivity()
        }
     
     private func clearTimer() async {
@@ -137,32 +136,7 @@ struct Tracker: View {
             tracking = false
         }
         
-        await endLiveActivity()
-    }
-    
-    private func requestLiveActivity(date: Date) {
-        if ActivityAuthorizationInfo().areActivitiesEnabled {
-            let attributes = TrackerAttributes(projectName: project.displayName, projectId: project.id!)
-            let contentState = ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil)
-            
-            do {
-                try liveActivity = Activity.request(attributes: attributes, content: contentState)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func updateLiveActivity(date: Date?) async {
-        if let date {
-            await liveActivity?.update(ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil))
-        }
-    }
-    
-    private func endLiveActivity(date: Date = Date()) async {
-        for activity in Activity<TrackerAttributes>.activities {
-            await activity.end(ActivityContent(state: TrackerAttributes.ContentState(start: date), staleDate: nil), dismissalPolicy: .immediate)
-        }
+        await TimerActivity.shared.endLiveActivity()
     }
 }
 

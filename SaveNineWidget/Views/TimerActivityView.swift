@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct TimerActivityView: View {
-    let context: ActivityViewContext<TrackerAttributes>
+    let context: ActivityViewContext<TimerAttributes>
     
     var body: some View {
         VStack {
