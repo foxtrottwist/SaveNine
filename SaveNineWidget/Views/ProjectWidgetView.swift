@@ -27,6 +27,17 @@ struct ProjectWidgetView: View {
                 .font(.caption)
             
             Spacer()
+            
+            Button(intent: StartTimer(project: ProjectEntity(from: project))) {
+                if project.tracking {
+                    Image(systemName: "stop.fill")
+                    Text(.now, style: .timer)
+                        .font(.caption)
+                } else {
+                    Label("Start", systemImage: "play.fill")
+                        .font(.caption)
+                }
+            }
         }
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))
