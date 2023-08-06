@@ -105,20 +105,6 @@ extension Project {
         return session.endDate == nil
     }
     
-    static var mostRecentlyTracked: Project? {
-        guard let container = try? ModelContainer(for: [Project.self, Session.self, Tag.self]) else {
-            return nil
-        }
-        
-        let modelContext = ModelContext(container)
-        
-        let fetchDescriptor = FetchDescriptor<Project>(
-            predicate: #Predicate { $0.modificationDate != nil }, sortBy: [SortDescriptor(\.modificationDate)]
-        )
-        
-        return try! modelContext.fetch(fetchDescriptor).first
-    }
-    
     static var preview: Project {
         let project = Project(
             detail: "Everything but the leaf.",
@@ -129,5 +115,15 @@ extension Project {
         
         project.modificationDate = Session.preview.endDate
         return project
+    }
+    
+    static var recentlyTracked: Project? {
+        let modelContext = ModelContext(PersistentStack.container)
+        
+        let fetchDescriptor = FetchDescriptor<Project>(
+            predicate: #Predicate { $0.modificationDate != nil }, sortBy: [SortDescriptor(\.modificationDate, order: .reverse)]
+        )
+        
+        return try! modelContext.fetch(fetchDescriptor).first
     }
 }

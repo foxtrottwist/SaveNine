@@ -14,14 +14,14 @@ struct RecentlyTrackedProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
-        if let project = Project.mostRecentlyTracked {
+        if let project = Project.recentlyTracked {
             let entry = RecentlyTrackedEntry(date: Date(), project: project)
             completion(entry)
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
-        if let project = Project.mostRecentlyTracked {
+        if let project = Project.recentlyTracked {
             let startOfDay = Calendar.current.startOfDay(for: Date())
             let entry = RecentlyTrackedEntry(date: startOfDay, project: project)
             let timeline = Timeline(entries: [entry], policy: .atEnd)

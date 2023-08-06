@@ -72,7 +72,7 @@ struct SessionDetail: View {
         session.duration = endDate.timeIntervalSince(startDate)
         dismiss()
         
-        if let sessionProject = session.project, let project = Project.mostRecentlyTracked {
+        if let sessionProject = session.project, let project = Project.recentlyTracked {
             if project.id == sessionProject.id {
                 project.modificationDate = endDate
             }
