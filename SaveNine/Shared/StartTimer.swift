@@ -24,7 +24,7 @@ struct StartTimer: AppIntent {
     init() {}
     
     func perform() async throws -> some IntentResult {
-        let modelContext = ModelContext(PersistentStack.container)
+        let modelContext = ModelContext(Persistence.container)
         let id = project.id
         let fetchDescriptor = FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
         

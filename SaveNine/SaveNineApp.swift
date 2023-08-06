@@ -15,7 +15,7 @@ struct SaveNineApp: App {
         WindowGroup {
             ContentView()
                 .environment(sessionLabelController)
-                .modelContainer(PersistentStack.container)
+                .modelContainer(Persistence.container)
         }
     }
 }

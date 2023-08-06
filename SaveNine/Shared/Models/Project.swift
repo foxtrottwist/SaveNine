@@ -118,7 +118,7 @@ extension Project {
     }
     
     static var recentlyTracked: Project? {
-        let modelContext = ModelContext(PersistentStack.container)
+        let modelContext = ModelContext(Persistence.container)
         
         let fetchDescriptor = FetchDescriptor<Project>(
             predicate: #Predicate { $0.modificationDate != nil }, sortBy: [SortDescriptor(\.modificationDate, order: .reverse)]
