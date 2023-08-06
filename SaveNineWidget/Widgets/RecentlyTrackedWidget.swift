@@ -5,25 +5,24 @@
 //  Created by Lawrence Horne on 12/18/22.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 struct RecentlyTrackedProvider: TimelineProvider {
     func placeholder(in context: Context) -> RecentlyTrackedEntry {
-        RecentlyTrackedEntry(date: Date(), project: Project.preview)
+        RecentlyTrackedEntry(date: .now, project: Project.preview)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
         if let project = Project.recentlyTracked {
-            let entry = RecentlyTrackedEntry(date: Date(), project: project)
+            let entry = RecentlyTrackedEntry(date: .now, project: project)
             completion(entry)
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
         if let project = Project.recentlyTracked {
-            let startOfDay = Calendar.current.startOfDay(for: Date())
-            let entry = RecentlyTrackedEntry(date: startOfDay, project: project)
+            let entry = RecentlyTrackedEntry(date: .now, project: project)
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
@@ -86,7 +85,7 @@ struct RecentlyTrackedWidget: Widget {
 #Preview(as: .systemSmall) {
     RecentlyTrackedWidget()
 } timeline: {
-    RecentlyTrackedEntry(date: Date(), project: Project.preview)
+    RecentlyTrackedEntry(date: .now, project: Project.preview)
 }
 
 

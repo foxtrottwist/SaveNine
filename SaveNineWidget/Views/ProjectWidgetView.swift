@@ -17,32 +17,55 @@ struct ProjectWidgetView: View {
                 .font(.caption)
                 .foregroundStyle(.black)
                 .lineLimit(2)
-            
-            Text(project.timeTracked)
-                .font(.title)
-                .minimumScaleFactor(0.8)
-            
-            Text(project.modificationDate!.relativeDescription())
-                .foregroundStyle(.black.opacity(0.5))
-                .font(.caption)
+           
+            if project.tracking {
+                timer
+            } else {
+                info
+            }
             
             Spacer()
             
-            Button(intent: StartTimer(project: ProjectEntity(from: project))) {
-                if project.tracking {
-                    Image(systemName: "stop.fill")
-                    Text(.now, style: .timer)
-                        .font(.caption)
-                } else {
-                    Label("Start", systemImage: "play.fill")
-                        .font(.caption)
+            HStack {
+                Spacer()
+                Button(intent: StartTimer(project: ProjectEntity(from: project))) {
+                    Group {
+                        if project.tracking {
+                            Label("Stop", systemImage: "stop.fill")
+                        } else {
+                            Label("Start", systemImage: "play.fill")
+                        }
+                    }
+                    .font(.caption)
+                    .padding([.leading, .trailing])
                 }
+                Spacer()
             }
         }
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))
         .frame(maxWidth: .infinity, alignment: .leading)
         .widgetURL(createProjectUrl(id: project.id!))
+    }
+    
+    @ViewBuilder
+    var info: some View {
+        Text(project.timeTracked)
+            .font(.title)
+        
+        Text(project.modificationDate!.relativeDescription())
+            .foregroundStyle(.black.opacity(0.5))
+            .font(.caption)
+    }
+    
+    @ViewBuilder
+    var timer: some View {
+        HStack {
+            Spacer()
+            Text(.now, style: .timer)
+                .font(.title)
+            Spacer()
+        }
     }
 }
 
