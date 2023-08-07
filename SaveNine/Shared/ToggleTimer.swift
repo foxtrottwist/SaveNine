@@ -1,5 +1,5 @@
 //
-//  StartTimer.swift
+//  ToggleTimer.swift
 //  SaveNine
 //
 //  Created by Lawrence Horne on 8/5/23.
@@ -9,9 +9,9 @@ import AppIntents
 import SwiftData
 import WidgetKit
 
-struct StartTimer: LiveActivityIntent {
-    static var title: LocalizedStringResource = "Start Timer"
-    static var description = IntentDescription ("Start tracking a project.")
+struct ToggleTimer: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Toggle Timer"
+    static var description = IntentDescription ("Starts a live activity timer for a given project if is not running and stops it if is running.")
     
     @Parameter(title: "Project")
     var project: ProjectEntity

@@ -27,7 +27,7 @@ struct ProjectWidgetView: View {
             Spacer()
             
             HStack {
-                Button(intent: StartTimer(project: ProjectEntity(from: project))) {
+                Button(intent: ToggleTimer(project: ProjectEntity(from: project))) {
                     Group {
                         if project.tracking {
                             Label("Stop", systemImage: "stop.fill")
