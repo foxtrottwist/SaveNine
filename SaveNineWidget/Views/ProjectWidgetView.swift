@@ -27,7 +27,6 @@ struct ProjectWidgetView: View {
             Spacer()
             
             HStack {
-                Spacer()
                 Button(intent: StartTimer(project: ProjectEntity(from: project))) {
                     Group {
                         if project.tracking {
@@ -37,9 +36,7 @@ struct ProjectWidgetView: View {
                         }
                     }
                     .font(.caption)
-                    .padding([.leading, .trailing])
                 }
-                Spacer()
             }
         }
         .fontWeight(.medium)
@@ -53,9 +50,15 @@ struct ProjectWidgetView: View {
         Text(project.timeTracked)
             .font(.title)
         
-        Text(project.modificationDate!.relativeDescription())
-            .foregroundStyle(.black.opacity(0.5))
-            .font(.caption)
+        Group {
+            if let modificationDate = project.modificationDate {
+                Text(modificationDate.relativeDescription())
+            } else {
+                Text("–––")
+            }
+        }
+        .foregroundStyle(.black.opacity(0.5))
+        .font(.caption)
     }
     
     @ViewBuilder
@@ -71,5 +74,5 @@ struct ProjectWidgetView: View {
 
 #Preview {
     ProjectWidgetView(project: Project.preview)
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
 }

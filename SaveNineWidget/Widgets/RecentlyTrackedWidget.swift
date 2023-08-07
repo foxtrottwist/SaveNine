@@ -10,7 +10,8 @@ import WidgetKit
 
 struct RecentlyTrackedProvider: TimelineProvider {
     func placeholder(in context: Context) -> RecentlyTrackedEntry {
-        RecentlyTrackedEntry(date: .now, project: Project.preview)
+        let project = Project(name: "Hello There")
+        return RecentlyTrackedEntry(date: .now, project: project)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
@@ -40,7 +41,7 @@ struct RecentlyTrackedEntryView: View {
     
     var body: some View {
         switch family {
-        case .systemSmall:
+        case .systemSmall, .systemMedium:
             ProjectWidgetView(project: entry.project)
         case .accessoryRectangular:
             HStack {
@@ -52,12 +53,16 @@ struct RecentlyTrackedEntryView: View {
                     }
                     HStack {
                         Image(systemName: "calendar")
-                        Text(entry.project.modificationDate!.relativeDescription())
+                        if let modificationDate = entry.project.modificationDate {
+                            Text(modificationDate.relativeDescription())
+                        } else {
+                            Text("–––")
+                        }
                     }
                 }
             }
             .widgetURL(createProjectUrl(id: entry.project.id!))
-        case .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
+        case .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
             EmptyView()
         @unknown default:
             EmptyView()
@@ -78,7 +83,7 @@ struct RecentlyTrackedWidget: Widget {
         }
         .configurationDisplayName("Project")
         .description("See the most recently tracked project and access it quickly.")
-        .supportedFamilies([ .accessoryRectangular, .systemSmall])
+        .supportedFamilies([ .accessoryRectangular, .systemSmall, .systemMedium])
     }
 }
 
