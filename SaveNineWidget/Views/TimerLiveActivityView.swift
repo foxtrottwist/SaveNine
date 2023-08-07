@@ -1,5 +1,5 @@
 //
-//  TimerActivityView.swift
+//  TimerLiveActivityView.swift
 //  SaveNineWidgetExtension
 //
 //  Created by Lawrence Horne on 12/19/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WidgetKit
 
-struct TimerActivityView: View {
+struct TimerLiveActivityView: View {
     let context: ActivityViewContext<TimerAttributes>
     
     var body: some View {

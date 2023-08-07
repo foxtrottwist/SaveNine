@@ -1,5 +1,5 @@
 //
-//  RecentlyTrackedWidget.swift
+//  ProjectWidget.swift
 //  SaveNineWidget
 //
 //  Created by Lawrence Horne on 12/18/22.
@@ -70,7 +70,7 @@ struct RecentlyTrackedEntryView: View {
     }
 }
 
-struct RecentlyTrackedWidget: Widget {
+struct ProjectWidget: Widget {
     let kind: String = WidgetKind.RecentlyTracked.rawValue
     
     var body: some WidgetConfiguration {
@@ -88,7 +88,7 @@ struct RecentlyTrackedWidget: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    RecentlyTrackedWidget()
+    ProjectWidget()
 } timeline: {
     RecentlyTrackedEntry(date: .now, project: Project.preview)
 }

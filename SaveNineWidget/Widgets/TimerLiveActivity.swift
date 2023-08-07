@@ -11,7 +11,7 @@ import WidgetKit
 struct TimerLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimerAttributes.self) { context in
-            TimerActivityView(context: context)
+            TimerLiveActivityView(context: context)
                 .widgetURL(createProjectUrl(id: context.attributes.projectId))
         } dynamicIsland: { context in
             DynamicIsland {
