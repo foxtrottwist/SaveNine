@@ -9,7 +9,7 @@ import AppIntents
 import SwiftData
 import WidgetKit
 
-struct StartTimer: AppIntent {
+struct StartTimer: LiveActivityIntent {
     static var title: LocalizedStringResource = "Start Timer"
     static var description = IntentDescription ("Start tracking a project.")
     

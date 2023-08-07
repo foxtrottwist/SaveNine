@@ -7,6 +7,7 @@
 
 import ActivityKit
 import Foundation
+import OSLog
 
 
 final class TimerActivity {
@@ -27,7 +28,7 @@ final class TimerActivity {
             do {
                 try liveActivity = Activity.request(attributes: attributes, content: contentState)
             } catch {
-                print(error.localizedDescription)
+                Logger.statistics.error("\(Self.self) – \(error.localizedDescription)")
             }
         }
     }
