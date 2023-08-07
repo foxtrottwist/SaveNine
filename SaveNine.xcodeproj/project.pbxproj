@@ -237,6 +237,24 @@
 			path = Reuseable;
 			sourceTree = "<group>";
 		};
+		652454EB2A814BD80022A1A2 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C22294FBD1A00A3B960 /* ProjectWidget.swift */,
+				653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		652454EC2A814BFC0022A1A2 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				65A51C20294FBD1A00A3B960 /* TimerLiveActivity.swift */,
+				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
 		653899CF29A3B303008E39B4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,24 +264,6 @@
 				65F9F3A629A2FF6200D51D7B /* SettingsView.swift */,
 			);
 			path = Settings;
-			sourceTree = "<group>";
-		};
-		655869292976151C0015E20F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				65A51C3A2950A1B200A3B960 /* TimerLiveActivityView.swift */,
-				653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6558692A297615470015E20F /* Widgets */ = {
-			isa = PBXGroup;
-			children = (
-				65A51C22294FBD1A00A3B960 /* ProjectWidget.swift */,
-				65A51C20294FBD1A00A3B960 /* TimerLiveActivity.swift */,
-			);
-			path = Widgets;
 			sourceTree = "<group>";
 		};
 		6558692B297615970015E20F /* Extensions */ = {
@@ -345,8 +345,8 @@
 		65A51C1D294FBD1A00A3B960 /* SaveNineWidget */ = {
 			isa = PBXGroup;
 			children = (
-				655869292976151C0015E20F /* Views */,
-				6558692A297615470015E20F /* Widgets */,
+				652454EC2A814BFC0022A1A2 /* Timer */,
+				652454EB2A814BD80022A1A2 /* Project */,
 				6558692B297615970015E20F /* Extensions */,
 				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
 				65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */,
