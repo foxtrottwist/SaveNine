@@ -16,6 +16,9 @@
 		6518916629A5387300ACE985 /* StorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916529A5387300ACE985 /* StorageKey.swift */; };
 		651CE21B28F85FF100E1B248 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651CE21A28F85FF100E1B248 /* Localizable.strings */; };
 		652437352A783AFD00C839C9 /* StopwatchSafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */; };
+		652454EE2A814DB20022A1A2 /* ProjectWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652454ED2A814DB20022A1A2 /* ProjectWidgetIntent.swift */; };
+		652454F12A815EDD0022A1A2 /* ProjectEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652454F02A815EDD0022A1A2 /* ProjectEntity.swift */; };
+		652454F22A815F270022A1A2 /* ProjectEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652454F02A815EDD0022A1A2 /* ProjectEntity.swift */; };
 		652AE95028D6550E0001294F /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AE94F28D6550E0001294F /* Tracker.swift */; };
 		652BFD01295F367000179792 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652BFD00295F367000179792 /* View+Extension.swift */; };
 		652D025628D79DA300F818E7 /* ProjectSessions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652D025528D79DA300F818E7 /* ProjectSessions.swift */; };
@@ -129,6 +132,8 @@
 		6518916529A5387300ACE985 /* StorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKey.swift; sourceTree = "<group>"; };
 		651CE21A28F85FF100E1B248 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchSafeAreaInset.swift; sourceTree = "<group>"; };
+		652454ED2A814DB20022A1A2 /* ProjectWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWidgetIntent.swift; sourceTree = "<group>"; };
+		652454F02A815EDD0022A1A2 /* ProjectEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectEntity.swift; sourceTree = "<group>"; };
 		652AE94F28D6550E0001294F /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		652BFD00295F367000179792 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		652D025528D79DA300F818E7 /* ProjectSessions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSessions.swift; sourceTree = "<group>"; };
@@ -241,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				65A51C22294FBD1A00A3B960 /* ProjectWidget.swift */,
+				652454ED2A814DB20022A1A2 /* ProjectWidgetIntent.swift */,
 				653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */,
 			);
 			path = Project;
@@ -345,9 +351,9 @@
 		65A51C1D294FBD1A00A3B960 /* SaveNineWidget */ = {
 			isa = PBXGroup;
 			children = (
-				652454EC2A814BFC0022A1A2 /* Timer */,
-				652454EB2A814BD80022A1A2 /* Project */,
 				6558692B297615970015E20F /* Extensions */,
+				652454EB2A814BD80022A1A2 /* Project */,
+				652454EC2A814BFC0022A1A2 /* Timer */,
 				65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */,
 				65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */,
 				65A51C25294FBD1A00A3B960 /* Assets.xcassets */,
@@ -378,10 +384,10 @@
 		65D2314328CD552E00A91A47 /* SaveNine */ = {
 			isa = PBXGroup;
 			children = (
-				65E531032A76EFF600760FE9 /* Navigation */,
 				65F9F3A329A2E9D800D51D7B /* Controllers */,
 				659FDA6928E232A300899A2E /* Extensions */,
 				659FDA6A28E232AC00899A2E /* Helpers */,
+				65E531032A76EFF600760FE9 /* Navigation */,
 				65F4A71729646B8900CABB3C /* Shared */,
 				659FDA6B28E232CA00899A2E /* Views */,
 				65D2314828CD552F00A91A47 /* Assets.xcassets */,
@@ -448,6 +454,7 @@
 				65DD6DC7299D299B00FA1E48 /* FileExtension.swift */,
 				65F4A7222965B0C900CABB3C /* Helpers.swift */,
 				65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */,
+				652454F02A815EDD0022A1A2 /* ProjectEntity.swift */,
 				652E5A972A7FC5E60029E0BD /* TimerActivity.swift */,
 				65A51C31294FC7C400A3B960 /* TimerAttributes.swift */,
 				65F4A72E2965E5B900CABB3C /* WidgetKind.swift */,
@@ -570,6 +577,7 @@
 				65DBEA512A7BDD7500788216 /* Session.swift in Sources */,
 				65B931BE2A812E0D00113497 /* Logger+Extension.swift in Sources */,
 				65DBEA502A7BDD6800788216 /* DefaultLabel.swift in Sources */,
+				652454EE2A814DB20022A1A2 /* ProjectWidgetIntent.swift in Sources */,
 				65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				65DBEA522A7BDD7500788216 /* Tag.swift in Sources */,
 				65A51C21294FBD1A00A3B960 /* TimerLiveActivity.swift in Sources */,
@@ -578,6 +586,7 @@
 				65DBEA532A7BDD7500788216 /* Project.swift in Sources */,
 				65F4A7302965E5B900CABB3C /* WidgetKind.swift in Sources */,
 				65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
+				652454F22A815F270022A1A2 /* ProjectEntity.swift in Sources */,
 				65CC0E262A7F3E36001E727D /* ToggleTimer.swift in Sources */,
 				65A51C23294FBD1A00A3B960 /* ProjectWidget.swift in Sources */,
 				6505CA562A7F0AC100515953 /* Persistence.swift in Sources */,
@@ -614,6 +623,7 @@
 				65D32BBA2A79AB1300AC9F6B /* Tag.swift in Sources */,
 				653899DB29A449AE008E39B4 /* AppIcon.swift in Sources */,
 				65011C4B2A75E8E700E36090 /* AppNavigation.swift in Sources */,
+				652454F12A815EDD0022A1A2 /* ProjectEntity.swift in Sources */,
 				65011C492A75E45700E36090 /* ProjectNavigationStack.swift in Sources */,
 				6518916629A5387300ACE985 /* StorageKey.swift in Sources */,
 				65F4A72C2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,

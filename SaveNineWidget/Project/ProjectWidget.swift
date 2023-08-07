@@ -8,35 +8,47 @@
 import SwiftUI
 import WidgetKit
 
-struct RecentlyTrackedProvider: TimelineProvider {
-    func placeholder(in context: Context) -> RecentlyTrackedEntry {
-        let project = Project(name: "Hello There")
-        return RecentlyTrackedEntry(date: .now, project: project)
-    }
-    
-    func getSnapshot(in context: Context, completion: @escaping (RecentlyTrackedEntry) -> ()) {
-        if let project = Project.recentlyTracked {
-            let entry = RecentlyTrackedEntry(date: .now, project: project)
-            completion(entry)
+struct ProjectProvider: AppIntentTimelineProvider {
+    func project(for configuration: ProjectWidgetIntent) -> Project? {
+        if configuration.recentlyTracked {
+            Project.recentlyTracked
+        } else {
+            Project.recentlyTracked
         }
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<RecentlyTrackedEntry>) -> ()) {
-        if let project = Project.recentlyTracked {
-            let entry = RecentlyTrackedEntry(date: .now, project: project)
-            let timeline = Timeline(entries: [entry], policy: .atEnd)
-            completion(timeline)
+    func placeholder(in context: Context) -> ProjectEntry {
+        return ProjectEntry(date: .now, project: .init(name: "Lucy Loo"))
+    }
+    
+    func snapshot(for configuration: ProjectWidgetIntent, in context: Context) async -> ProjectEntry {
+        if let project = project(for: configuration) {
+            ProjectEntry(date: .now, project: project)
+        } else {
+            .empty
+        }
+    }
+    
+    func timeline(for configuration: ProjectWidgetIntent, in context: Context)async -> Timeline<ProjectEntry> {
+        if let project = project(for: configuration) {
+            Timeline(entries: [ProjectEntry(date: .now, project: project)], policy: .atEnd)
+        } else {
+            Timeline(entries: [.empty], policy: .never)
         }
     }
 }
 
-struct RecentlyTrackedEntry: TimelineEntry {
+struct ProjectEntry: TimelineEntry {
     let date: Date
     let project: Project
+    
+    static var empty: Self {
+        Self(date: .now, project: .init(name: ""))
+    }
 }
 
 struct RecentlyTrackedEntryView: View {
-    var entry: RecentlyTrackedProvider.Entry
+    var entry: ProjectProvider.Entry
     @Environment(\.widgetFamily) var family
     
     var body: some View {
@@ -74,7 +86,7 @@ struct ProjectWidget: Widget {
     let kind: String = WidgetKind.RecentlyTracked.rawValue
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: RecentlyTrackedProvider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: ProjectWidgetIntent.self, provider: ProjectProvider()) { entry in
             RecentlyTrackedEntryView(entry: entry)
                 .containerBackground(for: .widget) {
                     ContainerRelativeShape()
@@ -90,7 +102,7 @@ struct ProjectWidget: Widget {
 #Preview(as: .systemSmall) {
     ProjectWidget()
 } timeline: {
-    RecentlyTrackedEntry(date: .now, project: Project.preview)
+    ProjectEntry(date: .now, project: Project.preview)
 }
 
 

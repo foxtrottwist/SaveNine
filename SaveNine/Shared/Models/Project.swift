@@ -105,6 +105,11 @@ extension Project {
         return session.endDate == nil
     }
     
+    static var projects: [Project?] {
+        let modelContext = ModelContext(Persistence.container)
+        return try! modelContext.fetch(FetchDescriptor<Project>())
+    }
+    
     static var preview: Project {
         let project = Project(
             detail: "Everything but the leaf.",

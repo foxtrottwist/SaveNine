@@ -11,7 +11,7 @@ import WidgetKit
 
 struct ToggleTimer: LiveActivityIntent {
     static var title: LocalizedStringResource = "Toggle Timer"
-    static var description = IntentDescription ("Starts a live activity timer for a given project if is not running and stops it if is running.")
+    static var description = IntentDescription("Starts a live activity timer for a given project if is not running and stops it if is running.")
     
     @Parameter(title: "Project")
     var project: ProjectEntity
@@ -48,30 +48,4 @@ struct ToggleTimer: LiveActivityIntent {
     }
 }
 
-struct ProjectEntity: AppEntity, Identifiable {
-    var id: UUID
-    var name: String
-    init(id: UUID, name: String) {
-        self.id = id
-        self.name = name
-    }
-    
-    init(from project: Project) {
-        self.id = project.id!
-        self.name = project.name!
-    }
-    
-    var displayRepresentation: DisplayRepresentation {
-        DisplayRepresentation(title: "\(name)")
-    }
-    
-    static var defaultQuery = ProjectQuery()
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Project"
-}
-
-struct ProjectQuery: EntityQuery {
-    func entities(for identifiers: [UUID]) async throws -> [ProjectEntity] {
-        return [ProjectEntity(from: Project.recentlyTracked!)]
-    }
-}
 
