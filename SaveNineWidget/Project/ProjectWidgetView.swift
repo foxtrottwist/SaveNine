@@ -9,7 +9,52 @@ import OSLog
 import SwiftUI
 import WidgetKit
 
+
 struct ProjectWidgetView: View {
+    var entry: ProjectEntry
+    @Environment(\.widgetFamily) var family
+    
+    var body: some View {
+        if let project = entry.project {
+            switch family {
+            case .systemSmall, .systemMedium:
+                ProjectView(project: project)
+            case .accessoryRectangular:
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(project.displayName)
+                        HStack {
+                            Image(systemName: "stopwatch")
+                            Text(project.timeTracked)
+                        }
+                        HStack {
+                            Image(systemName: "calendar")
+                            if let modificationDate = project.modificationDate {
+                                Text(modificationDate.relativeDescription())
+                            } else {
+                                Text("–––")
+                            }
+                        }
+                    }
+                }
+                .widgetURL(projectUrl(id: project.id!))
+            case .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
+                EmptyView()
+            @unknown default:
+                EmptyView()
+            }
+        } else {
+            ContentUnavailableView {
+                Image(systemName: "stopwatch")
+                Text("Start tracking projects Save nine.")
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+
+struct ProjectView: View {
     let project: Project
     
     var body: some View {
@@ -45,7 +90,7 @@ struct ProjectWidgetView: View {
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))
         .frame(maxWidth: .infinity, alignment: .leading)
-        .widgetURL(createProjectUrl(id: project.id!))
+        .widgetURL(projectUrl(id: project.id!))
     }
     
     @ViewBuilder
@@ -72,10 +117,6 @@ struct ProjectWidgetView: View {
                 .font(.title)
             Spacer()
         }
+        .invalidatableContent()
     }
-}
-
-#Preview {
-    ProjectWidgetView(project: Project.preview)
-        .previewContext(WidgetPreviewContext(family: .systemMedium))
 }

@@ -12,6 +12,7 @@
 		65011C4D2A75EFD700E36090 /* AppSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65011C4C2A75EFD700E36090 /* AppSidebar.swift */; };
 		6505CA552A7F0AC100515953 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6505CA542A7F0AC100515953 /* Persistence.swift */; };
 		6505CA562A7F0AC100515953 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6505CA542A7F0AC100515953 /* Persistence.swift */; };
+		65073CAC2A82709600047FBC /* ProjectSnapTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65073CAB2A82709600047FBC /* ProjectSnapTimelineProvider.swift */; };
 		6518916429A5372200ACE985 /* AppIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916329A5372200ACE985 /* AppIconImageView.swift */; };
 		6518916629A5387300ACE985 /* StorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916529A5387300ACE985 /* StorageKey.swift */; };
 		651CE21B28F85FF100E1B248 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 651CE21A28F85FF100E1B248 /* Localizable.strings */; };
@@ -128,6 +129,7 @@
 		65011C4A2A75E8E700E36090 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
 		65011C4C2A75EFD700E36090 /* AppSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSidebar.swift; sourceTree = "<group>"; };
 		6505CA542A7F0AC100515953 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		65073CAB2A82709600047FBC /* ProjectSnapTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSnapTimelineProvider.swift; sourceTree = "<group>"; };
 		6518916329A5372200ACE985 /* AppIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconImageView.swift; sourceTree = "<group>"; };
 		6518916529A5387300ACE985 /* StorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKey.swift; sourceTree = "<group>"; };
 		651CE21A28F85FF100E1B248 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		652454EB2A814BD80022A1A2 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				65073CAB2A82709600047FBC /* ProjectSnapTimelineProvider.swift */,
 				65A51C22294FBD1A00A3B960 /* ProjectWidget.swift */,
 				652454ED2A814DB20022A1A2 /* ProjectWidgetIntent.swift */,
 				653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */,
@@ -577,6 +580,7 @@
 				65DBEA512A7BDD7500788216 /* Session.swift in Sources */,
 				65B931BE2A812E0D00113497 /* Logger+Extension.swift in Sources */,
 				65DBEA502A7BDD6800788216 /* DefaultLabel.swift in Sources */,
+				65073CAC2A82709600047FBC /* ProjectSnapTimelineProvider.swift in Sources */,
 				652454EE2A814DB20022A1A2 /* ProjectWidgetIntent.swift in Sources */,
 				65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				65DBEA522A7BDD7500788216 /* Tag.swift in Sources */,
@@ -691,6 +695,7 @@
 				INFOPLIST_FILE = SaveNineWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SaveNineWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -720,6 +725,7 @@
 				INFOPLIST_FILE = SaveNineWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SaveNineWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
