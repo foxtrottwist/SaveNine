@@ -18,6 +18,7 @@ public class Project {
     var image: String?
     var modificationDate: Date?
     var name: String?
+    var tracking: Bool? = false
     @Relationship(.cascade, inverse: \Session.project) var sessions: [Session]?
     @Relationship(inverse: \Tag.projects) var tags: [Tag]?
 
@@ -94,16 +95,16 @@ extension Project {
         projectSessions.map { $0.duration }.reduce(0.0) { $0 + $1! }.formattedDuration
     }
     
-    /// A Boolean value that indicates whether the Project is being tracked.
-    var tracking: Bool {
-        // A Session either
-        // 1. does not exist; -> false
-        // 2. exists and has a startDate & endDate both with a value; -> false
-        // 3. exists and has a startDate with a value, and endDate without a value.
-        //    This means the Session was created but not completed;  -> true
-        guard let session = projectSessions.first else { return false }
-        return session.endDate == nil
-    }
+//    /// A Boolean value that indicates whether the Project is being tracked.
+//    var tracking: Bool {
+//        // A Session either
+//        // 1. does not exist; -> false
+//        // 2. exists and has a startDate & endDate both with a value; -> false
+//        // 3. exists and has a startDate with a value, and endDate without a value.
+//        //    This means the Session was created but not completed;  -> true
+//        guard let session = projectSessions.first else { return false }
+//        return session.endDate == nil
+//    }
     
     static var projects: [Project?] {
         let modelContext = ModelContext(Persistence.container)

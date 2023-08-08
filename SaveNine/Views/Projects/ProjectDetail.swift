@@ -44,7 +44,7 @@ struct ProjectDetail: View {
                                 .fontWeight(.semibold)
                                 .italic()
                             
-                            Text("\(project.tracking ? project.projectSessions.count - 1 : project.projectSessions.count)")
+                            Text("\(project.tracking ?? false ? project.projectSessions.count - 1 : project.projectSessions.count)")
                         }
                         
                         Spacer()
@@ -113,7 +113,7 @@ struct ProjectDetail: View {
                 } label: {
                     Label("Export", systemImage: "square.and.arrow.up")
                 }
-                .disabled(project.tracking)
+                .disabled(project.tracking ?? false)
             }
         }
     }

@@ -24,10 +24,10 @@ struct Tracker: View {
         if let session = project.projectSessions.first {
             _label = State(wrappedValue: session.sessionLabel)
             
-            if project.tracking {
+            if let tracking = project.tracking, tracking {
                 _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
-                _tracking = State(wrappedValue: project.tracking)
+                _tracking = State(wrappedValue: tracking)
             }
         }
     }
@@ -106,7 +106,9 @@ struct Tracker: View {
         tracking = true
         let session = Session(label: label, startDate: start, project: project)
         self.session = session
+        project.tracking = tracking
         project.sessions?.append(session)
+        try! modelContext.save()
         
         TimerActivity.shared.requestLiveActivity(project: project, date: start!)
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
@@ -116,12 +118,14 @@ struct Tracker: View {
         if let session = session, let startDate = start {
             let endDate = Date()
             
+            start = nil
+            tracking = false
             project.modificationDate = endDate
+            project.tracking = tracking
             session.endDate = endDate
             session.label = label
             session.duration = endDate.timeIntervalSince(startDate)
-            start = nil
-            tracking = false
+            try! modelContext.save()
         }
         
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
@@ -133,6 +137,8 @@ struct Tracker: View {
             modelContext.delete(session)
             start = nil
             tracking = false
+            project.tracking = tracking
+            try! modelContext.save()
         }
         
         WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)

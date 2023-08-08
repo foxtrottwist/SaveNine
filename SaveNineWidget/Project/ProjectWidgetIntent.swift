@@ -15,9 +15,9 @@ struct ProjectWidgetIntent: WidgetConfigurationIntent {
     var recentlyTracked: Bool
     
     @Parameter(title: "Project")
-    var project: ProjectEntity
+    var project: ProjectEntity?
     
-    init(recentlyTracked: Bool = true, project: ProjectEntity) {
+    init(recentlyTracked: Bool = true, project: ProjectEntity? = nil) {
         self.recentlyTracked = recentlyTracked
         self.project = project
     }

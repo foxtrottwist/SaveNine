@@ -5,15 +5,22 @@
 //  Created by Lawrence Horne on 12/18/22.
 //
 
+import SwiftData
 import SwiftUI
 import WidgetKit
 
 struct ProjectProvider: AppIntentTimelineProvider {
+    let modelContext = ModelContext(Persistence.container)
+    
     func project(for configuration: ProjectWidgetIntent) -> Project? {
-        if configuration.recentlyTracked {
+        if let id = configuration.project?.id {
+            try? modelContext.fetch(
+                FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
+            ).first
+        } else if configuration.recentlyTracked {
             Project.recentlyTracked
         } else {
-            Project.recentlyTracked
+            nil
         }
     }
     

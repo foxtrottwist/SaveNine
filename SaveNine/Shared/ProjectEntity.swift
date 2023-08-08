@@ -6,6 +6,8 @@
 //
 
 import AppIntents
+import OSLog
+import SwiftData
 
 struct ProjectEntity: AppEntity, Identifiable {
     var id: UUID
@@ -31,10 +33,19 @@ struct ProjectEntity: AppEntity, Identifiable {
 
 struct ProjectQuery: EntityQuery {
     func entities(for identifiers: [UUID]) async throws -> [ProjectEntity] {
-        return [ProjectEntity(from: Project.recentlyTracked!)]
+        Logger.statistics.info("\(Self.self) – Loading projects using identifiers: \(identifiers).")
+        let modelContext = ModelContext(Persistence.container)
+        let projects = try! modelContext.fetch(FetchDescriptor<Project>())
+        let entity = projects.filter { identifiers.contains($0.id!) }.map { ProjectEntity(from: $0)}
+        Logger.statistics.info("Found: \(entity.first.debugDescription)")
+        return entity
     }
     
     func suggestedEntities() async throws -> [ProjectEntity] {
-        Project.projects.map { ProjectEntity(from: $0!)}
+        Logger.statistics.info("\(Self.self) – Loading projects to suggest.")
+        let modelContext = ModelContext(Persistence.container)
+        let projects = try! modelContext.fetch(FetchDescriptor<Project>())
+        Logger.statistics.info("Found: \(projects.first?.tracking ?? false)")
+        return projects.map { ProjectEntity(from: $0)}
     }
 }

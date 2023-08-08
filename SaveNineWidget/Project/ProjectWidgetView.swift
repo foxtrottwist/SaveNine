@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 1/16/23.
 //
 
+import OSLog
 import SwiftUI
 import WidgetKit
 
@@ -18,7 +19,7 @@ struct ProjectWidgetView: View {
                 .foregroundStyle(.black)
                 .lineLimit(2)
            
-            if project.tracking {
+            if project.tracking ?? false {
                 timer
             } else {
                 info
@@ -29,7 +30,7 @@ struct ProjectWidgetView: View {
             HStack {
                 Button(intent: ToggleTimer(project: ProjectEntity(from: project))) {
                     Group {
-                        if project.tracking {
+                        if project.tracking ?? false {
                             Label("Stop", systemImage: "stop.fill")
                         } else {
                             Label("Start", systemImage: "play.fill")
@@ -37,7 +38,9 @@ struct ProjectWidgetView: View {
                     }
                     .font(.caption)
                 }
+                .disabled(project.displayName.isEmpty)
             }
+            .onAppear(perform: { Logger.viewCycle.log("\(Self.self) – \(project.tracking!)") })
         }
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))
