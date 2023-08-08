@@ -18,7 +18,7 @@ struct ProjectWidgetView: View {
         if let project = entry.project {
             switch family {
             case .systemSmall, .systemMedium:
-                ProjectView(project: project)
+                ProjectSnapshotView(project: project)
             case .accessoryRectangular:
                 HStack {
                     VStack(alignment: .leading) {
@@ -54,7 +54,7 @@ struct ProjectWidgetView: View {
 }
 
 
-struct ProjectView: View {
+struct ProjectSnapshotView: View {
     let project: Project
     
     var body: some View {

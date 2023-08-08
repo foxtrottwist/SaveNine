@@ -12,7 +12,7 @@ struct ProjectWidget: Widget {
     let kind: String = WidgetKind.RecentlyTracked.rawValue
     
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ProjectWidgetIntent.self, provider: ProjectProvider()) { entry in
+        StaticConfiguration(kind: kind, provider: ProjectTimelineProvider()) { entry in
             ProjectWidgetView(entry: entry)
                 .containerBackground(for: .widget) {
                     ContainerRelativeShape()
