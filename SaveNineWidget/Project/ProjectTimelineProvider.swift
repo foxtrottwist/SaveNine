@@ -1,5 +1,5 @@
 //
-//  ProjectSnapTimelineProvider.swift
+//  ProjectTimelineProvider.swift.swift
 //  SaveNineWidgetExtension
 //
 //  Created by Lawrence Horne on 8/8/23.
