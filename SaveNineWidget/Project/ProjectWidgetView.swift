@@ -37,7 +37,7 @@ struct ProjectWidgetView: View {
                         }
                     }
                 }
-                .widgetURL(projectUrl(id: project.id!))
+                .widgetURL(projectURL(id: project.id!))
             case .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
                 EmptyView()
             @unknown default:
@@ -90,7 +90,7 @@ struct ProjectSnapshotView: View {
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))
         .frame(maxWidth: .infinity, alignment: .leading)
-        .widgetURL(projectUrl(id: project.id!))
+        .widgetURL(projectURL(id: project.id!))
     }
     
     @ViewBuilder
@@ -113,7 +113,7 @@ struct ProjectSnapshotView: View {
     var timer: some View {
         HStack {
             Spacer()
-            Text(.now, style: .timer)
+            Text(project.projectSessions.first?.startDate ?? .now, style: .timer)
                 .font(.title)
             Spacer()
         }

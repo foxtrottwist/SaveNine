@@ -12,7 +12,7 @@ struct TimerLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: TimerAttributes.self) { context in
             TimerLiveActivityView(context: context)
-                .widgetURL(projectUrl(id: context.attributes.projectId))
+                .widgetURL(projectURL(id: context.attributes.projectId))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -44,7 +44,7 @@ struct TimerLiveActivity: Widget {
                 Image(systemName: "stopwatch")
                     .foregroundColor(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
             }
-            .widgetURL(projectUrl(id: context.attributes.projectId))
+            .widgetURL(projectURL(id: context.attributes.projectId))
             .keylineTint(Color(red: 0.671, green: 0.949, blue: 0.604, opacity: 1.000))
         }
     }

@@ -36,10 +36,10 @@ struct ProjectNavigationStack: View {
                     let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
                     guard let host = components?.host else { return }
                     let projectID = UUID(uuidString: host)
-                    let project = projects.map { $0 }.filter { $0.id == projectID }
+                    let project = projects.first { $0.id == projectID }
                     
-                    if path.last?.id != projectID {
-                        path.append(contentsOf: project)
+                    if let project, path.last?.id != projectID {
+                        path.append(project)
                     }
                 })
             })
