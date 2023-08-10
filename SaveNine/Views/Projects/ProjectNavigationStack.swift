@@ -42,6 +42,18 @@ struct ProjectNavigationStack: View {
                         path.append(project)
                     }
                 })
+                .overlay {
+                    if let filter = navigation.filter , projects.isEmpty, searchText.isEmpty {
+                        switch filter {
+                        case .all, .open:
+                            ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
+                        case .closed:
+                            ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
+                        default:
+                            ContentUnavailableView("There are currently no Projects tagged with \(filter.name).", systemImage: "tag")
+                        }
+                    }
+                }
             })
             .listStyle(.inset)
             .navigationDestination(for: Project.self) { project in
