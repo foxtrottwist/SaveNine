@@ -25,7 +25,6 @@ struct ToggleTimer: LiveActivityIntent {
         let modelContext = ModelContext(Persistence.container)
         let id = project.id
         let fetchDescriptor = FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
-        
         guard let project = try! modelContext.fetch(fetchDescriptor).first else { return .result() }
         
         if project.tracking ?? false {
@@ -38,5 +37,8 @@ struct ToggleTimer: LiveActivityIntent {
         WidgetKind.reload(.all)
         return .result()
     }
+    
+    static var parameterSummary: some ParameterSummary {
+            Summary("Toggle \(\.$project) timer")
+        }
 }
-
