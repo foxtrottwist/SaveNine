@@ -14,10 +14,10 @@ struct ProjectRow: View {
     init(project: Project) {
         self.project = project
         
-        if project.projectImage.isEmpty {
-            self.uiImage = nil
+        if let data = project.image {
+            uiImage = UIImage(data: data)
         } else {
-            self.uiImage = FileManager.getImage(named: project.projectImage)
+            uiImage = nil
         }
     }
     

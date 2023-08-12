@@ -16,8 +16,8 @@ struct ProjectImage: View {
     init(project: Project) {
         self.project = project
         
-        if let image = project.image {
-            if let uiImage = FileManager.getImage (named: image) {
+        if let data = project.image {
+            if let uiImage = UIImage(data: data) {
                 _uiImage = State(wrappedValue: uiImage)
             }
         }
@@ -34,9 +34,7 @@ struct ProjectImage: View {
                         Task {
                             if let data = try? await image.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
                                 self.uiImage = uiImage
-                                let name = project.id?.uuidString ?? ""
-                                project.image = name
-                                FileManager.save(uiImage: uiImage, named: name)
+                                project.image = data
                             }
                         }
                     }

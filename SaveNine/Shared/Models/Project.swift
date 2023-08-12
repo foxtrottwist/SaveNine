@@ -11,14 +11,14 @@ import SwiftData
 
 @Model
 public class Project {
+    public var id: UUID?
     var closed: Bool?
     var creationDate: Date?
     var detail: String?
-    public var id: UUID?
-    var image: String?
     var modificationDate: Date?
     var name: String?
     var tracking: Bool?
+    @Attribute(.externalStorage) var image: Data?
     @Relationship(deleteRule: .cascade, inverse: \Session.project) var sessions: [Session]?
     @Relationship(inverse: \Tag.projects) var tags: [Tag]?
 
@@ -26,7 +26,7 @@ public class Project {
         creationDate: Date? = .now,
         detail: String? = nil,
         id: UUID? = UUID(),
-        image: String? = nil,
+        image: Data? = nil,
         modificationDate: Date? = nil,
         name: String?,
         sessions: [Session]? = [],
@@ -60,10 +60,6 @@ extension Project {
     
     var projectDetail: String {
         detail ?? ""
-    }
-    
-    var projectImage: String {
-        image ?? ""
     }
     
     var projectModificationDate: Date {
