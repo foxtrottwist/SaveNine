@@ -49,7 +49,7 @@ struct Tracker: View {
                         Button {
                             showingClearConfirm.toggle()
                         } label: {
-                            Text("Clear")
+                            Text("Cancel")
                                 .padding()
                                 .contentShape(Circle())
                         }
