@@ -1,0 +1,756 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+
+    },
+    "%@ %@ - %@" : {
+      "comment" : "Session Row relative {time/day} {startDate} - {endDate}"
+    },
+    "%lld" : {
+
+    },
+    "About" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "Add Checklist" : {
+      "comment" : "Checklist View",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Checklist"
+          }
+        }
+      }
+    },
+    "Add Label" : {
+      "comment" : "Session Label View",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Label"
+          }
+        }
+      }
+    },
+    "Add lists to track supplies, tasks and more." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add lists to track supplies, tasks and more."
+          }
+        }
+      }
+    },
+    "Add New Item" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add New Item"
+          }
+        }
+      }
+    },
+    "Add Project" : {
+      "comment" : "Projects View & Button label for plus on top toolbar"
+    },
+    "Add tags to your projects to filter." : {
+      "comment" : "Project Tags View\n Appears when toggled from the Home View top toolbar menu. & Empty State",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add tags to your projects to filter."
+          }
+        }
+      }
+    },
+    "App Icon" : {
+
+    },
+    "Are you sure you want to clear the timer? No time will be tracked." : {
+
+    },
+    "Are you sure you want to delete this list? All items in this list will be deleted as well." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this list? All items in this list will be deleted as well."
+          }
+        }
+      }
+    },
+    "Are you sure you want to delete this project?" : {
+      "comment" : "Project deletion confirmation\n Triggered from the Project Details top toolbar menu.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this project?"
+          }
+        }
+      }
+    },
+    "Are you sure you want to delete this tag?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete this tag?"
+          }
+        }
+      }
+    },
+    "Ascending" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ascending"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "comment" : "Common Text"
+    },
+    "Cancel Timer" : {
+
+    },
+    "Checklists" : {
+      "comment" : "Navigation Link",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checklists"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "comment" : "Tracker View\n Displayed in Project Details.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        }
+      }
+    },
+    "Clear Filter" : {
+
+    },
+    "Clear Image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Image"
+          }
+        }
+      }
+    },
+    "Clear Tags %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Tags %lld"
+          }
+        }
+      }
+    },
+    "Clear Timer" : {
+      "comment" : "Confirmation to discard tracked time triggered by press the Tracker's \"Clear\" button. & Clear confirmation title.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Timer"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "comment" : "Settings View"
+    },
+    "Close project" : {
+      "comment" : "Project Details top toolbar menu"
+    },
+    "Closed" : {
+      "comment" : "Picker options",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed"
+          }
+        }
+      }
+    },
+    "Closed Projects" : {
+      "comment" : "Navigation title when showing closed projects",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed Projects"
+          }
+        }
+      }
+    },
+    "Could not rename tag, tag name already exists." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not rename tag, tag name already exists."
+          }
+        }
+      }
+    },
+    "Creation Date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creation Date"
+          }
+        }
+      }
+    },
+    "Default Icon" : {
+      "comment" : "App Icon Picker",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default Icon"
+          }
+        }
+      }
+    },
+    "Delete" : {
+
+    },
+    "Delete List" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete List"
+          }
+        }
+      }
+    },
+    "Delete Tag" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Tag"
+          }
+        }
+      }
+    },
+    "Descending" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descending"
+          }
+        }
+      }
+    },
+    "Details" : {
+      "comment" : "Item Details Sheet",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
+          }
+        }
+      }
+    },
+    "Done" : {
+
+    },
+    "Duration" : {
+
+    },
+    "Edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        }
+      }
+    },
+    "Email" : {
+
+    },
+    "Ends" : {
+
+    },
+    "Export" : {
+
+    },
+    "Export Sessions" : {
+      "comment" : "Sessions View"
+    },
+    "Failed to Rename Tag" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to Rename Tag"
+          }
+        }
+      }
+    },
+    "Filter By" : {
+
+    },
+    "High" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
+          }
+        }
+      }
+    },
+    "Homepage" : {
+
+    },
+    "Import" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import"
+          }
+        }
+      }
+    },
+    "Label" : {
+
+    },
+    "Labels" : {
+
+    },
+    "Low" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
+          }
+        }
+      }
+    },
+    "Manage Tags" : {
+
+    },
+    "Medium" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        }
+      }
+    },
+    "Menu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "comment" : "Update Name View & Placeholder text"
+    },
+    "New Item" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Item"
+          }
+        }
+      }
+    },
+    "New List" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New List"
+          }
+        }
+      }
+    },
+    "New Tag" : {
+
+    },
+    "Newest First" : {
+      "comment" : "Picker options",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Newest First"
+          }
+        }
+      }
+    },
+    "No sessions have been completed or match the current filter." : {
+      "comment" : "Sessions Tab View empty state"
+    },
+    "No time tracking sessions have been completed for this project." : {
+      "comment" : "Sessions View empty state"
+    },
+    "None" : {
+      "comment" : "Displayed by when no time has been tracked",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None"
+          }
+        }
+      }
+    },
+    "Notes" : {
+      "comment" : "Field label and placeholder text"
+    },
+    "OK" : {
+
+    },
+    "Oldest First" : {
+      "comment" : "Picker options",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oldest First"
+          }
+        }
+      }
+    },
+    "Open" : {
+      "comment" : "Picker options",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "Open Projects" : {
+      "comment" : "Navigation title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Projects"
+          }
+        }
+      }
+    },
+    "Pawpaw Pink" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pawpaw Pink"
+          }
+        }
+      }
+    },
+    "Please add a project to begin." : {
+      "comment" : "Open Projects empty State"
+    },
+    "Priority" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Priority"
+          }
+        }
+      }
+    },
+    "Project" : {
+
+    },
+    "Project name" : {
+      "comment" : "New project placeholder text"
+    },
+    "Project Name" : {
+      "comment" : "Project Details & Field label and placeholder text",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project Name"
+          }
+        }
+      }
+    },
+    "Project Status" : {
+      "comment" : "Projects View top toolbar menu & Picker title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Project Status"
+          }
+        }
+      }
+    },
+    "Projects" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projects"
+          }
+        }
+      }
+    },
+    "Rename" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rename"
+          }
+        }
+      }
+    },
+    "Rename Tag" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rename Tag"
+          }
+        }
+      }
+    },
+    "Reopen project" : {
+
+    },
+    "Save Nine" : {
+      "comment" : "Localizable.strings\n  SaveNine\n\n  Created by Lawrence Horne on 10/13/22."
+    },
+    "savenine.app" : {
+
+    },
+    "Session Details" : {
+      "comment" : "Sessions Details Sheet"
+    },
+    "Sessions" : {
+      "comment" : "Navigation Link; Home - Navigation title"
+    },
+    "Sessions Menu" : {
+      "comment" : "Sessions Menu"
+    },
+    "Sessions:" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sessions:"
+          }
+        }
+      }
+    },
+    "Settings" : {
+
+    },
+    "Sort By" : {
+
+    },
+    "Sort Options" : {
+      "comment" : "Picker title"
+    },
+    "Sort Order" : {
+      "comment" : "Picker title"
+    },
+    "Start" : {
+
+    },
+    "Start Date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Date"
+          }
+        }
+      }
+    },
+    "Start Timer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Timer"
+          }
+        }
+      }
+    },
+    "Starts" : {
+
+    },
+    "Starts a live activity timer for a given project if is not running and stops it if is running." : {
+
+    },
+    "Stop" : {
+
+    },
+    "Stop Timer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Timer"
+          }
+        }
+      }
+    },
+    "Support" : {
+
+    },
+    "support@savenine.app" : {
+
+    },
+    "Tags" : {
+
+    },
+    "Text, separated by spaces" : {
+      "comment" : "Placeholder text for Tags field.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text, separated by spaces"
+          }
+        }
+      }
+    },
+    "There are currently no closed projects." : {
+      "comment" : "Closed Projects empty State"
+    },
+    "There are currently no Projects tagged with %@." : {
+
+    },
+    "Time Tracked" : {
+
+    },
+    "Time Tracked:" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time Tracked:"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Title"
+          }
+        }
+      }
+    },
+    "Toggle Timer" : {
+
+    }
+  },
+  "version" : "1.0"
+}
