@@ -37,6 +37,8 @@
 		6560AC37291AFD110047E2C6 /* SessionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560AC36291AFD110047E2C6 /* SessionRow.swift */; };
 		6572FFB829981A96006493DB /* SessionLabelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6572FFB729981A96006493DB /* SessionLabelController.swift */; };
 		659FDA6D28E28EC900899A2E /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659FDA6C28E28EC900899A2E /* ProjectRow.swift */; };
+		65A2D3432A868606004B2421 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2D3422A868606004B2421 /* Timer.swift */; };
+		65A2D3442A86860D004B2421 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2D3422A868606004B2421 /* Timer.swift */; };
 		65A51C1A294FBD1A00A3B960 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C19294FBD1A00A3B960 /* WidgetKit.framework */; };
 		65A51C1C294FBD1A00A3B960 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */; };
 		65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A51C1E294FBD1A00A3B960 /* SaveNineWidgetBundle.swift */; };
@@ -153,6 +155,7 @@
 		657081DD28D8E460006C568D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6572FFB729981A96006493DB /* SessionLabelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLabelController.swift; sourceTree = "<group>"; };
 		659FDA6C28E28EC900899A2E /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
+		65A2D3422A868606004B2421 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		65A51C17294FBD1A00A3B960 /* SaveNineWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SaveNineWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A51C19294FBD1A00A3B960 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		65A51C1B294FBD1A00A3B960 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -456,10 +459,11 @@
 				65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */,
 				65DD6DC7299D299B00FA1E48 /* FileExtension.swift */,
 				65F4A7222965B0C900CABB3C /* Helpers.swift */,
-				65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */,
 				652454F02A815EDD0022A1A2 /* ProjectEntity.swift */,
+				65A2D3422A868606004B2421 /* Timer.swift */,
 				652E5A972A7FC5E60029E0BD /* TimerActivity.swift */,
 				65A51C31294FC7C400A3B960 /* TimerAttributes.swift */,
+				65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */,
 				65F4A72E2965E5B900CABB3C /* WidgetKind.swift */,
 			);
 			path = Shared;
@@ -600,6 +604,7 @@
 				65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */,
 				652BFD01295F367000179792 /* View+Extension.swift in Sources */,
 				65A51C3B2950A1B200A3B960 /* TimerLiveActivityView.swift in Sources */,
+				65A2D3442A86860D004B2421 /* Timer.swift in Sources */,
 				65A51C33294FC7F400A3B960 /* TimerAttributes.swift in Sources */,
 				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
 				652E5A992A7FCF5C0029E0BD /* TimerActivity.swift in Sources */,
@@ -624,6 +629,7 @@
 				659FDA6D28E28EC900899A2E /* ProjectRow.swift in Sources */,
 				65F4A737296684FC00CABB3C /* Double+Extension.swift in Sources */,
 				65EA44CC29A6F1BC00EE9BF0 /* ProjectFile.swift in Sources */,
+				65A2D3432A868606004B2421 /* Timer.swift in Sources */,
 				65D32BBA2A79AB1300AC9F6B /* Tag.swift in Sources */,
 				653899DB29A449AE008E39B4 /* AppIcon.swift in Sources */,
 				65011C4B2A75E8E700E36090 /* AppNavigation.swift in Sources */,

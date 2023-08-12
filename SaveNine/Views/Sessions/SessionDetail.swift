@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WidgetKit
 
 struct SessionDetail: View {
     let session: Session
@@ -78,7 +77,7 @@ struct SessionDetail: View {
             }
         }
         
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
+        WidgetKind.reload(.recentlyTracked)
     }
 }
 

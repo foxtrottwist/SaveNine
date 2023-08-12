@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
-import WidgetKit
 
 struct Tracker: View {
     var project: Project
     @Environment (\.modelContext) private var modelContext
     @State private var label: String = DefaultLabel.none.rawValue
-    @State private var session: Session?
     @State private var start: Date?
     @State private var showingClearConfirm = false
     @State private var showingStopWatchSheet = false
@@ -25,7 +23,6 @@ struct Tracker: View {
             _label = State(wrappedValue: session.sessionLabel)
             
             if let tracking = project.tracking, tracking {
-                _session = State(wrappedValue: session)
                 _start = State(wrappedValue: session.startDate)
                 _tracking = State(wrappedValue: tracking)
             }
@@ -92,9 +89,9 @@ struct Tracker: View {
             .presentationDetents([.fraction(0.4)])
             .presentationDragIndicator(.visible)
             .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
-                Button("Clear Timer", role: .destructive) {
+                Button("Cancel Timer", role: .destructive) {
                     Task {
-                        await clearTimer()
+                        await cancelTimer()
                     }
                 }
             }
@@ -104,45 +101,34 @@ struct Tracker: View {
     private func startTimer() {
         start = Date()
         tracking = true
-        let session = Session(label: label, startDate: start, project: project)
-        self.session = session
-        project.tracking = tracking
-        project.sessions?.append(session)
+        
+        Timer.shared.start(for: project, date: start!)
         try! modelContext.save()
         
-        TimerActivity.shared.requestLiveActivity(project: project, date: start!)
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
+        WidgetKind.reload(.recentlyTracked)
     }
     
     private func stopTimer() async {
-        if let session = session, let startDate = start {
-            let endDate = Date()
-            
-            start = nil
-            tracking = false
-            project.modificationDate = endDate
-            project.tracking = tracking
-            session.endDate = endDate
-            session.label = label
-            session.duration = endDate.timeIntervalSince(startDate)
-            try! modelContext.save()
-        }
+        start = nil
+        tracking = false
         
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
-        await TimerActivity.shared.endLiveActivity()
+        await Timer.shared.stop(for: project)
+        try! modelContext.save()
+         
+        WidgetKind.reload(.recentlyTracked)
     }
     
-    private func clearTimer() async {
-        if let session = session {
-            modelContext.delete(session)
-            start = nil
-            tracking = false
-            project.tracking = tracking
-            try! modelContext.save()
-        }
+    private func cancelTimer() async {
+        start = nil
+        tracking = false
         
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
-        await TimerActivity.shared.endLiveActivity()
+        let currentSession = await Timer.shared.cancel(for: project)
+        guard let currentSession else { return }
+        
+        modelContext.delete(currentSession)
+        try! modelContext.save()
+        
+        WidgetKind.reload(.recentlyTracked)
     }
 }
 

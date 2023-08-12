@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct ProjectWidget: Widget {
-    let kind: String = WidgetKind.RecentlyTracked.rawValue
+    let kind: String = WidgetKind.recentlyTracked.rawValue
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: ProjectTimelineProvider()) { entry in

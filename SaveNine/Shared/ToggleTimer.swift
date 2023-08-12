@@ -7,7 +7,6 @@
 
 import AppIntents
 import SwiftData
-import WidgetKit
 
 struct ToggleTimer: LiveActivityIntent {
     static var title: LocalizedStringResource = "Toggle Timer"
@@ -30,25 +29,14 @@ struct ToggleTimer: LiveActivityIntent {
         guard let project = try! modelContext.fetch(fetchDescriptor).first else { return .result() }
         
         if project.tracking ?? false {
-            let currentSession = project.projectSessions.first
-            let endDate = Date()
-            currentSession?.endDate = endDate
-            currentSession?.duration = endDate.timeIntervalSince(currentSession!.startDate!)
-            project.modificationDate = endDate
-            project.tracking = false
-            await TimerActivity.shared.endLiveActivity()
+            await Timer.shared.stop(for: project)
         } else {
-            let startDate = Date()
-            let session = Session(label: nil, startDate: startDate, project: project)
-            project.tracking = true
-            project.sessions?.append(session)
-            TimerActivity.shared.requestLiveActivity(project: project, date: startDate)
+            Timer.shared.start(for: project, date: .now)
         }
         
         try! modelContext.save()
-        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.RecentlyTracked.rawValue)
+        WidgetKind.reload(.all)
         return .result()
     }
 }
-
 
