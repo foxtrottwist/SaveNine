@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    private var navigation = Navigator()
+    private var navigator = Navigator()
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     
     var body: some View {
         Group {
             if prefersTabNavigation {
-                AppTabView()
+                AppTabView(navigator: navigator)
             } else {
                 AppNavigationSplitView()
             }
         }
-        .environment(navigation)
+        .environment(navigator)
     }
 }
 

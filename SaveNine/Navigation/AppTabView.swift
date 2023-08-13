@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct AppTabView: View {
-    @SceneStorage(StorageKey.selectedTabView.rawValue) private var selectedTabView: String?
-    @State private var tabController = TabController()
+    @Bindable var navigator: Navigator
+    @SceneStorage(StorageKey.selectedTabView.rawValue) private var selectedTab: String?
     
     var body: some View {
-        TabView(selection: $tabController.selectedTabView) {
+        TabView(selection: $navigator.selectedTab) {
             Group {
-                AppNavigationSplitView(subject: tabController.subject)
+                AppNavigationSplitView()
                     .tag(AppNavigationSplitView.tag)
                     .tabItem {
                         Image(systemName: "tray")
@@ -31,16 +31,16 @@ struct AppTabView: View {
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarBackground(.ultraThinMaterial, for: .tabBar)
         }
-        .onAppear(perform: { tabController.selectedTabView = selectedTabView })
-        .onChange(of: tabController.selectedTabView) {  selectedTabView = tabController.selectedTabView }
+        .onAppear(perform: { navigator.selectedTab = selectedTab })
+        .onChange(of: navigator.selectedTab) {  selectedTab = navigator.selectedTab }
         .onOpenURL { _ in
-            if tabController.selectedTabView != AppNavigationSplitView.tag {
-                tabController.selectedTabView = AppNavigationSplitView.tag
+            if navigator.selectedTab != AppNavigationSplitView.tag {
+                navigator.selectedTab = AppNavigationSplitView.tag
             }
         }
     }
 }
 
-#Preview {
-    AppTabView()
-}
+//#Preview {
+//    AppTabView(navigator: Navigator())
+//}
