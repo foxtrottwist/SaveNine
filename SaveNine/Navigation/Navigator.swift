@@ -11,9 +11,13 @@ import Observation
 
 @Observable
 final class Navigator {
-    static let shared = Navigator()
-    var link: NavigatorLink? = .open
     var path: [Project] = []
+    var prefersTabNavigation: Bool = false
+    var selectedLink: NavigatorLink? = .open
+    
+    var defaultLinks: [NavigatorLink] {
+        prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
+    }
     
     let subject = PassthroughSubject<String?, Never>()
     
@@ -24,12 +28,26 @@ final class Navigator {
             }
         }
     }
+    
+    static let shared = Navigator()
 }
 
 struct NavigatorLink: Identifiable, Hashable, Codable {
     var id: UUID
     var name: String
     var icon: String
+    
+    init(id: UUID, name: String, icon: String) {
+        self.id = id
+        self.name = name
+        self.icon = icon
+    }
+    
+    init(from tag: Tag) {
+        id = tag.id!
+        name = tag.displayName
+        icon = "tag"
+    }
     
     static var all = NavigatorLink(id: UUID(), name: "All Projects", icon: "tray")
     static var open = NavigatorLink(id: UUID(), name: "Open Projects", icon: "tray.full")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AppTabView: View {
     @Bindable var navigator: Navigator
-    @SceneStorage(StorageKey.selectedTabView.rawValue) private var selectedTab: String?
+    @SceneStorage(StorageKey.selectedTab.rawValue) private var selectedTab: String?
     
     var body: some View {
         TabView(selection: $navigator.selectedTab) {

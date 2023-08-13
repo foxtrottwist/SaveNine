@@ -445,10 +445,10 @@
 			children = (
 				65DD6DC6299D294C00FA1E48 /* Extensions */,
 				65D32BBB2A79AB1D00AC9F6B /* Models */,
-				6505CA542A7F0AC100515953 /* Persistence.swift */,
 				65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */,
 				65DD6DC7299D299B00FA1E48 /* FileExtension.swift */,
 				65F4A7222965B0C900CABB3C /* Helpers.swift */,
+				6505CA542A7F0AC100515953 /* Persistence.swift */,
 				652454F02A815EDD0022A1A2 /* ProjectEntity.swift */,
 				65A2D3422A868606004B2421 /* Timer.swift */,
 				652E5A972A7FC5E60029E0BD /* TimerActivity.swift */,

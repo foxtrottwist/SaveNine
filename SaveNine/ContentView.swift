@@ -18,6 +18,9 @@ struct ContentView: View {
                 AppNavigationSplitView()
             }
         }
+        .onAppear {
+            Navigator.shared.prefersTabNavigation = prefersTabNavigation
+        }
     }
 }
 

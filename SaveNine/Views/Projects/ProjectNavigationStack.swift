@@ -42,7 +42,7 @@ struct ProjectNavigationStack: View {
                     }
                 })
                 .overlay {
-                    if let filter = navigator.link , projects.isEmpty, searchText.isEmpty {
+                    if let filter = navigator.selectedLink , projects.isEmpty, searchText.isEmpty {
                         switch filter {
                         case .all, .open:
                             ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
@@ -58,7 +58,7 @@ struct ProjectNavigationStack: View {
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
-            .navigationTitle(navigator.link?.name ?? "")
+            .navigationTitle(navigator.selectedLink?.name ?? "")
             .searchable(text: $searchText, placement: .navigationBarDrawer)
             .toolbar {
                 ToolbarItem {

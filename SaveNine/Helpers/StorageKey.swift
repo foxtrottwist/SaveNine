@@ -8,5 +8,5 @@
 import Foundation
 
 enum StorageKey: String {
-    case selectedAppIcon, selectedTabView
+    case selectedAppIcon, selectedTab
 }
