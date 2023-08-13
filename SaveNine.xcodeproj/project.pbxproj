@@ -317,10 +317,10 @@
 			isa = PBXGroup;
 			children = (
 				653899DA29A449AE008E39B4 /* AppIcon.swift */,
+				65E531012A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift */,
 				65EA44CB29A6F1BC00EE9BF0 /* ProjectFile.swift */,
 				65FC92D5299FFD4B008871A5 /* SortOption.swift */,
 				6518916529A5387300ACE985 /* StorageKey.swift */,
-				65E531012A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -432,10 +432,10 @@
 		65E531032A76EFF600760FE9 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				65011C4A2A75E8E700E36090 /* Navigator.swift */,
 				65D2315D28CD5B3B00A91A47 /* AppNavigationSplitView.swift */,
 				65011C4C2A75EFD700E36090 /* AppSidebar.swift */,
 				65E531042A76F02100760FE9 /* AppTabView.swift */,
+				65011C4A2A75E8E700E36090 /* Navigator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
