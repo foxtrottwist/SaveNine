@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private var navigation = AppNavigation()
+    private var navigation = Navigator()
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     
     var body: some View {

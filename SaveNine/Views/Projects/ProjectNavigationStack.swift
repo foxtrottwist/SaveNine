@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProjectNavigationStack: View {
     @Binding var path: [Project]
-    @Environment(AppNavigation.self) private var navigation
+    @Environment(Navigator.self) private var navigation
     @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
     @State private var searchText = ""

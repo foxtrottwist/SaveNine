@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct AppSidebar: View {
-    @Bindable var navigation: AppNavigation
+    @Bindable var navigation: Navigator
     @Environment (\.modelContext) private var modelContext
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
@@ -53,6 +53,6 @@ struct AppSidebar: View {
 }
 
 #Preview {
-    AppSidebar(navigation: AppNavigation())
+    AppSidebar(navigation: Navigator())
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

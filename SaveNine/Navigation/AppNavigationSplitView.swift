@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AppNavigationSplitView: View {
     let subject: PassthroughSubject<String?, Never>
-    @Environment(AppNavigation.self) private var navigation
+    @Environment(Navigator.self) private var navigation
     @State private var disabled = false
     @State private var path: [Project] = []
     
@@ -43,7 +43,7 @@ struct ProjectsTabView_Previews: PreviewProvider {
     
     static var previews: some View {
         AppNavigationSplitView(subject: PassthroughSubject<String?, Never>())
-            .environment(AppNavigation())
+            .environment(Navigator())
             .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
     }
 }
