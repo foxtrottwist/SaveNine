@@ -25,7 +25,6 @@ public class Project {
     init(
         creationDate: Date? = .now,
         detail: String? = nil,
-        id: UUID? = UUID(),
         image: Data? = nil,
         modificationDate: Date? = nil,
         name: String?,
@@ -35,7 +34,7 @@ public class Project {
         self.closed = false
         self.creationDate = creationDate
         self.detail = detail
-        self.id = id
+        self.id = UUID()
         self.image = image
         self.modificationDate = modificationDate
         self.name = name

@@ -75,15 +75,11 @@
 		65E531022A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E531012A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift */; };
 		65E531052A76F02100760FE9 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E531042A76F02100760FE9 /* AppTabView.swift */; };
 		65EA44CC29A6F1BC00EE9BF0 /* ProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA44CB29A6F1BC00EE9BF0 /* ProjectFile.swift */; };
-		65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
-		65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34F92999DA3A00AB396A /* FileManager+Images.swift */; };
 		65EC34FD2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
 		65EC34FE2999DE4800AB396A /* FileManager+AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */; };
 		65EF242A28DF870A003749F3 /* ProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EF242928DF870A003749F3 /* ProjectName.swift */; };
 		65F4A7232965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
 		65F4A7242965B0C900CABB3C /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7222965B0C900CABB3C /* Helpers.swift */; };
-		65F4A7262965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */; };
-		65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */; };
 		65F4A72C2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */; };
 		65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */; };
 		65F4A72F2965E5B900CABB3C /* WidgetKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A72E2965E5B900CABB3C /* WidgetKind.swift */; };
@@ -186,12 +182,10 @@
 		65E531012A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefersTabNavigationEnvironmentKey.swift; sourceTree = "<group>"; };
 		65E531042A76F02100760FE9 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		65EA44CB29A6F1BC00EE9BF0 /* ProjectFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFile.swift; sourceTree = "<group>"; };
-		65EC34F92999DA3A00AB396A /* FileManager+Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Images.swift"; sourceTree = "<group>"; };
 		65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+AppGroup.swift"; sourceTree = "<group>"; };
 		65EF242928DF870A003749F3 /* ProjectName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectName.swift; sourceTree = "<group>"; };
 		65F4A70D2963AFFB00CABB3C /* SaveNineWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaveNineWidgetExtension.entitlements; sourceTree = "<group>"; };
 		65F4A7222965B0C900CABB3C /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Widgets.swift"; sourceTree = "<group>"; };
 		65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		65F4A72E2965E5B900CABB3C /* WidgetKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetKind.swift; sourceTree = "<group>"; };
 		65F4A7312966826E00CABB3C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -431,8 +425,6 @@
 				65F4A7312966826E00CABB3C /* Date+Extension.swift */,
 				65F4A736296684FC00CABB3C /* Double+Extension.swift */,
 				65EC34FC2999DE4800AB396A /* FileManager+AppGroup.swift */,
-				65EC34F92999DA3A00AB396A /* FileManager+Images.swift */,
-				65F4A7252965BB4B00CABB3C /* FileManager+Widgets.swift */,
 				65B931BC2A812D9B00113497 /* Logger+Extension.swift */,
 				65F4A72B2965BD0300CABB3C /* UserDefaults+Extension.swift */,
 			);
@@ -586,7 +578,6 @@
 				65DBEA502A7BDD6800788216 /* DefaultLabel.swift in Sources */,
 				65073CAC2A82709600047FBC /* ProjectTimelineProvider.swift in Sources */,
 				652454EE2A814DB20022A1A2 /* ProjectWidgetIntent.swift in Sources */,
-				65F4A7272965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				65DBEA522A7BDD7500788216 /* Tag.swift in Sources */,
 				65A51C21294FBD1A00A3B960 /* TimerLiveActivity.swift in Sources */,
 				65F4A73929668C2700CABB3C /* Double+Extension.swift in Sources */,
@@ -608,7 +599,6 @@
 				65A51C33294FC7F400A3B960 /* TimerAttributes.swift in Sources */,
 				65A51C1F294FBD1A00A3B960 /* SaveNineWidgetBundle.swift in Sources */,
 				652E5A992A7FCF5C0029E0BD /* TimerActivity.swift in Sources */,
-				65EC34FB2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,13 +646,11 @@
 				6560AC37291AFD110047E2C6 /* SessionRow.swift in Sources */,
 				65DD6DC8299D299B00FA1E48 /* FileExtension.swift in Sources */,
 				65AFF19D299531EC009AB991 /* SessionLabelPicker.swift in Sources */,
-				65EC34FA2999DA3A00AB396A /* FileManager+Images.swift in Sources */,
 				65F9F3A529A2EC0600D51D7B /* TabController.swift in Sources */,
 				65FC3F532A75DBE500D76AFE /* ProjectsSearchResults.swift in Sources */,
 				65464D2128F26B74008E1EE6 /* UpdateNameView.swift in Sources */,
 				6505CA552A7F0AC100515953 /* Persistence.swift in Sources */,
 				65F9F3A729A2FF6200D51D7B /* SettingsView.swift in Sources */,
-				65F4A7262965BB4B00CABB3C /* FileManager+Widgets.swift in Sources */,
 				652AE95028D6550E0001294F /* Tracker.swift in Sources */,
 				6572FFB829981A96006493DB /* SessionLabelController.swift in Sources */,
 				65E531052A76F02100760FE9 /* AppTabView.swift in Sources */,

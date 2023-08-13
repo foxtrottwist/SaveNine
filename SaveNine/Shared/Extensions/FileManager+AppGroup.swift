@@ -6,11 +6,10 @@
 //
 
 import Foundation
+import OSLog
 
 enum AppGroupContainer: String {
     case groupID = "group.com.pawpawpixel.SaveNine"
-    case imageDirectory = "Images"
-    case widgetDirectory = "Widgets"
 }
 
 extension FileManager {
@@ -18,12 +17,24 @@ extension FileManager {
         self.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroupContainer.groupID.rawValue)!
     }
     
+    /// Checks whether a the given directory exists and creates it if it does not.
+    /// - Parameter url: A file URL that specifies the directory to create.
+    static func createDirectoryIfNoneExist(at url: URL) {
+        if !FileManager.default.fileExists(atPath: url.path()) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false)
+            } catch {
+                fatalError("Unable to create directory at \(url)")
+            }
+        }
+    }
+    
     static func deleteAppGroupContainerContents() {
         do {
             try FileManager.default.removeItem(at: sharedContainer)
-            print("Files at \(sharedContainer) was deleted.")
+            Logger.statistics.info("Files at \(sharedContainer) was deleted.")
         } catch let error as NSError {
-            print("Could not delete files at \(sharedContainer): \(error)")
+            Logger.statistics.info("Could not delete files at \(sharedContainer): \(error)")
         }
     }
 }
