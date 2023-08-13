@@ -13,7 +13,6 @@ struct AppNavigationSplitView: View {
     let subject: PassthroughSubject<String?, Never>
     @Environment(Navigator.self) private var navigator
     @State private var disabled = false
-    @State private var path: [Project] = []
     
     init(subject: PassthroughSubject<String?, Never> = .init()) {
         self.subject = subject
@@ -26,10 +25,10 @@ struct AppNavigationSplitView: View {
             if navigator.link == .sessions {
                 SessionNavigationStack()
             } else {
-                ProjectNavigationStack(path: $path)
+                ProjectNavigationStack(navigator: navigator)
                     .onReceive(subject, perform: { tab in
-                        if tab == Self.tag, !path.isEmpty {
-                            path = []
+                        if tab == Self.tag, !navigator.path.isEmpty {
+                            navigator.path = []
                         }
                     })
             }

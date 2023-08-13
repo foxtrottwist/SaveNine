@@ -9,14 +9,13 @@ import SwiftData
 import SwiftUI
 
 struct ProjectNavigationStack: View {
-    @Binding var path: [Project]
-    @Environment(Navigator.self) private var navigator
+    @Bindable var navigator: Navigator
     @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
     @State private var searchText = ""
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navigator.path) {
             QueryView(FetchDescriptor(sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
                 ProjectsSearchResults(projects: projects, searchText: searchText) { project in
                     if project.displayName.isEmpty {
@@ -38,8 +37,8 @@ struct ProjectNavigationStack: View {
                     let projectID = UUID(uuidString: host)
                     let project = projects.first { $0.id == projectID }
                     
-                    if let project, path.last?.id != projectID {
-                        path.append(project)
+                    if let project, navigator.path.last?.id != projectID {
+                        navigator.path.append(project)
                     }
                 })
                 .overlay {
@@ -77,7 +76,7 @@ struct ProjectNavigationStack: View {
     }
 }
 
-#Preview {
-    ProjectNavigationStack(path: .constant([]))
-        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
-}
+//#Preview {
+//    ProjectNavigationStack(path: .constant([]))
+//        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+//}

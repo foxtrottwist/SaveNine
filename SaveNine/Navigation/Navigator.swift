@@ -10,9 +10,8 @@ import Observation
 
 @Observable
 final class Navigator {
-    // FIXME: investigate why path does not update correctly.
-    var path: [Project] = []
     var link: NavigatorLink? = .open
+    var path: [Project] = []
     
     init() {}
 }
