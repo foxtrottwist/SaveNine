@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 
 struct AppNavigationSplitView: View {
-    @Environment(Navigator.self) private var navigator
+    private let navigator = Navigator.shared
     @State private var disabled = false
     
     var body: some View {
@@ -35,6 +35,5 @@ struct AppNavigationSplitView: View {
 
 #Preview {
     AppNavigationSplitView()
-        .environment(Navigator())
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

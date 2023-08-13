@@ -41,6 +41,6 @@ struct AppTabView: View {
     }
 }
 
-//#Preview {
-//    AppTabView(navigator: Navigator())
-//}
+#Preview {
+    AppTabView(navigator: Navigator())
+}

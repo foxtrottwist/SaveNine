@@ -11,6 +11,7 @@ import Observation
 
 @Observable
 final class Navigator {
+    static let shared = Navigator()
     var link: NavigatorLink? = .open
     var path: [Project] = []
     
@@ -23,8 +24,6 @@ final class Navigator {
             }
         }
     }
-    
-    init() {}
 }
 
 struct NavigatorLink: Identifiable, Hashable, Codable {
