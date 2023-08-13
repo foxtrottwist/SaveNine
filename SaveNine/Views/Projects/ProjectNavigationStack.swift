@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProjectNavigationStack: View {
     @Binding var path: [Project]
-    @Environment(Navigator.self) private var navigation
+    @Environment(Navigator.self) private var navigator
     @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
     @State private var searchText = ""
@@ -43,7 +43,7 @@ struct ProjectNavigationStack: View {
                     }
                 })
                 .overlay {
-                    if let filter = navigation.filter , projects.isEmpty, searchText.isEmpty {
+                    if let filter = navigator.link , projects.isEmpty, searchText.isEmpty {
                         switch filter {
                         case .all, .open:
                             ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
@@ -59,7 +59,7 @@ struct ProjectNavigationStack: View {
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
-            .navigationTitle(navigation.filter?.name ?? "")
+            .navigationTitle(navigator.link?.name ?? "")
             .searchable(text: $searchText, placement: .navigationBarDrawer)
             .toolbar {
                 ToolbarItem {

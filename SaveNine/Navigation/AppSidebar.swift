@@ -9,30 +9,30 @@ import SwiftData
 import SwiftUI
 
 struct AppSidebar: View {
-    @Bindable var navigation: Navigator
+    @Bindable var navigator: Navigator
     @Environment (\.modelContext) private var modelContext
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
     
-    private var defaultLinks: [AppNavigationLink] {
+    private var defaultLinks: [NavigatorLink] {
         prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
     }
-    private var Links: [AppNavigationLink] {
+    private var links: [NavigatorLink] {
         tags.map {
-            AppNavigationLink(id: $0.id!, name: $0.name!, icon: "tag")
+            NavigatorLink(id: $0.id!, name: $0.name!, icon: "tag")
         }
     }
     
     var body: some View {
-        List(selection: $navigation.filter) {
-            ForEach(defaultLinks) { filter in
-                NavigationLink(value: filter) {
-                    Label(filter.name, systemImage: filter.icon)
+        List(selection: $navigator.link) {
+            ForEach(defaultLinks) { link in
+                NavigationLink(value: link) {
+                    Label(link.name, systemImage: link.icon)
                 }
             }
             
             Section("Tags") {
-                ForEach(Links) { link in
+                ForEach(links) { link in
                     NavigationLink(value: link) {
                         Label(link.name, systemImage: link.icon)
                     }
@@ -53,6 +53,6 @@ struct AppSidebar: View {
 }
 
 #Preview {
-    AppSidebar(navigation: Navigator())
+    AppSidebar(navigator: Navigator())
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

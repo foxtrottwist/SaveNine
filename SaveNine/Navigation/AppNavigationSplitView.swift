@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AppNavigationSplitView: View {
     let subject: PassthroughSubject<String?, Never>
-    @Environment(Navigator.self) private var navigation
+    @Environment(Navigator.self) private var navigator
     @State private var disabled = false
     @State private var path: [Project] = []
     
@@ -21,9 +21,9 @@ struct AppNavigationSplitView: View {
     
     var body: some View {
         NavigationSplitView {
-            AppSidebar(navigation: navigation)
+            AppSidebar(navigator: navigator)
         } detail: {
-            if navigation.filter == .sessions {
+            if navigator.link == .sessions {
                 SessionNavigationStack()
             } else {
                 ProjectNavigationStack(path: $path)
