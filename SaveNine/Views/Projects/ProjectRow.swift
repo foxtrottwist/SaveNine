@@ -9,17 +9,6 @@ import SwiftUI
 
 struct ProjectRow: View {
     var project: Project
-    private let uiImage: UIImage?
-    
-    init(project: Project) {
-        self.project = project
-        
-        if let data = project.image {
-            uiImage = UIImage(data: data)
-        } else {
-            uiImage = nil
-        }
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,7 +26,7 @@ struct ProjectRow: View {
                 
                 Spacer()
                 
-                if let uiImage {
+                if let data = project.image, let uiImage = UIImage(data: data) {
                     Image(uiImage: uiImage)
                         .projectImage(width: 100, height: 100, cornerRadius: 10)
                 }

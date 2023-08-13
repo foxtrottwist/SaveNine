@@ -11,29 +11,17 @@ import SwiftUI
 struct ProjectImage: View {
     var project: Project
     @State private var selectedImage: PhotosPickerItem? = nil
-    @State private var uiImage: UIImage? = nil
-    
-    init(project: Project) {
-        self.project = project
-        
-        if let data = project.image {
-            if let uiImage = UIImage(data: data) {
-                _uiImage = State(wrappedValue: uiImage)
-            }
-        }
-    }
     
     var body: some View {
         VStack {
             HStack {
                 Spacer()
-                RoundedRectProjectImage(uiImage: uiImage)
+                RoundedRectProjectImage(uiImage: UIImage(data: project.image ?? Data()))
                     .onChange(of: selectedImage) {
                         guard let image = selectedImage else { return }
                         
                         Task {
-                            if let data = try? await image.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                                self.uiImage = uiImage
+                            if let data = try? await image.loadTransferable(type: Data.self) {
                                 project.image = data
                             }
                         }

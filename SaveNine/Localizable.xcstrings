@@ -5,7 +5,14 @@
 
     },
     "%@ %@ - %@" : {
-      "comment" : "Session Row relative {time/day} {startDate} - {endDate}"
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@ - %3$@"
+          }
+        }
+      }
     },
     "%lld" : {
 
@@ -68,7 +75,7 @@
       }
     },
     "Add Project" : {
-      "comment" : "Projects View & Button label for plus on top toolbar"
+
     },
     "Add tags to your projects to filter." : {
       "comment" : "Project Tags View\n Appears when toggled from the Home View top toolbar menu. & Empty State",
@@ -134,7 +141,7 @@
       }
     },
     "Cancel" : {
-      "comment" : "Common Text"
+
     },
     "Cancel Timer" : {
 
@@ -201,10 +208,10 @@
       }
     },
     "Close" : {
-      "comment" : "Settings View"
+
     },
     "Close project" : {
-      "comment" : "Project Details top toolbar menu"
+
     },
     "Closed" : {
       "comment" : "Picker options",
@@ -339,7 +346,7 @@
 
     },
     "Export Sessions" : {
-      "comment" : "Sessions View"
+
     },
     "Failed to Rename Tag" : {
       "extractionState" : "manual",
@@ -423,7 +430,7 @@
       }
     },
     "Name" : {
-      "comment" : "Update Name View & Placeholder text"
+
     },
     "New Item" : {
       "extractionState" : "manual",
@@ -463,10 +470,10 @@
       }
     },
     "No sessions have been completed or match the current filter." : {
-      "comment" : "Sessions Tab View empty state"
+
     },
     "No time tracking sessions have been completed for this project." : {
-      "comment" : "Sessions View empty state"
+
     },
     "None" : {
       "comment" : "Displayed by when no time has been tracked",
@@ -481,7 +488,7 @@
       }
     },
     "Notes" : {
-      "comment" : "Field label and placeholder text"
+
     },
     "OK" : {
 
@@ -534,7 +541,7 @@
       }
     },
     "Please add a project to begin." : {
-      "comment" : "Open Projects empty State"
+
     },
     "Priority" : {
       "extractionState" : "manual",
@@ -551,7 +558,7 @@
 
     },
     "Project name" : {
-      "comment" : "New project placeholder text"
+
     },
     "Project Name" : {
       "comment" : "Project Details & Field label and placeholder text",
@@ -614,19 +621,19 @@
 
     },
     "Save Nine" : {
-      "comment" : "Localizable.strings\n  SaveNine\n\n  Created by Lawrence Horne on 10/13/22."
+
     },
     "savenine.app" : {
 
     },
     "Session Details" : {
-      "comment" : "Sessions Details Sheet"
+
     },
     "Sessions" : {
-      "comment" : "Navigation Link; Home - Navigation title"
+
     },
     "Sessions Menu" : {
-      "comment" : "Sessions Menu"
+
     },
     "Sessions:" : {
       "extractionState" : "manual",
@@ -646,10 +653,10 @@
 
     },
     "Sort Options" : {
-      "comment" : "Picker title"
+
     },
     "Sort Order" : {
-      "comment" : "Picker title"
+
     },
     "Start" : {
 
@@ -718,7 +725,7 @@
       }
     },
     "There are currently no closed projects." : {
-      "comment" : "Closed Projects empty State"
+
     },
     "There are currently no Projects tagged with %@." : {
 
