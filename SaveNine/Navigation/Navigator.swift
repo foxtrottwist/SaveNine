@@ -12,12 +12,7 @@ import Observation
 @Observable
 final class Navigator {
     var path: [Project] = []
-    var prefersTabNavigation: Bool = false
     var selectedLink: NavigatorLink? = .open
-    
-    var defaultLinks: [NavigatorLink] {
-        prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
-    }
     
     let subject = PassthroughSubject<String?, Never>()
     

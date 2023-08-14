@@ -11,12 +11,18 @@ import SwiftUI
 struct AppSidebar: View {
     @Bindable var navigator: Navigator
     @Environment (\.modelContext) private var modelContext
+    @Environment (\.prefersTabNavigation) private var prefersTabNavigation
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
+    
+    private var defaultLinks: [NavigatorLink] {
+        prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
+    }
+    
     private var links: [NavigatorLink] { tags.map { .init(from: $0) } }
     
     var body: some View {
         List(selection: $navigator.selectedLink) {
-            ForEach(Navigator.shared.defaultLinks) { link in
+            ForEach(defaultLinks) { link in
                 NavigationLink(value: link) {
                     Label(link.name, systemImage: link.icon)
                 }
