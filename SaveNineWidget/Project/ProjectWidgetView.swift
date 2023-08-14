@@ -46,7 +46,7 @@ struct ProjectWidgetView: View {
         } else {
             ContentUnavailableView {
                 Image(systemName: "stopwatch")
-                Text("Start tracking projects Save nine.")
+                Text("Start tracking projects in Save Nine.")
                     .font(.caption)
             }
         }
@@ -63,7 +63,7 @@ struct ProjectSnapshotView: View {
                 .font(.caption)
                 .foregroundStyle(.black)
                 .lineLimit(2)
-           
+            
             if project.tracking ?? false {
                 timer
             } else {
@@ -85,7 +85,6 @@ struct ProjectSnapshotView: View {
                 }
                 .disabled(project.displayName.isEmpty)
             }
-            .onAppear(perform: { Logger.viewCycle.log("\(Self.self) – \(project.tracking!)") })
         }
         .fontWeight(.medium)
         .foregroundStyle(.black.opacity(0.7))

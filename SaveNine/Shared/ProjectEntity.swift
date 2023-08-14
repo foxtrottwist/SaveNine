@@ -33,19 +33,19 @@ struct ProjectEntity: AppEntity, Identifiable {
 
 struct ProjectQuery: EntityQuery {
     func entities(for identifiers: [UUID]) async throws -> [ProjectEntity] {
-        Logger.statistics.info("\(Self.self) – Loading projects using identifiers: \(identifiers).")
+        Logger.data.info("\(Self.self) – Loading projects using identifiers: \(identifiers).")
         let modelContext = ModelContext(Persistence.container)
         let projects = try! modelContext.fetch(FetchDescriptor<Project>())
         let entity = projects.filter { identifiers.contains($0.id!) }.map { ProjectEntity(from: $0)}
-        Logger.statistics.info("Found: \(entity.first.debugDescription)")
+        Logger.data.info("Found: \(entity.first.debugDescription)")
         return entity
     }
     
     func suggestedEntities() async throws -> [ProjectEntity] {
-        Logger.statistics.info("\(Self.self) – Loading projects to suggest.")
+        Logger.data.info("\(Self.self) – Loading projects to suggest.")
         let modelContext = ModelContext(Persistence.container)
         let projects = try! modelContext.fetch(FetchDescriptor<Project>())
-        Logger.statistics.info("Found: \(projects.first?.tracking ?? false)")
+        Logger.data.info("Found: \(projects.first?.tracking ?? false)")
         return projects.map { ProjectEntity(from: $0)}
     }
 }

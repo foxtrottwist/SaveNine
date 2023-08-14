@@ -6,6 +6,7 @@
 //
 
 import PhotosUI
+import OSLog
 import SwiftUI
 
 struct ProjectDetail: View {
@@ -77,9 +78,9 @@ struct ProjectDetail: View {
         ) { result in
             switch result {
             case .success(let url):
-                print("Saved to \(url)")
+                Logger.data.info("Saved to \(url)")
             case .failure(let error):
-                print(error.localizedDescription)
+                Logger.data.error("\(error.localizedDescription)")
             }
         }
         .navigationTitle($name)

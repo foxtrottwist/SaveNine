@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 2/20/23.
 //
 
+import OSLog
 import SwiftUI
 
 struct AppIconView: View {
@@ -40,7 +41,7 @@ struct AppIconView: View {
             } else {
                 UIApplication.shared.setAlternateIconName(selectedAppIcon) { error in
                     if let error = error {
-                        print(error.localizedDescription)
+                        Logger.statistics.error("\(error.localizedDescription)")
                     }
                 }
             }
