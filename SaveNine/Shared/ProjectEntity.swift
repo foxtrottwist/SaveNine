@@ -35,17 +35,22 @@ struct ProjectQuery: EntityQuery {
     func entities(for identifiers: [UUID]) async throws -> [ProjectEntity] {
         Logger.data.info("\(Self.self) – Loading projects using identifiers: \(identifiers).")
         let modelContext = ModelContext(Persistence.container)
-        let projects = try! modelContext.fetch(FetchDescriptor<Project>())
-        let entity = projects.filter { identifiers.contains($0.id!) }.map { ProjectEntity(from: $0)}
-        Logger.data.info("Found: \(entity.first.debugDescription)")
-        return entity
+        
+        let projects = identifiers.compactMap { id in
+            try! modelContext.fetch(
+                FetchDescriptor<Project>(predicate: #Predicate { id == $0.id })
+            )
+        }.first!
+        
+        Logger.data.info("Found: \(projects.first.debugDescription)")
+        return projects.map { ProjectEntity(from: $0)}
     }
     
     func suggestedEntities() async throws -> [ProjectEntity] {
         Logger.data.info("\(Self.self) – Loading projects to suggest.")
         let modelContext = ModelContext(Persistence.container)
         let projects = try! modelContext.fetch(FetchDescriptor<Project>())
-        Logger.data.info("Found: \(projects.first?.tracking ?? false)")
+        Logger.data.info("Found: \(projects.count)")
         return projects.map { ProjectEntity(from: $0)}
     }
 }
