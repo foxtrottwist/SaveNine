@@ -42,14 +42,14 @@ struct ProjectNavigationStack: View {
                     }
                 })
                 .overlay {
-                    if let filter = navigator.selectedLink , projects.isEmpty, searchText.isEmpty {
-                        switch filter {
+                    if let selection = navigator.selection , projects.isEmpty, searchText.isEmpty {
+                        switch selection {
                         case .all, .open:
                             ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
                         case .closed:
                             ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
                         default:
-                            ContentUnavailableView("There are currently no Projects tagged with \(filter.name).", systemImage: "tag")
+                            ContentUnavailableView("There are currently no Projects tagged with \(selection.name).", systemImage: "tag")
                         }
                     }
                 }
@@ -58,7 +58,7 @@ struct ProjectNavigationStack: View {
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
-            .navigationTitle(navigator.selectedLink?.name ?? "")
+            .navigationTitle(navigator.selection?.name ?? "")
             .searchable(text: $searchText, placement: .navigationBarDrawer)
             .toolbar {
                 ToolbarItem {

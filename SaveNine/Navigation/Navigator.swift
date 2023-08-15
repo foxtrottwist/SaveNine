@@ -12,7 +12,7 @@ import Observation
 @Observable
 final class Navigator {
     var path: [Project] = []
-    var selectedLink: NavigatorLink? = .open
+    var selection: NavigatorLink? = .open
     
     let subject = PassthroughSubject<String?, Never>()
     

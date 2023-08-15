@@ -21,7 +21,7 @@ struct AppSidebar: View {
     private var links: [NavigatorLink] { tags.map { .init(from: $0) } }
     
     var body: some View {
-        List(selection: $navigator.selectedLink) {
+        List(selection: $navigator.selection) {
             ForEach(defaultLinks) { link in
                 NavigationLink(value: link) {
                     Label(link.name, systemImage: link.icon)

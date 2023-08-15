@@ -17,7 +17,7 @@ struct AppNavigationSplitView: View {
         NavigationSplitView {
             AppSidebar(navigator: navigator)
         } detail: {
-            if navigator.selectedLink == .sessions {
+            if navigator.selection == .sessions {
                 SessionNavigationStack()
             } else {
                 ProjectNavigationStack(navigator: navigator)
