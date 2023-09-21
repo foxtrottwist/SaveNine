@@ -10,5 +10,5 @@ import SwiftData
 public final class Persistence {}
 
 public extension Persistence {
-    static let container = try! ModelContainer(for: [Project.self, Session.self, Tag.self])
+    static let container = try! ModelContainer(for: Project.self, Session.self, Tag.self)
 }

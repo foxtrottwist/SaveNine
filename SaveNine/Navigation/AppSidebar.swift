@@ -9,29 +9,23 @@ import SwiftData
 import SwiftUI
 
 struct AppSidebar: View {
-    @Bindable var navigator: Navigator
+    @Binding var selection: Screen?
     @Environment (\.modelContext) private var modelContext
     @Environment (\.prefersTabNavigation) private var prefersTabNavigation
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
     
-    private var defaultLinks: [NavigatorLink] {
-        prefersTabNavigation ? [.open, .closed, .all] : [.open, .closed, .all, .sessions]
-    }
-    
-    private var links: [NavigatorLink] { tags.map { .init(from: $0) } }
-    
     var body: some View {
-        List(selection: $navigator.selection) {
-            ForEach(defaultLinks) { link in
-                NavigationLink(value: link) {
-                    Label(link.name, systemImage: link.icon)
+        List(selection: $selection) {
+            ForEach(prefersTabNavigation ? Screen.prefersTabNavigationCases : Screen.allCases) { screen in
+                NavigationLink(value: screen) {
+                    screen.label
                 }
             }
             
             Section("Tags") {
-                ForEach(links) { link in
-                    NavigationLink(value: link) {
-                        Label(link.name, systemImage: link.icon)
+                ForEach(tags) { tag in
+                    NavigationLink(value: Screen.tag(tag.displayName, tag.id!)) {
+                        Label(tag.displayName, image: "tag")
                     }
                 }
                 .onDelete(perform: deleteTags)
@@ -50,6 +44,6 @@ struct AppSidebar: View {
 }
 
 #Preview {
-    AppSidebar(navigator: Navigator())
+    AppSidebar(selection: .constant(nil))
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }

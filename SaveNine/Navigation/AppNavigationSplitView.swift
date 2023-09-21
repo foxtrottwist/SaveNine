@@ -6,27 +6,16 @@
 //
 
 import Combine
-import CoreData
 import SwiftUI
 
 struct AppNavigationSplitView: View {
-    private let navigator = Navigator.shared
-    @State private var disabled = false
+    @State private var selection: Screen? = .open
     
     var body: some View {
         NavigationSplitView {
-            AppSidebar(navigator: navigator)
+            AppSidebar(selection: $selection)
         } detail: {
-            if navigator.selection == .sessions {
-                SessionNavigationStack()
-            } else {
-                ProjectNavigationStack(navigator: navigator)
-                    .onReceive(navigator.subject, perform: { tab in
-                        if tab == Self.tag, !navigator.path.isEmpty {
-                            navigator.path = []
-                        }
-                    })
-            }
+            selection?.destination
         }
     }
     

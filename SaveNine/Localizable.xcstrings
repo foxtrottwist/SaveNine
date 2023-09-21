@@ -110,6 +110,16 @@
         }
       }
     },
+    "All Projects" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Projects"
+          }
+        }
+      }
+    },
     "App Icon" : {
       "localizations" : {
         "en" : {
@@ -487,6 +497,9 @@
           }
         }
       }
+    },
+    "Hello, World!" : {
+
     },
     "High" : {
       "extractionState" : "manual",

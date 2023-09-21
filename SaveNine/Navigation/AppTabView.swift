@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AppTabView: View {
-    @Bindable var navigator: Navigator
     @SceneStorage(StorageKey.selectedTab.rawValue) private var selectedTab: String?
+    @State private var navigator = Navigator.shared
     
     var body: some View {
         TabView(selection: $navigator.selectedTab) {
@@ -42,5 +42,5 @@ struct AppTabView: View {
 }
 
 #Preview {
-    AppTabView(navigator: Navigator())
+    AppTabView()
 }

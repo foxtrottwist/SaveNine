@@ -13,6 +13,7 @@
 		6505CA552A7F0AC100515953 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6505CA542A7F0AC100515953 /* Persistence.swift */; };
 		6505CA562A7F0AC100515953 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6505CA542A7F0AC100515953 /* Persistence.swift */; };
 		65073CAC2A82709600047FBC /* ProjectTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65073CAB2A82709600047FBC /* ProjectTimelineProvider.swift */; };
+		651469772ABBE14900F0A701 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651469762ABBE14900F0A701 /* Screen.swift */; };
 		6518916429A5372200ACE985 /* AppIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916329A5372200ACE985 /* AppIconImageView.swift */; };
 		6518916629A5387300ACE985 /* StorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6518916529A5387300ACE985 /* StorageKey.swift */; };
 		652437352A783AFD00C839C9 /* StopwatchSafeAreaInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */; };
@@ -127,6 +128,7 @@
 		65011C4C2A75EFD700E36090 /* AppSidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSidebar.swift; sourceTree = "<group>"; };
 		6505CA542A7F0AC100515953 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		65073CAB2A82709600047FBC /* ProjectTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTimelineProvider.swift; sourceTree = "<group>"; };
+		651469762ABBE14900F0A701 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		6518916329A5372200ACE985 /* AppIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconImageView.swift; sourceTree = "<group>"; };
 		6518916529A5387300ACE985 /* StorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageKey.swift; sourceTree = "<group>"; };
 		652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchSafeAreaInset.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				65011C4C2A75EFD700E36090 /* AppSidebar.swift */,
 				65E531042A76F02100760FE9 /* AppTabView.swift */,
 				65011C4A2A75E8E700E36090 /* Navigator.swift */,
+				651469762ABBE14900F0A701 /* Screen.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				652E5A982A7FC5E60029E0BD /* TimerActivity.swift in Sources */,
 				65EF242A28DF870A003749F3 /* ProjectName.swift in Sources */,
 				65FC3F4B2A75C6AE00D76AFE /* ProjectImage.swift in Sources */,
+				651469772ABBE14900F0A701 /* Screen.swift in Sources */,
 				65E531002A76AB5300760FE9 /* ProjectTagsSheet.swift in Sources */,
 				65FC92D829A04E27008871A5 /* FileManager+Documents.swift in Sources */,
 				653899D529A3B690008E39B4 /* LabelsView.swift in Sources */,

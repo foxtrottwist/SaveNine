@@ -9,14 +9,29 @@ import SwiftData
 import SwiftUI
 
 struct ProjectNavigationStack: View {
-    @Bindable var navigator: Navigator
+    let screen: Screen
     @Environment (\.modelContext) private var modelContext
     @State private var disabled = false
+    @State private var navigator = Navigator.shared
     @State private var searchText = ""
+    
+    private var predicate: Predicate<Project>? {
+        switch screen {
+        case .open:
+            #Predicate { $0.closed != nil && $0.closed == false }
+        case .closed:
+            #Predicate { $0.closed != nil && $0.closed == true }
+        case .tag(let name, _):
+            #Predicate { $0.tags!.contains {  $0.name! == name }  }
+        default:
+            nil
+        }
+    }
+    
     
     var body: some View {
         NavigationStack(path: $navigator.path) {
-            QueryView(FetchDescriptor(sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
+            QueryView(FetchDescriptor(predicate: predicate, sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
                 ProjectsSearchResults(projects: projects, searchText: searchText) { project in
                     if project.displayName.isEmpty {
                         ProjectName(project: project)
@@ -42,14 +57,16 @@ struct ProjectNavigationStack: View {
                     }
                 })
                 .overlay {
-                    if let selection = navigator.selection , projects.isEmpty, searchText.isEmpty {
-                        switch selection {
+                    if projects.isEmpty, searchText.isEmpty {
+                        switch screen {
                         case .all, .open:
                             ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
                         case .closed:
                             ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
+                        case .tag(let name, _):
+                            ContentUnavailableView("There are currently no Projects tagged with \(name).", systemImage: "tag")
                         default:
-                            ContentUnavailableView("There are currently no Projects tagged with \(selection.name).", systemImage: "tag")
+                           EmptyView()
                         }
                     }
                 }
@@ -58,7 +75,7 @@ struct ProjectNavigationStack: View {
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
-            .navigationTitle(navigator.selection?.name ?? "")
+            .navigationTitle(screen.title)
             .searchable(text: $searchText, placement: .navigationBarDrawer)
             .toolbar {
                 ToolbarItem {
@@ -76,7 +93,7 @@ struct ProjectNavigationStack: View {
     }
 }
 
-//#Preview {
-//    ProjectNavigationStack(path: .constant([]))
-//        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
-//}
+#Preview {
+    ProjectNavigationStack(screen: .open)
+        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+}
