@@ -9,6 +9,7 @@ import Combine
 import SwiftUI
 
 struct AppNavigationSplitView: View {
+    private let navigator = Navigator.shared
     @State private var selection: Screen? = .open
     
     var body: some View {
@@ -16,6 +17,11 @@ struct AppNavigationSplitView: View {
             AppSidebar(selection: $selection)
         } detail: {
             selection?.destination
+                .onReceive(navigator.subject, perform: { tab in
+                    if tab == Self.tag, !navigator.path.isEmpty {
+                        navigator.path = []
+                    }
+                })
         }
     }
     
