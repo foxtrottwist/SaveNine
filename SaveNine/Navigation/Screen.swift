@@ -31,13 +31,13 @@ extension Screen {
     var label: some View {
         switch self {
         case .all:
-            Label("All Projects", image: "tray")
+            Label("All Projects", systemImage: "tray")
         case .open:
-            Label("Open Projects", image: "tray.full")
+            Label("Open Projects", systemImage: "tray.full")
         case .closed:
-            Label("Closed Projects", image: "archivebox")
+            Label("Closed Projects", systemImage: "archivebox")
         case .sessions:
-            Label("Sessions", image: "clock")
+            Label("Sessions", systemImage: "clock")
         default:
             EmptyView()
         }

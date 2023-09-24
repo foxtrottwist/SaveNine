@@ -15,62 +15,50 @@ struct ProjectNavigationStack: View {
     @State private var navigator = Navigator.shared
     @State private var searchText = ""
     
-    private var predicate: Predicate<Project>? {
+    private enum Descriptor {
+        case project(FetchDescriptor<Project>)
+        case tag(FetchDescriptor<Tag>)
+    }
+    
+    private var fetchDescriptor: Descriptor {
         switch screen {
-        case .open:
-            #Predicate { $0.closed != nil && $0.closed == false }
         case .closed:
-            #Predicate { $0.closed != nil && $0.closed == true }
-        case .tag(let name, _):
-            #Predicate { $0.tags!.contains {  $0.name! == name }  }
+                .project(
+                    FetchDescriptor<Project>(
+                        predicate: #Predicate<Project> { $0.closed != nil && $0.closed == true },
+                        sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+                    )
+                )
+        case .open:
+                .project(
+                    FetchDescriptor<Project>(
+                        predicate: #Predicate<Project> { $0.closed != nil && $0.closed == false },
+                        sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+                    )
+                )
+        case .tag(_, let id):
+                .tag(FetchDescriptor<Tag>(predicate: #Predicate { $0.id == id }, sortBy: []))
         default:
-            nil
+                .project(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.creationDate, order: .reverse)]))
         }
     }
     
-    
     var body: some View {
         NavigationStack(path: $navigator.path) {
-            QueryView(FetchDescriptor(predicate: predicate, sortBy: [SortDescriptor<Project>(\.creationDate, order: .reverse)]), { projects in
-                ProjectsSearchResults(projects: projects, searchText: searchText) { project in
-                    if project.displayName.isEmpty {
-                        ProjectName(project: project)
-                            .onAppear { disabled = true }
-                            .onDisappear { disabled = false }
-                    } else {
-                        VStack {
-                            NavigationLink(value: project) {
-                                ProjectRow(project: project)
-                            }
-                        }
-                        .disabled(disabled)
+            Group {
+                switch fetchDescriptor {
+                case .project(let fetchDescriptor):
+                    QueryView(fetchDescriptor) { projects in
+                        projectsList(projects)
                     }
-                }
-                .onOpenURL(perform: { url in
-                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-                    guard let host = components?.host else { return }
-                    let projectID = UUID(uuidString: host)
-                    let project = projects.first { $0.id == projectID }
-                    
-                    if let project, navigator.path.last?.id != projectID {
-                        navigator.path.append(project)
-                    }
-                })
-                .overlay {
-                    if projects.isEmpty, searchText.isEmpty {
-                        switch screen {
-                        case .all, .open:
-                            ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
-                        case .closed:
-                            ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
-                        case .tag(let name, _):
-                            ContentUnavailableView("There are currently no Projects tagged with \(name).", systemImage: "tag")
-                        default:
-                           EmptyView()
+                case .tag(let fetchDescriptor):
+                    QueryView(fetchDescriptor) { tags in
+                        if let projects = tags.first?.projects {
+                            projectsList(projects)
                         }
                     }
                 }
-            })
+            }
             .listStyle(.inset)
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
@@ -83,6 +71,48 @@ struct ProjectNavigationStack: View {
                         Label("Add Project", systemImage: "plus.square")
                     }
                     .disabled(disabled)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func projectsList(_ projects: [Project]) -> some View {
+        ProjectsSearchResults(projects: projects, searchText: searchText) { project in
+            if project.displayName.isEmpty {
+                ProjectName(project: project)
+                    .onAppear { disabled = true }
+                    .onDisappear { disabled = false }
+            } else {
+                VStack {
+                    NavigationLink(value: project) {
+                        ProjectRow(project: project)
+                    }
+                }
+                .disabled(disabled)
+            }
+        }
+        .onOpenURL(perform: { url in
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+            guard let host = components?.host else { return }
+            let projectID = UUID(uuidString: host)
+            let project = projects.first { $0.id == projectID }
+            
+            if let project, navigator.path.last?.id != projectID {
+                navigator.path.append(project)
+            }
+        })
+        .overlay {
+            if projects.isEmpty, searchText.isEmpty {
+                switch screen {
+                case .all, .open:
+                    ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
+                case .closed:
+                    ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
+                case .tag(let name, _):
+                    ContentUnavailableView("There are currently no Projects tagged with \"\(name)\".", systemImage: "tag")
+                default:
+                    EmptyView()
                 }
             }
         }

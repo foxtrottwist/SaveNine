@@ -498,9 +498,6 @@
         }
       }
     },
-    "Hello, World!" : {
-
-    },
     "High" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -532,6 +529,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "Label" : {
       "localizations" : {
@@ -1083,7 +1083,18 @@
         }
       }
     },
+    "There are currently no Projects tagged with \"%@\"." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are currently no Projects tagged with \"%@\"."
+          }
+        }
+      }
+    },
     "There are currently no Projects tagged with %@." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
