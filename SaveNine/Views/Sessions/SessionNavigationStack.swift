@@ -15,7 +15,10 @@ struct SessionNavigationStack: View {
     var body: some View {
         NavigationStack {
             QueryView(
-                FetchDescriptor<Session>(sortBy: [SortDescriptor(\.endDate, order: .reverse)])
+                FetchDescriptor<Session>(
+                    predicate: #Predicate { $0.endDate != nil }, 
+                    sortBy: [SortDescriptor(\.endDate, order: .reverse)]
+                )
             ) { sessions in
                 if sessions.isEmpty {
                     ContentUnavailableView(
