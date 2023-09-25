@@ -25,14 +25,14 @@ struct ProjectNavigationStack: View {
         case .closed:
                 .project(
                     FetchDescriptor<Project>(
-                        predicate: #Predicate<Project> { $0.closed != nil && $0.closed == true },
+                        predicate: #Predicate<Project> { $0.closed == true },
                         sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
                     )
                 )
         case .open:
                 .project(
                     FetchDescriptor<Project>(
-                        predicate: #Predicate<Project> { $0.closed != nil && $0.closed == false },
+                        predicate: #Predicate<Project> { $0.closed == false },
                         sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
                     )
                 )

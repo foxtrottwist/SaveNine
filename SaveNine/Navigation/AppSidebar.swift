@@ -24,7 +24,7 @@ struct AppSidebar: View {
             
             Section("Tags") {
                 ForEach(tags) { tag in
-                    NavigationLink(value: Screen.tag(tag.displayName, tag.id!)) {
+                    NavigationLink(value: Screen.tag(name: tag.displayName, id: tag.id!)) {
                         Label(tag.displayName, systemImage: "tag")
                     }
                 }

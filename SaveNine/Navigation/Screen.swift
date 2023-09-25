@@ -13,7 +13,7 @@ enum Screen: Codable, Hashable, Identifiable, CaseIterable {
     case open
     case closed
     case sessions
-    case tag(String, UUID)
+    case tag(name: String, id: UUID)
     
     var id: Screen { self }
     
@@ -46,10 +46,8 @@ extension Screen {
     @ViewBuilder
     var destination: some View {
         switch self {
-        case .all, .open, .closed:
+        case .all, .open, .closed, .tag:
             ProjectNavigationStack(screen: self)
-        case let .tag(name, id):
-            ProjectNavigationStack(screen: .tag(name, id))
         case .sessions:
             SessionNavigationStack()
         }

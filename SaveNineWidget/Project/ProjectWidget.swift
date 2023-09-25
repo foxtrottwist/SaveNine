@@ -21,7 +21,7 @@ struct ProjectWidget: Widget {
         }
         .configurationDisplayName("Project")
         .description("See the most recently tracked project and access it quickly.")
-        .supportedFamilies([ .accessoryRectangular, .systemSmall, .systemMedium])
+        .supportedFamilies([ .accessoryRectangular, .systemSmall])
     }
 }
 

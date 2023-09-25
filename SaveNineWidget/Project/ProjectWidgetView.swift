@@ -17,7 +17,7 @@ struct ProjectWidgetView: View {
     var body: some View {
         if let project = entry.project {
             switch family {
-            case .systemSmall, .systemMedium:
+            case .systemSmall:
                 ProjectSnapshotView(project: project)
             case .accessoryRectangular:
                 HStack {
@@ -38,7 +38,7 @@ struct ProjectWidgetView: View {
                     }
                 }
                 .widgetURL(projectURL(id: project.id!))
-            case .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
+            case .systemMedium, .systemLarge, .systemExtraLarge, .accessoryCircular, .accessoryInline:
                 EmptyView()
             @unknown default:
                 EmptyView()
