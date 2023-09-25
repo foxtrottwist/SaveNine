@@ -130,7 +130,18 @@
         }
       }
     },
+    "Are you sure you want to cancel the timer? No time will be tracked." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to cancel the timer? No time will be tracked."
+          }
+        }
+      }
+    },
     "Are you sure you want to clear the timer? No time will be tracked." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

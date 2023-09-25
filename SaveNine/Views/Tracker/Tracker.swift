@@ -12,9 +12,8 @@ struct Tracker: View {
     @Environment (\.modelContext) private var modelContext
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var start: Date?
-    @State private var showingClearConfirm = false
+    @State private var showingCancelConfirm = false
     @State private var showingStopWatchSheet = false
-    @State private var tracking = false
     
     init(project: Project) {
         self.project = project
@@ -22,9 +21,8 @@ struct Tracker: View {
         if let session = project.projectSessions.first {
             _label = State(wrappedValue: session.sessionLabel)
             
-            if let tracking = project.tracking, tracking {
+            if project.tracking ?? false {
                 _start = State(wrappedValue: session.startDate)
-                _tracking = State(wrappedValue: tracking)
             }
         }
     }
@@ -32,7 +30,7 @@ struct Tracker: View {
     var body: some View {
         StopwatchSafeAreaInset(
             start: start,
-            tracking: tracking,
+            tracking: project.tracking ?? false,
             startAction: startTimer,
             stopAction: stopTimer,
             onTap: { showingStopWatchSheet.toggle() }
@@ -47,7 +45,7 @@ struct Tracker: View {
                 HStack {
                     VStack {
                         Button {
-                            showingClearConfirm.toggle()
+                            showingCancelConfirm.toggle()
                         } label: {
                             Text("Cancel")
                                 .padding()
@@ -57,12 +55,12 @@ struct Tracker: View {
                     .padding()
                     .background(.ultraThickMaterial)
                     .clipShape(Circle())
-                    .disabled(!tracking)
+                    .disabled(!(project.tracking ?? false))
                     
                     Spacer()
                     
                     VStack {
-                        if tracking {
+                        if project.tracking ?? false {
                             Button {
                                 Task {
                                     await stopTimer()
@@ -88,7 +86,7 @@ struct Tracker: View {
             }
             .presentationDetents([.fraction(0.4)])
             .presentationDragIndicator(.visible)
-            .confirmationDialog("Are you sure you want to clear the timer? No time will be tracked.", isPresented: $showingClearConfirm, titleVisibility: .visible) {
+            .confirmationDialog("Are you sure you want to cancel the timer? No time will be tracked.", isPresented: $showingCancelConfirm, titleVisibility: .visible) {
                 Button("Cancel Timer", role: .destructive) {
                     Task {
                         await cancelTimer()
@@ -100,7 +98,7 @@ struct Tracker: View {
     
     private func startTimer() {
         start = Date()
-        tracking = true
+        project.tracking = true
         
         Timer.shared.start(for: project, date: start!)
         try! modelContext.save()
@@ -110,17 +108,17 @@ struct Tracker: View {
     
     private func stopTimer() async {
         start = nil
-        tracking = false
+        project.tracking = false
         
         await Timer.shared.stop(for: project)
         try! modelContext.save()
-         
+        
         WidgetKind.reload(.recentlyTracked)
     }
     
     private func cancelTimer() async {
         start = nil
-        tracking = false
+        project.tracking = false
         
         let currentSession = await Timer.shared.cancel(for: project)
         guard let currentSession else { return }
