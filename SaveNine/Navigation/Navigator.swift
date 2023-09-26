@@ -13,7 +13,6 @@ import Observation
 final class Navigator {
     var path: [Project] = []
     var selection: Screen? = .open
-    
     let subject = PassthroughSubject<String?, Never>()
     
     var selectedTab: String? {
