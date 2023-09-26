@@ -100,7 +100,7 @@ struct Tracker: View {
         start = Date()
         project.tracking = true
         
-        Timer.shared.start(for: project, date: start!)
+        Timer.shared.start(for: project, date: start!, label: label)
         try! modelContext.save()
         
         WidgetKind.reload(.recentlyTracked)
@@ -110,7 +110,7 @@ struct Tracker: View {
         start = nil
         project.tracking = false
         
-        await Timer.shared.stop(for: project)
+        await Timer.shared.stop(for: project, label: label)
         try! modelContext.save()
         
         WidgetKind.reload(.recentlyTracked)

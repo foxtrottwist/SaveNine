@@ -21,8 +21,8 @@ final class Timer {
         return currentSession
     }
     
-    func start(for project: Project, date: Date) {
-        let session = Session(label: nil, startDate: date, project: project)
+    func start(for project: Project, date: Date, label: String? = nil) {
+        let session = Session(label: label, startDate: date, project: project)
         
         project.tracking = true
         project.sessions?.append(session)
@@ -30,12 +30,13 @@ final class Timer {
         TimerActivity.shared.requestLiveActivity(project: project, date: date)
     }
     
-    func stop(for project: Project) async {
+    func stop(for project: Project, label: String? = nil) async {
         let currentSession = project.projectSessions.first
         let endDate = Date()
         
         currentSession?.endDate = endDate
         currentSession?.duration = endDate.timeIntervalSince(currentSession!.startDate!)
+        currentSession?.label = label
         project.modificationDate = endDate
         project.tracking = false
         
