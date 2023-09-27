@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ProjectNavigationStack: View {
     let screen: Screen
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var disabled = false
     @State private var navigator = Navigator.shared
     @State private var searchText = ""
@@ -44,40 +45,49 @@ struct ProjectNavigationStack: View {
     }
     
     var body: some View {
-        NavigationStack(path: $navigator.path) {
-            Group {
-                switch fetchDescriptor {
-                case .project(let fetchDescriptor):
-                    QueryView(fetchDescriptor) { projects in
-                        projectsList(projects)
-                    }
-                case .tag(let fetchDescriptor):
-                    QueryView(fetchDescriptor) { tags in
-                        if let projects = tags.first?.projects {
-                            projectsList(projects)
-                        }
-                    }
-                }
+        if prefersTabNavigation {
+            NavigationStack(path: $navigator.path) {
+                content
             }
-            .listStyle(.inset)
-            .navigationDestination(for: Project.self) { project in
-                ProjectDetail(project: project)
-            }
-            .navigationTitle(screen.title)
-            .searchable(text: $searchText, placement: .navigationBarDrawer)
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addProject) {
-                        Label("Add Project", systemImage: "plus.square")
-                    }
-                    .disabled(disabled)
-                }
+        } else {
+            NavigationStack {
+                content
             }
         }
     }
     
-    @ViewBuilder
-    func projectsList(_ projects: [Project]) -> some View {
+    private var content: some View {
+        Group {
+            switch fetchDescriptor {
+            case .project(let fetchDescriptor):
+                QueryView(fetchDescriptor) { projects in
+                    projectsList(projects)
+                }
+            case .tag(let fetchDescriptor):
+                QueryView(fetchDescriptor) { tags in
+                    if let projects = tags.first?.projects {
+                        projectsList(projects)
+                    }
+                }
+            }
+        }
+        .listStyle(.inset)
+        .navigationDestination(for: Project.self) { project in
+            ProjectDetail(project: project)
+        }
+        .navigationTitle(screen.title)
+        .searchable(text: $searchText, placement: .navigationBarDrawer)
+        .toolbar {
+            ToolbarItem {
+                Button(action: addProject) {
+                    Label("Add Project", systemImage: "plus.square")
+                }
+                .disabled(disabled)
+            }
+        }
+    }
+    
+    private func projectsList(_ projects: [Project]) -> some View {
         ProjectsSearchResults(projects: projects, searchText: searchText) { project in
             if project.displayName.isEmpty {
                 ProjectName(project: project)
