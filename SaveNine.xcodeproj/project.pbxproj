@@ -65,6 +65,8 @@
 		65D32BB82A79AB1300AC9F6B /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D32BB52A79AB1300AC9F6B /* Session.swift */; };
 		65D32BB92A79AB1300AC9F6B /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D32BB62A79AB1300AC9F6B /* Project.swift */; };
 		65D32BBA2A79AB1300AC9F6B /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D32BB72A79AB1300AC9F6B /* Tag.swift */; };
+		65D4B5AD2B0DAF5000D50D71 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B5AC2B0DAF5000D50D71 /* Marker.swift */; };
+		65D4B5AE2B0DAF5000D50D71 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B5AC2B0DAF5000D50D71 /* Marker.swift */; };
 		65DBEA4F2A7BDD4600788216 /* DefaultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */; };
 		65DBEA502A7BDD6800788216 /* DefaultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */; };
 		65DBEA512A7BDD7500788216 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D32BB52A79AB1300AC9F6B /* Session.swift */; };
@@ -177,6 +179,7 @@
 		65D32BB52A79AB1300AC9F6B /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		65D32BB62A79AB1300AC9F6B /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		65D32BB72A79AB1300AC9F6B /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		65D4B5AC2B0DAF5000D50D71 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		65DBEA4E2A7BDD4600788216 /* DefaultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLabel.swift; sourceTree = "<group>"; };
 		65DD6DC7299D299B00FA1E48 /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		65E530FF2A76AB5300760FE9 /* ProjectTagsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTagsSheet.swift; sourceTree = "<group>"; };
@@ -412,6 +415,7 @@
 		65D32BBB2A79AB1D00AC9F6B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				65D4B5AC2B0DAF5000D50D71 /* Marker.swift */,
 				65D32BB62A79AB1300AC9F6B /* Project.swift */,
 				65D32BB52A79AB1300AC9F6B /* Session.swift */,
 				65D32BB72A79AB1300AC9F6B /* Tag.swift */,
@@ -584,6 +588,7 @@
 				65F4A7322966826E00CABB3C /* Date+Extension.swift in Sources */,
 				65DBEA532A7BDD7500788216 /* Project.swift in Sources */,
 				65F4A7302965E5B900CABB3C /* WidgetKind.swift in Sources */,
+				65D4B5AE2B0DAF5000D50D71 /* Marker.swift in Sources */,
 				65F4A72D2965BD0300CABB3C /* UserDefaults+Extension.swift in Sources */,
 				652454F22A815F270022A1A2 /* ProjectEntity.swift in Sources */,
 				65CC0E262A7F3E36001E727D /* ToggleTimer.swift in Sources */,
@@ -620,6 +625,7 @@
 				659FDA6D28E28EC900899A2E /* ProjectRow.swift in Sources */,
 				65F4A737296684FC00CABB3C /* Double+Extension.swift in Sources */,
 				65EA44CC29A6F1BC00EE9BF0 /* ProjectFile.swift in Sources */,
+				65D4B5AD2B0DAF5000D50D71 /* Marker.swift in Sources */,
 				65A2D3432A868606004B2421 /* Timer.swift in Sources */,
 				65D32BBA2A79AB1300AC9F6B /* Tag.swift in Sources */,
 				653899DB29A449AE008E39B4 /* AppIcon.swift in Sources */,
