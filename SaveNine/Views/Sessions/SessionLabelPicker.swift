@@ -14,8 +14,8 @@ struct SessionLabelPicker: View {
     @State private var name = ""
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false
-    
-    init(selectedLabel: Binding<String>, disableAddLabel: Bool = false) {
+   // Temporarily disabled adding labels; disabledAddLabel default set to true.
+    init(selectedLabel: Binding<String>, disableAddLabel: Bool = true) {
         self.disableAddLabel = disableAddLabel
         _selectedLabel = selectedLabel
         _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
