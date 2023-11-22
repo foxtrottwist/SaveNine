@@ -43,8 +43,8 @@ struct SessionDetail: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Session Details")
-            .onChange(of: startDate) { updateDuration() }
             .onChange(of: endDate) { updateDuration() }
+            .onChange(of: startDate) { updateDuration() }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
@@ -65,6 +65,10 @@ struct SessionDetail: View {
     }
     
     private func updateSession() {
+        if label != session.displayLabel {
+            Marker.updateLastUsed(for: label)
+        }
+       
         session.label = label
         session.startDate = startDate
         session.endDate = endDate

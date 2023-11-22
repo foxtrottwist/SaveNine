@@ -29,4 +29,10 @@ extension Marker {
     static var preview: Marker {
         .init(name: "Quilting")
     }
+    
+    static func updateLastUsed(for name: String) {
+        let modelContext = ModelContext(Persistence.container)
+        let marker = try? modelContext.fetch(FetchDescriptor<Marker>(predicate: #Predicate { $0.name == name })).first
+        marker?.lastUsed = .now
+    }
 }
