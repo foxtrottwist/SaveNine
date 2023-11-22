@@ -8,10 +8,11 @@
 import Combine
 import Foundation
 import Observation
+import SwiftUI
 
 @Observable
 final class Navigator {
-    var path: [Project] = []
+    var path = NavigationPath()
     var selection: Screen? = .open
     let subject = PassthroughSubject<String?, Never>()
     

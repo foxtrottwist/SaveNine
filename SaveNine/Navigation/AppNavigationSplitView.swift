@@ -18,7 +18,7 @@ struct AppNavigationSplitView: View {
             selection?.destination
                 .onReceive(Navigator.shared.subject, perform: { tab in
                     if tab == Self.tag, !Navigator.shared.path.isEmpty {
-                        Navigator.shared.path = []
+                        Navigator.shared.path = NavigationPath()
                     }
                 })
         }

@@ -8,35 +8,34 @@
 import SwiftData
 import SwiftUI
 
+private enum Descriptor {
+    case project(FetchDescriptor<Project>)
+    case tag(FetchDescriptor<Tag>)
+}
+
 struct ProjectNavigationStack: View {
     let screen: Screen
+    private let fetchDescriptor: Descriptor
     @Environment(\.modelContext) private var modelContext
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var disabled = false
     @State private var navigator = Navigator.shared
     @State private var searchText = ""
     
-    private enum Descriptor {
-        case project(FetchDescriptor<Project>)
-        case tag(FetchDescriptor<Tag>)
-    }
-    
-    private var fetchDescriptor: Descriptor {
-        switch screen {
+    init(screen: Screen) {
+        self.screen = screen
+        
+        fetchDescriptor = switch screen {
         case .closed:
-                .project(
-                    FetchDescriptor<Project>(
-                        predicate: #Predicate<Project> { $0.closed == true },
-                        sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
-                    )
-                )
+                .project(FetchDescriptor<Project>(
+                    predicate: #Predicate<Project> { $0.closed == true },
+                    sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+                ))
         case .open:
-                .project(
-                    FetchDescriptor<Project>(
-                        predicate: #Predicate<Project> { $0.closed == false },
-                        sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
-                    )
-                )
+                .project(FetchDescriptor<Project>(
+                    predicate: #Predicate<Project> { $0.closed == false },
+                    sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+                ))
         case .tag(_, let id):
                 .tag(FetchDescriptor<Tag>(predicate: #Predicate { $0.id == id }, sortBy: []))
         default:
@@ -45,44 +44,34 @@ struct ProjectNavigationStack: View {
     }
     
     var body: some View {
-        if prefersTabNavigation {
-            NavigationStack(path: $navigator.path) {
-                content
-            }
-        } else {
-            NavigationStack {
-                content
-            }
-        }
-    }
-    
-    private var content: some View {
-        Group {
-            switch fetchDescriptor {
-            case .project(let fetchDescriptor):
-                QueryView(fetchDescriptor) { projects in
-                    projectsList(projects)
-                }
-            case .tag(let fetchDescriptor):
-                QueryView(fetchDescriptor) { tags in
-                    if let projects = tags.first?.projects {
+        NavigationStack(path: $navigator.path) {
+            Group {
+                switch fetchDescriptor {
+                case .project(let fetchDescriptor):
+                    QueryView(fetchDescriptor) { projects in
                         projectsList(projects)
+                    }
+                case .tag(let fetchDescriptor):
+                    QueryView(fetchDescriptor) { tags in
+                        if let projects = tags.first?.projects {
+                            projectsList(projects)
+                        }
                     }
                 }
             }
-        }
-        .listStyle(.inset)
-        .navigationDestination(for: Project.self) { project in
-            ProjectDetail(project: project)
-        }
-        .navigationTitle(screen.title)
-        .searchable(text: $searchText, placement: .navigationBarDrawer)
-        .toolbar {
-            ToolbarItem {
-                Button(action: addProject) {
-                    Label("Add Project", systemImage: "plus.square")
+            .listStyle(.inset)
+            .navigationDestination(for: Project.self) { project in
+                ProjectDetail(project: project)
+            }
+            .navigationTitle(screen.title)
+            .searchable(text: $searchText, placement: .navigationBarDrawer)
+            .toolbar {
+                ToolbarItem {
+                    Button(action: addProject) {
+                        Label("Add Project", systemImage: "plus.square")
+                    }
+                    .disabled(disabled)
                 }
-                .disabled(disabled)
             }
         }
     }
@@ -108,7 +97,7 @@ struct ProjectNavigationStack: View {
             let projectID = UUID(uuidString: host)
             let project = projects.first { $0.id == projectID }
             
-            if let project, navigator.path.last?.id != projectID {
+            if let project /*, navigator.path.last?.id != projectID*/ {
                 navigator.path.append(project)
             }
         })
