@@ -26,11 +26,12 @@ struct ToggleTimer: LiveActivityIntent {
         let id = project.id
         let fetchDescriptor = FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
         guard let project = try! modelContext.fetch(fetchDescriptor).first else { return .result() }
+        let label = project.projectSessions.first?.label
         
         if project.tracking ?? false {
-            await Timer.shared.stop(for: project)
+            await Timer.shared.stop(for: project, label: label)
         } else {
-            Timer.shared.start(for: project, date: .now)
+            Timer.shared.start(for: project, date: .now, label: label)
         }
         
         try! modelContext.save()

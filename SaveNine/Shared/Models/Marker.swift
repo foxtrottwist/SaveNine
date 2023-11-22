@@ -34,5 +34,6 @@ extension Marker {
         let modelContext = ModelContext(Persistence.container)
         let marker = try? modelContext.fetch(FetchDescriptor<Marker>(predicate: #Predicate { $0.name == name })).first
         marker?.lastUsed = .now
+        try! modelContext.save()
     }
 }

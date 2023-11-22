@@ -40,6 +40,7 @@ final class Timer {
         project.modificationDate = endDate
         project.tracking = false
         
+        if let label { Marker.updateLastUsed(for: label) }
         await TimerActivity.shared.endLiveActivity(date: endDate)
     }
 }
