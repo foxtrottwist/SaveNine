@@ -76,7 +76,7 @@ extension Project {
     
     var sessionsShareLinkItem: String {
         let sessions = projectSessions.sorted(using: KeyPathComparator(\.startDate)).map {
-            "\($0.sessionLabel)\n\($0.formattedStartDate)\n\( $0.formattedDuration)"
+            "\($0.displayLabel)\n\($0.formattedStartDate)\n\( $0.formattedDuration)"
          }.reduce("") { "\($0)\n\n\($1)" }
         
         let sharedSessions = """

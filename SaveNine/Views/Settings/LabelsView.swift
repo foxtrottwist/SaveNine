@@ -5,21 +5,23 @@
 //  Created by Lawrence Horne on 2/20/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct LabelsView: View {
-    @Environment(SessionLabelController.self) private var sessionLabelController
+    @Environment (\.modelContext) private var modelContext
+    @Query(sort: \Marker.name, order: .forward) private var markers: [Marker]
     
     var body: some View {
         List {
-            ForEach(sessionLabelController.labels) { label in
+            ForEach(markers) { marker in
                 HStack {
-                    Text(label.name)
+                    Text(marker.displayName)
                     Spacer()
                 }
                 .contextMenu {
                     Button {
-                        sessionLabelController.remove(label: label)
+                    // TODO: Implement new context menu delete functionality.
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
@@ -35,15 +37,12 @@ struct LabelsView: View {
     
     private func deleteLabel(at offsets: IndexSet) {
             for offset in offsets {
-                let label = sessionLabelController.labels[offset]
-                sessionLabelController.remove(label: label)
+                let marker = markers[offset]
+                modelContext.delete(marker)
             }
         }
 }
 
-struct LabelsView_Previews: PreviewProvider {
-    static var previews: some View {
-        LabelsView()
-            .environment(SessionLabelController.preview)
-    }
+#Preview {
+    LabelsView()
 }

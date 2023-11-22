@@ -39,9 +39,9 @@ struct SessionRow: View {
                     sessionDateDescription
                     
                     HStack {
-                        Text(session.sessionLabel)
+                        Text(session.displayLabel)
                             .font(.callout)
-                            .foregroundColor(session.sessionLabel == DefaultLabel.none.rawValue ? .clear : nil)
+                            .foregroundColor(session.displayLabel == DefaultLabel.none.rawValue ? .clear : nil)
                         
                         Spacer()
                         Text(session.formattedDuration)

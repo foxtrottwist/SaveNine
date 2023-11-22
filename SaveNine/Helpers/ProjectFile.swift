@@ -72,7 +72,7 @@ struct SessionDocument: Codable {
             SessionDocument(
                 duration: session.duration!,
                 endDate: session.endDate!,
-                label: session.sessionLabel,
+                label: session.displayLabel,
                 startDate: session.startDate!
             )
         }

@@ -49,7 +49,7 @@ struct SessionNavigationStack: View {
                             Label("Clear Filter", systemImage: "xmark.circle")
                         }
                         
-                        SessionLabelPicker(selectedLabel: $selectedLabel, disableAddLabel: true)
+                        SessionLabelPicker(selectedLabel: $selectedLabel, disabled: true)
                     } label: {
                         Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                     }

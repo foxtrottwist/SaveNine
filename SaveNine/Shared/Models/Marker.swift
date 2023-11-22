@@ -14,7 +14,7 @@ class Marker {
     var lastUsed: Date?
     var name: String?
     
-    init(id: UUID? = UUID(), lastUsed: Date? = nil, name: String? = nil) {
+    init(id: UUID? = UUID(), lastUsed: Date? = nil, name: String?) {
         self.id = id
         self.lastUsed = lastUsed
         self.name = name
@@ -22,6 +22,10 @@ class Marker {
 }
 
 extension Marker {
+    var displayName: String {
+        name ?? ""
+    }
+    
     static var preview: Marker {
         .init(name: "Quilting")
     }

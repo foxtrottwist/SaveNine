@@ -28,6 +28,10 @@ public class Session {
 }
 
 extension Session {
+    var displayLabel: String {
+        label ?? DefaultLabel.none.rawValue
+    }
+    
     var formattedStartDate: String {
         guard let startDate else { return "" }
         return startDate.formatted(date: .abbreviated, time: .shortened)
@@ -40,10 +44,6 @@ extension Session {
     
     var formattedDuration: String {
         duration!.formattedDuration
-    }
-    
-    var sessionLabel: String {
-        label ?? DefaultLabel.none.rawValue
     }
     
     static var preview: Session {

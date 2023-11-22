@@ -5,31 +5,33 @@
 //  Created by Lawrence Horne on 2/9/23.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SessionLabelPicker: View {
-    let disableAddLabel: Bool
+    let disabled: Bool
     @Binding var selectedLabel: String
-    @Environment(SessionLabelController.self) var sessionLabelController
+    @Environment (\.modelContext) private var modelContext
     @State private var name = ""
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false
-   // Temporarily disabled adding labels; disabledAddLabel default set to true.
-    init(selectedLabel: Binding<String>, disableAddLabel: Bool = true) {
-        self.disableAddLabel = disableAddLabel
+    @Query private var markers: [Marker]
+   
+    init(selectedLabel: Binding<String>, disabled: Bool = false) {
+        self.disabled = disabled
         _selectedLabel = selectedLabel
         _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
+        _markers = Query(sort: \Marker.lastUsed, order: disabled ? .forward : .reverse)
     }
     
     var body: some View {
         Picker("Label", selection: $selectedLabel) {
-            ForEach(sessionLabelController.labels) { sessionLabel in
-                Text(sessionLabel.name).tag(sessionLabel.name)
+            ForEach(markers) { marker in
+                Text(marker.displayName).tag(marker.displayName)
             }
             
-            Text(DefaultLabel.none.rawValue).tag(DefaultLabel.none.rawValue)
-            
-            if !disableAddLabel {
+            if !disabled {
+                Text(DefaultLabel.none.rawValue).tag(DefaultLabel.none.rawValue)
                 Divider()
                 Text(DefaultLabel.addLabel.rawValue).tag(DefaultLabel.addLabel.rawValue)
             }
@@ -45,21 +47,19 @@ struct SessionLabelPicker: View {
         }
     }
     
-    func addLabel() {
-        sessionLabelController.add(name: name)
+    private func addLabel() {
+        modelContext.insert(Marker(name: name))
         previousSelectedLabel = name
         selectedLabel = name
         name = ""
     }
     
-    func cancelAction() {
+    private func cancelAction() {
         name = ""
     }
 }
 
-struct SessionLabelPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        SessionLabelPicker(selectedLabel: .constant("None"))
-            .environment(SessionLabelController.preview)
-    }
+#Preview {
+    SessionLabelPicker(selectedLabel: .constant("Quilting"))
 }
+

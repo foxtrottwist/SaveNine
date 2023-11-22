@@ -19,7 +19,7 @@ struct Tracker: View {
         self.project = project
         
         if let session = project.projectSessions.first {
-            _label = State(wrappedValue: session.sessionLabel)
+            _label = State(wrappedValue: session.displayLabel)
             
             if project.tracking ?? false {
                 _start = State(wrappedValue: session.startDate)
