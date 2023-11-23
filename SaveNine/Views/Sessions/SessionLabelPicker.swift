@@ -48,8 +48,9 @@ struct SessionLabelPicker: View {
     }
     
     private func addLabel() {
-        let isAllowed = DefaultLabel.allCases.allSatisfy { $0.rawValue.localizedCaseInsensitiveCompare(name) != ComparisonResult.orderedSame }
-        let isUnique = markers.allSatisfy { $0.name?.localizedCaseInsensitiveCompare(name) != ComparisonResult.orderedSame }
+        let trimmedName = name.trimmingCharacters(in: .whitespaces)
+        let isAllowed = DefaultLabel.allCases.allSatisfy { $0.rawValue.localizedCaseInsensitiveCompare(trimmedName) != ComparisonResult.orderedSame }
+        let isUnique = markers.allSatisfy { $0.name?.localizedCaseInsensitiveCompare(trimmedName) != ComparisonResult.orderedSame }
         
         if isAllowed && isUnique {
             modelContext.insert(Marker(name: name))
