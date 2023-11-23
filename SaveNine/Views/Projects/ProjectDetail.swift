@@ -122,6 +122,5 @@ struct ProjectDetail: View {
 
 #Preview {
     ProjectDetail(project: Project.preview)
-        .environment(SessionLabelController.preview)
 }
 

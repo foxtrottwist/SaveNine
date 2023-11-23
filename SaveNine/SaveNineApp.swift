@@ -9,12 +9,10 @@ import SwiftUI
 
 @main
 struct SaveNineApp: App {
-    var sessionLabelController = SessionLabelController()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(sessionLabelController)
                 .modelContainer(Persistence.container)
         }
     }

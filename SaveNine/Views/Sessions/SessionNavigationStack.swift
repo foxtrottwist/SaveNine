@@ -71,5 +71,4 @@ struct SessionNavigationStack: View {
 
 #Preview {
     SessionNavigationStack()
-        .environment(SessionLabelController())
 }

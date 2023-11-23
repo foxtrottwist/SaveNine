@@ -132,6 +132,5 @@ struct Tracker: View {
 
 #Preview {
     Tracker(project: Project.preview)
-        .environment(SessionLabelController())
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
 }
