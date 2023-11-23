@@ -12,9 +12,11 @@ import SwiftUI
 struct ProjectDetail: View {
     var project: Project
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var name = ""
     @State private var detail = ""
     @State private var document: ProjectFile?
+    @State private var showingDeleteConfirmation = false
     @State private var showingFileExporter = false
     @State private var showingTagsSheet = false
     
@@ -106,6 +108,13 @@ struct ProjectDetail: View {
                     }
                 }
                 
+                Button {
+                    showingDeleteConfirmation = true
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+                .disabled(project.tracking ?? false)
+                
                 Divider()
                 
                 Button {
@@ -115,6 +124,15 @@ struct ProjectDetail: View {
                     Label("Export", systemImage: "square.and.arrow.up")
                 }
                 .disabled(project.tracking ?? false)
+            }
+        }
+        .confirmationDialog(
+            "Are you sure you want to delete this project? This cannot be undone.",
+            isPresented: $showingDeleteConfirmation
+        ) {
+            Button("Delete Project", role: .destructive) {
+                dismiss()
+                modelContext.delete(project)
             }
         }
     }

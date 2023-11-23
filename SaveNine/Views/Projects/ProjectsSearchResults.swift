@@ -30,19 +30,10 @@ struct ProjectsSearchResults<Content: View>: View {
     var body: some View {
         List {
             ForEach(searchResult, content: content)
-                .onDelete(perform: deleteProjects)
         }
         .overlay {
             if searchResult.isEmpty, !searchText.isEmpty {
                 ContentUnavailableView.search
-            }
-        }
-    }
-    
-    private func deleteProjects(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(projects[index])
             }
         }
     }
