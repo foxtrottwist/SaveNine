@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DefaultLabel: String {
+enum DefaultLabel: String, CaseIterable {
     case addLabel = "Add Label"
     case none = "None"
 }
