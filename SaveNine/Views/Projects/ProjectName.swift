@@ -23,7 +23,7 @@ struct ProjectName: View {
             .submitLabel(.done)
     }
     
-    func submitProjectName() {
+    private func submitProjectName() {
         withAnimation {
             if name.isEmpty {
                 // If a user starts to add a project but fails to give

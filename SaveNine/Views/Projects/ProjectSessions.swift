@@ -36,7 +36,7 @@ struct ProjectSessions: View {
         }
     }
     
-    func deleteSession(at offsets: IndexSet) {
+    private func deleteSession(at offsets: IndexSet) {
         for offset in offsets {
             let session = project.projectSessions[offset]
             modelContext.delete(session)

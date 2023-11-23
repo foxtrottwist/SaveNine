@@ -117,7 +117,7 @@ struct ProjectNavigationStack: View {
         }
     }
     
-    func addProject() {
+    private func addProject() {
         modelContext.insert(Project(name: ""))
     }
 }
