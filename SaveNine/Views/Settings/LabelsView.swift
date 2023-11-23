@@ -19,13 +19,13 @@ struct LabelsView: View {
                     Text(marker.displayName)
                     Spacer()
                 }
-                .contextMenu {
-                    Button {
-                    // TODO: Implement new context menu delete functionality.
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                }
+                // TODO: Implement new context menu delete functionality.
+//                .contextMenu {
+//                    Button {
+//                    } label: {
+//                        Label("Delete", systemImage: "trash")
+//                    }
+//                }
             }
             .onDelete(perform: deleteLabel)
         }

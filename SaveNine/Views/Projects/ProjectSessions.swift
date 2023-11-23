@@ -30,8 +30,8 @@ struct ProjectSessions: View {
                 ShareLink(item: project.sessionsShareLinkItem) {
                     Label ("Export Sessions", systemImage: "square.and.arrow.up")
                 }
-                
-                EditButton()
+                // TODO: Fix use of edit button crashing app.
+//                EditButton()
             }
         }
     }
