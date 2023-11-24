@@ -320,6 +320,7 @@
 				65E531012A76EB1B00760FE9 /* PrefersTabNavigationEnvironmentKey.swift */,
 				65EA44CB29A6F1BC00EE9BF0 /* ProjectFile.swift */,
 				65FC92D5299FFD4B008871A5 /* SortOption.swift */,
+				65FC92D929A11C92008871A5 /* SortController.swift */,
 				6518916529A5387300ACE985 /* StorageKey.swift */,
 			);
 			path = Helpers;
@@ -382,7 +383,6 @@
 		65D2314328CD552E00A91A47 /* SaveNine */ = {
 			isa = PBXGroup;
 			children = (
-				65F9F3A329A2E9D800D51D7B /* Controllers */,
 				659FDA6928E232A300899A2E /* Extensions */,
 				659FDA6A28E232AC00899A2E /* Helpers */,
 				65E531032A76EFF600760FE9 /* Navigation */,
@@ -459,14 +459,6 @@
 				65F4A72E2965E5B900CABB3C /* WidgetKind.swift */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		65F9F3A329A2E9D800D51D7B /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				65FC92D929A11C92008871A5 /* SortController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
