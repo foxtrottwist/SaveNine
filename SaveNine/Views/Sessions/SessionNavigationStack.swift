@@ -8,19 +8,34 @@
 import SwiftData
 import SwiftUI
 
+private enum SortBy: Identifiable, CaseIterable {
+    case endDate
+    case project
+    
+    var id: Self { self }
+}
+
+extension SortBy {
+    var description: LocalizedStringResource {
+        switch self {
+        case .endDate:
+            "End Date"
+        case .project:
+            "Project Name"
+        }
+    }
+}
+
 struct SessionNavigationStack: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
+    @State private var fetchDescriptor = FetchDescriptor<Session>(predicate: #Predicate { $0.endDate != nil }, sortBy: [SortDescriptor(\.endDate, order: .reverse)])
+    @State private var selectedSortOption: SortBy = .endDate
+    @State private var selectedSortOrder: SortOrder = .reverse
     @State private var selectedLabel: String = ""
     
     var body: some View {
         NavigationStack {
-            QueryView(
-                FetchDescriptor<Session>(
-                    predicate: #Predicate { $0.endDate != nil }, 
-                    sortBy: [SortDescriptor(\.endDate, order: .reverse)]
-                )
-            ) { sessions in
+            QueryView(fetchDescriptor) { sessions in
                 if sessions.isEmpty {
                     ContentUnavailableView(
                         "No sessions have been completed or match the current filter.",
@@ -44,8 +59,6 @@ struct SessionNavigationStack: View {
                         }
                     }
                     .listStyle(.grouped)
-                    .onChange(of: sortController.sortAscending) { sortController.save() }
-                    .onChange(of: sortController.sortOption) { sortController.save() }
                 }
             }
             .navigationTitle("Sessions")
@@ -63,15 +76,35 @@ struct SessionNavigationStack: View {
                         Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
                     }
                     
-                    SortOptionsView(
-                        sortOptions: [.project, .startDate],
-                        selectedSortOption: $sortController.sortOption,
-                        selectedSortOrder: $sortController.sortAscending
-                    )
+                    Menu {
+                        Picker("Sort Option", selection: $selectedSortOption) {
+                            ForEach(SortBy.allCases) { option in
+                                Text(option.description).tag(option)
+                            }
+                        }
+                        Picker("Sort Order", selection: $selectedSortOrder) {
+                            Text("Ascending").tag(SortOrder.forward)
+                            Text("Descending").tag(SortOrder.reverse)
+                        }
+                        
+                    } label: {
+                        Label("Sort By", systemImage: "arrow.up.arrow.down")
+                    }
+                    .onChange(of: selectedSortOption, sortBy)
+                    .onChange(of: selectedSortOrder, sortBy)
                 } label: {
                     Label("Sessions Menu", systemImage: "ellipsis.circle")
                 }
             }
+        }
+    }
+    
+    private func sortBy() {
+        switch selectedSortOption {
+        case .endDate:
+            fetchDescriptor.sortBy = [SortDescriptor(\.endDate, order: selectedSortOrder)]
+        case .project:
+            fetchDescriptor.sortBy = [SortDescriptor(\.project?.name, order: selectedSortOrder)]
         }
     }
     

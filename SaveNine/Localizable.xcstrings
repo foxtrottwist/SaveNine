@@ -478,6 +478,16 @@
         }
       }
     },
+    "End Date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End Date"
+          }
+        }
+      }
+    },
     "Ends" : {
       "localizations" : {
         "en" : {
@@ -968,6 +978,9 @@
           }
         }
       }
+    },
+    "Sort Option" : {
+
     },
     "Sort Options" : {
       "localizations" : {
