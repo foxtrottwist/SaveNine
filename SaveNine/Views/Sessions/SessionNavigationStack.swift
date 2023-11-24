@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct SessionNavigationStack: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var sortController = SortController(for: "sessionSort", defaultSort: SortOption.startDate, sortAscending: false)
     @State private var selectedLabel: String = ""
     
@@ -26,12 +27,20 @@ struct SessionNavigationStack: View {
                         systemImage: "hourglass.bottomhalf.filled"
                     )
                 } else {
-                    List(sessions) { session in
-                        VStack(alignment: .leading) {
-                            Text(session.project?.displayName ?? "")
-                                .font(.headline)
-                            
-                            SessionRow(session: session)
+                    List {
+                        ForEach(sessions) { session in
+                            VStack(alignment: .leading) {
+                                Text(session.project?.displayName ?? "")
+                                    .font(.headline)
+                                
+                                SessionRow(session: session)
+                            }
+                        }
+                        .onDelete { offsets in
+                            for offset in offsets {
+                                let session = sessions[offset]
+                                modelContext.delete(session)
+                            }
                         }
                     }
                     .listStyle(.grouped)
