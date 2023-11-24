@@ -8,30 +8,12 @@
 import SwiftData
 import SwiftUI
 
-private enum SortBy: Identifiable, CaseIterable {
-    case endDate
-    case project
-    
-    var id: Self { self }
-}
-
-extension SortBy {
-    var description: LocalizedStringResource {
-        switch self {
-        case .endDate:
-            "End Date"
-        case .project:
-            "Project Name"
-        }
-    }
-}
-
 struct SessionNavigationStack: View {
     @Environment(\.modelContext) private var modelContext
+    @SceneStorage(StorageKey.sessionsSortOptions.rawValue) private var data: Data?
     @State private var fetchDescriptor = FetchDescriptor<Session>(predicate: #Predicate { $0.endDate != nil }, sortBy: [SortDescriptor(\.endDate, order: .reverse)])
-    @State private var selectedSortOption: SortBy = .endDate
-    @State private var selectedSortOrder: SortOrder = .reverse
     @State private var selectedLabel: String = ""
+    @State private var sortValues = SortValues()
     
     var body: some View {
         NavigationStack {
@@ -77,12 +59,12 @@ struct SessionNavigationStack: View {
                     }
                     
                     Menu {
-                        Picker("Sort Option", selection: $selectedSortOption) {
-                            ForEach(SortBy.allCases) { option in
+                        Picker("Sort Option", selection: $sortValues.sortBy) {
+                            ForEach(SortOption.allCases) { option in
                                 Text(option.description).tag(option)
                             }
                         }
-                        Picker("Sort Order", selection: $selectedSortOrder) {
+                        Picker("Sort Order", selection: $sortValues.sortOrder) {
                             Text("Ascending").tag(SortOrder.forward)
                             Text("Descending").tag(SortOrder.reverse)
                         }
@@ -90,21 +72,28 @@ struct SessionNavigationStack: View {
                     } label: {
                         Label("Sort By", systemImage: "arrow.up.arrow.down")
                     }
-                    .onChange(of: selectedSortOption, sortBy)
-                    .onChange(of: selectedSortOrder, sortBy)
+                    .onChange(of: sortValues.sortBy, sortBy)
+                    .onChange(of: sortValues.sortOrder, sortBy)
                 } label: {
                     Label("Sessions Menu", systemImage: "ellipsis.circle")
                 }
             }
         }
+        .onAppear {
+            if let data {
+                sortValues.data = data
+            }
+        }
+        .onChange(of: sortValues.sortBy,  { data = sortValues.data })
+        .onChange(of: sortValues.sortOrder,  { data = sortValues.data })
     }
     
     private func sortBy() {
-        switch selectedSortOption {
+        switch sortValues.sortBy {
         case .endDate:
-            fetchDescriptor.sortBy = [SortDescriptor(\.endDate, order: selectedSortOrder)]
+            fetchDescriptor.sortBy = [SortDescriptor(\.endDate, order: sortValues.sortOrder)]
         case .project:
-            fetchDescriptor.sortBy = [SortDescriptor(\.project?.name, order: selectedSortOrder)]
+            fetchDescriptor.sortBy = [SortDescriptor(\.project?.name, order: sortValues.sortOrder)]
         }
     }
     

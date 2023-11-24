@@ -5,52 +5,42 @@
 //  Created by Lawrence Horne on 2/18/23.
 //
 
-import Combine
 import Foundation
 import Observation
 
 @Observable
-final class SortController: Codable {
-    var sortAscending: Bool
-    var sortOption: SortOption
-    
-    private var listView = ""
-    
-    init(for listView: String, defaultSort: SortOption, sortAscending: Bool) {
-        self.listView = listView
-        let url = URL.documentsDirectory.appending(path: FileExtension.append(to: listView, using: .json))
-        
-        if FileManager.default.fileExists(atPath: url.path()),
-           let data = try? Data(contentsOf: url),
-           let model = try? JSONDecoder().decode(SortController.self, from: data) {
-            self.sortAscending = model.sortAscending
-            self.sortOption = model.sortOption
-        } else {
-            self.sortOption = defaultSort
-            self.sortAscending = sortAscending
-        }
-    }
+final class SortValues: Codable {
+    var sortBy: SortOption = .endDate
+    var sortOrder: SortOrder = .reverse
     
     enum CodingKeys: String, CodingKey {
-       case sortOption, sortAscending
+        case sortBy, sortOrder
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(sortAscending, forKey: .sortAscending)
-        try container.encode(sortOption, forKey: .sortOption)
+        try container.encode(sortBy, forKey: .sortBy)
+        try container.encode(sortOrder, forKey: .sortOrder)
     }
+    
+    init() {}
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sortAscending = try container.decode(Bool.self, forKey: .sortAscending)
-        sortOption = try container.decode(SortOption.self, forKey: .sortOption)
+        sortBy = try container.decode(SortOption.self, forKey: .sortBy)
+        sortOrder = try container.decode(SortOrder.self, forKey: .sortOrder)
     }
     
-    func save() {
-        let url = URL.documentsDirectory.appending(path: FileExtension.append(to: listView, using: .json))
-        let data = try? JSONEncoder().encode(self)
-        try? data?.write(to: url)
+    var data: Data? {
+        get {
+            try? JSONEncoder().encode(self)
+        }
+        set {
+            if let data = newValue, let options = try? JSONDecoder().decode(SortValues.self, from: data) {
+                self.sortBy = options.sortBy
+                self.sortOrder = options.sortOrder
+            }
+        }
     }
 }
 

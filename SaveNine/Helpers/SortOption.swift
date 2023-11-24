@@ -7,37 +7,20 @@
 
 import Foundation
 
-enum SortOption: Codable {
-    case creationDate, name, project, startDate
+enum SortOption: Identifiable, Codable, CaseIterable {
+    case endDate
+    case project
     
-    var descriptor: String {
+    var id: Self { self }
+}
+
+extension SortOption {
+    var description: LocalizedStringResource {
         switch self {
-        case .creationDate:
-            return "Creation Date"
-        case .name:
-            return "Title"
+        case .endDate:
+            "End Date"
         case .project:
-            return "Project"
-        case .startDate:
-            return "Start Date"
-        }
-    }
-   
-    var orderAscending: (descriptor: String, value: Bool) {
-        switch self {
-        case .creationDate, .startDate:
-            return ("Oldest First", true)
-        case .name, .project:
-            return ("Ascending", true)
-        }
-    }
-    
-    var orderDescending: (descriptor: String, value: Bool) {
-        switch self {
-        case .creationDate, .startDate:
-            return ("Newest First", false)
-        case .name, .project:
-            return ("Descending", false)
+            "Project Name"
         }
     }
 }

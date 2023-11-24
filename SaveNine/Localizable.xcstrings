@@ -140,17 +140,6 @@
         }
       }
     },
-    "Are you sure you want to clear the timer? No time will be tracked." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Are you sure you want to clear the timer? No time will be tracked."
-          }
-        }
-      }
-    },
     "Are you sure you want to delete this list? All items in this list will be deleted as well." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -980,14 +969,11 @@
       }
     },
     "Sort Option" : {
-
-    },
-    "Sort Options" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sort Options"
+            "value" : "Sort Option"
           }
         }
       }
@@ -1133,17 +1119,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There are currently no Projects tagged with \"%@\"."
-          }
-        }
-      }
-    },
-    "There are currently no Projects tagged with %@." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There are currently no Projects tagged with %@."
           }
         }
       }
