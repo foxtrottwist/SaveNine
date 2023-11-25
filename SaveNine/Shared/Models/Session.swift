@@ -17,7 +17,6 @@ public class Session {
     var label: String?
     var startDate: Date?
     var project: Project?
-    var projectName: String?
 
     init(id: UUID? = UUID(), label: String?, startDate: Date?, project: Project?) {
         self.duration = 0
@@ -25,7 +24,6 @@ public class Session {
         self.label = label
         self.startDate = startDate
         self.project = project
-        self.projectName = project?.name
     }
 }
 

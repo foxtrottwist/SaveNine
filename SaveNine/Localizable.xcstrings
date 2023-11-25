@@ -519,11 +519,52 @@
       }
     },
     "Filter By" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filter By"
+          }
+        }
+      }
+    },
+    "Filter By Label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter By Label"
+          }
+        }
+      }
+    },
+    "Filter By Name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter By Name"
+          }
+        }
+      }
+    },
+    "Filter By Project Name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter By Project Name"
+          }
+        }
+      }
+    },
+    "Filters Menu" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filters Menu"
           }
         }
       }
@@ -928,6 +969,7 @@
       }
     },
     "Sessions Menu" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -959,6 +1001,7 @@
       }
     },
     "Sort By" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -969,6 +1012,7 @@
       }
     },
     "Sort Option" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -979,6 +1023,7 @@
       }
     },
     "Sort Order" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

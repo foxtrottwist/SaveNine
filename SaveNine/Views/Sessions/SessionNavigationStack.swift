@@ -10,14 +10,16 @@ import SwiftUI
 
 struct SessionNavigationStack: View {
     @Environment(\.modelContext) private var modelContext
-    @SceneStorage(StorageKey.sessionsSortOptions.rawValue) private var data: Data?
-    @State private var fetchDescriptor = FetchDescriptor<Session>(predicate: #Predicate { $0.endDate != nil }, sortBy: [SortDescriptor(\.endDate, order: .reverse)])
+    @State private var predicate = #Predicate<Session> { $0.endDate != nil }
     @State private var selectedLabel: String = ""
-    @State private var sortValues = SortValues()
+    @State private var selectedName: String = ""
+    @Query(sort: \Project.name) private var projects: [Project]
     
     var body: some View {
         NavigationStack {
-            QueryView(fetchDescriptor) { sessions in
+            QueryView(
+                FetchDescriptor<Session>(predicate: predicate, sortBy: [SortDescriptor(\.endDate, order: .reverse)])
+            ) { sessions in
                 if sessions.isEmpty {
                     ContentUnavailableView(
                         "No sessions have been completed or match the current filter.",
@@ -46,55 +48,50 @@ struct SessionNavigationStack: View {
             .navigationTitle("Sessions")
             .toolbar {
                 Menu {
-                    Menu {
-                        Button {
-                            selectedLabel.removeAll()
-                        } label: {
-                            Label("Clear Filter", systemImage: "xmark.circle")
-                        }
-                        
-                        SessionLabelPicker(selectedLabel: $selectedLabel, disabled: true)
+                    Button {
+                        selectedLabel = ""
+                        selectedName = ""
+                        predicate = #Predicate<Session> { $0.endDate != nil }
                     } label: {
-                        Label("Filter By", systemImage: "line.3.horizontal.decrease.circle")
+                        Label("Clear Filter", systemImage: "xmark.circle")
                     }
                     
                     Menu {
-                        Picker("Sort Option", selection: $sortValues.sortOption) {
-                            ForEach(SortOption.allCases) { option in
-                                Text(option.description).tag(option)
+                        SessionLabelPicker(selectedLabel: $selectedLabel, disabled: true)
+                            .onChange(of: selectedLabel) { filter() }
+                    } label: {
+                        Label("Filter By Label", systemImage: "")
+                    }
+                    Menu {
+                        Picker("Filter By Name", selection: $selectedName) {
+                            ForEach(projects) { project in
+                                Text(project.displayName).tag(project.displayName)
                             }
                         }
-                        Picker("Sort Order", selection: $sortValues.sortOrder) {
-                            Text("Ascending").tag(SortOrder.forward)
-                            Text("Descending").tag(SortOrder.reverse)
-                        }
-                        
+                        .onChange(of: selectedName) { filter() }
                     } label: {
-                        Label("Sort By", systemImage: "arrow.up.arrow.down")
+                        Label("Filter By Project Name", systemImage: "")
                     }
-                    .onChange(of: sortValues.sortOption, sortBy)
-                    .onChange(of: sortValues.sortOrder, sortBy)
                 } label: {
-                    Label("Sessions Menu", systemImage: "ellipsis.circle")
+                    Label("Filters Menu", systemImage: "line.3.horizontal.decrease.circle")
                 }
-            }
-        }
-        .task {
-            if let data {
-                sortValues.data = data
             }
         }
     }
     
-    private func sortBy() {
-        switch sortValues.sortOption {
-        case .endDate:
-            fetchDescriptor.sortBy = [SortDescriptor(\.endDate, order: sortValues.sortOrder)]
-        case .project:
-            fetchDescriptor.sortBy = [SortDescriptor(\Session.projectName, order: sortValues.sortOrder), SortDescriptor(\.endDate, order: .reverse)]
+    private func filter() {
+        if selectedLabel.isEmpty && selectedName.isEmpty {
+            return
         }
-        
-        data = sortValues.data
+        if selectedLabel.isEmpty {
+            predicate = #Predicate<Session> { $0.endDate != nil && $0.project?.name == selectedName }
+            return
+        }
+        if selectedName.isEmpty {
+            predicate = #Predicate<Session> { $0.endDate != nil && $0.label == selectedLabel }
+            return
+        }
+        predicate = #Predicate<Session> { $0.endDate != nil && $0.label == selectedLabel && $0.project?.name == selectedName }
     }
     
     static let tag: String? = "Sessions"
