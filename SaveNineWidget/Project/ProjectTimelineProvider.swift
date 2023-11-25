@@ -9,7 +9,7 @@ import WidgetKit
 
 struct ProjectTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> ProjectEntry {
-        return ProjectEntry(date: .now, project: .init(name: "Lucy Loo"))
+        return ProjectEntry(date: .now, project: Project.preview)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (ProjectEntry) -> ()) {

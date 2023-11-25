@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Tracker: View {
     var project: Project
+    @Environment(\.colorScheme) var colorScheme
     @Environment (\.modelContext) private var modelContext
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var start: Date?
@@ -28,13 +29,42 @@ struct Tracker: View {
     }
     
     var body: some View {
-        StopwatchSafeAreaInset(
-            start: start,
-            tracking: project.tracking ?? false,
-            startAction: startTimer,
-            stopAction: stopTimer,
-            onTap: { showingStopWatchSheet.toggle() }
-        )
+        ZStack {
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(.ultraThickMaterial)
+            
+            HStack {
+                HStack {
+                    TimerTimelineView(start: start)
+                        .font(.title)
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    showingStopWatchSheet.toggle()
+                }
+                
+                
+                if project.tracking ?? false {
+                    Button {
+                        Task {
+                            await stopTimer()
+                        }
+                    } label: {
+                        Label("Stop", systemImage: "stop.fill")
+                    }
+                } else {
+                    Button(action: startTimer) {
+                        Label("Start", systemImage: "play.fill")
+                    }
+                }
+            }
+            .padding()
+        }
+        .frame(height: 70)
+        .padding()
+        .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
         .sheet(isPresented: $showingStopWatchSheet) {
             VStack {
                 SessionLabelPicker(selectedLabel: $label)
