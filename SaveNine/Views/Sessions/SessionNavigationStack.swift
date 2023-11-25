@@ -59,7 +59,7 @@ struct SessionNavigationStack: View {
                     }
                     
                     Menu {
-                        Picker("Sort Option", selection: $sortValues.sortBy) {
+                        Picker("Sort Option", selection: $sortValues.sortOption) {
                             ForEach(SortOption.allCases) { option in
                                 Text(option.description).tag(option)
                             }
@@ -72,29 +72,29 @@ struct SessionNavigationStack: View {
                     } label: {
                         Label("Sort By", systemImage: "arrow.up.arrow.down")
                     }
-                    .onChange(of: sortValues.sortBy, sortBy)
+                    .onChange(of: sortValues.sortOption, sortBy)
                     .onChange(of: sortValues.sortOrder, sortBy)
                 } label: {
                     Label("Sessions Menu", systemImage: "ellipsis.circle")
                 }
             }
         }
-        .onAppear {
+        .task {
             if let data {
                 sortValues.data = data
             }
         }
-        .onChange(of: sortValues.sortBy,  { data = sortValues.data })
-        .onChange(of: sortValues.sortOrder,  { data = sortValues.data })
     }
     
     private func sortBy() {
-        switch sortValues.sortBy {
+        switch sortValues.sortOption {
         case .endDate:
             fetchDescriptor.sortBy = [SortDescriptor(\.endDate, order: sortValues.sortOrder)]
         case .project:
-            fetchDescriptor.sortBy = [SortDescriptor(\.project?.name, order: sortValues.sortOrder)]
+            fetchDescriptor.sortBy = [SortDescriptor(\Session.projectName, order: sortValues.sortOrder), SortDescriptor(\.endDate, order: .reverse)]
         }
+        
+        data = sortValues.data
     }
     
     static let tag: String? = "Sessions"

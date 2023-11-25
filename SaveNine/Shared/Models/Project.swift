@@ -42,6 +42,11 @@ public class Project {
         self.tags = tags
         self.tracking = false
     }
+    
+    func update(name: String) {
+        self.name = name
+        sessions?.forEach { $0.projectName = name }
+    }
 }
 
 extension Project {

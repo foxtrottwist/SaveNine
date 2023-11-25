@@ -10,7 +10,7 @@ import Observation
 
 @Observable
 final class SortValues: Codable {
-    var sortBy: SortOption = .endDate
+    var sortOption: SortOption = .endDate
     var sortOrder: SortOrder = .reverse
     
     enum CodingKeys: String, CodingKey {
@@ -19,7 +19,7 @@ final class SortValues: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(sortBy, forKey: .sortBy)
+        try container.encode(sortOption, forKey: .sortBy)
         try container.encode(sortOrder, forKey: .sortOrder)
     }
     
@@ -27,7 +27,7 @@ final class SortValues: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sortBy = try container.decode(SortOption.self, forKey: .sortBy)
+        sortOption = try container.decode(SortOption.self, forKey: .sortBy)
         sortOrder = try container.decode(SortOrder.self, forKey: .sortOrder)
     }
     
@@ -37,7 +37,7 @@ final class SortValues: Codable {
         }
         set {
             if let data = newValue, let options = try? JSONDecoder().decode(SortValues.self, from: data) {
-                self.sortBy = options.sortBy
+                self.sortOption = options.sortOption
                 self.sortOrder = options.sortOrder
             }
         }
