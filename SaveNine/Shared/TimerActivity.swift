@@ -26,7 +26,7 @@ final class TimerActivity {
             let contentState = ActivityContent(state: TimerAttributes.ContentState(start: date), staleDate: nil)
             
             do {
-                try liveActivity = Activity.request(attributes: attributes, content: contentState)
+                 liveActivity = try Activity.request(attributes: attributes, content: contentState)
             } catch {
                 Logger.statistics.error("\(Self.self) – \(error.localizedDescription)")
             }

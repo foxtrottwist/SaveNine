@@ -10,7 +10,8 @@ import SwiftUI
 struct Tracker: View {
     var project: Project
     @Environment(\.colorScheme) var colorScheme
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var start: Date?
     @State private var showingCancelConfirm = false
@@ -32,6 +33,11 @@ struct Tracker: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(.ultraThickMaterial)
+            
+            if label != DefaultLabel.none.rawValue {
+                Text(label)
+                    .font(prefersTabNavigation ? .subheadline : .title )
+            }
             
             HStack {
                 HStack {
