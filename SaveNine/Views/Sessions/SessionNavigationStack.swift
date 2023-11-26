@@ -13,7 +13,7 @@ struct SessionNavigationStack: View {
     @State private var predicate = #Predicate<Session> { $0.endDate != nil }
     @State private var selectedLabel: String = ""
     @State private var selectedName: String = ""
-    @Query(sort: \Project.name) private var projects: [Project]
+    @Query(filter: #Predicate<Project> { $0.closed != true }, sort: \Project.name) private var projects: [Project]
     
     var body: some View {
         NavigationStack {
@@ -60,7 +60,7 @@ struct SessionNavigationStack: View {
                         SessionLabelPicker(selectedLabel: $selectedLabel, disabled: true)
                             .onChange(of: selectedLabel) { filter() }
                     } label: {
-                        Label("Filter By Label", systemImage: "")
+                        Text("Filter By Label")
                     }
                     Menu {
                         Picker("Filter By Name", selection: $selectedName) {
@@ -70,7 +70,7 @@ struct SessionNavigationStack: View {
                         }
                         .onChange(of: selectedName) { filter() }
                     } label: {
-                        Label("Filter By Project Name", systemImage: "")
+                        Text("Filter By Project Name")
                     }
                 } label: {
                     Label("Filters Menu", systemImage: "line.3.horizontal.decrease.circle")
