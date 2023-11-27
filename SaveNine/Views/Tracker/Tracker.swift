@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct Tracker: View {
     var project: Project
     @Environment(\.colorScheme) var colorScheme
@@ -34,9 +35,9 @@ struct Tracker: View {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(.ultraThickMaterial)
             
-            if label != DefaultLabel.none.rawValue {
-                Text(label)
-                    .font(prefersTabNavigation ? .subheadline : .title )
+            if !showingStopWatchSheet {
+                ScrollingText(label)
+                    .font(.subheadline)
             }
             
             HStack {
