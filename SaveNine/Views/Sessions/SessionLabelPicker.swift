@@ -15,13 +15,12 @@ struct SessionLabelPicker: View {
     @State private var name = ""
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false
-    @Query private var markers: [Marker]
+    @Query(sort: \Marker.name, order: .forward) private var markers: [Marker]
    
     init(selectedLabel: Binding<String>, disabled: Bool = false) {
         self.disabled = disabled
         _selectedLabel = selectedLabel
         _previousSelectedLabel = State(wrappedValue: selectedLabel.wrappedValue)
-        _markers = Query(sort: \Marker.lastUsed, order: disabled ? .forward : .reverse)
     }
     
     var body: some View {
