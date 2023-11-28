@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(StorageKey.selectedAppIcon.rawValue) private var selectedAppIcon: String = "AppIcon"
+    @AppStorage(StorageKey.timerHaptic.rawValue) private var timerHaptics: Bool = true
     
     var body: some View {
         NavigationStack {
@@ -24,6 +25,14 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink("Labels", destination: LabelsView())
+                }
+                
+                Section {
+                    Toggle(isOn: $timerHaptics) {
+                       Text("Haptic")
+                    }
+                } header: {
+                    Text("Timer Feedback")
                 }
                 
                 Section {
@@ -44,7 +53,7 @@ struct SettingsView: View {
                             .tint(.secondary)
                     }
                 } header: {
-                    Text("Support")
+                    Text("About")
                 }
             }
             .navigationTitle("Settings")

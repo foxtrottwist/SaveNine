@@ -569,6 +569,16 @@
         }
       }
     },
+    "Haptic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haptic"
+          }
+        }
+      }
+    },
     "High" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1107,6 +1117,7 @@
       }
     },
     "Support" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1185,6 +1196,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Time Tracked:"
+          }
+        }
+      }
+    },
+    "Timer Feedback" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timer Feedback"
           }
         }
       }

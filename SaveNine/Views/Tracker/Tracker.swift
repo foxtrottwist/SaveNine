@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Tracker: View {
     var project: Project
+    @AppStorage(StorageKey.timerHaptic.rawValue) private var timerHaptics: Bool = true
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var modelContext
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
@@ -54,7 +55,7 @@ struct Tracker: View {
                 }
                 
                 
-                if project.tracking ?? false {
+                if tracking {
                     Button {
                         Task {
                             await stopTimer()
@@ -72,7 +73,7 @@ struct Tracker: View {
         }
         .frame(height: 70)
         .padding()
-        .sensoryFeedback(.success, trigger: tracking)
+        .sensoryFeedback(.success, trigger: timerHaptics ? tracking : timerHaptics)
         .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
         .sheet(isPresented: $showingStopWatchSheet) {
             VStack {
