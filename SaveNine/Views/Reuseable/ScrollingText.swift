@@ -36,8 +36,8 @@ struct ScrollingText: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let width = geometry.size.width * 0.25
-            let positionX = geometry.size.width / 2 + (width / 2) / 2
+            let frameWidth = geometry.size.width * 0.25
+            let positionX = geometry.size.width / 2 + (frameWidth / 4)
             let positionY = geometry.size.height / 2
             
             HStack {
@@ -47,7 +47,7 @@ struct ScrollingText: View {
                             .offset(x: offsetX)
                             .task(id: textSize) {
                                 withAnimation(.linear(duration: 10).repeatForever(autoreverses: false)) {
-                                    offsetX = -(width + (textSize.width - width))
+                                    offsetX = -(frameWidth + (textSize.width - frameWidth))
                                 }
                             }
                     } else {
@@ -59,16 +59,16 @@ struct ScrollingText: View {
                 .background(ViewGeometry()) // Monitor View size using PreferenceKey.
                 .onPreferenceChange(ViewSizeKey.self) {
                     textSize = $0
-                    animate = textSize.width > width
+                    animate = textSize.width > frameWidth
                     
                     if animate {
-                        offsetX = width + (textSize.width - width)
+                        offsetX = frameWidth + (textSize.width - frameWidth)
                     } else {
                         offsetX = 0.0
                     }
                 }
             }
-            .frame(width: width)
+            .frame(width: frameWidth, alignment: .leading)
             .clipped() // Obscures text when scrolling.
             .position(x: positionX, y: positionY)
         }
