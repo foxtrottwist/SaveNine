@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct Tracker: View {
     var project: Project
     @Environment(\.colorScheme) var colorScheme
@@ -17,6 +16,8 @@ struct Tracker: View {
     @State private var start: Date?
     @State private var showingCancelConfirm = false
     @State private var showingStopWatchSheet = false
+    
+    private var tracking: Bool { project.tracking ?? false }
     
     init(project: Project) {
         self.project = project
@@ -71,6 +72,7 @@ struct Tracker: View {
         }
         .frame(height: 70)
         .padding()
+        .sensoryFeedback(.success, trigger: tracking)
         .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
         .sheet(isPresented: $showingStopWatchSheet) {
             VStack {
