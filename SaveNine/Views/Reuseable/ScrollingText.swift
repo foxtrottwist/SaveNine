@@ -62,7 +62,7 @@ struct ScrollingText: View {
                     animate = textSize.width > frameWidth
                     
                     if animate {
-                        offsetX = frameWidth + (textSize.width - frameWidth)
+                        offsetX = frameWidth
                     } else {
                         offsetX = 0.0
                     }
