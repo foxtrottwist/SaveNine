@@ -15,7 +15,6 @@ struct Tracker: View {
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var label: String = DefaultLabel.none.rawValue
     @State private var start: Date?
-    @State private var showingCancelConfirm = false
     @State private var showingStopWatchSheet = false
     
     private var tracking: Bool { project.tracking ?? false }
@@ -115,13 +114,6 @@ struct Tracker: View {
             }
             .presentationDetents([.fraction(0.4)])
             .presentationDragIndicator(.visible)
-            .confirmationDialog("Are you sure you want to cancel the timer? No time will be tracked.", isPresented: $showingCancelConfirm, titleVisibility: .visible) {
-                Button("Cancel Timer", role: .destructive) {
-                    Task {
-                        await cancelTimer()
-                    }
-                }
-            }
         }
     }
     
