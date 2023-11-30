@@ -73,8 +73,8 @@ struct Tracker: View {
         }
         .frame(height: 70)
         .padding()
-        .sensoryFeedback(.success, trigger: timerHaptics ? tracking : timerHaptics)
         .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
+        .sensoryFeedback(.success, trigger: timerHaptics ? tracking : timerHaptics)
         .sheet(isPresented: $showingStopWatchSheet) {
             VStack {
                 SessionLabelPicker(selectedLabel: $label)
@@ -83,18 +83,11 @@ struct Tracker: View {
                     .font(.largeTitle)
                 
                 HStack {
-                    VStack {
-                        Button {
-                            showingCancelConfirm.toggle()
-                        } label: {
-                            Text("Cancel")
-                                .padding()
-                                .contentShape(Circle())
+                    CancelButton {
+                        Task {
+                            await cancelTimer()
                         }
                     }
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .clipShape(Circle())
                     .disabled(!(project.tracking ?? false))
                     
                     Spacer()
@@ -173,4 +166,30 @@ struct Tracker: View {
 #Preview {
     Tracker(project: Project.preview)
         .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+}
+
+// Moved cancel button to separate view to solve confirmationDialog reappearing momentarily after pressing one of the dialog buttons.
+struct CancelButton: View {
+    let action: () -> Void
+    @State private var showingCancelConfirm = false
+    
+    var body: some View {
+        VStack {
+            Button {
+                showingCancelConfirm.toggle()
+            } label: {
+                Text("Cancel")
+                    .padding()
+                    .contentShape(Circle())
+            }
+        }
+        .padding()
+        .background(.ultraThickMaterial)
+        .clipShape(Circle())
+        .confirmationDialog("Are you sure you want to cancel the timer? No time will be tracked.", isPresented: $showingCancelConfirm, titleVisibility: .visible) {
+            Button("Cancel Timer", role: .destructive) {
+                action()
+            }
+        }
+    }
 }
