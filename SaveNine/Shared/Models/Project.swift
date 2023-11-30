@@ -92,11 +92,6 @@ extension Project {
         projectSessions.map { $0.duration }.reduce(0.0) { $0 + $1! }.formattedDuration
     }
     
-    static var projects: [Project?] {
-        let modelContext = ModelContext(Persistence.container)
-        return try! modelContext.fetch(FetchDescriptor<Project>())
-    }
-    
     static var preview: Project {
         let project = Project(
             detail: "Everything but the leaf.",
@@ -107,6 +102,13 @@ extension Project {
         
         project.modificationDate = Session.preview.endDate
         return project
+    }
+}
+
+extension Project {
+    static var projects: [Project?] {
+        let modelContext = ModelContext(Persistence.container)
+        return try! modelContext.fetch(FetchDescriptor<Project>())
     }
     
     static var recentlyTracked: Project? {
