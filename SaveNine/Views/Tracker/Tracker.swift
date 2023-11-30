@@ -101,19 +101,15 @@ struct Tracker: View {
                             } label: {
                                 Text("Stop")
                                     .padding()
-                                    .contentShape(Circle())
                             }
                         } else {
                             Button(action: startTimer) {
                                 Text("Start")
                                     .padding()
-                                    .contentShape(Circle())
                             }
                         }
                     }
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .clipShape(Circle())
+                    .timerButton()
                 }
                 .padding()
             }
@@ -180,16 +176,28 @@ struct CancelButton: View {
             } label: {
                 Text("Cancel")
                     .padding()
-                    .contentShape(Circle())
             }
         }
-        .padding()
-        .background(.ultraThickMaterial)
-        .clipShape(Circle())
+        .timerButton()
         .confirmationDialog("Are you sure you want to cancel the timer? No time will be tracked.", isPresented: $showingCancelConfirm, titleVisibility: .visible) {
             Button("Cancel Timer", role: .destructive) {
                 action()
             }
         }
+    }
+}
+
+fileprivate struct TimerButton: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding()
+            .background(.ultraThickMaterial)
+            .clipShape(Circle())
+    }
+}
+
+fileprivate extension VStack {
+    func timerButton() -> some View {
+       return modifier(TimerButton())
     }
 }
