@@ -73,7 +73,9 @@ struct Tracker: View {
         .frame(height: 70)
         .padding()
         .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
-        .sensoryFeedback(.success, trigger: timerHaptics ? tracking : timerHaptics)
+        .sensoryFeedback(.success, trigger: tracking) { _, _ in
+            timerHaptics
+        }
         .sheet(isPresented: $showingStopWatchSheet) {
             VStack {
                 SessionLabelPicker(selectedLabel: $label)
@@ -157,7 +159,7 @@ struct Tracker: View {
 }
 
 // Moved cancel button to separate view to solve confirmationDialog reappearing momentarily after pressing one of the dialog buttons.
-struct CancelButton: View {
+fileprivate struct CancelButton: View {
     let action: () -> Void
     @State private var showingCancelConfirm = false
     
