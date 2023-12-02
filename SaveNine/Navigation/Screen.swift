@@ -31,9 +31,9 @@ extension Screen {
     var label: some View {
         switch self {
         case .all:
-            Label("All Projects", systemImage: "tray")
+            Label("All Projects", systemImage: "tray.full")
         case .open:
-            Label("Open Projects", systemImage: "tray.full")
+            Label("Open Projects", systemImage: "tray")
         case .closed:
             Label("Closed Projects", systemImage: "archivebox")
         case .sessions:

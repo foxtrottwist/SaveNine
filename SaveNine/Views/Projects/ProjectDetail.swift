@@ -109,19 +109,19 @@ struct ProjectDetail: View {
                 }
                 
                 Button {
-                    showingDeleteConfirmation = true
+                    document = ProjectDocument.document(from: project)
+                    showingFileExporter.toggle()
                 } label: {
-                    Label("Delete", systemImage: "trash")
+                    Label("Export", systemImage: "square.and.arrow.up")
                 }
                 .disabled(project.tracking ?? false)
                 
                 Divider()
                 
-                Button {
-                    document = ProjectDocument.document(from: project)
-                    showingFileExporter.toggle()
+                Button(role: .destructive) {
+                    showingDeleteConfirmation = true
                 } label: {
-                    Label("Export", systemImage: "square.and.arrow.up")
+                    Label("Delete", systemImage: "trash")
                 }
                 .disabled(project.tracking ?? false)
             }

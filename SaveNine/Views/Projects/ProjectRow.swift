@@ -43,6 +43,7 @@ struct ProjectRow: View {
             }
             .padding(.top, 0.25)
         }
+        .frame(minHeight: 75)
     }
 }
 
