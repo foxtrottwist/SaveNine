@@ -88,12 +88,13 @@ struct ProjectNavigationStack: View {
                         ProjectRow(project: project)
                             .swipeActions {
                                 let closed = project.closed ?? false
+                                
                                 Button {
                                     project.closed = !closed
                                 } label: {
                                     Label(closed ? "Open" : "Close", systemImage: closed ? "tray" : "archivebox")
                                 }
-                                .tint(.blue)
+                                .tint(closed ? .pawPawGreen : .pawPawPink)
                             }
                     }
                 }
