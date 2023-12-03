@@ -124,7 +124,7 @@ struct Tracker: View {
         project.tracking = true
         
         Timer.shared.start(for: project, date: start!, label: label)
-        try! modelContext.save()
+        try? modelContext.save()
         
         WidgetKind.reload(.recentlyTracked)
     }
@@ -134,7 +134,7 @@ struct Tracker: View {
         project.tracking = false
         
         await Timer.shared.stop(for: project, label: label)
-        try! modelContext.save()
+        try? modelContext.save()
         
         WidgetKind.reload(.recentlyTracked)
     }
@@ -147,7 +147,7 @@ struct Tracker: View {
         guard let currentSession else { return }
         
         modelContext.delete(currentSession)
-        try! modelContext.save()
+        try? modelContext.save()
         
         WidgetKind.reload(.recentlyTracked)
     }

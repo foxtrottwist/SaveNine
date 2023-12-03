@@ -518,17 +518,6 @@
         }
       }
     },
-    "Filter By" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filter By"
-          }
-        }
-      }
-    },
     "Filter By Label" : {
       "localizations" : {
         "en" : {
@@ -978,17 +967,6 @@
         }
       }
     },
-    "Sessions Menu" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sessions Menu"
-          }
-        }
-      }
-    },
     "Sessions:" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1006,39 +984,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
-          }
-        }
-      }
-    },
-    "Sort By" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sort By"
-          }
-        }
-      }
-    },
-    "Sort Option" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sort Option"
-          }
-        }
-      }
-    },
-    "Sort Order" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sort Order"
           }
         }
       }
@@ -1112,17 +1057,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stop Timer"
-          }
-        }
-      }
-    },
-    "Support" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
           }
         }
       }

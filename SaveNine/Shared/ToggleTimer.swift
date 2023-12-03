@@ -34,8 +34,9 @@ struct ToggleTimer: LiveActivityIntent {
             Timer.shared.start(for: project, date: .now, label: label)
         }
         
-        try! modelContext.save()
+        try? modelContext.save()
         WidgetKind.reload(.all)
+        
         return .result()
     }
     
