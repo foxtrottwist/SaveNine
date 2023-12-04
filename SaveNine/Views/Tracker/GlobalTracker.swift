@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GlobalTracker: View {
     @State private var offsetY = 100.0
-    @Query(filter: Project.tracking) private var projects: [Project]
+    @Query(filter: Project.predicate(tracking: true)) private var projects: [Project]
     
     var body: some View {
         Color.clear

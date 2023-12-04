@@ -121,7 +121,12 @@ extension Project {
         return try! modelContext.fetch(fetchDescriptor).first
     }
     
-    static var tracking: Predicate<Project> {
-        #Predicate { $0.tracking == true }
+    static func predicate(searchText: String = "", closed: Bool? = nil, id: UUID? = nil, tracking: Bool? = nil) -> Predicate<Project> {
+        #Predicate { project in
+            (searchText.isEmpty || project.name?.localizedStandardContains(searchText) == true) &&
+            (closed == nil || project.closed == closed) &&
+            (id == nil || project.id == id) &&
+            (tracking == nil || project.tracking == tracking)
+        }
     }
 }
