@@ -21,6 +21,9 @@ struct ProjectNavigationStack: View {
     @State private var disabled = false
     @State private var navigator = Navigator.shared
     @State private var searchText = ""
+    @Query(filter: Project.tracking) private var project: [Project]
+    
+    private var tracking: Bool { !project.isEmpty }
     
     init(screen: Screen) {
         self.screen = screen
@@ -59,6 +62,9 @@ struct ProjectNavigationStack: View {
                     }
                 }
             }
+            .overlay {
+                GlobalTracker()
+            }
             .listStyle(.inset)
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
@@ -85,8 +91,18 @@ struct ProjectNavigationStack: View {
             } else {
                 NavigationLink(value: project) {
                     ProjectRow(project: project)
-                        .swipeActions {
+                        .swipeActions(allowsFullSwipe: false) {
                             let closed = project.closed ?? false
+                            
+                            if !closed && !tracking {
+                                Button {
+                                    Timer.shared.start(for: project, date: .now)
+                                    WidgetKind.reload(.recentlyTracked)
+                                } label: {
+                                    Label("Start", systemImage: "stopwatch")
+                                }
+                                .tint(.pawPawGreen)
+                            }
                             
                             Button {
                                 project.closed = !closed

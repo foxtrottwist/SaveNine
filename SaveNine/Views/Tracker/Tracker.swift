@@ -148,9 +148,7 @@ struct Tracker: View {
             let currentSession = await Timer.shared.cancel(for: project)
             guard let currentSession else { return }
             
-            try? modelContext.save()
             modelContext.delete(currentSession)
-            
             project.tracking = false
             start = nil
             
