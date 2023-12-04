@@ -56,6 +56,7 @@
 		65C9A346299B3619001FABB1 /* SessionNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C9A345299B3619001FABB1 /* SessionNavigationStack.swift */; };
 		65CC0E252A7F3ACE001E727D /* ToggleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */; };
 		65CC0E262A7F3E36001E727D /* ToggleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */; };
+		65CEFA732B1D60A30041B011 /* GlobalTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CEFA722B1D60A30041B011 /* GlobalTracker.swift */; };
 		65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314428CD552E00A91A47 /* SaveNineApp.swift */; };
 		65D2314728CD552E00A91A47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2314628CD552E00A91A47 /* ContentView.swift */; };
 		65D2314928CD552F00A91A47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D2314828CD552F00A91A47 /* Assets.xcassets */; };
@@ -168,6 +169,7 @@
 		65B931BC2A812D9B00113497 /* Logger+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+Extension.swift"; sourceTree = "<group>"; };
 		65C9A345299B3619001FABB1 /* SessionNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionNavigationStack.swift; sourceTree = "<group>"; };
 		65CC0E242A7F3ACE001E727D /* ToggleTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleTimer.swift; sourceTree = "<group>"; };
+		65CEFA722B1D60A30041B011 /* GlobalTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTracker.swift; sourceTree = "<group>"; };
 		65D2314128CD552E00A91A47 /* SaveNine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveNine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D2314428CD552E00A91A47 /* SaveNineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNineApp.swift; sourceTree = "<group>"; };
 		65D2314628CD552E00A91A47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				652437342A783AFD00C839C9 /* StopwatchSafeAreaInset.swift */,
 				652D025728D79F9000F818E7 /* TimerTimelineView.swift */,
 				652AE94F28D6550E0001294F /* Tracker.swift */,
+				65CEFA722B1D60A30041B011 /* GlobalTracker.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				65B931BD2A812D9B00113497 /* Logger+Extension.swift in Sources */,
 				65011C4D2A75EFD700E36090 /* AppSidebar.swift in Sources */,
 				652437352A783AFD00C839C9 /* StopwatchSafeAreaInset.swift in Sources */,
+				65CEFA732B1D60A30041B011 /* GlobalTracker.swift in Sources */,
 				65C9A346299B3619001FABB1 /* SessionNavigationStack.swift in Sources */,
 				65FC92DA29A11C92008871A5 /* SortValues.swift in Sources */,
 				65A51C32294FC7C400A3B960 /* TimerAttributes.swift in Sources */,

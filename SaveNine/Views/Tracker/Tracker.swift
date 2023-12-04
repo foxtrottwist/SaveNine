@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Tracker: View {
-    var project: Project
+    var project: Project?
     @AppStorage(StorageKey.timerHaptic.rawValue) private var timerHaptics: Bool = true
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var modelContext
@@ -17,12 +17,12 @@ struct Tracker: View {
     @State private var start: Date?
     @State private var showingStopWatchSheet = false
     
-    private var tracking: Bool { project.tracking ?? false }
+    private var tracking: Bool { project?.tracking ?? false }
     
-    init(project: Project) {
+    init(project: Project?) {
         self.project = project
         
-        if let session = project.projectSessions.first {
+        if let project, let session = project.projectSessions.first {
             _label = State(wrappedValue: session.displayLabel)
             
             if project.tracking ?? false {
@@ -89,12 +89,12 @@ struct Tracker: View {
                             await cancelTimer()
                         }
                     }
-                    .disabled(!(project.tracking ?? false))
+                    .disabled(!tracking)
                     
                     Spacer()
                     
                     VStack {
-                        if project.tracking ?? false {
+                        if tracking {
                             Button {
                                 Task {
                                     await stopTimer()
@@ -120,36 +120,42 @@ struct Tracker: View {
     }
     
     private func startTimer() {
-        start = Date()
-        project.tracking = true
-        
-        Timer.shared.start(for: project, date: start!, label: label)
-        try? modelContext.save()
-        
-        WidgetKind.reload(.recentlyTracked)
+        if let project {
+            start = Date()
+            project.tracking = true
+            
+            Timer.shared.start(for: project, date: start!, label: label)
+            try? modelContext.save()
+            
+            WidgetKind.reload(.recentlyTracked)
+        }
     }
     
     private func stopTimer() async {
-        start = nil
-        project.tracking = false
-        
-        await Timer.shared.stop(for: project, label: label)
-        try? modelContext.save()
-        
-        WidgetKind.reload(.recentlyTracked)
+        if let project {
+            start = nil
+            project.tracking = false
+            
+            await Timer.shared.stop(for: project, label: label)
+            try? modelContext.save()
+            
+            WidgetKind.reload(.recentlyTracked)
+        }
     }
     
     private func cancelTimer() async {
-        start = nil
-        project.tracking = false
-        
-        let currentSession = await Timer.shared.cancel(for: project)
-        guard let currentSession else { return }
-        
-        modelContext.delete(currentSession)
-        try? modelContext.save()
-        
-        WidgetKind.reload(.recentlyTracked)
+        if let project {
+            let currentSession = await Timer.shared.cancel(for: project)
+            guard let currentSession else { return }
+            
+            try? modelContext.save()
+            modelContext.delete(currentSession)
+            
+            project.tracking = false
+            start = nil
+            
+            WidgetKind.reload(.recentlyTracked)
+        }
     }
 }
 

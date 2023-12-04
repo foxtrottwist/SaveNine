@@ -120,4 +120,8 @@ extension Project {
         
         return try! modelContext.fetch(fetchDescriptor).first
     }
+    
+    static var tracking: Predicate<Project> {
+        #Predicate { $0.tracking == true }
+    }
 }
