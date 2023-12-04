@@ -31,6 +31,8 @@
 		653899D729A3BE3B008E39B4 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653899D629A3BE3B008E39B4 /* AppIconView.swift */; };
 		653899DB29A449AE008E39B4 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653899DA29A449AE008E39B4 /* AppIcon.swift */; };
 		653B2DDD2976502400EAD9CD /* ProjectWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */; };
+		654307C42B1E469100461A28 /* TagNavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654307C32B1E469100461A28 /* TagNavigationStack.swift */; };
+		654307C62B1E4A7800461A28 /* ProjectNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654307C52B1E4A7800461A28 /* ProjectNavigationLink.swift */; };
 		65464D2128F26B74008E1EE6 /* UpdateNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65464D2028F26B74008E1EE6 /* UpdateNameView.swift */; };
 		6560598F296A04740075C353 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F4A7312966826E00CABB3C /* Date+Extension.swift */; };
 		6560AC30291AA2AB0047E2C6 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6560AC2F291AA2AB0047E2C6 /* QueryView.swift */; };
@@ -146,6 +148,8 @@
 		653899D629A3BE3B008E39B4 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
 		653899DA29A449AE008E39B4 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		653B2DDC2976502400EAD9CD /* ProjectWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWidgetView.swift; sourceTree = "<group>"; };
+		654307C32B1E469100461A28 /* TagNavigationStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagNavigationStack.swift; sourceTree = "<group>"; };
+		654307C52B1E4A7800461A28 /* ProjectNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNavigationLink.swift; sourceTree = "<group>"; };
 		65464D2028F26B74008E1EE6 /* UpdateNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNameView.swift; sourceTree = "<group>"; };
 		6560AC2F291AA2AB0047E2C6 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		6560AC34291AF6660047E2C6 /* SessionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetail.swift; sourceTree = "<group>"; };
@@ -301,11 +305,13 @@
 				65D2316128CD6ED700A91A47 /* ProjectDetail.swift */,
 				65FC3F4A2A75C6AE00D76AFE /* ProjectImage.swift */,
 				65EF242928DF870A003749F3 /* ProjectName.swift */,
+				654307C52B1E4A7800461A28 /* ProjectNavigationLink.swift */,
 				65011C482A75E45700E36090 /* ProjectNavigationStack.swift */,
 				659FDA6C28E28EC900899A2E /* ProjectRow.swift */,
 				652D025528D79DA300F818E7 /* ProjectSessions.swift */,
 				65FC3F522A75DBE500D76AFE /* ProjectsSearchResults.swift */,
 				65E530FF2A76AB5300760FE9 /* ProjectTagsSheet.swift */,
+				654307C32B1E469100461A28 /* TagNavigationStack.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -648,6 +654,7 @@
 				65DD6DC8299D299B00FA1E48 /* FileExtension.swift in Sources */,
 				65AFF19D299531EC009AB991 /* SessionLabelPicker.swift in Sources */,
 				65FC3F532A75DBE500D76AFE /* ProjectsSearchResults.swift in Sources */,
+				654307C62B1E4A7800461A28 /* ProjectNavigationLink.swift in Sources */,
 				65464D2128F26B74008E1EE6 /* UpdateNameView.swift in Sources */,
 				6505CA552A7F0AC100515953 /* Persistence.swift in Sources */,
 				65F9F3A729A2FF6200D51D7B /* SettingsView.swift in Sources */,
@@ -658,6 +665,7 @@
 				65EC34FD2999DE4800AB396A /* FileManager+Extension.swift in Sources */,
 				6518916429A5372200ACE985 /* AppIconImageView.swift in Sources */,
 				65CC0E252A7F3ACE001E727D /* ToggleTimer.swift in Sources */,
+				654307C42B1E469100461A28 /* TagNavigationStack.swift in Sources */,
 				65D2314528CD552E00A91A47 /* SaveNineApp.swift in Sources */,
 				653899D729A3BE3B008E39B4 /* AppIconView.swift in Sources */,
 			);

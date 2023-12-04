@@ -46,10 +46,12 @@ extension Screen {
     @ViewBuilder
     var destination: some View {
         switch self {
-        case .all, .open, .closed, .tag:
+        case .all, .open, .closed:
             ProjectNavigationStack(screen: self)
         case .sessions:
             SessionNavigationStack()
+        case  .tag:
+            TagNavigationStack(screen: self)
         }
     }
     
