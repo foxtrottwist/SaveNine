@@ -8,64 +8,84 @@
 import SwiftData
 import SwiftUI
 
-private enum Descriptor {
-    case project(FetchDescriptor<Project>)
-    case tag(FetchDescriptor<Tag>)
-}
-
 struct ProjectNavigationStack: View {
     let screen: Screen
-    private let fetchDescriptor: Descriptor
     @Environment(\.modelContext) private var modelContext
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var disabled = false
+    @State private var fetchDescriptor: FetchDescriptor<Project>
     @State private var navigator = Navigator.shared
     @State private var searchText = ""
-    @Query(filter: Project.tracking) private var project: [Project]
-    
-    private var tracking: Bool { !project.isEmpty }
     
     init(screen: Screen) {
         self.screen = screen
         
-        fetchDescriptor = switch screen {
-        case .closed:
-                .project(FetchDescriptor<Project>(
-                    predicate: #Predicate<Project> { $0.closed == true },
-                    sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
-                ))
+        let fetchDescriptor: FetchDescriptor<Project> = switch screen {
         case .open:
-                .project(FetchDescriptor<Project>(
-                    predicate: #Predicate<Project> { $0.closed == false },
-                    sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
-                ))
-        case .tag(_, let id):
-                .tag(FetchDescriptor<Tag>(predicate: #Predicate { $0.id == id }, sortBy: []))
+            FetchDescriptor<Project>(
+                predicate: Project.predicate(closed: false),
+                sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+            )
+        case .closed:
+            FetchDescriptor<Project>(
+                predicate: Project.predicate(closed: true),
+                sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+            )
         default:
-                .project(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.creationDate, order: .reverse)]))
+            FetchDescriptor<Project>(sortBy: [SortDescriptor(\.creationDate, order: .reverse)])
         }
+        
+        _fetchDescriptor = State(wrappedValue: fetchDescriptor)
     }
     
     var body: some View {
         NavigationStack(path: $navigator.path) {
-            Group {
-                switch fetchDescriptor {
-                case .project(let fetchDescriptor):
-                    QueryView(fetchDescriptor) { projects in
-                        projectsList(projects)
-                    }
-                case .tag(let fetchDescriptor):
-                    QueryView(fetchDescriptor) { tags in
-                        if let projects = tags.first?.projects {
-                            projectsList(projects)
+            QueryView(fetchDescriptor) { projects in
+                List {
+                    ForEach(projects) { project in
+                        if project.displayName.isEmpty {
+                            ProjectName(project: project)
+                                .onAppear { disabled = true }
+                                .onDisappear { disabled = false }
+                        } else {
+                            ProjectNavigationLink(project: project)
+                                .disabled(disabled)
                         }
                     }
                 }
+                .listStyle(.inset)
+                .onOpenURL(perform: { url in
+                    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+                    guard let host = components?.host else { return }
+                    let projectID = UUID(uuidString: host)
+                    let project = projects.first { $0.id == projectID }
+                    
+                    if let project /*, navigator.path.last?.id != projectID*/ {
+                        navigator.path.append(project)
+                    }
+                })
+                .overlay {
+                    GlobalTracker()
+                    
+                    if projects.isEmpty, searchText.isEmpty {
+                        switch screen {
+                        case .all, .open:
+                            ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
+                        case .closed:
+                            ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
+                        case .tag(let name, _):
+                            ContentUnavailableView("There are currently no Projects tagged with \"\(name)\".", systemImage: "tag")
+                        default:
+                            EmptyView()
+                        }
+                    }
+                    
+                    if projects.isEmpty, !searchText.isEmpty {
+                        ContentUnavailableView.search
+                    }
+                }
             }
-            .overlay {
-                GlobalTracker()
-            }
-            .listStyle(.inset)
+            .onChange(of: searchText, search)
             .navigationDestination(for: Project.self) { project in
                 ProjectDetail(project: project)
             }
@@ -82,67 +102,25 @@ struct ProjectNavigationStack: View {
         }
     }
     
-    private func projectsList(_ projects: [Project]) -> some View {
-        ProjectsSearchResults(projects: projects, searchText: searchText) { project in
-            if project.displayName.isEmpty {
-                ProjectName(project: project)
-                    .onAppear { disabled = true }
-                    .onDisappear { disabled = false }
-            } else {
-                NavigationLink(value: project) {
-                    ProjectRow(project: project)
-                        .swipeActions(allowsFullSwipe: false) {
-                            let closed = project.closed ?? false
-                            
-                            if !closed && !tracking {
-                                Button {
-                                    Timer.shared.start(for: project, date: .now)
-                                    WidgetKind.reload(.recentlyTracked)
-                                } label: {
-                                    Label("Start", systemImage: "stopwatch")
-                                }
-                                .tint(.pawPawGreen)
-                            }
-                            
-                            Button {
-                                project.closed = !closed
-                            } label: {
-                                Label(closed ? "Open" : "Close", systemImage: closed ? "tray" : "archivebox")
-                            }
-                            .tint(closed ? .orange : .pawPawBlue)
-                        }
-                }
-                .disabled(disabled)
-            }
-        }
-        .onOpenURL(perform: { url in
-            let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
-            guard let host = components?.host else { return }
-            let projectID = UUID(uuidString: host)
-            let project = projects.first { $0.id == projectID }
-            
-            if let project /*, navigator.path.last?.id != projectID*/ {
-                navigator.path.append(project)
-            }
-        })
-        .overlay {
-            if projects.isEmpty, searchText.isEmpty {
-                switch screen {
-                case .all, .open:
-                    ContentUnavailableView("Please add a project to begin.", systemImage: "plus.square")
-                case .closed:
-                    ContentUnavailableView("There are currently no closed projects.", systemImage: "archivebox")
-                case .tag(let name, _):
-                    ContentUnavailableView("There are currently no Projects tagged with \"\(name)\".", systemImage: "tag")
-                default:
-                    EmptyView()
-                }
-            }
-        }
-    }
-    
     private func addProject() {
         modelContext.insert(Project(name: ""))
+    }
+    
+    private func search() {
+        fetchDescriptor = switch screen {
+        case .closed:
+            FetchDescriptor<Project>(
+                predicate: Project.predicate(searchText: searchText, closed: true),
+                sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+            )
+        case .open:
+            FetchDescriptor<Project>(
+                predicate: Project.predicate(searchText: searchText, closed: false),
+                sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
+            )
+        default:
+            FetchDescriptor<Project>(sortBy: [SortDescriptor(\.creationDate, order: .reverse)])
+        }
     }
 }
 
