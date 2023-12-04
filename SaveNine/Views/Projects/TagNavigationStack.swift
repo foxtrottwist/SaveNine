@@ -38,6 +38,9 @@ struct TagNavigationStack: View {
             .listStyle(.inset)
             .navigationTitle(screen.title)
             .searchable(text: $searchText, placement: .navigationBarDrawer)
+            .navigationDestination(for: Project.self) { project in
+                ProjectDetail(project: project)
+            }
             .overlay {
                 GlobalTracker()
             }
