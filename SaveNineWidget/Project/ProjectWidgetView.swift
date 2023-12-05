@@ -22,7 +22,7 @@ struct ProjectWidgetView: View {
             case .accessoryRectangular:
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(project.displayName)
+                        Text(project.name)
                         HStack {
                             Image(systemName: "stopwatch")
                             Text(project.timeTracked)
@@ -59,7 +59,7 @@ struct ProjectSnapshotView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(project.displayName)
+            Text(project.name)
                 .font(.caption)
                 .foregroundStyle(.black)
                 .lineLimit(2)
@@ -83,7 +83,7 @@ struct ProjectSnapshotView: View {
                     }
                     .font(.caption)
                 }
-                .disabled(project.displayName.isEmpty)
+                .disabled(project.name.isEmpty)
             }
         }
         .fontWeight(.medium)

@@ -51,10 +51,10 @@ struct ProjectDocument: Codable {
         return ProjectFile(
             contents: .init(
                 id: project.id!,
-                name: project.displayName,
+                name: project.name,
                 closed: project.closed!,
                 creationDate: project.projectCreationDate,
-                detail: project.projectDetail,
+                detail: project.detail,
                 sessions: SessionDocument.document(from: project.projectSessions)
             )
         )

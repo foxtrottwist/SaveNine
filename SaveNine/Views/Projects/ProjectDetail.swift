@@ -10,21 +10,13 @@ import OSLog
 import SwiftUI
 
 struct ProjectDetail: View {
-    var project: Project
+    @Bindable var project: Project
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    @State private var name = ""
-    @State private var detail = ""
     @State private var document: ProjectFile?
     @State private var showingDeleteConfirmation = false
     @State private var showingFileExporter = false
     @State private var showingTagsSheet = false
-    
-    init(project: Project) {
-        self.project = project
-        _name = State(wrappedValue: project.displayName)
-        _detail = State(wrappedValue: project.projectDetail)
-    }
     
     var body: some View {
         Form {
@@ -34,7 +26,7 @@ struct ProjectDetail: View {
             .listRowBackground(Color.clear)
             
             Section {
-                TextField("Notes", text: $detail, axis: .vertical)
+                TextField("Notes", text: $project.detail, axis: .vertical)
                     .padding(.bottom)
             }
             
@@ -76,7 +68,7 @@ struct ProjectDetail: View {
             isPresented: $showingFileExporter,
             document: document,
             contentType: .json,
-            defaultFilename: name
+            defaultFilename: project.name
         ) { result in
             switch result {
             case .success(let url):
@@ -85,10 +77,8 @@ struct ProjectDetail: View {
                 Logger.data.error("\(error.localizedDescription)")
             }
         }
-        .navigationTitle($name)
+        .navigationTitle($project.name)
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: detail) { project.detail = detail }
-        .onChange(of: name) { project.name = name }
         .scrollDismissesKeyboard(.interactively)
         .sheet(isPresented: $showingTagsSheet, content: {
             ProjectTagsSheet(project: project)

@@ -14,9 +14,9 @@ public class Project {
     public var id: UUID?
     var closed: Bool?
     var creationDate: Date?
-    var detail: String?
+    var detail: String = ""
     var modificationDate: Date?
-    var name: String?
+    var name: String = ""
     var tracking: Bool?
     @Attribute(.externalStorage) var image: Data?
     @Relationship(deleteRule: .cascade, inverse: \Session.project) var sessions: [Session]?
@@ -24,10 +24,10 @@ public class Project {
 
     init(
         creationDate: Date? = .now,
-        detail: String? = nil,
+        detail: String = "",
         image: Data? = nil,
         modificationDate: Date? = nil,
-        name: String?,
+        name: String,
         sessions: [Session]? = [],
         tags: [Tag]? = []
     ) {
@@ -45,20 +45,12 @@ public class Project {
 }
 
 extension Project {
-    var displayName: String {
-        name ?? ""
-    }
-    
     var displayTags: String {
         projectTags.map { $0.displayName }.sorted {$0 < $1 }.joined(separator: " ")
     }
     
     var projectCreationDate: Date {
         creationDate ?? Date()
-    }
-    
-    var projectDetail: String {
-        detail ?? ""
     }
     
     var projectModificationDate: Date {
@@ -80,7 +72,7 @@ extension Project {
          }.reduce("") { "\($0)\n\n\($1)" }
         
         let sharedSessions = """
-            \(displayName)
+            \(name)
             Time Tracked: \(timeTracked)
             \(sessions)
             """
@@ -123,7 +115,7 @@ extension Project {
     
     static func predicate(searchText: String = "", closed: Bool? = nil, id: UUID? = nil, tracking: Bool? = nil) -> Predicate<Project> {
         #Predicate { project in
-            (searchText.isEmpty || project.name?.localizedStandardContains(searchText) == true) &&
+            (searchText.isEmpty || project.name.localizedStandardContains(searchText)) &&
             (closed == nil || project.closed == closed) &&
             (id == nil || project.id == id) &&
             (tracking == nil || project.tracking == tracking)

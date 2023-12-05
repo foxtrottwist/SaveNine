@@ -43,7 +43,7 @@ struct ProjectNavigationStack: View {
             QueryView(fetchDescriptor) { projects in
                 List {
                     ForEach(projects) { project in
-                        if project.displayName.isEmpty {
+                        if project.name.isEmpty {
                             ProjectName(project: project)
                                 .onAppear { disabled = true }
                                 .onDisappear { disabled = false }

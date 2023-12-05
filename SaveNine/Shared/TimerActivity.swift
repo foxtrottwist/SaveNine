@@ -22,7 +22,7 @@ final class TimerActivity {
     
     func requestLiveActivity(project: Project, date: Date) {
         if ActivityAuthorizationInfo().areActivitiesEnabled {
-            let attributes = TimerAttributes(projectName: project.displayName, projectId: project.id!)
+            let attributes = TimerAttributes(projectName: project.name, projectId: project.id!)
             let contentState = ActivityContent(state: TimerAttributes.ContentState(start: date), staleDate: nil)
             
             do {

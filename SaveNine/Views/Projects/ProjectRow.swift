@@ -14,11 +14,11 @@ struct ProjectRow: View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                    Text(project.displayName)
+                    Text(project.name)
                         .font(.headline)
                         .lineLimit(2)
                     
-                    Text(project.projectDetail)
+                    Text(project.detail)
                         .font(.footnote)
                         .foregroundColor(.secondary)
                         .lineLimit(3)

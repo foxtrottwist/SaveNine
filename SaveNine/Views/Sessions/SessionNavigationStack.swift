@@ -29,7 +29,7 @@ struct SessionNavigationStack: View {
                     List {
                         ForEach(sessions) { session in
                             VStack(alignment: .leading) {
-                                Text(session.project?.displayName ?? "")
+                                Text(session.project?.name ?? "")
                                     .font(.headline)
                                 
                                 SessionRow(session: session)
@@ -65,7 +65,7 @@ struct SessionNavigationStack: View {
                     Menu {
                         Picker("Filter By Name", selection: $selectedName) {
                             ForEach(projects) { project in
-                                Text(project.displayName).tag(project.displayName)
+                                Text(project.name).tag(project.name)
                             }
                         }
                         .onChange(of: selectedName) { filter() }

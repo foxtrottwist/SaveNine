@@ -20,7 +20,7 @@ struct ProjectEntity: AppEntity, Identifiable {
     
     init(from project: Project) {
         self.id = project.id!
-        self.name = project.name!
+        self.name = project.name
     }
     
     var displayRepresentation: DisplayRepresentation {

@@ -17,7 +17,7 @@ struct ProjectsSearchResults<Content: View>: View {
         if searchText.isEmpty {
             projects
         } else {
-            projects.filter { $0.displayName.localizedCaseInsensitiveContains(searchText) }
+            projects.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
         }
     }
     
