@@ -5,6 +5,7 @@
 //  Created by Lawrence Horne on 9/17/22.
 //
 
+import SwiftData
 import SwiftUI
 
 struct Tracker: View {
@@ -12,23 +13,36 @@ struct Tracker: View {
     @AppStorage(StorageKey.timerHaptic.rawValue) private var timerHaptics: Bool = true
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var label: String = DefaultLabel.none.rawValue
-    @State private var start: Date?
     @State private var showingStopWatchSheet = false
+    @Query private var sessions: [Session]
     
     private var tracking: Bool { project?.tracking ?? false }
     
+    private var currentSession: Session? {
+        if let session = sessions.first, session.endDate == nil && tracking {
+            session
+        } else {
+            nil
+        }
+    }
+    
+    private var lastSession: Session? {
+        if let session = sessions.last, session.endDate != nil {
+            session
+        } else {
+            nil
+        }
+    }
+    
+    private var currentLabel: String {
+        currentSession?.displayLabel ?? lastSession?.displayLabel ?? label
+    }
+    
+    
     init(project: Project?) {
         self.project = project
-        
-        if let project, let session = project.projectSessions.first {
-            _label = State(wrappedValue: session.displayLabel)
-            
-            if project.tracking ?? false {
-                _start = State(wrappedValue: session.startDate)
-            }
-        }
+        _sessions = Query(Session.fetchLastTwoBy(projectID: project?.id))
     }
     
     var body: some View {
@@ -43,7 +57,7 @@ struct Tracker: View {
             
             HStack {
                 HStack {
-                    TimerTimelineView(start: start)
+                    TimerTimelineView(start: currentSession?.startDate)
                         .font(.title)
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -70,6 +84,7 @@ struct Tracker: View {
             }
             .padding()
         }
+        .onAppear { label = currentLabel }
         .frame(height: 70)
         .padding()
         .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
@@ -80,7 +95,8 @@ struct Tracker: View {
             VStack {
                 SessionLabelPicker(selectedLabel: $label)
                     .padding(.top)
-                TimerTimelineView(start: start)
+                
+                TimerTimelineView(start: currentSession?.startDate)
                     .font(.largeTitle)
                 
                 HStack {
@@ -121,16 +137,14 @@ struct Tracker: View {
     
     private func startTimer() {
         if let project {
-            start = Date()
             project.tracking = true
-            Timer.shared.start(for: project, date: start!, label: label)
+            Timer.shared.start(for: project, date: .now, label: label)
             WidgetKind.reload(.recentlyTracked)
         }
     }
     
     private func stopTimer() async {
         if let project {
-            start = nil
             project.tracking = false
             await Timer.shared.stop(for: project, label: label)
             WidgetKind.reload(.recentlyTracked)
@@ -144,7 +158,6 @@ struct Tracker: View {
             
             modelContext.delete(currentSession)
             project.tracking = false
-            start = nil
             
             WidgetKind.reload(.recentlyTracked)
         }
@@ -190,6 +203,6 @@ fileprivate struct TimerButton: ViewModifier {
 
 fileprivate extension VStack {
     func timerButton() -> some View {
-       return modifier(TimerButton())
+        return modifier(TimerButton())
     }
 }
