@@ -28,10 +28,14 @@ struct Tracker: View {
     }
     
     private var lastSession: Session? {
-        if let session = sessions.last, session.endDate != nil {
-            session
+        if currentSession == nil {
+            sessions.first
         } else {
-            nil
+            if let session = sessions.last, session.endDate != nil {
+                session
+            } else {
+                nil
+            }
         }
     }
     
