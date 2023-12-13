@@ -74,9 +74,7 @@ struct Tracker: View {
                 
                 if tracking {
                     Button {
-                        Task {
-                            await stopTimer()
-                        }
+                        stopTimer()
                     } label: {
                         Label("Stop", systemImage: "stop.fill")
                     }
@@ -105,9 +103,7 @@ struct Tracker: View {
                 
                 HStack {
                     CancelButton {
-                        Task {
-                            await cancelTimer()
-                        }
+                        cancelTimer()
                     }
                     .disabled(!tracking)
                     
@@ -116,9 +112,7 @@ struct Tracker: View {
                     VStack {
                         if tracking {
                             Button {
-                                Task {
-                                    await stopTimer()
-                                }
+                                stopTimer()
                             } label: {
                                 Text("Stop")
                                     .padding()
@@ -139,39 +133,21 @@ struct Tracker: View {
         }
     }
     
-    private func cancelTimer() async {
-        if let currentSession, let project {
-            modelContext.delete(currentSession)
-            
-            project.tracking = false
-            WidgetKind.reload(.recentlyTracked)
-            await TimerActivity.shared.endLiveActivity(date: .now)
+    private func cancelTimer() {
+        if let currentSession {
+            Timer.shared.cancel(session: currentSession, modelContext: modelContext)
         }
     }
     
     private func startTimer() {
         if let project {
-            let startDate = Date()
-            let _ = Session(label: label, startDate: startDate, project: project)
-            project.tracking = true
-            
-            TimerActivity.shared.requestLiveActivity(project: project, date: startDate)
-            WidgetKind.reload(.recentlyTracked)
+            Timer.shared.start(for: project, date: .now, label: label)
         }
     }
     
-    private func stopTimer() async {
-        if let currentSession, let project {
-            project.tracking = false
-            
-            let endDate = Date()
-            currentSession.endDate = endDate
-            currentSession.duration = endDate.timeIntervalSince(currentSession.startDate!)
-            currentSession.label = label
-            project.modificationDate = endDate
-            
-            WidgetKind.reload(.recentlyTracked)
-            await TimerActivity.shared.endLiveActivity(date: endDate)
+    private func stopTimer() {
+        if let currentSession {
+            Timer.shared.stop(session: currentSession)
         }
     }
 }
