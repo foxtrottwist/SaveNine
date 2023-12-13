@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct StopwatchSafeAreaInset: View {
+    let label: String
     let start: Date?
     let tracking: Bool
     let startAction: () -> Void
-    let stopAction: () async -> Void
-    let onTap: () -> Void
+    let stopAction: () -> Void
+    let onTapGesture: () -> Void
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10, style: .continuous)
                 .fill(.ultraThickMaterial)
+            
+            ScrollingText(label)
+                .font(.subheadline)
             
             HStack {
                 HStack {
@@ -29,15 +33,13 @@ struct StopwatchSafeAreaInset: View {
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    onTap()
+                    onTapGesture()
                 }
                 
                 
                 if tracking {
                     Button {
-                        Task {
-                           await stopAction()
-                        }
+                           stopAction()
                     } label: {
                         Label("Stop", systemImage: "stop.fill")
                     }
@@ -56,5 +58,12 @@ struct StopwatchSafeAreaInset: View {
 }
 
 #Preview {
-    StopwatchSafeAreaInset(start: .now, tracking: true, startAction: {}, stopAction: {}, onTap: {})
+    StopwatchSafeAreaInset(
+        label: "Design",
+        start: .now,
+        tracking: true,
+        startAction: {},
+        stopAction: {},
+        onTapGesture: {}
+    )
 }

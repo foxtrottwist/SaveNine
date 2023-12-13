@@ -43,53 +43,20 @@ struct Tracker: View {
         currentSession?.displayLabel ?? lastSession?.displayLabel ?? label
     }
     
-    
     init(project: Project?) {
         self.project = project
         _sessions = Query(Session.fetchLastTwoBy(projectID: project?.id))
     }
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                .fill(.ultraThickMaterial)
-            
-            if !showingStopWatchSheet {
-                ScrollingText(label)
-                    .font(.subheadline)
-            }
-            
-            HStack {
-                HStack {
-                    TimerTimelineView(start: currentSession?.startDate)
-                        .font(.title)
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    showingStopWatchSheet.toggle()
-                }
-                
-                
-                if tracking {
-                    Button {
-                        stopTimer()
-                    } label: {
-                        Label("Stop", systemImage: "stop.fill")
-                    }
-                } else {
-                    Button(action: startTimer) {
-                        Label("Start", systemImage: "play.fill")
-                    }
-                }
-            }
-            .padding()
+        StopwatchSafeAreaInset(label: label, start: currentSession?.startDate, tracking: tracking) {
+            startTimer()
+        } stopAction: {
+            stopTimer()
+        } onTapGesture: {
+            showingStopWatchSheet.toggle()
         }
         .onAppear { label = currentLabel }
-        .frame(height: 70)
-        .padding()
-        .shadow(color: colorScheme == .light ? .secondary : .clear, radius: 10, x: 0, y: 15)
         .sensoryFeedback(.success, trigger: tracking) { _, _ in
             timerHaptics
         }
