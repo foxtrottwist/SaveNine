@@ -139,31 +139,39 @@ struct Tracker: View {
         }
     }
     
+    private func cancelTimer() async {
+        if let currentSession, let project {
+            modelContext.delete(currentSession)
+            
+            project.tracking = false
+            WidgetKind.reload(.recentlyTracked)
+            await TimerActivity.shared.endLiveActivity(date: .now)
+        }
+    }
+    
     private func startTimer() {
         if let project {
+            let startDate = Date()
+            let _ = Session(label: label, startDate: startDate, project: project)
             project.tracking = true
-            Timer.shared.start(for: project, date: .now, label: label)
+            
+            TimerActivity.shared.requestLiveActivity(project: project, date: startDate)
             WidgetKind.reload(.recentlyTracked)
         }
     }
     
     private func stopTimer() async {
-        if let project {
-            project.tracking = false
-            await Timer.shared.stop(for: project, label: label)
-            WidgetKind.reload(.recentlyTracked)
-        }
-    }
-    
-    private func cancelTimer() async {
-        if let project {
-            let currentSession = await Timer.shared.cancel(for: project)
-            guard let currentSession else { return }
-            
-            modelContext.delete(currentSession)
+        if let currentSession, let project {
             project.tracking = false
             
+            let endDate = Date()
+            currentSession.endDate = endDate
+            currentSession.duration = endDate.timeIntervalSince(currentSession.startDate!)
+            currentSession.label = label
+            project.modificationDate = endDate
+            
             WidgetKind.reload(.recentlyTracked)
+            await TimerActivity.shared.endLiveActivity(date: endDate)
         }
     }
 }
