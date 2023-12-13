@@ -102,19 +102,19 @@ struct Tracker: View {
     
     private func cancelTimer() {
         if let currentSession {
-            Timer.shared.cancel(session: currentSession, modelContext: modelContext)
+            Timer.shared.cancel(session: currentSession, modelContext: modelContext, widget: .recentlyTracked)
         }
     }
     
     private func startTimer() {
         if let project {
-            Timer.shared.start(for: project, date: .now, label: label)
+            Timer.shared.start(for: project, date: .now, label: label, widget: .recentlyTracked)
         }
     }
     
     private func stopTimer() {
         if let currentSession {
-            Timer.shared.stop(session: currentSession)
+            Timer.shared.stop(session: currentSession, widget: .recentlyTracked)
         }
     }
 }

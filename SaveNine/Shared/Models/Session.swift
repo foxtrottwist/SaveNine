@@ -55,6 +55,18 @@ extension Session {
 }
 
 extension Session {
+    static func fetchCurrentSession(projectID: UUID?) -> FetchDescriptor<Session> {
+        var fetchDescriptor = FetchDescriptor<Session>(
+            predicate: #Predicate<Session> {
+                $0.project?.id == projectID && $0.project?.tracking == true && $0.endDate == nil
+            },
+            sortBy: [SortDescriptor<Session>(\.startDate, order: .reverse)]
+        )
+        
+        fetchDescriptor.fetchLimit = 1
+        return fetchDescriptor
+    }
+    
     static func fetchLastTwoBy(projectID: UUID?) -> FetchDescriptor<Session> {
         var fetchDescriptor = FetchDescriptor<Session>(
             predicate: #Predicate<Session> { $0.project?.id == projectID },

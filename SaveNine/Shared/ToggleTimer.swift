@@ -24,19 +24,19 @@ struct ToggleTimer: LiveActivityIntent {
     func perform() async throws -> some IntentResult {
         let modelContext = ModelContext(Persistence.container)
         let id = project.id
-        let fetchDescriptor = FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
-        guard let project = try! modelContext.fetch(fetchDescriptor).first else { return .result() }
-        let label = project.projectSessions.first?.label
+        let session = try? modelContext.fetch(Session.fetchCurrentSession(projectID: id)).first
         
-        if project.tracking ?? false {
-            await Timer.shared.stop(for: project, label: label)
+        if let session {
+            Timer.shared.stop(session: session, widget: .all)
         } else {
-            Timer.shared.start(for: project, date: .now, label: label)
+            let fetchDescriptor = FetchDescriptor<Project>(predicate: #Predicate { $0.id == id })
+            guard let project = try? modelContext.fetch(fetchDescriptor).first else { return .result() }
+            
+            let label = project.projectSessions.first?.label
+            Timer.shared.start(for: project, date: .now, label: label, widget: .all)
         }
         
         try? modelContext.save()
-        WidgetKind.reload(.all)
-        
         return .result()
     }
     

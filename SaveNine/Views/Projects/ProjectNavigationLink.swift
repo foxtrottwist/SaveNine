@@ -22,8 +22,7 @@ struct ProjectNavigationLink: View {
                     
                     if !closed && !tracking {
                         Button {
-                            Timer.shared.start(for: project, date: .now)
-                            WidgetKind.reload(.recentlyTracked)
+                            Timer.shared.start(for: project, date: .now, widget: .recentlyTracked)
                         } label: {
                             Label("Start", systemImage: "stopwatch")
                         }
