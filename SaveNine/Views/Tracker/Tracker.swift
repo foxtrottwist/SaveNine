@@ -71,6 +71,7 @@ struct Tracker: View {
                 HStack {
                     CancelButton {
                         cancelTimer()
+                        showingStopWatchSheet = false
                     }
                     .disabled(!tracking)
                     

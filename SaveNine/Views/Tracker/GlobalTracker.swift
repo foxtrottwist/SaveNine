@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GlobalTracker: View {
     @State private var project: Project?
-    @State private var offsetY = 100.0
+    @State private var offsetY = 200.0
     @Query(filter: Project.predicate(tracking: true)) private var projects: [Project]
     
     var body: some View {
@@ -22,7 +22,7 @@ struct GlobalTracker: View {
                         if projects.isEmpty {
                             defer { project = nil }
                             withAnimation(.easeInOut.delay(0.5)) {
-                                offsetY = 100.0
+                                offsetY = 200.0
                             }
                         }
                         
