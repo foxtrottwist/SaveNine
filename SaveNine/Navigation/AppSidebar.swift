@@ -56,5 +56,5 @@ struct AppSidebar: View {
 
 #Preview {
     AppSidebar(selection: .constant(nil))
-        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+        .modelContainer(Persistence.previewContainer)
 }

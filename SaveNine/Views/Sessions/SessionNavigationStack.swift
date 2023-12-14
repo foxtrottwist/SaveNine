@@ -99,4 +99,5 @@ struct SessionNavigationStack: View {
 
 #Preview {
     SessionNavigationStack()
+        .modelContainer(Persistence.previewContainer)
 }

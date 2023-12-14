@@ -29,5 +29,5 @@ struct AppNavigationSplitView: View {
 
 #Preview {
     AppNavigationSplitView()
-        .modelContainer(for: [Project.self, Session.self, Tag.self], inMemory: true)
+        .modelContainer(Persistence.previewContainer)
 }

@@ -43,4 +43,5 @@ struct AppTabView: View {
 
 #Preview {
     AppTabView()
+        .modelContainer(Persistence.previewContainer)
 }
