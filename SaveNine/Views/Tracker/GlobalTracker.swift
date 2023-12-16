@@ -16,23 +16,29 @@ struct GlobalTracker: View {
     var body: some View {
         Color.clear
             .safeAreaInset(edge: .bottom) {
-                Tracker(project: projects.first)
-                    .offset(y: offsetY)
-                    .task(id: projects) {
-                        if projects.isEmpty {
-                            defer { project = nil }
-                            withAnimation(.easeInOut.delay(0.5)) {
-                                offsetY = 200.0
-                            }
-                        }
-                        
-                        if projects.first != nil {
-                            defer { project = projects.first }
-                            withAnimation(.bouncy.delay(0.4)) {
-                                offsetY = 0.0
-                            }
+                VStack {
+                    Image(systemName: "stopwatch")
+                        .padding()
+                }
+                .background(.accent)
+                .clipShape(Circle())
+                .padding()
+                .offset(y: offsetY)
+                .task(id: projects) {
+                    if projects.isEmpty {
+                        defer { project = nil }
+                        withAnimation(.easeInOut.delay(0.5)) {
+                            offsetY = 200.0
                         }
                     }
+                    
+                    if projects.first != nil {
+                        defer { project = projects.first }
+                        withAnimation(.bouncy.delay(0.4)) {
+                            offsetY = 0.0
+                        }
+                    }
+                }
             }
     }
 }

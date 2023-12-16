@@ -9,10 +9,17 @@ import SwiftUI
 
 struct ProjectRow: View {
     var project: Project
+    private var tracking: Bool { project.tracking ?? false }
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
+                if tracking {
+                    Image(systemName: "stopwatch")
+                        .symbolEffect(.pulse, isActive: tracking)
+                        .foregroundColor(.accentColor)
+                }
+                
                 VStack(alignment: .leading) {
                     Text(project.name)
                         .font(.headline)

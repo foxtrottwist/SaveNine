@@ -36,7 +36,6 @@ struct StopwatchSafeAreaInset: View {
                     onTapGesture()
                 }
                 
-                
                 if tracking {
                     Button {
                            stopAction()

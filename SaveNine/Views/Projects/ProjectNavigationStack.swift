@@ -65,8 +65,6 @@ struct ProjectNavigationStack: View {
                     }
                 })
                 .overlay {
-                    GlobalTracker()
-                    
                     if projects.isEmpty, searchText.isEmpty {
                         switch screen {
                         case .all, .open:
