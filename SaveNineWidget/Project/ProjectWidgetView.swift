@@ -62,7 +62,7 @@ struct ProjectSnapshotView: View {
             Text(project.name)
                 .font(.caption)
                 .foregroundStyle(.black)
-                .lineLimit(2)
+                .lineLimit(2, reservesSpace: true)
             
             if project.tracking ?? false {
                 timer

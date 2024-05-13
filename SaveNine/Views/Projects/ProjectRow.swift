@@ -23,12 +23,12 @@ struct ProjectRow: View {
                 VStack(alignment: .leading) {
                     Text(project.name)
                         .font(.headline)
-                        .lineLimit(2)
+                        .lineLimit(2, reservesSpace: true)
                     
                     Text(project.detail)
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                        .lineLimit(3)
+                        .lineLimit(3, reservesSpace: true)
                 }
                 
                 Spacer()
@@ -36,6 +36,10 @@ struct ProjectRow: View {
                 if let data = project.image, let uiImage = UIImage(data: data) {
                     Image(uiImage: uiImage)
                         .projectImage(width: 100, height: 100, cornerRadius: 10)
+                } else {
+                    Image(systemName: "photo")
+                        .projectImage(width: 100, height: 100, cornerRadius: 10)
+                        .foregroundColor(.clear)
                 }
             }
             
@@ -50,7 +54,6 @@ struct ProjectRow: View {
             }
             .padding(.top, 0.25)
         }
-        .frame(minHeight: 75)
     }
 }
 
