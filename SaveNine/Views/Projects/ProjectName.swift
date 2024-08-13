@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectName: View {
     let project: Project
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @FocusState var focused: Bool
     @State private var name = ""
     

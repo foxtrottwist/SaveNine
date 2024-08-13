@@ -11,7 +11,7 @@ import SwiftUI
 struct SessionLabelPicker: View {
     let disabled: Bool
     @Binding var selectedLabel: String
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @State private var name = ""
     @State private var previousSelectedLabel: String
     @State private var showingAddLabelAlert = false

@@ -11,7 +11,7 @@ struct ProjectsSearchResults<Content: View>: View {
     let projects: [Project]
     let searchText: String
     let content: (Project) -> Content
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     
     private var searchResult: [Project] {
         if searchText.isEmpty {

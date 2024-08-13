@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct LabelsView: View {
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @Query(sort: \Marker.name, order: .forward) private var markers: [Marker]
     
     var body: some View {

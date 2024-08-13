@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProjectSessions: View {
     var project: Project
-    @Environment (\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     
     var body: some View {
         // If there are no sessions or only one session that is incomplete, sessions.last?.endDate == nil.

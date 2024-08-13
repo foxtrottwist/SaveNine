@@ -10,8 +10,8 @@ import SwiftUI
 
 struct AppSidebar: View {
     @Binding var selection: Screen?
-    @Environment (\.modelContext) private var modelContext
-    @Environment (\.prefersTabNavigation) private var prefersTabNavigation
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     @State private var showingSettings = false
     @Query(FetchDescriptor(sortBy: [SortDescriptor<Tag>(\.name, order: .forward)])) private var tags: [Tag]
     
