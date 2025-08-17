@@ -6,14 +6,6 @@ An iOS time tracking app built with SwiftUI for managing project sessions.
 
 a straightforward time tracker app to learn Swift, SwiftUI, SwiftData by and iOS widgets. SaveNine tracks time spent on projects with start/stop functionality, custom session labels, and project tags.
 
-## Tech Stack
-<img src="https://raw.githubusercontent.com/foxtrottwist/foxtrottwist/main/assets/brider-codes.png" alt="Bridge Builder Fox mascot coding" width="600" height="400" align="right">
-
-**Framework & Core:**
-- SwiftUI - Native iOS interface with adaptive layouts
-- SwiftData - Model relationships and data persistence
-- iOS 18.0+ - Target deployment
-
 **iOS Integration:**
 - WidgetKit - Home screen widgets
 - Dynamic Island - Live timer display
