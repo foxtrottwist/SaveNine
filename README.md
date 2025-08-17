@@ -4,7 +4,7 @@ An iOS time tracking app built with SwiftUI for managing project sessions.
 
 ## Purpose
 
-a straightforward time tracker app to learn Swift, SwiftUI, SwiftData by and iOS widgets. SaveNine tracks time spent on projects with start/stop functionality, custom session labels, and project tags.
+A straightforward time tracker app to learn Swift, SwiftUI, SwiftData and iOS widgets. SaveNine tracks time spent on projects with start/stop functionality, custom session labels, and project tags.
 
 **iOS Integration:**
 - WidgetKit - Home screen widgets
